@@ -5,13 +5,12 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحبا بكم في منصة M IDEA</title>
+    <title>منصة M IDEA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- كود AdSense الأساسي (استبدل PUBLISHER_ID برقمك) -->
@@ -26,58 +25,63 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: transparent;
+            background: #f9f9f9;
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* تغيير لترتيب عمودي */
-            justify-content: space-between; /* توزيع المساحة */
-            padding: 20px;
+            flex-direction: column;
+            padding: 15px 15px 0; /* إزالة المساحة السفلية تماماً */
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
         }
         .container {
             display: flex;
-            max-width: 1200px;
             background: transparent;
-            border-radius: 0;
             box-shadow: none;
             overflow: visible;
-            flex: 1; /* شغل المساحة المتاحة */
+            margin-bottom: 5px; /* تقليل المسافة السفلية */
         }
         .left-section {
-            padding: 40px;
+            padding: 30px 30px 15px; /* تقليل المساحة الداخلية */
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: transparent;
         }
         .logo {
-            width: 120px;
-            margin-bottom: 30px;
+            width: 100px; /* تصغير الشعار */
+            margin-bottom: 15px;
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem; /* تصغير حجم العنوان */
             color: #b61412;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
         p {
             color: #666;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            font-size: 0.95rem; /* تصغير حجم النص */
         }
         .social-icons {
             display: flex;
-            gap: 20px;
+            gap: 15px; /* تقليل المسافة بين الأيقونات */
             justify-content: center;
+            margin-top: 5px;
         }
         .social-icon {
             background: transparent !important;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #b61412;
-            font-size: 1.6rem;
+            font-size: 1.5rem; /* تصغير الأيقونات */
             transition: all 0.3s;
             text-decoration: none !important;
         }
@@ -90,98 +94,224 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0;
-            background: transparent;
+            padding: 20px 0; /* تقليل المساحة الداخلية */
         }
         .ad-image {
-            max-width: 100%;
-            border-radius: 0;
-            box-shadow: none;
+            max-width: 90%;
+            max-height: 280px; /* تصغير الصورة الإعلانية */
             display: block;
+            border-radius: 8px;
         }
         
-        /* قسم الإعلانات في الأسفل */
+        /* قسم الإعلانات في الأسفل بحجم مربع */
         .ads-container {
             width: 100%;
-            padding: 15px;
+            padding: 5px 0; /* تقليل المساحة الداخلية */
             background: #f8f8f8;
             text-align: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* حجم أصغر للإعلانات */
+            gap: 10px; /* تقليل المسافة بين الإعلانات */
             border-top: 1px solid #eee;
-            margin-top: 30px;
+            justify-content: center;
         }
         
-        .ads-placeholder {
-            margin: 0 auto;
-            max-width: 1200px;
+        .ad-slot {
+            height: 180px; /* تصغير ارتفاع الإعلانات بشكل كبير */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* ظل أخف */
+            transition: transform 0.3s ease;
+        }
+        
+        .ad-slot:hover {
+            transform: translateY(-3px); /* تأثير أقل */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+
+        /* حقوق النشر - تصغير المساحة بشكل كبير */
+        .copyright {
+            text-align: center;
+            padding: 5px 0; /* مساحة صغيرة جداً */
+            color: #777;
+            font-size: 0.8rem; /* حجم خط صغير */
+            background: #f8f8f8;
+            border-top: 1px solid #eee;
+            line-height: 1.3;
+        }
+        
+        .copyright a {
+            color: #b61412;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .copyright a:hover {
+            color: #d43c3a;
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px 10px 0; /* إزالة المساحة السفلية */
+            }
             .container {
                 flex-direction: column;
+                margin-bottom: 3px;
+            }
+            .left-section {
+                padding: 20px 15px 10px;
             }
             .right-section {
-                padding: 0;
+                padding: 0 15px 5px;
+            }
+            .logo {
+                width: 90px;
+                margin-bottom: 12px;
+            }
+            h1 {
+                font-size: 1.7rem;
+                margin-bottom: 12px;
+            }
+            p {
+                margin-bottom: 15px;
+                font-size: 0.9rem;
             }
             .social-icons {
-                gap: 25px;
+                gap: 15px;
+            }
+            .social-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 1.4rem;
+            }
+            .ad-image {
+                max-height: 240px; /* تصغير أكثر للجوال */
+            }
+            .ads-container {
+                grid-template-columns: repeat(2, 1fr); /* عمودين في الأجهزة اللوحية والهواتف */
+                gap: 8px;
+                padding: 3px 5px;
+            }
+            .ad-slot {
+                height: 150px; /* ارتفاع أقل للجوال */
+            }
+            .copyright {
+                padding: 4px 0;
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px 8px 0; /* إزالة المساحة السفلية */
+            }
+            .left-section {
+                padding: 15px 12px 8px;
+            }
+            .right-section {
+                padding: 0 12px 4px;
+            }
+            .logo {
+                width: 80px;
+                margin-bottom: 10px;
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+            .social-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1.3rem;
+            }
+            .ad-image {
+                max-height: 200px; /* تصغير أكثر للهواتف الصغيرة */
+            }
+            .ads-container {
+                grid-template-columns: repeat(2, 1fr); /* عمودين حتى في الهواتف الصغيرة */
+                gap: 6px;
+            }
+            .ad-slot {
+                height: 130px; /* ارتفاع صغير جداً للهواتف */
+                padding: 8px;
+            }
+            .copyright {
+                padding: 3px 0;
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-section">
-            <img src="app_logo.png" alt="شعار التطبيق" class="logo">
-            <h1>M IDEA</h1>
-            <p>نعتذر، تطبيق M IDEA غير متوفر الآن ونعمل على تطويره. سنقدم لكم أخباراً رائعة قريباً!</p>
-            
-            <div class="social-icons">
-                <a href="https://youtube.com/@m-idea?si=1AhBSp-72nTeKxTV" target="_blank" class="social-icon">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.instagram.com/m.idea1?igsh=MWFxdzc3bmZtMG5xbA==" target="_blank" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://x.com/M_idea1?t=09-cJQVzkzIt1Tk7nX-Low&s=09" target="_blank" class="social-icon">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://www.tiktok.com/@m.idea7?_r=1&_d=dj31jahe154k3d&sec_uid=MS4wLjABAAAAN1R0KFxUxP9F4IDuQou5z36HIeCYLy0AbsypMhvF_wBy7go44KnQW5eUBKqBr1OF&share_author_id=7257009448764474374&sharer_language=ar&source=h5_m&u_code=e0e8jd4g6d685f&timestamp=1752426254&user_id=7070215071784633349&sec_user_id=MS4wLjABAAAAlrfET2EAhvANEtIL1F5nk_sa878KUMI4wjg2Jpw9AKvG6P1ZWpn8tyEHkfRoC2Dm&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7520652014067746576&share_link_id=5d3561f1-efd6-40e3-97eb-990cae470103&share_app_id=1233&ugbiz_name=ACCOUNT&social_share_type=5&enable_checksum=1" target="_blank" class="social-icon">
-                    <i class="fab fa-tiktok"></i>
-                </a>
+    <div class="main-content">
+        <div class="container">
+            <div class="left-section">
+                <img src="app_logo.png" alt="شعار التطبيق" class="logo">
+                <h1>M IDEA</h1>
+                <p>نعتذر، تطبيق M IDEA غير متوفر الآن ونعمل على تطويره. سنقدم لكم أخباراً رائعة قريباً!</p>
+                
+                <div class="social-icons">
+                    <a href="https://youtube.com/@m-idea?si=1AhBSp-72nTeKxTV" target="_blank" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.instagram.com/m.idea1?igsh=MWFxdzc3bmZtMG5xbA==" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/M_idea1?t=09-cJQVzkzIt1Tk7nX-Low&s=09" target="_blank" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@m.idea7?_r=1&_d=dj31jahe154k3d&sec_uid=MS4wLjABAAAAN1R0KFxUxP9F4IDuQou5z36HIeCYLy0AbsypMhvF_wBy7go44KnQW5eUBKqBr1OF&share_author_id=7257009448764474374&sharer_language=ar&source=h5_m&u_code=e0e8jd4g6d685f&timestamp=1752426254&user_id=7070215071784633349&sec_user_id=MS4wLjABAAAAlrfET2EAhvANEtIL1F5nk_sa878KUMI4wjg2Jpw9AKvG6P1ZWpn8tyEHkfRoC2Dm&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7520652014067746576&share_link_id=5d3561f1-efd6-40e3-97eb-990cae470103&share_app_id=1233&ugbiz_name=ACCOUNT&social_share_type=5&enable_checksum=1" target="_blank" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="right-section">
+                <img src="Picsart_25-07-13_19-28-02-799.png" alt="صورة إعلانية" class="ad-image">
             </div>
         </div>
-        <div class="right-section">
-            <img src="Picsart_25-07-13_19-28-02-799.png" alt="صورة إعلانية" class="ad-image">
-        </div>
-    </div>
 
-    <!-- قسم الإعلانات في أسفل الصفحة -->
-    <div class="ads-container">
-        <div class="ads-placeholder">
-            <!-- إعلان AdSense 1 -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-PUBLISHER_ID"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <!-- قسم الإعلانات في أسفل المحتوى مباشرة -->
+        <div class="ads-container">
+            <div class="ad-slot">
+                <!-- إعلان AdSense 1 -->
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:100%;"
+                     data-ad-client="ca-pub-PUBLISHER_ID"
+                     data-ad-slot="1234567890"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             
-            <!-- إعلان AdSense 2 -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-PUBLISHER_ID"
-                 data-ad-slot="0987654321"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <div class="ad-slot">
+                <!-- إعلان AdSense 2 -->
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:100%;"
+                     data-ad-client="ca-pub-PUBLISHER_ID"
+                     data-ad-slot="0987654321"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <!-- حقوق النشر - مساحة مصغرة جداً -->
+        <div class="copyright">
+            Copyright © 2026 - <a href="#">M IDEA</a> جميع الحقوق محفوظة
         </div>
     </div>
-
-    <!-- تم إزالة كود JavaScript الخاص بزر التثبيت -->
 </body>
-</html>
+    </html>
