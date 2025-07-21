@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -147,6 +150,32 @@
             line-height: 1.6;
             margin-bottom: 20px;
             font-size: 0.95rem;
+        }
+        
+        /* زر التثبيت الجديد */
+        .install-button {
+            background: linear-gradient(to bottom, #b61412, #8f0f0d);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(182, 20, 18, 0.2);
+        }
+        
+        .install-button:hover {
+            background: linear-gradient(to bottom, #d43c3a, #b61412);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(182, 20, 18, 0.3);
+        }
+        
+        .install-button:active {
+            transform: translateY(0);
         }
         
         .right-section {
@@ -330,6 +359,14 @@
                 font-size: 1.7rem;
             }
             
+            .install-button {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                align-self: center;
+                width: 100%;
+                max-width: 200px;
+            }
+            
             .about-section {
                 padding: 25px 20px;
                 margin: 30px 0;
@@ -387,6 +424,12 @@
             
             h1 {
                 font-size: 1.5rem;
+            }
+            
+            .install-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                max-width: 180px;
             }
             
             .about-section {
@@ -459,6 +502,8 @@
                 <img src="app_logo.png" alt="شعار التطبيق" class="logo">
                 <h1>M IDEA</h1>
                 <p>نعتذر، تطبيق M IDEA غير متوفر الآن ونعمل على تطويره. سنقدم لكم أخباراً رائعة قريباً!</p>
+                <!-- زر التثبيت المضاف -->
+                <button class="install-button">تثبيت</button>
             </div>
             <div class="right-section">
                 <img src="Picsart_25-07-13_19-28-02-799.png" alt="صورة إعلانية" class="ad-image">
@@ -483,7 +528,7 @@
         
         <!-- قسم معلومات عنا -->
         <div class="" id="about-section">
-            <h2>معلومات عنا</h2>
+            <h2></h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>M IDEA هي منصة تواصل اجتماعي مبتكرة، صُممت لتمنح المستخدمين مساحة حرة للتعبير عن إبداعاتهم عبر الفيديو، والتفاعل مع محتوى متنوع يجمع بين الترفيه والقيمة. تعتمد المنصة على فلسفة "الإبداع المشترك" حيث تتحول الأفكار إلى محتوى مرئي يجذب الملايين، ويسهم في بناء مجتمع رقمي تفاعلي .  </p>
@@ -551,6 +596,12 @@
             // منع إغلاق القائمة عند النقر عليها
             settingsDropdown.addEventListener('click', function(e) {
                 e.stopPropagation();
+            });
+            
+            // حدث النقر على زر التثبيت
+            const installButton = document.querySelector('.install-button');
+            installButton.addEventListener('click', function() {
+                alert('نعتذر لكم، تطبيق M IDEA غير متوفر حالياً. نعمل على تطويره وسنقدم لكم أخباراً رائعة قريباً!');
             });
         });
     </script>
