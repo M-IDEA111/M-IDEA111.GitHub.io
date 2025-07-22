@@ -21,7 +21,7 @@
             padding: 0;
         }
         
-        /* شريط التنقل */
+        /* شريط التنقل المعدل */
         .navbar {
             background: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -50,60 +50,33 @@
             font-size: 1.2rem;
         }
         
-        .settings-icon {
-            font-size: 1.5rem;
-            color: #b61412;
-            cursor: pointer;
-            position: relative;
+        /* الروابط الجديدة في شريط التنقل */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
         
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            width: 220px;
-            overflow: hidden;
-            display: none;
-            z-index: 1000;
-        }
-        
-        .dropdown.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .dropdown-item {
-            padding: 12px 20px;
+        .nav-link {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #333;
+            gap: 8px;
+            color: #555;
             text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: all 0.3s;
-            border-bottom: 1px solid #f0f0f0;
         }
         
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .dropdown-item:hover {
+        .nav-link:hover {
             background: #f8f8f8;
             color: #b61412;
         }
         
-        .dropdown-item i {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
+        .nav-link i {
+            font-size: 1.1rem;
         }
         
         .main-content {
@@ -143,7 +116,7 @@
         }
         
         p {
-            color: #white;
+            color: #555;
             line-height: 1.6;
             margin-bottom: 20px;
             font-size: 0.95rem;
@@ -254,7 +227,7 @@
         
         .about-text {
             flex: 1;
-            color: #white;
+            color: #555;
             line-height: 1.7;
             font-size: 1rem;
         }
@@ -295,7 +268,7 @@
         .copyright {
             text-align: center;
             padding: 8px 0;
-            color: #white;
+            color: #555;
             font-size: 0.85rem;
             background: transparent;
             width: 100%;
@@ -319,6 +292,20 @@
         }
         
         /* التكيف مع الشاشات المختلفة */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -395,8 +382,12 @@
                 font-size: 1.1rem;
             }
             
-            .settings-icon {
-                font-size: 1.4rem;
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 6px;
             }
             
             .main-content {
@@ -459,28 +450,27 @@
     </style>
 </head>
 <body>
-    <!-- شريط التنقل مع قائمة الإعدادات -->
+    <!-- شريط التنقل المعدل -->
     <div class="navbar">
         <div class="navbar-logo">
             <img src="app_logo.png" alt="شعار التطبيق">
             <h2>M IDEA</h2>
         </div>
-        <div class="settings-container">
-            <i class="fas fa-cog settings-icon" id="settingsIcon"></i>
-            <div class="dropdown" id="settingsDropdown">
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-home"></i>
-                    <span>الصفحة الرئيسية</span>
-                </a>
-                <a href="#social-section" class="dropdown-item">
-                    <i class="fas fa-share-alt"></i>
-                    <span>تابعونا على وسائل التواصل</span>
-                </a>
-                <a href="#about-section" class="dropdown-item">
-                    <i class="fas fa-info-circle"></i>
-                    <span>معلومات عنا</span>
-                </a>
-            </div>
+        
+        <!-- الروابط الجديدة في شريط التنقل -->
+        <div class="nav-links">
+            <a href="#" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>الصفحة الرئيسية</span>
+            </a>
+            <a href="#social-section" class="nav-link">
+                <i class="fas fa-share-alt"></i>
+                <span>تابعونا</span>
+            </a>
+            <a href="#about-section" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+                <span>معلومات عنا</span>
+            </a>
         </div>
     </div>
     
@@ -516,7 +506,7 @@
         
         <!-- قسم معلومات عنا -->
         <div class="" id="about-section">
-
+            <h2></h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>M IDEA هي منصة تواصل اجتماعي مبتكرة، صُممت لتمنح المستخدمين مساحة حرة للتعبير عن إبداعاتهم عبر الفيديو، والتفاعل مع محتوى متنوع يجمع بين الترفيه والقيمة. تعتمد المنصة على فلسفة "الإبداع المشترك" حيث تتحول الأفكار إلى محتوى مرئي يجذب الملايين، ويسهم في بناء مجتمع رقمي تفاعلي .  </p>
@@ -571,27 +561,7 @@
     </div>
     
     <script>
-        // التحكم في قائمة الإعدادات
         document.addEventListener('DOMContentLoaded', function() {
-            const settingsIcon = document.getElementById('settingsIcon');
-            const settingsDropdown = document.getElementById('settingsDropdown');
-            
-            // إظهار/إخفاء القائمة المنسدلة
-            settingsIcon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                settingsDropdown.classList.toggle('active');
-            });
-            
-            // إغلاق القائمة عند النقر في أي مكان آخر
-            document.addEventListener('click', function() {
-                settingsDropdown.classList.remove('active');
-            });
-            
-            // منع إغلاق القائمة عند النقر عليها
-            settingsDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-            
             // حدث النقر على زر التثبيت
             const installButton = document.querySelector('.install-button');
             installButton.addEventListener('click', function() {
