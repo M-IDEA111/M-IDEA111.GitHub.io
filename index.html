@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -279,20 +278,21 @@
         .social-icons-bottom {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 18px;
             margin: 30px 0;
             padding: 20px;
             background: transparent;
+            flex-wrap: wrap;
         }
         
         .social-icon {
-            width: 50px;
-            height: 50px;
+            width: 42px; /* تم تصغير الحجم */
+            height: 42px; /* تم تصغير الحجم */
             display: flex;
             align-items: center;
             justify-content: center;
             color: #b61412;
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* تم تصغير حجم الخط */
             transition: all 0.3s;
             text-decoration: none;
             background: transparent;
@@ -394,6 +394,13 @@
                 height: 250px;
                 width: 250px;
             }
+            
+            /* تعديل حجم أيقونات التواصل للشاشات المتوسطة */
+            .social-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.15rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -441,14 +448,14 @@
             }
             
             .social-icons-bottom {
-                gap: 12px;
+                gap: 10px;
                 margin: 15px 0;
             }
             
             .social-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
             }
             
             .ad-image {
@@ -490,7 +497,6 @@
                     <i class="fas fa-info-circle"></i>
                     <span>معلومات عنا</span>
                 </a>
-                </a>
             </div>
         </div>
     </div>
@@ -526,13 +532,11 @@
         </div>
         
         <!-- قسم معلومات عنا -->
-        <div class="" id="about-section">
-            <h2></h2>
+        <div class="about-section" id="about-section">
+            <h2>معلومات عنا</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>M IDEA هي منصة تواصل اجتماعي مبتكرة، صُممت لتمنح المستخدمين مساحة حرة للتعبير عن إبداعاتهم عبر الفيديو، والتفاعل مع محتوى متنوع يجمع بين الترفيه والقيمة. تعتمد المنصة على فلسفة "الإبداع المشترك" حيث تتحول الأفكار إلى محتوى مرئي يجذب الملايين، ويسهم في بناء مجتمع رقمي تفاعلي .  </p>
-                </div>
-                
                 </div>
             </div>
         </div>
@@ -566,6 +570,14 @@
             </a>
             <a href="https://www.tiktok.com/@m.idea7?_r=1&_d=dj31jahe154k3d&sec_uid=MS4wLjABAAAAN1R0KFxUxP9F4IDuQou5z36HIeCYLy0AbsypMhvF_wBy7go44KnQW5eUBKqBr1OF&share_author_id=7257009448764474374&sharer_language=ar&source=h5_m&u_code=e0e8jd4g6d685f&timestamp=1752426254&user_id=7070215071784633349&sec_user_id=MS4wLjABAAAAlrfET2EAhvANEtIL1F5nk_sa878KUMI4wjg2Jpw9AKvG6P1ZWpn8tyEHkfRoC2Dm&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7520652014067746576&share_link_id=5d3561f1-efd6-40e3-97eb-990cae470103&share_app_id=1233&ugbiz_name=ACCOUNT&social_share_type=5&enable_checksum=1" target="_blank" class="social-icon">
                 <i class="fab fa-tiktok"></i>
+            </a>
+            <!-- تم إضافة Discord -->
+            <a href="https://discord.gg/F6f48AgV" target="_blank" class="social-icon">
+                <i class="fab fa-discord"></i>
+            </a>
+            <!-- تم إضافة Facebook -->
+            <a href="https://www.facebook.com/share/1AXLeGXPXQ/" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
             </a>
         </div>
         
