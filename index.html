@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة M IDEA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+        
+        /* شريط التنقل المحسّن */
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .navbar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+        }
+        
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .navbar-logo h2 {
+            color: #b61412;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+        
+        /* تحسينات كبيرة لشريط الروابط */
+        .nav-links-container {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            min-width: max-content;
+        }
+        
+        .nav-link:hover {
+            background: #f8f8f8;
+            color: #b61412;
+        }
+        
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+        
+        /* زر القائمة للشاشات الصغيرة */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #b61412;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            padding: 20px 15px;
+        }
+        
+        .container {
+            display: flex;
+            background: transparent;
+            box-shadow: none;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .left-section {
+            padding: 30px 30px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            color: #b61412;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        /* زر التثبيت الجديد - تم تحسينه */
+        .install-button {
+            background: linear-gradient(to bottom, #b61412, #b61412);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem; /* زيادة حجم الخط */
+            font-weight: 700; /* زيادة سمك الخط */
+            cursor: pointer;
+            align-self: flex-start;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(182, 20, 18, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .install-button:hover {
+            background: linear-gradient(to bottom, #d43c3a, #b61412);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(182, 20, 18, 0.4);
+        }
+        
+        .install-button:active {
+            transform: translateY(0);
+        }
+        
+        /* تأثير إضافي للزر */
+        .install-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+        
+        .install-button:hover::after {
+            left: 120%;
+        }
+        
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .ad-image {
+            max-width: 90%;
+            max-height: 280px;
+            display: block;
+            border-radius: 8px;
+            background: transparent;
+        }
+        
+        /* قسم الإعلانات بدون خلفية - حجم مربع كبير */
+        .ads-container {
+            width: 100%;
+            padding: 15px 0;
+            background: transparent;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .ad-slot {
+            height: 300px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: transparent;
+            margin: 0 auto;
+        }
+        
+        /* قسم معلومات عنا - بدون خلفية */
+        .about-section {
+            background: transparent;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .about-section h2 {
+            color: #b61412;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: #b61412;
+            border-radius: 3px;
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            color: #333;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* أيقونات التواصل الاجتماعي في الأسفل بدون خلفية */
+        .social-icons-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 0 0 15px;
+            padding: 0;
+            background: transparent;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b61412;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            background: transparent;
+            border-radius: 50%;
+            border: 2px solid #b61412;
+        }
+        
+        .social-icon:hover {
+            color: white;
+            background: #b61412;
+            transform: translateY(-5px);
+        }
+        
+        /* حقوق النشر */
+        .copyright {
+            text-align: center;
+            padding: 8px 0;
+            color: #333;
+            font-size: 0.85rem;
+            background: transparent;
+            width: 100%;
+        }
+        
+        .copyright a {
+            color: #b61412;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 600;
+        }
+        
+        .copyright a:hover {
+            color: #d43c3a;
+            text-decoration: underline;
+        }
+        
+        /* تأثير التمرير الناعم */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* شريط التمرير */
+        ::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #b61412;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d43c3a;
+        }
+        
+        /* التكيف مع الشاشات المختلفة */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+            }
+            
+            .nav-links-container {
+                width: 100%;
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
+            
+            .nav-links {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links-container {
+                display: none;
+                flex-direction: column;
+                overflow-x: visible;
+                padding: 0;
+            }
+            
+            .nav-links-container.active {
+                display: flex;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+            
+            .nav-link {
+                border-radius: 0;
+                padding: 12px 15px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .container {
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+            
+            .left-section {
+                padding: 20px 15px;
+            }
+            
+            .right-section {
+                padding: 0 15px 20px;
+            }
+            
+            .logo {
+                width: 90px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .install-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                align-self: center;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .about-section {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+            
+            .about-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .social-icons-bottom {
+                gap: 15px;
+                margin: 0 0 10px;
+            }
+            
+            .ad-image {
+                max-height: 240px;
+            }
+            
+            .ad-slot {
+                height: 250px;
+                width: 250px;
+            }
+            
+            .social-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.15rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 8px;
+            }
+            
+            .navbar-logo h2 {
+                font-size: 1.1rem;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+            
+            .left-section {
+                padding: 15px 12px;
+            }
+            
+            .logo {
+                width: 80px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .install-button {
+                padding: 8px 16px;
+                font-size: 0.95rem;
+                max-width: 180px;
+            }
+            
+            .about-section {
+                padding: 20px 15px;
+                margin: 25px 0;
+            }
+            
+            .about-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .social-icons-bottom {
+                gap: 10px;
+                margin: 0 0 8px;
+            }
+            
+            .social-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .ad-image {
+                max-height: 200px;
+            }
+            
+            .copyright {
+                padding: 6px 0;
+                font-size: 0.8rem;
+            }
+            
+            .ad-slot {
+                height: 220px;
+                width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل المحسّن -->
+    <div class="navbar">
+        <div class="navbar-top">
+            <div class="navbar-logo">
+                <img src="app_logo.png" alt="شعار التطبيق">
+                <h2>M IDEA</h2>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="nav-links-container">
+            <div class="nav-links">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الصفحة الرئيسية</span>
+                </a>
+                <a href="#social-section" class="nav-link">
+                    <i class="fas fa-share-alt"></i>
+                    <span>تابعونا</span>
+                </a>
+                <a href="#about-section" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>معلومات عنا</span>
+                </a>
+                <a href="privacy.html" class="nav-link" style="color: #b61412; font-weight: bold;">
+                    <i class="fas fa-file-contract"></i>
+                    <span>السياسات</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="left-section">
+                <img src="app_logo.png" alt="شعار التطبيق" class="logo">
+                <h1>M IDEA</h1>
+                <p>شارك لحظاتك مع M IDEA</p>
+                <!-- زر التثبيت المعدل -->
+                <button class="install-button">download</button>
+            </div>
+            <div class="right-section">
+                <img src="Picsart_25-07-13_19-28-02-799.png" alt="صورة إعلانية" class="ad-image">
+            </div>
+        </div>
+        
+        <!-- الإعلان الأول - حجم مربع كبير -->
+        <div class="ads-container">
+            <div class="ad-slot">
+                <!-- إعلان AdSense 1 -->
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:100%;"
+                     data-ad-client="ca-pub-3352888654930814"
+                     data-ad-slot="9520291396"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <!-- قسم معلومات عنا بدون خلفية -->
+        <div class="about-section" id="about-section">
+            <h2>معلومات عنا</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                     ‏‏صور بعض الفيديوهات، وسيحولها M IDEA إلى فيديوهات تجعلك تبدو جميلا.
+‏
+‏نعمل بجد لتحديث واجهة مستخدم M IDEA بشريط تنقل جديد يصل إلى المكان الذي تريد الانتقال إليه بشكل أسرع، مع مخطط زمني واضح في نافذة المعاينة وصفحة إعدادات جديدة.
+‏
+‏يحتوي M IDEA أيضًا على نظام جديد، حتى نتمكن من العمل مع علاماتك التجارية المفضلة حتى نستطيع تزويدك بمحتوى مدعوم ورائع.
+‏
+‏أخيرًا، قمنا بإعادة تصميم نظام تقييم الفيديوهات ، لذا أظهر تقديرك للمحتوى الرائع.
+‏
+‏استمر في إنشاء مقاطع M IDEA، واستمر في فعل أفضل ما يمكنك القيام به.
+‏
+‏****************************************
+‏M IDEA يقدم لك أسهل طريقة لإنشاء فيديوهات خالية من العيوب. قم بإنشاء فيديوهات موسيقية بجودة عالية، وصور أفلاما جميلة، واشترك مع أصدقائك لإنشاء فيديوهات جماعية في ثوان.
+‏
+‏استخدم M IDEA لتقوم بما يلي:
+‏
+‏* أنشيء فيديوهات رائعة بمساعدة خوارزمياتنا الرائعة لتحرير الفيديو.
+‏* صور أحداث حياتك من أفضل الزوايا، أو اختر من بين أفضل الأغاني لعمل فيديو موسيقي.
+‏* زين فيديوهاتك بالنصوص، والرسومات، والرموز التعبيرية.
+‏* تعاون مع أصدقائك لإنشاء فيديوهات جماعية.
+‏* شارك الفيديوهات عبر إنستجرام، وتويتر، وفيسبوك، والرسائل النصية، والبريد.
+‏
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- الإعلان الثاني - حجم مربع كبير -->
+        <div class="ads-container">
+            <div class="ad-slot">
+                <!-- إعلان AdSense 2 -->
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:100%;"
+                     data-ad-client="ca-pub-3352888654930814"
+                     data-ad-slot="9520291396"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+    
+    <!-- أيقونات التواصل الاجتماعي في الأسفل قبل حقوق النشر -->
+    <div class="social-icons-bottom" id="social-section">
+        <a href="https://youtube.com/@m-idea?si=1AhBSp-72nTeKxTV" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/m.idea1?igsh=MWFxdzc3bmZtMG5xbA==" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://x.com/M_idea1?t=09-cJQVzkzIt1Tk7nX-Low&s=09" target="_blank" class="social-icon">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.tiktok.com/@m.idea7?_r=1&_d=dj31jahe154k3d&sec_uid=MS4wLjABAAAAN1R0KFxUxP9F4IDuQou5z36HIeCYLy0AbsypMhvF_wBy7go44KnQW5eUBKqBr1OF&share_author_id=7257009448764474374&sharer_language=ar&source=h5_m&u_code=e0e8jd4g6d685f&timestamp=1752426254&user_id=7070215071784633349&sec_user_id=MS4wLjABAAAAlrfET2EAhvANEtIL1F5nk_sa878KUMI4wjg2Jpw9AKvG6P1ZWpn8tyEHkfRoC2Dm&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7520652014067746576&share_link_id=5d3561f1-efd6-40e3-97eb-990cae470103&share_app_id=1233&ugbiz_name=ACCOUNT&social_share_type=5&enable_checksum=1" target="_blank" class="social-icon">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <!-- تم إضافة Discord -->
+        <a href="https://discord.gg/F6f48AgV" target="_blank" class="social-icon">
+            <i class="fab fa-discord"></i>
+        </a>
+        <!-- تم إضافة Facebook -->
+        <a href="https://www.facebook.com/share/1AXLeGXPXQ/" target="_blank" class="social-icon">
+            <i class="fab fa-facebook"></i>
+        </a>
+    </div>
+    
+    <!-- حقوق النشر في الأسفل تماماً -->
+    <div class="copyright">
+        Copyright © 2026 - <a href="#">M IDEA</a> جميع الحقوق محفوظة
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // حدث النقر على زر التثبيت - تم إصلاحه
+            const installButton = document.querySelector('.install-button');
+            if (installButton) {
+                installButton.addEventListener('', function() {
+                    alert('غير متوفر حالياً - Currently unavailable');
+                });
+            }
+            
+            // تبادل القائمة على الأجهزة المحمولة
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navContainer = document.querySelector('.nav-links-container');
+            
+            if(menuBtn && navContainer) {
+                menuBtn.addEventListener('click', () => {
+                    navContainer.classList.toggle('active');
+                });
+                
+                // إغلاق القائمة عند النقر على رابط
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navContainer.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+    
