@@ -51,6 +51,7 @@
         .navbar-logo img {
             width: 40px;
             height: 40px;
+            pointer-events: none; /* منع التفاعل مع الصورة */
         }
         
         .navbar-logo h2 {
@@ -193,6 +194,7 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            pointer-events: none; /* منع التفاعل مع الصورة */
         }
         
         .product-name {
@@ -329,6 +331,7 @@
             height: auto;
             display: block;
             border-radius: 8px;
+            pointer-events: none; /* منع التفاعل مع الصورة */
         }
         
         .about-text-content {
@@ -653,7 +656,8 @@
                 </div>
             </div>
         </div>
-                           <!-- قسم منتجاتنا -->
+        
+            <!-- قسم منتجاتنا -->
         <div class="products-section" id="products-section">
             <h2 class="products-title">منتجاتنا</h2>
             <div class="products-grid">
@@ -669,7 +673,7 @@
                     <a href="M.IDEA.html" class="product-link">ابدأ الآن</a>
                 </div>
                 
-                <!-- M IDEA Book -->
+<!-- M IDEA Book -->
                 <div class="product-card">
                     <div class="product-logo">
                         <img src="BooK.png" alt="M IDEA Book Logo">
@@ -731,6 +735,20 @@
                 navLinks.classList.remove('active');
             });
         });
+        
+        // منع النقر الأيمن على جميع الصور لمنع تحميلها
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        }, false);
+        
+        // منع سحب الصور
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        }, false);
     </script>
 </body>
             </html>
