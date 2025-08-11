@@ -19,7 +19,7 @@
             flex-direction: column;
             padding: 0;
             position: relative;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         /* شريط التنقل الجديد */
@@ -173,7 +173,6 @@
         .product-card {
             background: transparent;
             text-align: center;
-            transition: all 0.3s ease;
             position: relative;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
@@ -184,8 +183,6 @@
             width: 90px;
             height: 90px;
             margin: 0 auto 20px;
-            border-radius: 50%;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,8 +190,8 @@
         }
         
         .product-logo img {
-            width: 70%;
-            height: 70%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
         }
         
@@ -209,7 +206,7 @@
             color: #555;
             line-height: 1.6;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             min-height: 60px;
         }
         
@@ -221,12 +218,14 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
         
         .product-link:hover {
+            background: #d43c3a;
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(182, 20, 18, 0.3);
         }
         
         /* أيقونات التواصل الاجتماعي */
@@ -266,7 +265,7 @@
             text-align: center;
             margin-bottom: 15px;
             padding: 10px 0;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .policy-links a {
@@ -286,7 +285,7 @@
             text-align: center;
             padding: 10px 0;
             color: #333;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             background: transparent;
             width: 100%;
         }
@@ -313,13 +312,13 @@
             display: flex;
             align-items: center;
             gap: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .about-image {
-            flex: 0 0 40%;
-            border-radius: 10px;
-            overflow: hidden;
+            flex: 1;
+            min-width: 250px;
+            max-width: 380px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -327,22 +326,16 @@
         
         .about-image img {
             width: 100%;
-            max-width: 320px;
             height: auto;
             display: block;
-            transition: transform 0.5s;
             border-radius: 8px;
         }
         
-        .about-image img:hover {
-            transform: scale(1.03);
-        }
-        
         .about-text-content {
-            flex: 0 0 60%;
+            flex: 1;
             padding: 0 10px;
             text-align: right;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             line-height: 1.7;
         }
         
@@ -379,30 +372,28 @@
         
         /* التكيف مع الشاشات المختلفة - تم التعديل هنا */
         @media (max-width: 992px) {
-            .image-text-container {
-                flex-direction: column;
-                gap: 25px;
-            }
-            
-            .about-image, .about-text-content {
-                flex: 0 0 100%;
-                width: 100%;
-            }
-            
-            .about-image {
-                max-width: 400px;
-            }
-            
-            .reverse-order {
-                flex-direction: column;
+            body {
+                font-size: 0.92rem;
             }
             
             .about-text-content {
-                font-size: 0.85rem;
+                font-size: 0.92rem;
+            }
+            
+            .image-text-container {
+                gap: 25px;
+            }
+            
+            .about-image {
+                max-width: 350px;
             }
         }
         
         @media (max-width: 768px) {
+            body {
+                font-size: 0.9rem;
+            }
+            
             .navbar {
                 flex-direction: column;
                 align-items: stretch;
@@ -448,15 +439,37 @@
             }
             
             .about-text-content {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             
             .section-title {
                 font-size: 1.35rem;
             }
+            
+            .image-text-container {
+                flex-direction: column;
+                margin-bottom: 30px;
+            }
+            
+            .about-image {
+                max-width: 100%;
+                min-width: auto;
+            }
+            
+            .reverse-order {
+                flex-direction: column;
+            }
+            
+            .about-text-content {
+                padding: 0;
+            }
         }
         
         @media (max-width: 480px) {
+            body {
+                font-size: 0.85rem;
+            }
+            
             .main-content {
                 padding: 15px 10px;
             }
@@ -490,11 +503,11 @@
             }
             
             .policy-links {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
             .copyright {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
             .product-card {
@@ -509,12 +522,31 @@
                 margin-bottom: 30px;
             }
             
-            .about-image {
-                max-width: 300px;
-            }
-            
             .section-title {
                 font-size: 1.25rem;
+            }
+            
+            .about-text-content {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            body {
+                font-size: 1rem;
+            }
+            
+            .about-text-content {
+                font-size: 1rem;
+            }
+            
+            .image-text-container {
+                max-width: 1100px;
+                margin: 0 auto 40px;
+            }
+            
+            .about-image {
+                max-width: 420px;
             }
         }
     </style>
@@ -525,6 +557,7 @@
         <div class="navbar-top">
             <div class="navbar-logo">
                 <img src="Picsart_25-08-11_00-29-03-123.png" alt="شعار التطبيق">
+                <h2>M IDEA</h2>
             </div>
             
             <button class="mobile-menu-btn">
@@ -620,8 +653,7 @@
                 </div>
             </div>
         </div>
-        
-        <!-- قسم منتجاتنا -->
+                           <!-- قسم منتجاتنا -->
         <div class="products-section" id="products-section">
             <h2 class="products-title">منتجاتنا</h2>
             <div class="products-grid">
@@ -651,7 +683,7 @@
             </div>
         </div>
     </div>
-        <!-- أيقونات التواصل الاجتماعي -->
+    <!-- أيقونات التواصل الاجتماعي -->
        <div class="social-icons-bottom" id="social-section">
         <a href="https://youtube.com/@m-idea?si=1AhBSp-72nTeKxTV" target="_blank" class="social-icon">
             <i class="fab fa-youtube"></i>
@@ -701,5 +733,4 @@
         });
     </script>
 </body>
-    </html>
-    
+            </html>
