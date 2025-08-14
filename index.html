@@ -33,6 +33,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة M IDEA الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- إضافة سكريبت AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
+    <script>
+      // تحميل AdSense مرة واحدة فقط
+      if (!window.adSenseLoaded) {
+        window.adSenseLoaded = true;
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    </script>
     <style>
         * {
             margin: 0;
@@ -406,6 +415,29 @@
             margin-top: 30px;
         }
         
+        /* أنماط الإعلان الأفقي */
+        .horizontal-ad {
+            width: 100%;
+            max-width: 728px;
+            margin: 40px auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+        }
+        
+        .ad-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #b61412;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
         /* التكيف مع الشاشات المختلفة - تم التعديل هنا */
         @media (max-width: 992px) {
             body {
@@ -422,6 +454,11 @@
             
             .about-image {
                 max-width: 350px;
+            }
+            
+            .horizontal-ad {
+                max-width: 90%;
+                margin: 30px auto;
             }
         }
         
@@ -517,6 +554,11 @@
             
             .products-title {
                 margin-top: 10px;
+            }
+            
+            .horizontal-ad {
+                min-height: 250px;
+                max-width: 95%;
             }
         }
         
@@ -675,6 +717,15 @@
                     </p>
                 </div>
             </div>
+                  <!-- الإعلان الأول: بين قسم "ما هو M IDEA؟" و"ما هو منصة M IDEA" -->
+            <div class="horizontal-ad">
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:90px;"
+                     data-ad-client="ca-pub-3352888654930814"
+                     data-ad-slot="9520291396"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
             
             <!-- قسم ما هو منصة M IDEA -->
             <h2 class="section-title">ما هو منصة M IDEA</h2>
@@ -697,7 +748,8 @@
                     </p>
                 </div>
             </div>
-<!-- قسم ما هو منصة M IDEA Book -->
+            
+            <!-- قسم ما هو منصة M IDEA Book -->
             <div class="book-section">
                 <h2 class="section-title">ما هو منصة M IDEA BooK</h2>
                 <div class="image-text-container">
@@ -719,6 +771,16 @@
                         </p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- الإعلان الثاني: بين قسم "ما هو منصة M IDEA Book" و"منتجاتنا" -->
+            <div class="horizontal-ad">
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; height:90px;"
+                     data-ad-client="ca-pub-3352888654930814"
+                     data-ad-slot="9520291396"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
             </div>
         </div>
         
@@ -751,6 +813,7 @@
             </div>
         </div>
     </div>
+    
     <!-- أيقونات التواصل الاجتماعي -->
        <div class="social-icons-bottom" id="social-section">
         <a href="https://youtube.com/@m-idea?si=1AhBSp-72nTeKxTV" target="_blank" class="social-icon">
@@ -813,6 +876,8 @@
                 e.preventDefault();
             }
         }, false);
+        
+        // تم نقل تفعيل AdSense إلى الرأس لمنع التكرار
     </script>
 </body>
- </html>
+  </html>
