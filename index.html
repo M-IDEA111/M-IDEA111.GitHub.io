@@ -33,6 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة M IDEA الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- إضافة سكريبت AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
     <style>
@@ -40,22 +41,24 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: #ffffff;
+            background: #000;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             padding: 0;
             position: relative;
             font-size: 0.95rem;
+            color: #f0f0f0;
+            overflow-x: hidden;
         }
         
         /* شريط التنقل الجديد */
         .navbar {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 2px 20px rgba(182, 20, 18, 0.2);
             padding: 15px 20px;
             position: sticky;
             top: 0;
@@ -63,6 +66,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(182, 20, 18, 0.3);
         }
         
         .navbar-top {
@@ -81,12 +86,15 @@
         .navbar-logo img {
             width: 40px;
             height: 40px;
-            pointer-events: none; /* منع التفاعل مع الصورة */
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px rgba(182, 20, 18, 0.7));
         }
         
         .navbar-logo h2 {
             color: #b61412;
             font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(182, 20, 18, 0.5);
+            letter-spacing: 1px;
         }
         
         .nav-links {
@@ -98,26 +106,51 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #555;
+            color: #e0e0e0;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(182, 20, 18, 0.2));
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+        
+        .nav-link:hover::before {
+            transform: translateX(0);
         }
         
         .nav-link:hover {
-            background: #f8f8f8;
-            color: #b61412;
+            color: #fff;
         }
         
         .nav-link.active {
-            color: #b61412;
+            color: #fff;
             font-weight: bold;
+            background: rgba(182, 20, 18, 0.2);
+            box-shadow: 0 0 10px rgba(182, 20, 18, 0.3);
         }
         
         .nav-link i {
             font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .nav-link:hover i {
+            transform: scale(1.2);
         }
         
         .mobile-menu-btn {
@@ -127,6 +160,11 @@
             color: #b61412;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
         }
         
         .main-content {
@@ -140,7 +178,7 @@
         /* قسم معلومات عنا */
         .about-section {
             background: transparent;
-            padding: 0 0 30px 0;
+            padding: 40px 0;
             margin: 0 0 40px 0;
         }
         
@@ -150,11 +188,21 @@
         
         .about-section h2 {
             color: #b61412;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
             text-align: center;
             position: relative;
-            padding-bottom: 12px;
+            padding-bottom: 15px;
+            text-shadow: 0 0 15px rgba(182, 20, 18, 0.5);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-section h2.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .about-section h2::after {
@@ -163,28 +211,38 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 70px;
-            height: 3px;
-            background: #b61412;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #b61412, transparent);
             border-radius: 3px;
         }
         
         /* قسم منتجاتنا */
         .products-section {
             background: transparent;
-            padding: 0 0 30px 0;
+            padding: 40px 0;
             margin: 0 0 30px 0;
             position: relative;
         }
         
         .products-title {
             color: #b61412;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
             margin-top: 15px;
-            font-size: 1.6rem;
+            font-size: 2.2rem;
             text-align: center;
             position: relative;
-            padding-bottom: 12px;
+            padding-bottom: 15px;
+            text-shadow: 0 0 15px rgba(182, 20, 18, 0.5);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .products-title.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .products-title::after {
@@ -193,16 +251,16 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 70px;
-            height: 3px;
-            background: #b61412;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #b61412, transparent);
             border-radius: 3px;
         }
         
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 35px;
             margin-top: 15px;
         }
         
@@ -210,133 +268,180 @@
             background: transparent;
             text-align: center;
             position: relative;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 30px 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .product-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #b61412, #d43c3a);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover::before {
+            transform: scaleX(1);
         }
         
         .product-logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: transparent;
+            border-radius: 50%;
         }
         
         .product-logo img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 70%;
+            max-height: 70%;
             object-fit: contain;
-            pointer-events: none; /* منع التفاعل مع الصورة */
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px rgba(182, 20, 18, 0.5));
         }
         
         .product-name {
-            font-size: 1.3rem;
-            color: #b61412;
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 15px;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(182, 20, 18, 0.5);
         }
         
         .product-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1rem;
             min-height: 60px;
+            padding: 0 10px;
         }
         
         .product-link {
             display: inline-block;
-            background: linear-gradient(to bottom, #b61412, #d43c3a);
+            background: linear-gradient(to right, #b61412, #d43c3a);
             color: white;
-            padding: 10px 25px;
+            padding: 12px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(182, 20, 18, 0.4);
+            border: none;
         }
         
         .product-link:hover {
-            background: #d43c3a;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(182, 20, 18, 0.3);
+            box-shadow: 0 8px 20px rgba(182, 20, 18, 0.6);
         }
         
         /* أيقونات التواصل الاجتماعي */
         .social-icons-bottom {
             display: flex;
             justify-content: center;
-            gap: 18px;
-            margin: 30px 0 20px;
+            gap: 22px;
+            margin: 40px 0 30px;
             padding: 0;
             background: transparent;
             flex-wrap: wrap;
         }
         
         .social-icon {
-            width: 42px;
-            height: 42px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #b61412;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            font-size: 1.4rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             background: transparent;
             border-radius: 50%;
             border: 2px solid #b61412;
+            box-shadow: 0 0 15px rgba(182, 20, 18, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .social-icon.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .social-icon:hover {
-            color: white;
+            color: #fff;
             background: #b61412;
-            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(182, 20, 18, 0.6);
         }
         
-        /* روابط الشروط والخصوصية */
+        /* روابط الشروط والخصوصية - تم التصحيح هنا */
         .policy-links {
             text-align: center;
-            margin-bottom: 15px;
-            padding: 10px 0;
-            font-size: 0.95rem;
+            margin-bottom: 25px;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            opacity: 1; /* تم التصحيح: جعلها مرئية دائمًا */
+            transform: none; /* تم التصحيح: إزالة التحويل */
         }
         
         .policy-links a {
-            color: #b61412;
+            color: #b61412 !important; /* تم التصحيح: اللون الأحمر */
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 20px;
             font-weight: 600;
             transition: all 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1.1rem;
         }
         
         .policy-links a:hover {
             text-decoration: underline;
+            color: #d43c3a !important;
         }
         
-        /* حقوق النشر */
+        /* حقوق النشر - تم التصحيح هنا */
         .copyright {
             text-align: center;
-            padding: 10px 0;
-            color: #333;
-            font-size: 0.9rem;
+            padding: 15px 0;
+            color: #888;
+            font-size: 1rem;
             background: transparent;
             width: 100%;
+            opacity: 1; /* تم التصحيح: جعلها مرئية دائمًا */
+            transform: none; /* تم التصحيح: إزالة التحويل */
         }
         
         .copyright a {
-            color: #b61412;
+            color: #b61412 !important; /* تم التصحيح: اللون الأحمر */
             text-decoration: none;
             transition: color 0.3s;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.05rem;
         }
         
         .copyright a:hover {
-            color: #d43c3a;
             text-decoration: underline;
+            color: #d43c3a !important;
         }
         
         /* تأثير التمرير الناعم */
@@ -348,17 +453,30 @@
         .image-text-container {
             display: flex;
             align-items: center;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 40px;
+            margin-bottom: 60px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .image-text-container.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .about-image {
             flex: 1;
             min-width: 250px;
-            max-width: 380px;
+            max-width: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
         }
         
         .about-image img {
@@ -366,15 +484,16 @@
             height: auto;
             display: block;
             border-radius: 8px;
-            pointer-events: none; /* منع التفاعل مع الصورة */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
         
         .about-text-content {
             flex: 1;
-            padding: 0 10px;
+            padding: 0 15px;
             text-align: right;
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            z-index: 2;
         }
         
         .reverse-order {
@@ -383,19 +502,20 @@
         
         .about-text-content h3 {
             color: #b61412;
-            margin-bottom: 12px;
-            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(182, 20, 18, 0.3);
         }
         
         .about-text-content p {
-            margin-bottom: 15px;
-            color: #444;
+            margin-bottom: 20px;
+            color: #e0e0e0;
         }
         
         .section-title {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
         }
         
         /* إزالة الفراغ الزائد قبل أول قسم */
@@ -405,21 +525,22 @@
         
         /* قسم M IDEA Book */
         .book-section {
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         /* أنماط الإعلان الأفقي */
         .horizontal-ad {
             width: 100%;
             max-width: 728px;
-            margin: 40px auto;
-            padding: 15px;
-            background-color: transparent;
-            border-radius: 8px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #000;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 90px;
+            min-height: 120px;
+            border: 1px solid rgba(182, 20, 18, 0.3);
         }
         
         .ad-title {
@@ -430,7 +551,118 @@
             font-weight: 600;
         }
         
-        /* التكيف مع الشاشات المختلفة - تم التعديل هنا */
+        /* خلفية متحركة */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-particles {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(182, 20, 18, 0.1);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+        
+        .bg-particles:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+        
+        .bg-particles:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+        
+        .bg-particles:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+        
+        .bg-particles:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+        
+        .bg-particles:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+        
+        .bg-particles:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+        
+        .bg-particles:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+        
+        .bg-particles:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+        
+        .bg-particles:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+        
+        .bg-particles:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+                border-radius: 0;
+            }
+            
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        /* التكيف مع الشاشات المختلفة */
         @media (max-width: 992px) {
             body {
                 font-size: 0.92rem;
@@ -485,22 +717,22 @@
             }
             
             .mobile-menu-btn {
-                display: block;
+        display: block;
             }
             
             .products-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 30px;
             }
             
             .social-icons-bottom {
-                gap: 15px;
-                margin: 25px 0 15px;
+                gap: 18px;
+                margin: 35px 0 20px;
             }
             
             .about-section h2, 
             .products-title {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
             }
             
             .about-text-content {
@@ -508,12 +740,12 @@
             }
             
             .section-title {
-                font-size: 1.35rem;
+                font-size: 1.5rem;
             }
             
             .image-text-container {
                 flex-direction: column;
-                margin-bottom: 30px;
+                margin-bottom: 40px;
             }
             
             .about-image {
@@ -529,7 +761,6 @@
                 padding: 0;
             }
             
-            /* تعديلات الهوامش للجوال */
             .about-section {
                 padding: 0 0 20px 0;
                 margin: 0 0 30px 0;
@@ -569,8 +800,8 @@
             }
             
             .about-section h2 {
-                font-size: 1.3rem;
-                margin-bottom: 15px;
+                font-size: 1.6rem;
+                margin-bottom: 20px;
             }
             
             .products-section {
@@ -578,21 +809,26 @@
             }
             
             .products-title {
-                font-size: 1.3rem;
+                font-size: 1.6rem;
             }
             
             .social-icons-bottom {
-                gap: 12px;
+                gap: 15px;
             }
             
             .social-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 1.1rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
             }
             
             .policy-links {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
+            }
+            
+            .policy-links a {
+                display: block;
+                margin: 10px 0;
             }
             
             .copyright {
@@ -600,26 +836,26 @@
             }
             
             .product-card {
-                padding: 15px;
+                padding: 20px 15px;
             }
             
             .product-name {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .image-text-container {
                 margin-bottom: 30px;
+                padding: 20px 15px;
             }
             
             .section-title {
-                font-size: 1.25rem;
+                font-size: 1.4rem;
             }
             
             .about-text-content {
                 font-size: 0.85rem;
             }
             
-            /* تعديلات الهوامش للجوال الصغير */
             .about-section > .section-title:first-child {
                 margin-top: 8px;
             }
@@ -635,21 +871,37 @@
             }
             
             .about-text-content {
-                font-size: 1rem;
+                font-size: 1.05rem;
             }
             
             .image-text-container {
                 max-width: 1100px;
-                margin: 0 auto 40px;
+                margin: 0 auto 50px;
             }
             
             .about-image {
-                max-width: 420px;
+                max-width: 450px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- خلفية متحركة -->
+    <div class="bg-animation">
+        <ul>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+            <li class="bg-particles"></li>
+        </ul>
+    </div>
+    
     <!-- شريط التنقل الجديد -->
     <div class="navbar">
         <div class="navbar-top">
@@ -680,7 +932,6 @@
                 <i class="fas fa-file-contract"></i>
                 <span>السياسات</span>
             </a>
-            <!-- تم إضافة رابط اتصل بنا هنا -->
             <a href="https://discord.gg/F6f48AgV" target="_blank" class="nav-link">
                 <i class="fas fa-headset"></i>
                 <span>اتصل بنا</span>
@@ -709,7 +960,8 @@
                     </p>
                 </div>
             </div>
-    <!-- الإعلان الأول: بين قسم "ما هو M IDEA؟" و"ما هو منصة M IDEA" -->
+            
+            <!-- الإعلان الأول -->
             <div class="horizontal-ad">
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; min-height:90px;"
@@ -723,7 +975,7 @@
             </div>
             
             <!-- قسم ما هو منصة M IDEA -->
-            <h2 class="section-title">ما هي منصة M IDEA</h2>
+            <h2 class="section-title">ما هو منصة M IDEA</h2>
             <div class="image-text-container reverse-order">
                 <div class="about-image">
                     <img src="oh.png" alt="صورة توضيحية لمنصة M IDEA">
@@ -746,7 +998,7 @@
             
             <!-- قسم ما هو منصة M IDEA Book -->
             <div class="book-section">
-                <h2 class="section-title">ما هي منصة M IDEA BooK</h2>
+                <h2 class="section-title">ما هو منصة M IDEA BooK</h2>
                 <div class="image-text-container">
                     <div class="about-image">
                         <img src="Picsart_25-08-08_03-00-03-200.png" alt="صورة توضيحية لمنصة M IDEA Book">
@@ -768,7 +1020,7 @@
                 </div>
             </div>
             
-            <!-- الإعلان الثاني: بين قسم "ما هو منصة M IDEA Book" و"منتجاتنا" -->
+            <!-- الإعلان الثاني -->
             <div class="horizontal-ad">
                 <ins class="adsbygoogle"
                      style="display:block; width:100%; min-height:90px;"
@@ -834,13 +1086,13 @@
         </a>
     </div>
     
-    <!-- روابط الشروط والخصوصية -->
+    <!-- روابط الشروط والخصوصية - تم التصحيح هنا -->
     <div class="policy-links">
         <a href="privacy.html">شروط الاستخدام</a>
         <a href="privacy.html">سياسة الخصوصية</a>
     </div>
     
-    <!-- حقوق النشر -->
+    <!-- حقوق النشر - تم التصحيح هنا -->
     <div class="copyright">
         Copyright © 2025 - <a href="#">M IDEA</a> جميع الحقوق محفوظة
     </div>
@@ -874,6 +1126,31 @@
                 e.preventDefault();
             }
         }, false);
+        
+        // أنيميشن التمرير
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.section-title, .image-text-container, .product-card, .social-icon, .products-title');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+        
+        // تشغيل الأنيميشن عند التحميل وعند التمرير
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // تشغيل الأنيميشن للعناصر المرئية عند التحميل
+        document.querySelectorAll('.section-title, .products-title').forEach(el => {
+            setTimeout(() => {
+                el.classList.add('animate');
+            }, 300);
+        });
     </script>
 </body>
 </html>
