@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currently Unavailable - M IDEA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .construction-sign {
+            font-size: 10rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 204, 0, 0.7); }
+            50% { transform: scale(1.1); text-shadow: 0 0 30px rgba(255, 204, 0, 0.9); }
+            100% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 204, 0, 0.7); }
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #ffcc00, transparent);
+            border-radius: 2px;
+        }
+        
+        .message {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .copyright {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .copyright a {
+            color: #ffcc00;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .copyright a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .construction-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .construction-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 204, 0, 0.2);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .construction-sign {
+                font-size: 8rem;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .construction-sign {
+                font-size: 6rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .message {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="construction-icons" id="construction-icons"></div>
+    
+    <div class="container">
+        <div class="construction-sign">🚧</div>
+        
+        <h1>Currently Unavailable</h1>
+        
+        <div class="message">
+            We are currently improving the service and will be back soon
+        </div>
+        
+
+        </div>
+    </div>
+
+    <script>
+        // Create floating construction icons
+        function createConstructionIcons() {
+            const container = document.getElementById('construction-icons');
+            
+            for (let i = 0; i < 30; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'construction-icon';
+                icon.innerHTML = '🚧';
+                
+                // Random positioning
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = 0.5 + Math.random() * 2;
+                icon.style.fontSize = `${size}rem`;
+                
+                // Random animation delay
+                icon.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Random rotation
+                icon.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(icon);
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            createConstructionIcons();
+        });
+    </script>
+</body>
+</html>
