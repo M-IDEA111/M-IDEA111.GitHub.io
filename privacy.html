@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Terms of Use - M IDEA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation bar - enhancements */
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+        }
+        
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .navbar-logo h2 {
+            color: #b61412;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+        
+        /* Link bar enhancements */
+        .nav-links-container {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            min-width: max-content;
+        }
+        
+        .nav-link:hover {
+            background: #f8f8f8;
+            color: #b61412;
+        }
+        
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #b61412;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page content */
+        .privacy-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .privacy-header h1 {
+            color: #b61412;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .privacy-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #b61412;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section h3 {
+            color: #d43c3a;
+            margin: 20px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: #444;
+            text-align: justify;
+            line-height: 1.7;
+        }
+        
+        .section ul {
+            margin: 15px 0 20px 30px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        .highlight {
+            background-color: #fff8f8;
+            border-left: 4px solid #b61412;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            text-align: justify;
+        }
+        
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            color: #b61412;
+            font-size: 0.9rem;
+            background: #fff;
+            margin-top: auto;
+        }
+        
+        .copyright a {
+            color: #b61412;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+            }
+            
+            .navbar-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .nav-links-container {
+                width: 100%;
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
+            
+            .nav-links {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links-container {
+                display: none;
+                flex-direction: column;
+                overflow-x: visible;
+                padding: 0;
+            }
+            
+            .nav-links-container.active {
+                display: flex;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+            
+            .nav-link {
+                border-radius: 0;
+                padding: 12px 15px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .privacy-container {
+                padding: 15px;
+                margin: 20px 15px;
+            }
+            
+            .privacy-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .section p {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 8px;
+            }
+            
+            .navbar-logo h2 {
+                font-size: 1.1rem;
+            }
+            
+            .privacy-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section ul {
+                margin-left: 20px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #b61412;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d43c3a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced navigation bar -->
+    <div class="navbar">
+        <div class="navbar-top">
+            <div class="navbar-logo">
+                <img src="app_logo.png" alt="App Logo">
+                <h2>M IDEA</h2>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="nav-links-container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="index.html#social-section" class="nav-link">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Follow Us</span>
+                </a>
+                <a href="index.html#about-section" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Us</span>
+                </a>
+                <a href="#" class="nav-link" style="color: #b61412; font-weight: bold;">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Policies</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Privacy policy content -->
+    <div class="privacy-container">
+        <div class="privacy-header">
+            <h1>Privacy Policy & Terms of Use</h1>
+            <p>Effective Date: July 31, 2025</p>
+        </div>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Welcome to the M IDEA platform. We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, share, and protect your information when you use our website and application.</p>
+            <p>By using our services, you agree to the privacy practices described in this policy.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Information We Collect</h2>
+            
+            <h3>Information you provide to us:</h3>
+            <ul>
+                <li>Account information (name, email, password)</li>
+                <li>Profile information (photo, description, interests)</li>
+                <li>Content you post or share on the platform</li>
+                <li>Messages when communicating with other users or support team</li>
+            </ul>
+            
+            <h3>Information we collect automatically:</h3>
+            <ul>
+                <li>Device and operating system information</li>
+                <li>Usage logs and operational data</li>
+                <li>IP address and approximate location information</li>
+                <li>Cookies and similar tracking technologies</li>
+            </ul>
+            
+            <h3>Information from external sources:</h3>
+            <ul>
+                <li>Information from social media platforms when linking accounts</li>
+                <li>Information from marketing and analytics partners</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>How We Use Your Information</h2>
+            <ul>
+                <li>Providing platform services and improving user experience</li>
+                <li>Personalizing content and advertisements you see</li>
+                <li>Responding to your inquiries and providing technical support</li>
+                <li>Sending important updates and notifications</li>
+                <li>Analyzing platform usage and developing new services</li>
+                <li>Preventing fraud and illegal activities</li>
+                <li>Complying with applicable laws and regulations</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Sharing Information</h2>
+            <p>We do not sell your personal information to third parties. However, we may share your information with:</p>
+            <ul>
+                <li>Service providers working on our behalf (such as data hosting, analytics, payment processing)</li>
+                <li>Legal entities when complying with laws or protecting our rights</li>
+                <li>Our affiliates within the M IDEA group</li>
+                <li>In case of merger, acquisition, or sale of company assets</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Security</h2>
+            <p>We use reasonable technical and administrative security measures to protect your information from unauthorized access, use, or disclosure. However, 100% security of information online cannot be guaranteed.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Your Choices</h2>
+            <ul>
+                <li>You can update your account information at any time</li>
+                <li>You can unsubscribe from marketing messages</li>
+                <li>You can manage cookie preferences through your browser</li>
+                <li>You can request deletion of your account by contacting support</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Terms of Use</h2>
+            <p>By using the M IDEA platform, you agree to comply with the following terms:</p>
+            
+            <h3>User Responsibilities:</h3>
+            <ul>
+                <li>Be at least 13 years old to use the service</li>
+                <li>Provide accurate and true information when registering</li>
+                <li>Maintain the security of your account and password</li>
+                <li>Not use the platform for any illegal purposes</li>
+            </ul>
+            
+            <h3>Prohibited Content:</h3>
+            <ul>
+                <li>Racist or hateful content</li>
+                <li>Pornographic or unethical materials</li>
+                <li>Content that violates intellectual property rights</li>
+                <li>Content that encourages violence or illegal activities</li>
+                <li>False or misleading information</li>
+            </ul>
+            
+            <h3>Intellectual Property Rights:</h3>
+            <p>M IDEA retains all intellectual property rights to the platform. Users retain rights to their original content they post.</p>
+            
+            <h3>Service Termination:</h3>
+            <p>We reserve the right to suspend or terminate your access to the service at any time for any reason including violation of terms of use.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Policy Changes</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page and we will indicate the effective date at the top.</p>
+            <p>We encourage you to periodically review the Privacy Policy to stay informed about our practices.</p>
+        </div>
+    </div>
+    
+    </div>
+    
+    <script>
+        // Toggle mobile menu
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navContainer = document.querySelector('.nav-links-container');
+        
+        menuBtn.addEventListener('click', () => {
+            navContainer.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navContainer.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
