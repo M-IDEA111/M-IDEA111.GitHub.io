@@ -26,8 +26,11 @@
             --naruto-blue: #0066cc;
             --aot-red: #c70000;
             --aot-dark: #333333;
+            --classic-gold: #d4af37;
+            --classic-dark: #2a211c;
             --naruto-bg: linear-gradient(135deg, #1a1a1a, #0d0d0d);
             --aot-bg: linear-gradient(135deg, #0a0a0a, #121212);
+            --classic-bg: linear-gradient(135deg, #1a1612, #0f0c09);
         }
         
         body {
@@ -37,7 +40,7 @@
             display: flex;
             flex-direction: column;
             background-attachment: fixed;
-            padding-top: 140px;
+            padding-top: 100px; /* تقليل الحشوة العلوية */
             transition: background 0.5s ease;
         }
         
@@ -45,37 +48,51 @@
             background: var(--aot-bg);
         }
         
-        /* Header Styles */
+        body.classic-theme {
+            background: var(--classic-bg);
+        }
+        
+        /* Header Styles - UPDATED */
         header {
             background: rgba(0, 0, 0, 0.85);
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 1.2rem; /* تقليل الحشوة */
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: space-between;
             border-bottom: 2px solid var(--primary-color);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            height: 80px; /* ارتفاع ثابت للهيدر */
         }
         
-        .header-top {
+        .header-left {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
+            gap: 12px; /* تقليل المسافة بين العناصر */
+            flex: 1;
         }
         
-        .header-bottom {
-            width: 100%;
-            max-width: 600px;
+        .header-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            max-width: 500px; /* تقليل العرض الأقصى */
+        }
+        
+        .header-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px; /* تقليل المسافة بين العناصر */
         }
         
         .logo-img {
-            height: 50px;
+            height: 60px; /* تقليل حجم الشعار */
             transition: transform 0.3s;
             filter: drop-shadow(0 0 10px var(--primary-color-light));
         }
@@ -92,6 +109,7 @@
             overflow: hidden;
             box-shadow: 0 0 15px rgba(3, 255, 186, 0.3);
             animation: pulse 2s infinite;
+            height: 42px; /* ارتفاع ثابت لشريط البحث */
         }
         
         @keyframes pulse {
@@ -102,13 +120,14 @@
         
         .search-bar input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 10px 16px; /* تقليل الحشوة */
             border: none;
             background-color: rgba(0, 0, 0, 0.5);
             color: var(--dark-text);
-            font-size: 1rem;
+            font-size: 0.9rem; /* تقليل حجم الخط */
             outline: none;
             transition: all 0.3s;
+            height: 100%;
         }
         
         .search-bar input:focus {
@@ -116,16 +135,17 @@
         }
         
         .search-bar button {
-            padding: 0 22px;
+            padding: 0 18px; /* تقليل الحشوة */
             background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
             color: #000;
             border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem; /* تقليل حجم الخط */
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            height: 100%;
         }
         
         .search-bar button:hover {
@@ -137,13 +157,14 @@
             background: none;
             border: none;
             color: var(--primary-color);
-            font-size: 1.4rem;
+            font-size: 1.2rem; /* تقليل حجم الأيقونة */
             cursor: pointer;
-            padding: 8px;
+            padding: 6px;
             border-radius: 50%;
             transition: all 0.3s;
-            width: 45px;
-            height: 45px;
+            width: 38px; /* تقليل الحجم */
+ */
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -173,10 +194,50 @@
             opacity: 1;
         }
         
+        .exit-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px; /* تقليل المسافة */
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.95rem; /* تقليل حجم الخط */
+            cursor: pointer;
+            padding: 8px 12px; /* تقليل الحشوة */
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .exit-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            color: var(--primary-color-light);
+        }
+        
+        .transfer-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.95rem; /* تقليل حجم الخط */
+            padding: 8px 12px; /* تقليل الحشوة */
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px; /* تقليل المسافة */
+        }
+        
+        .transfer-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            color: var(--primary-color-light);
+        }
+        
         /* Settings Menu */
         .settings-menu {
             position: fixed;
-            top: 90px;
+            top: 80px;
             right: 20px;
             background-color: #2c2c2c;
             border-radius: var(--border-radius);
@@ -251,61 +312,6 @@
             color: #000;
         }
         
-        /* Navigation - under search bar */
-        nav {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 0.8rem 0;
-            position: sticky;
-            top: 140px;
-            z-index: 999;
-            border-bottom: 1px solid rgba(3, 255, 186, 0.2);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .categories {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        .category-btn {
-            background: none;
-            border: none;
-            color: #aaa;
-            padding: 8px 0;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            font-weight: 600;
-        }
-        
-        .category-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
-            transition: width 0.4s ease;
-            z-index: -1;
-        }
-        
-        .category-btn:hover, .category-btn.active {
-            color: var(--primary-color);
-        }
-        
-        .category-btn:hover::after, .category-btn.active::after {
-            width: 100%;
-        }
-        
         /* Main Content */
         main {
             padding: 1.5rem;
@@ -327,33 +333,37 @@
         
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
         
         .book-card {
-            background-color: var(--dark-card);
+            background-color: transparent;
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            border: 1px solid rgba(3, 255, 186, 0.1);
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .book-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(3, 255, 186, 0.3);
         }
         
         .book-cover {
-            height: 320px;
+            height: 220px;
+            width: 160px;
             overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .book-cover.naruto {
@@ -364,7 +374,11 @@
             background: linear-gradient(135deg, var(--aot-red), var(--aot-dark));
         }
         
-        .cover-image {'
+        .book-cover.classic {
+            background: linear-gradient(135deg, var(--classic-gold), var(--classic-dark));
+        }
+        
+        .cover-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -375,39 +389,16 @@
             transform: scale(1.05);
         }
         
-        .book-info {
-            padding: 1rem;
-        }
-        
         .book-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
+            font-size: 1rem;
+            margin-top: 10px;
             color: var(--primary-color);
             font-weight: 600;
-        }
-        
-        .book-author {
-            color: #aaa;
-            font-size: 0.85rem;
-            margin-bottom: 0.4rem;
-        }
-        
-        .book-description {
-            color: #ccc;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 0.6rem;
-        }
-        
-        .book-pages {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-top: 0.3rem;
-            font-weight: bold;
+            text-align: center;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
         /* Reading Section */
@@ -430,11 +421,6 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 2px solid var(--primary-color);
-        }
-        
-        .reading-title {
-            font-size: 1.3rem;
-            color: var(--primary-color);
         }
         
         .back-to-books {
@@ -525,6 +511,26 @@
             color: var(--primary-color-light);
         }
         
+        .book-description {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .book-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .book-author-reading {
+            font-size: 1rem;
+            color: #aaa;
+        }
+        
         .page-navigation {
             display: flex;
             justify-content: space-between;
@@ -592,14 +598,165 @@
             color: #000;
         }
         
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(3, 255, 186, 0.5);
+        }
+        
+        /* View More Button */
+        .view-more-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .view-more-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .view-more-btn:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: translateX(5px);
+        }
+        
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            
+            .book-cover {
+                height: 200px;
+                width: 150px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1.2rem;
+            }
+            
+            .book-cover {
+                height: 190px;
+                width: 140px;
+            }
+        }
+        
         @media (max-width: 768px) {
             body {
-                padding-top: 160px;
+                padding-top: 120px; /* تقليل الحشوة العلوية */
             }
             
             header {
                 padding: 8px 10px;
+                flex-direction: row; /* الحفاظ على الترتيب الأفقي */
+                height: 70px; /* تقليل الارتفاع */
+                gap: 10px;
+            }
+            
+            .header-left, .header-center, .header-right {
+                width: auto;
+                justify-content: center;
+            }
+            
+            .header-right {
+                order: 3; /* الحفاظ على الترتيب */
+            }
+            
+            .logo-img {
+                height: 45px; /* تقليل حجم الشعار */
+            }
+            
+            .icon-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title, .category-title {
+                font-size: 1.4rem;
+                margin: 1.2rem 0 0.8rem;
+            }
+            
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .book-cover {
+                height: 180px;
+                width: 130px;
+            }
+            
+            .book-title {
+                font-size: 0.9rem;
+                max-width: 130px;
+            }
+            
+            .settings-menu {
+                top: 100px;
+                right: 10px;
+                width: 90%;
+            }
+            
+            .search-bar {
+                height: 38px;
+            }
+            
+            .search-bar input {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+            
+            .search-bar button {
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+            
+            .transfer-btn, .exit-btn {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .header-center {
+                max-width: 450px; /* تقليل العرض الأقصى */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 110px; /* تقليل الحشوة العلوية */
+            }
+            
+            header {
+                height: 65px;
+                padding: 6px 8px;
             }
             
             .logo-img {
@@ -607,77 +764,58 @@
             }
             
             .icon-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 1.2rem;
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
             }
             
-            nav {
-                top: 128px;
-                padding: 0.5rem 0;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-                margin: 1.2rem 0 0.8rem;
+            .section-title, .category-title {
+                font-size: 1.3rem;
             }
             
             .books-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .book-cover {
-                height: 280px;
-            }
-            
-            .settings-menu {
-                top: 110px;
-                right: 10px;
-                width: 90%;
-            }
-            
-            .header-top {
-                margin-bottom: 5px;
-            }
-            
-            .categories {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
                 gap: 1rem;
             }
             
-            .category-btn {
-                font-size: 1rem;
-                padding: 6px 0;
+            .book-cover {
+                height: 160px;
+                width: 120px;
+            }
+            
+            .book-title {
+                font-size: 0.85rem;
+                max-width: 120px;
+            }
+            
+            .search-bar {
+                height: 36px;
             }
             
             .search-bar input {
-                padding: 12px 16px;
+                padding: 7px 12px;
+                font-size: 0.8rem;
             }
             
             .search-bar button {
-                padding: 0 18px;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .header-top {
-                max-width: 1200px;
-                width: 100%;
-            }
-            .header-bottom {
-                max-width: 600px;
-                margin-top: 10px;
+                padding: 0 14px;
+                font-size: 0.85rem;
             }
             
-            nav {
-                top: 138px;
+            .transfer-btn, .exit-btn {
+                font-size: 0.8rem;
+                padding: 5px 8px;
             }
         }
         
         @media (max-width: 480px) {
             body {
-                padding-top: 150px;
+                padding-top: 100px; /* تقليل الحشوة العلوية */
+            }
+            
+            header {
+                height: 60px;
+                padding: 5px;
             }
             
             .logo-img {
@@ -685,29 +823,78 @@
             }
             
             .icon-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+            .section-title, .category-title {
+                font-size: 1.2rem;
             }
             
-            .categories {
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
                 gap: 0.8rem;
             }
             
-            .category-btn {
-                font-size: 0.9rem;
-            }
-            
-            nav {
-                top: 118px;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-            }
-            
             .book-cover {
-                height: 250px;
+                height: 150px;
+                width: 110px;
+            }
+            
+            .book-title {
+                font-size: 0.8rem;
+                max-width: 110px;
+            }
+            
+            .search-bar {
+                height: 34px;
+            }
+            
+            .search-bar input {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .search-bar button {
+                padding: 0 12px;
+                font-size: 0.8rem;
+            }
+            
+            .transfer-btn, .exit-btn {
+                font-size: 0.75rem;
+                padding: 4px 6px;
+            }
+            
+            /* تعديلات إضافية للحفاظ على الترتيب في الشاشات الصغيرة جدًا */
+            .header-left {
+                gap: 5px;
+            }
+            
+            .header-right {
+                gap: 5px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            /* تعديلات إضافية للشاشات الصغيرة جدًا */
+            .transfer-btn span, .exit-btn span {
+                display: none; /* إخفاء النص في الشاشات الصغيرة جدًا */
+            }
+            
+            .transfer-btn, .exit-btn {
+                padding: 6px;
+            }
+            
+            .header-left {
+                flex: 0.8;
+            }
+            
+            .header-center {
+                flex: 1.5;
+            }
+            
+            .header-right {
+                flex: 0.8;
             }
         }
         
@@ -741,32 +928,53 @@
             margin-top: 5px;
             font-style: italic;
         }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: #aaa;
+            font-size: 1.2rem;
+        }
+        
+        /* Back to Categories Button */
+        .back-to-categories {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .back-to-categories:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(3, 255, 186, 0.4);
+        }
     </style>
 </head>
 <body>
-    <!-- Header with Logo, Search, Settings and Exit Icon -->
+   <!-- Header with Logo, Search, Transfer and Exit Icon -->
     <header>
-        <div class="header-top">
-            <!-- Settings icon on the left -->
-            <div class="header-icons">
-                <button class="icon-btn" id="settings-btn">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </div>
-            
-            <!-- Logo in the center -->
-            <img src="Picsart_25-07-23_05-13-20-665.png" alt="M IDEA Book Logo" class="logo-img" id="logo">
-            
-            <!-- Exit icon on the right -->
-            <div class="header-icons">
-                <button class="icon-btn" id="exit-btn">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+        <!-- Left side: Transfer and Exit buttons -->
+        <div class="header-left">
+            <button class="transfer-btn" id="transfer-btn">
+                <i class="fas fa-exchange-alt"></i> <span>Transfer</span>
+            </button>
+            <button class="exit-btn" id="exit-btn">
+                <i class="fas fa-door-open"></i> <span>Exit</span>
+            </button>
         </div>
         
-        <!-- Search bar -->
-        <div class="header-bottom">
+        <!-- Center: Search bar -->
+        <div class="header-center">
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search the library...">
                 <button id="search-btn">
@@ -774,10 +982,28 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Right side: Logo -->
+        <div class="header-right">
+            <img src="Picsart_25-07-23_05-13-20-665.png" alt="M IDEA Book Logo" class="logo-img" id="logo">
+        </div>
     </header>
-    
     <!-- Settings menu -->
     <div class="settings-menu" id="settings-menu">
+        <div class="settings-section">
+            <h3 class="settings-title"><i class="fas fa-exchange-alt"></i> Transfer to Section</h3>
+            <div class="social-links">
+                <a href="#" class="social-link" data-section="anime">
+                    <i class="fas fa-dragon"></i>
+                    <span>Anime Section</span>
+                </a>
+                <a href="#" class="social-link" data-section="classic">
+                    <i class="fas fa-book"></i>
+                    <span>Classic Novels</span>
+                </a>
+            </div>
+        </div>
+        
         <div class="settings-section">
             <h3 class="settings-title"><i class="fas fa-link"></i> Social Media</h3>
             <div class="social-links">
@@ -789,21 +1015,43 @@
         </div>
     </div>
     
-    <!-- Navigation - under search bar -->
-    <nav>
-        <div class="categories">
-            <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="anime">Anime</button>
-        </div>
-    </nav>
-    
     <!-- Main Content -->
     <main>
         <!-- Books Section -->
         <div class="books-section" id="books-section">
-            <h2 class="section-title">Anime</h2>
-            <div class="books-grid" id="books-grid">
-                <!-- Books will be populated by JavaScript -->
+            <!-- زر العودة إلى الأقسام (يظهر فقط عند التصفية) -->
+            <button class="back-to-categories" id="back-to-categories" style="display: none;">
+                <i class="fas fa-arrow-left"></i> Back to All Categories
+            </button>
+            
+            <!-- Anime Section -->
+            <div class="category-section" id="anime-section">
+                <h3 class="category-title">Anime</h3>
+                <div class="books-grid" id="anime-books-grid">
+                    <!-- Anime books will be populated by JavaScript -->
+                </div>
+                <!-- زر "المزيد" للأنمي -->
+                <div class="view-more-container">
+                    <button class="view-more-btn" data-category="anime">
+                        <span>المزيد</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Classic Novels Section -->
+            <div class="category-section" id="classic-section">
+                <h3 class="category-title">Classic Novels</h3>
+                <div class="books-grid" id="classic-books-grid">
+                    <!-- Classic books will be populated by JavaScript -->
+                </div>
+                <!-- زر "المزيد" للكلاسيك -->
+                <div class="view-more-container">
+                    <button class="view-more-btn" data-category="classic">
+                        <span>المزيد</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -812,7 +1060,7 @@
             <div class="reading-header">
                 <h3 class="reading-title" id="reading-title"></h3>
                 <button class="back-to-books" id="back-to-books">
-                    <i class="fas fa-arrow-left"></i> Back to Library
+                    <i class="fas fa-arrow-left"></i> Back to Categories
                 </button>
             </div>
             
@@ -822,13 +1070,13 @@
             
             <div class="page-navigation">
                 <button class="nav-btn" id="prev-page" disabled>
-                    <i class="fas fa-arrow-right"></i> Previous Page
+                    <i class="fas fa-arrow-left"></i> Previous Page
                 </button>
                 
                 <div class="page-indicator" id="page-indicator">Page 1 of 5</div>
                 
                 <button class="nav-btn" id="next-page">
-                    Next Page <i class="fas fa-arrow-left"></i>
+                    Next Page <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
@@ -840,7 +1088,7 @@
     </div>
     
     <script>
-        // Books data (two seasons) with real manga content
+        // Books data with real manga content
         const books = [
             {
                 id: 1,
@@ -857,6 +1105,9 @@
                         image: "00f993fde8debed82a8d401b69fe01df.jpg",
                         text: `<div class="episode-title">Chapter 245: Homecoming</div>
                         <div class="chapter-info">Source: Naruto Manga Chapter 245</div>
+                        <div class="book-description">
+                            <strong>Book Description:</strong> The story of Naruto Uzumaki on his journey to become the Seventh Hokage, facing new challenges and powerful enemies in the ninja world.
+                        </div>
                         <p>After two and a half years of training with Jiraiya, Naruto returns to the Village Hidden in the Leaves (Konoha). He notices slight changes in the village, especially Tsunade's face carved on the Hokage Mountain. Naruto meets Sakura and Konohamaru, and everyone notices how Naruto has grown and become more mature.</p>
                         <p>Sakura asks Naruto: "Do I look like a woman now?" Naruto replies: "No, you're still the same!" which angers her and she hits him hard. Jiraiya is surprised by Sakura's strength.</p>
                         <p>Tsunade asks Naruto and Sakura to test their new strength in a confrontation against Kakashi.</p>
@@ -864,7 +1115,7 @@
                     },
                     {
                         title: "Team 7 Test",
-                        description: "A match between Team 7 and Kakashi to test their progress",
+description: "A match between Team 7 and Kakashi to test their progress",
                         image: "00f993fde8debed82a8d401b69fe01df.jpg",
                         text: `<div class="episode-title">Chapter 246: The New Test</div>
                         <div class="chapter-info">Source: Naruto Manga Chapter 246</div>
@@ -923,12 +1174,16 @@
                         image: "f13da44847f5c86cef64753ac9da73d5.jpg",
                         text: `<div class="episode-title">Chapter 91: The Truth Behind the Walls</div>
                         <div class="chapter-info">Source: Attack on Titan Manga Chapter 91</div>
+                        <div class="book-description">
+                            <strong>Book Description:</strong> Continuation of the epic saga where the secrets of the walls and titans are revealed.
+                        </div>
                         <p>After discovering the basement in Eren's house, Eren, Mikasa, and Armin uncover the terrifying truth about the world beyond the walls. They learn that humanity outside the walls lives in advanced technological development, and considers the wall inhabitants "devils" because of their ability to transform into titans.</p>
                         <p>Eren discovers that his father, Grisha, came from outside the walls, and that he transferred the power of the Attack Titan to him before his death. He also discovers that the Eldian people (his ancestors) are the ones who created the titans and used them to control the world.</p>
                         <p class="source-reference">Source: Attack on Titan Manga Chapter 91</p>`
                     },
                     {
-                        title: "Enemy Territory",
+                        
+title: "Enemy Territory",
                         description: "Eren and his companions in Marley territory",
                         image: "f13da44847f5c86cef64753ac9da73d5.jpg",
                         text: `<div class="episode-title">Chapter 92: In Enemy Territory</div>
@@ -939,7 +1194,7 @@
                     },
                     {
                         title: "Liberio Attack",
-                        description: "The beginning of the attack on Marley",
+                          description: "The beginning of the attack on Marley",
                         image: "f13da44847f5c86cef64753ac9da73d5.jpg",
                         text: `<div class="episode-title">Chapter 93: Liberio Attack</div>
                         <div class="chapter-info">Source: Attack on Titan Manga Chapter 93</div>
@@ -971,14 +1226,75 @@
                         <p class="source-reference">Source: Attack on Titan Manga Chapter 95</p>`
                     }
                 ]
+            },
+            {
+                
+id: 3,
+                title: "قصر الشوق",
+                author: "Naguib Mahfouz",
+                category: "classic",
+                description: "The second book in the Cairo Trilogy, following the lives of the Abd al-Jawad family during the British occupation of Egypt",
+                pages: 5,
+                coverImage: "ok.jpg",
+                content: [
+                    {
+                        title: "Family Secrets",
+                        description: "The Abd al-Jawad family faces new challenges",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">Chapter 1: The Patriarch's Return</div>
+                        <div class="book-description">
+                            <strong>Book Description:</strong> The second book in the Cairo Trilogy, following the lives of the Abd al-Jawad family during the British occupation of Egypt.
+                        </div>
+                        <p>Al-Sayyid Ahmad Abd al-Jawad returns home after a long journey to find his family in turmoil. His wife, Amina, anxiously awaits his return, while his children each face their own struggles. Kamal, the youngest son, struggles with his education and identity crisis.</p>
+                        <p>Yasin, the eldest son, continues his reckless behavior and scandalous affairs. Khadija, the eldest daughter, struggles with her marriage to Khalil Shawkat. Aisha, the beautiful daughter, faces the challenges of motherhood and her husband's neglect.</p>
+                        <p class="source-reference">Source: Palace of Desire by Naguib Mahfouz</p>`
+                    },
+                    {
+                        title: "Political Turmoil",
+                        description: "The family faces the impact of political changes",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">Chapter 2: Winds of Change</div>
+                        <p>The year is 1924, and Egypt is undergoing significant political changes. The Wafd Party leads the nationalist movement against British occupation. Kamal becomes increasingly involved in political activism, much to his father's disapproval.</p>
+                        <p>Al-Sayyid Ahmad, once a staunch supporter of the monarchy, finds himself conflicted as he witnesses the growing nationalist sentiment. His business suffers due to the political instability, and he struggles to maintain his authority within the family.</p>
+                        <p class="source-reference">Source: Palace of Desire by Naguib Mahfouz</p>`
+                    },
+                    {
+                        title: "Love and Loss",
+                        description: "Romantic entanglements and heartbreaks",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">Chapter 3: Affairs of the Heart</div>
+                        <p>Yasin falls in love with Zannuba, a singer at the bar he frequents. Despite his father's disapproval and the scandal it causes, he pursues the relationship. His marriage to Zaynab deteriorates further as he neglects his family responsibilities.</p>
+                        <p>Kamal develops an unrequited love for Aida Shaddad, a girl from a wealthy family. His feelings for her become an obsession that affects his studies and mental health. He struggles with his self-esteem and questions his place in the changing world.</p>
+                        <p class="source-reference">Source: Palace of Desire by Naguib Mahfouz</p>`
+                    },
+                    {
+                        title: "Family Crisis",
+                        description: "The Abd al-Jawad family faces a major crisis",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">Chapter 4: The Patriarch's Illness</div>
+                        <p>Al-Sayyid Ahmad suffers a stroke that leaves him partially paralyzed. The family is thrown into chaos as the once powerful patriarch becomes dependent on others. His illness forces him to confront his mortality and the consequences of his authoritarian parenting.</p>
+                        <p>Amina takes charge of the household, showing unexpected strength and resilience. The children rally around their father, setting aside their differences in this time of crisis. Yasin steps up to manage the family business, surprising everyone with his newfound responsibility.</p>
+                        <p class="source-reference">Source: Palace of Desire by Naguib Mahfouz</p>`
+                    },
+                    {
+                        title: "New Beginnings",
+                        description: "The family adapts to a new reality",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">Chapter 5: Changing Times</div>
+                        <p>As Al-Sayyid Ahmad slowly recovers, the family adjusts to their new roles. Kamal graduates from teacher training college and begins his career, finally finding purpose beyond his unrequited love. He becomes involved in intellectual circles, discussing philosophy and politics.</p>
+                        <p>Aisha faces tragedy when her children fall ill during an epidemic. Her strength during this difficult time transforms her from the fragile beauty she once was. The novel ends with the family gathering for a rare moment of unity, facing an uncertain future but strengthened by their bonds.</p>
+                        <p class="source-reference">Source: Palace of Desire by Naguib Mahfouz</p>`
+                    }
+                ]
             }
         ];
         
         // DOM elements
-        const settingsBtn = document.getElementById('settings-btn');
+        const transferBtn = document.getElementById('transfer-btn');
         const exitBtn = document.getElementById('exit-btn');
         const logo = document.getElementById('logo');
-        const booksGrid = document.getElementById('books-grid');
+        const animeBooksGrid = document.getElementById('anime-books-grid');
+        const classicBooksGrid = document.getElementById('classic-books-grid');
         const booksSection = document.getElementById('books-section');
         const readingContainer = document.getElementById('reading-container');
         const readingTitle = document.getElementById('reading-title');
@@ -987,41 +1303,34 @@
         const prevPageBtn = document.getElementById('prev-page');
         const nextPageBtn = document.getElementById('next-page');
         const pageIndicator = document.getElementById('page-indicator');
-        const categoryBtns = document.querySelectorAll('.category-btn');
         const searchInput = document.getElementById('search-input');
         const searchBtn = document.getElementById('search-btn');
         const settingsMenu = document.getElementById('settings-menu');
         const loadingSpinner = document.getElementById('loading-spinner');
+        const animeSection = document.getElementById('anime-section');
+        const classicSection = document.getElementById('classic-section');
+        const backToCategoriesBtn = document.getElementById('back-to-categories');
         
         // App state
         let currentBook = null;
         let currentPage = 0;
         let currentTheme = 'naruto';
+        let currentView = 'all'; // 'all', 'anime', 'classic', or 'search'
         
         // Initialize site
         function initSite() {
-            // Display books
-            renderBooks(books);
+            // Display books by category
+            renderBooksByCategory();
             
             // Add event listeners
-            settingsBtn.addEventListener('click', toggleSettingsMenu);
-            exitBtn.addEventListener('dblclick', goToHomePage);
+            transferBtn.addEventListener('click', toggleSettingsMenu);
+            exitBtn.addEventListener('click', goToHomePage);
             logo.addEventListener('dblclick', refreshPage);
             
             // Reading section events
             backToBooksBtn.addEventListener('click', showBooksView);
             prevPageBtn.addEventListener('click', goToPrevPage);
             nextPageBtn.addEventListener('click', goToNextPage);
-            
-            // Category filtering
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const category = this.dataset.category;
-                    filterBooks(category);
-                    categoryBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
             
             // Search
             searchBtn.addEventListener('click', performSearch);
@@ -1031,42 +1340,74 @@
             
             // Close settings menu when clicking outside
             document.addEventListener('click', function(e) {
-                if (!settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
+                if (settingsMenu && !settingsMenu.contains(e.target) && !transferBtn.contains(e.target)) {
                     settingsMenu.classList.remove('active');
                 }
             });
+            
+            // Transfer to section
+            document.querySelectorAll('.social-link[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    filterBooks(section);
+                    settingsMenu.classList.remove('active');
+                });
+            });
+            
+            // View more buttons
+            document.querySelectorAll('.view-more-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    filterBooks(category);
+                });
+            });
+            
+            // Back to categories button
+            backToCategoriesBtn.addEventListener('click', function() {
+                currentView = 'all';
+                renderBooksByCategory();
+                backToCategoriesBtn.style.display = 'none';
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+            });
         }
         
-  // Display books
-        function renderBooks(booksArray) {
-            booksGrid.innerHTML = '';
+        // Display books by category
+        function renderBooksByCategory() {
+            const animeBooks = books.filter(book => book.category === 'anime');
+            const classicBooks = books.filter(book => book.category === 'classic');
+            
+            renderBooks(animeBooks, animeBooksGrid);
+            renderBooks(classicBooks, classicBooksGrid);
+        }
+        
+        // Display books
+        function renderBooks(booksArray, container) {
+            container.innerHTML = '';
             
             if (booksArray.length === 0) {
-                booksGrid.innerHTML = '<p class="no-results">No results found</p>';
+                container.innerHTML = '<p class="no-results">No results found</p>';
                 return;
             }
+            
             booksArray.forEach(book => {
                 const bookCard = document.createElement('div');
                 bookCard.className = 'book-card';
                 bookCard.dataset.id = book.id;
                 bookCard.dataset.category = book.category;
                 bookCard.innerHTML = `
-                    <div class="book-cover ${book.id === 1 ? 'naruto' : 'aot'}">
+                    <div class="book-cover ${book.id === 1 ? 'naruto' : book.id === 2 ? 'aot' : 'classic'}">
                         <img src="${book.coverImage}" alt="${book.title}" class="cover-image">
                     </div>
-                    <div class="book-info">
-                        <h3 class="book-title">${book.title}</h3>
-                        <p class="book-author">${book.author}</p>
-                        <p class="book-description">${book.description}</p>
-                        <span class="book-pages">${book.pages} pages</span>
-                    </div>
+                    <div class="book-title">${book.title}</div>
                 `;
                 
                 bookCard.addEventListener('click', () => {
                     openBook(book);
                 });
                 
-                booksGrid.appendChild(bookCard);
+                container.appendChild(bookCard);
             });
         }
         
@@ -1080,8 +1421,14 @@
                 currentPage = 0;
                 
                 // Change theme based on book
-                currentTheme = book.id === 1 ? 'naruto' : 'aot';
-                document.body.classList.toggle('aot-theme', currentTheme === 'aot');
+                if (book.id === 1) currentTheme = 'naruto';
+                else if (book.id === 2) currentTheme = 'aot';
+                else currentTheme = 'classic';
+                
+                document.body.className = '';
+                if (currentTheme !== 'naruto') {
+                    document.body.classList.add(`${currentTheme}-theme`);
+                }
                 
                 updateReadingView();
                 
@@ -1115,6 +1462,9 @@
             const content = currentBook.content[currentPage];
             
             readingContent.innerHTML = `
+                <div class="book-meta">
+                    <div class="book-author-reading">By: ${currentBook.author}</div>
+                </div>
                 <div class="page-image-container">
                     <img src="${content.image}" alt="${content.title}" class="page-image">
                 </div>
@@ -1142,13 +1492,27 @@
             }
         }
         
-        // Return to library view
+        // Return to books view
         function showBooksView() {
             booksSection.style.display = 'block';
             readingContainer.style.display = 'none';
             
-            // Reload books
-            renderBooks(books);
+            // Reset theme
+            document.body.className = '';
+            
+            // Reload books based on current view
+            if (currentView === 'all') {
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
+            } else if (currentView === 'anime') {
+                filterBooks('anime');
+            } else if (currentView === 'classic') {
+                filterBooks('classic');
+            } else if (currentView === 'search') {
+                performSearch();
+            }
         }
         
         // Toggle settings menu
@@ -1169,30 +1533,97 @@
         
         // Filter books by category
         function filterBooks(category) {
+            // Update current view state
+            currentView = category;
+            
+            // Show back to categories button
+            backToCategoriesBtn.style.display = 'block';
+            
+            // Hide all category sections initially
+            animeSection.style.display = 'none';
+            classicSection.style.display = 'none';
+            
             if (category === 'all') {
-                renderBooks(books);
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
             } else {
                 const filteredBooks = books.filter(book => book.category === category);
-                renderBooks(filteredBooks);
+                
+                // Show the appropriate section
+                if (category === 'anime') {
+                    renderBooks(filteredBooks, animeBooksGrid);
+                    animeSection.style.display = 'block';
+                } else if (category === 'classic') {
+                    renderBooks(filteredBooks, classicBooksGrid);
+                    classicSection.style.display = 'block';
+                }
             }
         }
         
-        // Perform search
+        // Perform search with better matching
         function performSearch() {
+            currentView = 'search';
             const searchTerm = searchInput.value.trim().toLowerCase();
             
             if (searchTerm === '') {
-                renderBooks(books);
+                currentView = 'all';
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
                 return;
             }
             
-            const results = books.filter(book => 
-                book.title.toLowerCase().includes(searchTerm) || 
-                book.author.toLowerCase().includes(searchTerm) ||
-                book.description.toLowerCase().includes(searchTerm)
-            );
+            // Show back to categories button
+            backToCategoriesBtn.style.display = 'block';
             
-            renderBooks(results);
+            // Hide category sections during search
+            animeSection.style.display = 'none';
+            classicSection.style.display = 'none';
+            
+            // Create search aliases for categories
+            const searchAliases = {
+                'anime': ['anime', 'أنمي', 'انمي', 'anim', 'manga', 'مانجا', 'مانغا'],
+                'classic': ['classic', 'كلاسيك', 'روايات', 'novel', 'رواية', 'literature', 'أدب']
+            };
+            
+            // Check if search term matches any category alias
+            let categoryMatch = null;
+            for (const category in searchAliases) {
+                if (searchAliases[category].includes(searchTerm)) {
+                    categoryMatch = category;
+                    break;
+                }
+            }
+            
+            let results = [];
+            
+            if (categoryMatch) {
+                // If search term matches a category, filter by that category
+                results = books.filter(book => book.category === categoryMatch);
+                
+                // Show the appropriate section
+                if (categoryMatch === 'anime') {
+                    animeSection.style.display = 'block';
+                } else if (categoryMatch === 'classic') {
+                    classicSection.style.display = 'block';
+                }
+            } else {
+                // Otherwise, perform regular search
+                results = books.filter(book => 
+                    book.title.toLowerCase().includes(searchTerm) || 
+                    book.author.toLowerCase().includes(searchTerm) ||
+                    book.description.toLowerCase().includes(searchTerm) ||
+                    book.category.toLowerCase().includes(searchTerm)
+                );
+                
+                // Show results in anime section grid
+                animeSection.style.display = 'block';
+            }
+            
+            renderBooks(results, animeBooksGrid);
         }
         
         // Initialize site when DOM is loaded
