@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M IDEA Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #03ffba;
+            --primary-color-light: #03ffed;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-text: #f5f5f5;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --naruto-orange: #ff7700;
+            --naruto-blue: #0066cc;
+            --aot-red: #c70000;
+            --aot-dark: #333333;
+            --classic-gold: #d4af37;
+            --classic-dark: #2a211c;
+            --naruto-bg: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            --aot-bg: linear-gradient(135deg, #0a0a0a, #121212);
+            --classic-bg: linear-gradient(135deg, #1a1612, #0f0c09);
+        }
+        
+        body {
+            background: var(--naruto-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-attachment: fixed;
+            padding-top: 100px;
+        }
+        
+        body.aot-theme {
+            background: var(--aot-bg);
+        }
+        
+        body.classic-theme {
+            background: var(--classic-bg);
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 0.8rem 1.2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            height: 80px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        
+        .header-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+        }
+        
+        .header-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 10px var(--primary-color-light));
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .search-bar {
+            width: 100%;
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(3, 255, 186, 0.3);
+            height: 42px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .search-bar input:focus {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .search-bar button {
+            padding: 0 18px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .search-bar button:hover {
+            background: linear-gradient(90deg, var(--primary-color-light), var(--primary-color));
+            transform: scale(1.05);
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            transform: rotate(10deg);
+            color: var(--primary-color-light);
+        }
+        
+        .icon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(3, 255, 186, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        
+        .icon-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .exit-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .exit-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            color: var(--primary-color-light);
+        }
+        
+        .transfer-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .transfer-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            color: var(--primary-color-light);
+        }
+        
+        /* Language Button */
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .language-btn:hover {
+            background-color: rgba(3, 255, 186, 0.1);
+            color: var(--primary-color-light);
+        }
+        
+        /* Settings Menu */
+        .settings-menu {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #2c2c2c;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            padding: 1.5rem;
+            display: none;
+            z-index: 1000;
+            border: 1px solid rgba(3, 255, 186, 0.3);
+        }
+        
+        .settings-menu.active {
+            display: block;
+        }
+        
+        .settings-section {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(3, 255, 186, 0.2);
+        }
+        
+        .settings-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius);
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: #000;
+        }
+        
+        .social-link i {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        
+        .social-link:hover i {
+            color: #000;
+        }
+        
+        /* Language Menu */
+        .language-menu {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background-color: #2c2c2c;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 200px;
+            padding: 1.5rem;
+            display: none;
+            z-index: 1000;
+            border: 1px solid rgba(3, 255, 186, 0.3);
+        }
+        
+        .language-menu.active {
+            display: block;
+        }
+        
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius);
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        
+        .language-option:hover {
+            background-color: var(--primary-color);
+            color: #000;
+        }
+        
+        .language-option i {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        
+        .language-option:hover i {
+            color: #000;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 1.5rem;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .section-title {
+            font-size: 1.7rem;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(3, 255, 186, 0.5);
+        }
+          /* New Horizontal Books Layout */
+        .books-horizontal-container {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        
+        .books-scroll-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 1.5rem;
+            padding: 1rem 0.5rem;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar IE and Edge */
+        }
+        
+        .books-scroll-wrapper::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome, Safari and Opera */
+        }
+        
+        .book-card {
+            background-color: transparent;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 0 0 auto;
+            width: 180px;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .book-cover {
+            height: 220px;
+            width: 160px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .book-cover.naruto {
+            background: linear-gradient(135deg, var(--naruto-orange), var(--naruto-blue));
+        }
+        
+        .book-cover.aot {
+            background: linear-gradient(135deg, var(--aot-red), var(--aot-dark));
+        }
+        
+        .book-cover.classic {
+            background: linear-gradient(135deg, var(--classic-gold), var(--classic-dark));
+        }
+        
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .book-card:hover .cover-image {
+            transform: scale(1.05);
+        }
+        
+        .book-title {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Navigation arrows for horizontal scroll */
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-arrow:hover {
+            background: var(--primary-color);
+            color: #000;
+        }
+        
+        .scroll-arrow.left {
+            left: -20px;
+        }
+        
+        .scroll-arrow.right {
+            right: -20px;
+        }
+        
+        /* Reading Section */
+        .reading-container {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            background: var(--dark-card);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border: 1px solid rgba(3, 255, 186, 0.2);
+        }
+        
+        .reading-header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .reading-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        
+        .back-to-books {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+        
+        .back-to-books:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(3, 255, 186, 0.4);
+        }
+        
+        .reading-content {
+            padding: 1.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+            min-height: 400px;
+            background: rgba(30, 30, 30, 0.8);
+        }
+        
+        .page-image-container {
+            width: 100%;
+            max-height: 380px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .page-text {
+            margin-top: 15px;
+        }
+        
+        .page-text p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .episode-title {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--primary-color-light);
+            padding-bottom: 0.4rem;
+        }
+        
+        .character {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .naruto-character {
+            background: rgba(255, 119, 0, 0.2);
+            color: var(--naruto-orange);
+        }
+        
+        .aot-character {
+            background: rgba(199, 0, 0, 0.2);
+            color: var(--aot-red);
+        }
+        
+        .chapter-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            color: var(--primary-color-light);
+        }
+        
+        .book-description {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .book-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .book-author-reading {
+            font-size: 1rem;
+            color: #aaa;
+        }
+        
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--dark-text);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-btn:disabled:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--dark-text);
+        }
+        
+        .page-indicator {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .bottom-back-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--dark-text);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            z-index: 10;
+            font-size: 0.9rem;
+        }
+        
+        .bottom-back-btn:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+        }
+        
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(3, 255, 186, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .book-card {
+                width: 160px;
+            }
+            
+            .book-cover {
+                height: 200px;
+                width: 150px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .book-card {
+                width: 140px;
+            }
+            
+            .book-cover {
+                height: 190px;
+                width: 140px;
+            }
+            
+            .scroll-arrow {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .scroll-arrow.left {
+                left: -15px;
+            }
+            
+            .scroll-arrow.right {
+                right: -15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px;
+            }
+            
+            header {
+                padding: 8px 10px;
+                flex-direction: row;
+                height: 70px;
+                gap: 10px;
+            }
+            
+            .header-left, .header-center, .header-right {
+                width: auto;
+                justify-content: center;
+            }
+            
+            .header-right {
+                order: 3;
+            }
+            
+            .logo-img {
+                height: 45px;
+            }
+            
+            .icon-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title, .category-title {
+                font-size: 1.4rem;
+                margin: 1.2rem 0 0.8rem;
+            }
+            
+            .book-card {
+                width: 130px;
+            }
+            
+            .book-cover {
+                height: 180px;
+                width: 130px;
+            }
+            
+            .book-title {
+                font-size: 0.9rem;
+                max-width: 130px;
+            }
+            
+            .settings-menu {
+                top: 100px;
+                right: 10px;
+                width: 90%;
+            }
+            
+            .language-menu {
+                top: 100px;
+                left: 10px;
+                width: 90%;
+            }
+            
+            .search-bar {
+                height: 38px;
+            }
+            
+            .search-bar input {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+            
+            .search-bar button {
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+            
+            .transfer-btn, .exit-btn, .language-btn {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+            
+            .scroll-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .header-center {
+                max-width: 450px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 110px;
+            }
+            
+            header {
+                height: 65px;
+                padding: 6px 8px;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .icon-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            
+            .section-title, .category-title {
+                font-size: 1.3rem;
+            }
+            
+            .book-card {
+                width: 120px;
+            }
+            
+            .book-cover {
+                height: 160px;
+                width: 120px;
+            }
+            
+            .book-title {
+                font-size: 0.85rem;
+                max-width: 120px;
+            }
+            
+            .search-bar {
+                height: 36px;
+            }
+            
+            .search-bar input {
+                padding: 7px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .search-bar button {
+                padding: 0 14px;
+                font-size: 0.85rem;
+            }
+            
+            .transfer-btn, .exit-btn, .language-btn {
+                font-size: 0.8rem;
+                padding: 5px 8px;
+            }
+            
+            /* Show arrows on small screens */
+            .scroll-arrow {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 100px;
+            }
+            
+            header {
+                height: 60px;
+                padding: 5px;
+            }
+            
+            .logo-img {
+                height: 35px;
+            }
+            
+            .icon-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title, .category-title {
+                font-size: 1.2rem;
+            }
+            
+            .book-card {
+                width: 110px;
+            }
+            
+            .book-cover {
+                height: 150px;
+                width: 110px;
+            }
+            
+            .book-title {
+                font-size: 0.8rem;
+                max-width: 110px;
+            }
+            
+            .search-bar {
+                height: 34px;
+            }
+            
+            .search-bar input {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .search-bar button {
+                padding: 0 12px;
+                font-size: 0.8rem;
+            }
+            
+            .transfer-btn, .exit-btn, .language-btn {
+                font-size: 0.75rem;
+                padding: 4px 6px;
+            }
+            
+            .header-left {
+                gap: 5px;
+            }
+            
+            .header-right {
+                gap: 5px;
+            }
+            
+            /* Show arrows on very small screens */
+            .scroll-arrow {
+                display: flex;
+                width: 28px;
+                height: 28px;
+                font-size: 0.7rem;
+            }
+            
+            .scroll-arrow.left {
+                left: -10px;
+            }
+            
+            .scroll-arrow.right {
+                right: -10px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .transfer-btn span, .exit-btn span, .language-btn span {
+                display: none;
+            }
+            
+            .transfer-btn, .exit-btn, .language-btn {
+                padding: 6px;
+            }
+            
+            .header-left {
+                flex: 0.8;
+            }
+            
+            .header-center {
+                flex: 1.5;
+            }
+            
+            .header-right {
+                flex: 0.8;
+            }
+            
+            .book-card {
+                width: 100px;
+            }
+            
+            .book-cover {
+                height: 140px;
+                width: 100px;
+            }
+            
+            /* Ensure arrows are visible */
+            .scroll-arrow {
+                display: flex;
+                width: 25px;
+                height: 25px;
+                font-size: 0.6rem;
+            }
+            
+            .scroll-arrow.left {
+                left: -8px;
+            }
+            
+            .scroll-arrow.right {
+                right: -8px;
+            }
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(3, 255, 186, 0.3);
+            border-radius: 50%;
+            border-top: 5px solid var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .source-reference {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: #aaa;
+            font-size: 1.2rem;
+        }
+        
+        /* Back to Categories Button */
+        .back-to-categories {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .back-to-categories:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(3, 255, 186, 0.4);
+        }
+    </style>
+    </head>
+<body>
+   <!-- Header with Logo, Search, Transfer and Exit Icon -->
+    <header>
+        <!-- Left side: Transfer and Exit buttons -->
+        <div class="header-left">
+            <button class="transfer-btn" id="transfer-btn">
+                <i class="fas fa-exchange-alt"></i> <span>Transfer</span>
+            </button>
+            <button class="exit-btn" id="exit-btn">
+                <i class="fas fa-door-open"></i> <span>Exit</span>
+            </button>
+            <button class="language-btn" id="language-btn">
+                <i class="fas fa-globe"></i> <span>Language</span>
+            </button>
+        </div>
+        
+        <!-- Center: Search bar -->
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search the library...">
+                <button id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Right side: Logo -->
+        <div class="header-right">
+            <img src="Picsart_25-07-23_05-13-20-665.png" alt="M IDEA Book Logo" class="logo-img" id="logo">
+        </div>
+    </header>
+    
+    <!-- Settings menu -->
+    <div class="settings-menu" id="settings-menu">
+        <div class="settings-section">
+            <h3 class="settings-title"><i class="fas fa-exchange-alt"></i> Transfer to Section</h3>
+            <div class="social-links">
+                <a href="#" class="social-link" data-section="anime">
+                    <i class="fas fa-dragon"></i>
+                    <span>Anime Section</span>
+                </a>
+                <a href="#" class="social-link" data-section="classic">
+                    <i class="fas fa-book"></i>
+                    <span>Classic Novels</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h3 class="settings-title"><i class="fas fa-link"></i> Social Media</h3>
+            <div class="social-links">
+                <a href="https://discord.gg/WDrpNjfA" target="_blank" class="social-link">
+                    <i class="fab fa-discord"></i>
+                    <span>Join our Discord community</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Language menu -->
+    <div class="language-menu" id="language-menu">
+        <div class="settings-section">
+            <h3 class="settings-title"><i class="fas fa-globe"></i> Select Language</h3>
+            <div class="social-links">
+                <div class="language-option" data-lang="ar">
+                    <i class="fas fa-language"></i>
+                    <span>العربية</span>
+                </div>
+                <div class="language-option" data-lang="en">
+                    <i class="fas fa-language"></i>
+                    <span>English</span>
+                </div>
+                <div class="language-option" data-lang="fr">
+                    <i class="fas fa-language"></i>
+                    <span>Français</span>
+                </div>
+                <div class="language-option" data-lang="es">
+                    <i class="fas fa-language"></i>
+                    <span>Español</span>
+                </div>
+                <div class="language-option" data-lang="de">
+                    <i class="fas fa-language"></i>
+                    <span>Deutsch</span>
+                </div>
+                <div class="language-option" data-lang="tr">
+                    <i class="fas fa-language"></i>
+                    <span>Türkçe</span>
+                </div>
+                <div class="language-option" data-lang="ru">
+                    <i class="fas fa-language"></i>
+                    <span>Русский</span>
+                </div>
+                <div class="language-option" data-lang="zh">
+                    <i class="fas fa-language"></i>
+                    <span>中文</span>
+                </div>
+                <div class="language-option" data-lang="ja">
+                    <i class="fas fa-language"></i>
+                    <span>日本語</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Books Section -->
+        <div class="books-section" id="books-section">
+            <!-- زر العودة إلى الأقسام (يظهر فقط عند التصفية) -->
+            <button class="back-to-categories" id="back-to-categories" style="display: none;">
+                <i class="fas fa-arrow-left"></i> Back to All Categories
+            </button>
+            
+            <!-- Anime Section -->
+            <div class="category-section" id="anime-section">
+                <h3 class="category-title">Anime</h3>
+                <div class="books-horizontal-container">
+                    <button class="scroll-arrow left" id="anime-scroll-left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="books-scroll-wrapper" id="anime-books-scroll">
+                        <!-- Anime books will be populated by JavaScript -->
+                    </div>
+                    <button class="scroll-arrow right" id="anime-scroll-right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Classic Novels Section -->
+            <div class="category-section" id="classic-section">
+                <h3 class="category-title">Classic Novels</h3>
+                <div class="books-horizontal-container">
+                    <button class="scroll-arrow left" id="classic-scroll-left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="books-scroll-wrapper" id="classic-books-scroll">
+                        <!-- Classic books will be populated by JavaScript -->
+                    </div>
+                    <button class="scroll-arrow right" id="classic-scroll-right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reading Section -->
+        <div class="reading-container" id="reading-container">
+            <div class="reading-header">
+                <h3 class="reading-title" id="reading-title"></h3>
+                <button class="back-to-books" id="back-to-books">
+                    <i class="fas fa-arrow-left"></i> Back to Categories
+                </button>
+            </div>
+            
+            <div class="reading-content" id="reading-content">
+                <!-- Current page content -->
+            </div>
+            
+            <div class="page-navigation">
+                <button class="nav-btn" id="prev-page" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous Page
+                </button>
+                
+                <div class="page-indicator" id="page-indicator">Page 1 of 5</div>
+                
+                <button class="nav-btn" id="next-page">
+                    Next Page <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    
+    <script>
+        // Books data with real manga content
+        const books = [
+            {
+                id: 1,
+                title: "Naruto Shippuden Season 6",
+                author: "Masashi Kishimoto",
+                category: "anime",
+                description: "The story of Naruto Uzumaki on his journey to become the Seventh Hokage, facing new challenges and powerful enemies in the ninja world",
+                pages: 5,
+                coverImage: "00f993fde8debed82a8d401b69fe01df.jpg",
+                content: [
+                    {
+                        title: "Naruto's Return",
+                        description: "After training with Jiraiya, Naruto returns to Konoha stronger than before",
+                        image: "00f993fde8debed82a8d401b69fe01df.jpg",
+                        text: `<div class="episode-title">Chapter 245: Homecoming</div>
+                        <div class="chapter-info">Source: Naruto Manga Chapter 245</div>
+                        <div class="book-description">
+                            <strong>Book Description:</strong> The story of Naruto Uzumaki on his journey to become the Seventh Hokage, facing new challenges and powerful enemies in the ninja world.
+                        </div>
+                        <p>After two and a half years of training with Jiraiya, Naruto returns to the Village Hidden in the Leaves (Konoha). He notices slight changes in the village, especially Tsunade's face carved on the Hokage Mountain. Naruto meets Sakura and Konohamaru, and everyone notices how Naruto has grown and become more mature.</p>
+                        <p>Sakura asks Naruto: "Do I look like a woman now?" Naruto replies: "No, you're still the same!" which angers her and she hits him hard. Jiraiya is surprised by Sakura's strength.</p>
+                        <p>Tsunade asks Naruto and Sakura to test their new strength in a confrontation against Kakashi.</p>
+                        <p class="source-reference">Source: Naruto Manga Chapter 245</p>`
+                    },
+                    {
+                        title: "Team 7 Test",
+                        description: "A match between Team 7 and Kakashi to test their progress",
+                        image: "00f993fde8debed82a8d401b69fe01df.jpg",
+                        text: `<div class="episode-title">Chapter 246: The New Test</div>
+                        <div class="chapter-info">Source: Naruto Manga Chapter 246</div>
+                        <p>In the training ground, the fight between Team 7 and Kakashi begins. Kakashi looks comfortable and challenges the two: "Show me what you've learned during these two years."</p>
+                        <p>Naruto starts attacking using the Shadow Clone technique. But Kakashi easily dodges the attacks. Then Naruto decides to use a new technique he learned: the Rasengan!</p>
+                        <p>While Sakura focuses on developing her medical skills and physical strength, Naruto shows his ability to produce the Rasengan with one hand.</p>
+                        <p class="source-reference">Source: Naruto Manga Chapter 246</p>`
+                    },
+                    {
+                        title: "The New Rasengan",
+                        description: "Naruto shows his new abilities with the Rasengan",
+                        image: "00f993fde8debed82a8d401b69fe01df.jpg",
+                        text: `<div class="episode-title">Chapter 247: The Improved Rasengan</div>
+                        <div class="chapter-info">Source: Naruto Manga Chapter 247</div>
+                        <p>Naruto creates a very large Rasengan and directs it towards Kakashi. But Kakashi uses the Mud Wall technique to avoid the attack.</p>
+                        <p>Naruto discovers that Kakashi put a mark on him during the attack. Naruto asks: "When did you do that?" Kakashi replies: "When you were busy attacking, I put an explosive tag on your back."</p>
+                        <p>Naruto and Sakura decide to work together. Sakura starts attacking Kakashi with great force that breaks the ground. Kakashi is impressed: "Your physical strength has become truly amazing, Sakura!".</p>
+                        <p class="source-reference">Source: Naruto Manga Chapter 247</p>`
+                    },
+                    {
+                        title: "Team Cooperation",
+                        description: "Naruto and Sakura cooperate against Kakashi",
+                        image: "00f993fde8debed82a8d401b69fe01df.jpg",
+                        text: `<div class="episode-title">Chapter 248: Deadly Cooperation</div>
+                        <div class="chapter-info">Source: Naruto Manga Chapter 248</div>
+                        <p>Sakura uses her medical skills to deliver precise blows. While Naruto plans a trick using his shadows. The plan seems to work and Kakashi is trapped between Naruto and Sakura.</p>
+                        <p>Suddenly, Kakashi appears behind them. The one they trapped was just a clone. Kakashi tells them that the test is over and they have succeeded: "You've become strong enough to protect Sasuke."</p>
+                        <p>Kakashi reveals that if they continued fighting they might have defeated him. Then he tells them about a new mission: Rescue the Kazekage Gaara from the Sand Village who was kidnapped by Akatsuki.</p>
+                        <p class="source-reference">Source: Naruto Manga Chapter 248</p>`
+                    },
+                    {
+                        title: "Gaara Rescue Mission",
+                        description: "Team 7 sets out to rescue Gaara",
+                        image: "00f993fde8debed82a8d401b69fe01df.jpg",
+                        text: `<div class="episode-title">Chapter 249: Rescue the Kazekage</div>
+                        <div class="chapter-info">Source: Naruto Manga Chapter 249</div>
+                        <p>Team 7 sets out on their mission to rescue Gaara. On the way, Kakashi explains that Akatsuki is pursuing "Jinchuriki" - bearers of the tailed beasts, like Naruto and Gaara.</p>
+                        <p>The team arrives at the Sand Village to find that Gaara has been taken to the Akatsuki hideout. Temari, Gaara's sister, tells them that he sacrificed himself to protect the village.</p>
+                        <p>Team 7 decides to pursue Akatsuki with some Sand ninjas to rescue Gaara before they extract his tailed beast, Shukaku.</p>
+                        <p class="source-reference">Source: Naruto Manga Chapter 249</p>`
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Attack on Titan Season 4",
+                author: "Hajime Isayama",
+                category: "anime",
+                description: "Continuation of the epic saga where the secrets of the walls and titans are revealed",
+                pages: 5,
+                coverImage: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                content: [
+                    {
+                        title: "The Other Side of the Sea",
+                        description: "Discovering new lands beyond the walls and the horrifying truth",
+                        image: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                        text: `<div class="episode-title">Chapter 91: The Truth Behind the Walls</div>
+                        <div class="chapter-info">Source: Attack on Titan Manga Chapter 91</div>
+                        <div class="book-description">
+                            <strong>Book Description:</strong> Continuation of the epic saga where the secrets of the walls and titans are revealed.
+                        </div>
+                        <p>After discovering the basement in Eren's house, Eren, Mikasa, and Armin uncover the terrifying truth about the world beyond the walls. They learn that humanity outside the walls lives in advanced technological development, and considers the wall inhabitants "devils" because of their ability to transform into titans.</p>
+                        <p>Eren discovers that his father, Grisha, came from outside the walls, and that he transferred the power of the Attack Titan to him before his death. He also discovers that the Eldian people (his ancestors) are the ones who created the titans and used them to control the world.</p>
+                        <p class="source-reference">Source: Attack on Titan Manga Chapter 91</p>`
+                    },
+                    {
+                        title: "Enemy Territory",
+                        description: "Eren and his companions in Marley territory",
+                        image: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                        text: `<div class="episode-title">Chapter 92: In Enemy Territory</div>
+                        <div class="chapter-info">Source: Attack on Titan Manga Chapter 92</div>
+                        <p>Four years after discovering the truth, Eren and his companions travel to Marley territory disguised. They witness the persecution of the Eldian people in ghetto neighborhoods, and hear a speech by Marley's military commander, Calvi, who announces that it's time to retrieve the "Founding Titan" from Paradis Island.</p>
+                        <p>Eren watches a military show where Eldian children are trained to become "Titan Shifters" for Marley. Among them is Reiner, his former comrade in the Survey Corps, who is now working as a spy for Paradis Island.</p>
+                        <p class="source-reference">Source: Attack on Titan Manga Chapter 92</p>`
+                    },
+                    {
+                        title: "Liberio Attack",
+                          description: "The beginning of the attack on Marley",
+                        image: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                        text: `<div class="episode-title">Chapter 93: Liberio Attack</div>
+                        <div class="chapter-info">Source: Attack on Titan Manga Chapter 93</div>
+                        <p>During the celebration of granting the Armored Titan power to "Porco," Eren and his team attack the city of Liberio in Marley. Eren transforms into his Attack Titan and attacks the building where Marley's leaders are located.</p>
+                        <p>Mikasa and Armin appear with members of the Survey Corps to help Eren. Armin transforms into the Colossal Titan and destroys Marley's naval fleet.</p>
+                        <p>The team specifically targets Marley's Titan Shifters, including Porco who just received the Armored Titan.</p>
+                        <p class="source-reference">Source: Attack on Titan Manga Chapter 93</p>`
+                    },
+                    {
+                        title: "Battle of Liberio",
+                        description: "The epic confrontation in Liberio",
+                        image: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                        text: `<div class="episode-title">Chapter 94: Battle of the Titans</div>
+                        <div class="chapter-info">Source: Attack on Titan Manga Chapter 94</div>
+                        <p>A huge battle erupts in the streets of Liberio between Titan Shifters from Paradis Island and Marley. Eren faces Porco (bearer of the Armored Titan) and Porco shows amazing skill in controlling the Armored Titan despite having just received the power.</p>
+                        <p>Zeke (bearer of the Beast Titan) joins the battle and uses his voice to turn the Eldians in the ghetto into titans. But Hange and other soldiers from Paradis Island prevent this catastrophe.</p>
+                        <p>During the battle, Reiner recognizes Eren and is shocked by his transformation into an aggressive character.</p>
+                        <p class="source-reference">Source: Attack on Titan Manga Chapter 94</p>`
+                    },
+                    {
+                        title: "Battle Aftermath",
+                        description: "The tragic results of the attack on Liberio",
+                        image: "f13da44847f5c86cef64753ac9da73d5.jpg",
+                        text: `<div class="episode-title">Chapter 95: Fall of the War Hammer Titan</div>
+                        <div class="chapter-info">Source: Attack on Titan Manga Chapter 95</div>
+                        <p>Eren succeeds in capturing Zeke, the bearer of the Beast Titan, and swallows him to gain his power. Meanwhile, Porco (Armored Titan) continues to fight but suffers a crushing defeat from Mikasa who destroys his armor using advanced machine guns.</p>
+                        <p>Armin (Colossal Titan) destroys most of Liberio city, resulting in thousands of casualties. Eren declares that their goal is to destroy the outside world to protect Paradis Island.</p>
+                        <p>The Survey Corps withdraws after achieving their goals, leaving behind a destroyed city and the Marleyan people in shock at the power of Paradis Island.</p>
+                        <p class="source-reference">Source: Attack on Titan Manga Chapter 95</p>`
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "قصر الشوق",
+                author: "نجيب محفوظ",
+                category: "classic",
+                description: "الجزء الثاني من ثلاثية القاهرة، يتتبع حياة عائلة عبد الجواد خلال الاحتلال البريطاني لمصر",
+                pages: 5,
+                coverImage: "ok.jpg",
+                content: [
+                    {
+                        title: "أسرار العائلة",
+                        description: "عائلة عبد الجواد تواجه تحديات جديدة",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">الفصل الأول: عودة رب العائلة</div>
+                        <div class="book-description">
+                            <strong>وصف الكتاب:</strong> الجزء الثاني من ثلاثية القاهرة، يتتبع حياة عائلة عبد الجواد خلال الاحتلال البريطاني لمصر.
+                        </div>
+                        <p>يعود السيد أحمد عبد الجواد إلى المنزل بعد رحلة طويلة ليجد عائلته في حالة من الاضطراب. زوجته أمينة تنتظر عودته بقلق، بينما يواجه كل من أبنائه صراعاته الخاصة. كمال، الابن الأصغر، يعاني من تعليمه وأزمة هوية.</p>
+                        <p>يوسف، الابن الأكبر، يواصل سلوكه المتهور وعلاقاته المشبوهة. خديجة، الابنة الكبرى، تعاني من زواجها من خليل شوقت. عائشة، الابنة الجميلة، تواجه تحديات الأمومة وإهمال زوجها.</p>
+                        <p class="source-reference">المصدر: قصر الشوق لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "الاضطرابات السياسية",
+                        description: "العائلة تواجه تأثير التغيرات السياسية",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">الفصل الثاني: رياح التغيير</div>
+                        <p>في عام 1924، تمر مصر بتغيرات سياسية كبيرة. يقود حزب الوفد الحركة الوطنية ضد الاحتلال البريطاني. يصبح كمال أكثر انخرطًا في النشاط السياسي، مما يثير استياء والده.</p>
+                        <p>السيد أحمد، الذي كان داعمًا قويًا للملكية، يجد نفسه في حيرة وهو يشهد تزايد المشاعر الوطنية. تعاني تجارته بسبب عدم الاستقرار السياسي، ويصعب عليه الحفاظ على سلطته داخل العائلة.</p>
+                        <p class="source-reference">المصدر: قصر الشوق لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "الحب والخسارة",
+                        description: "علاقات عاطفية وانهيارات قلبية",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">الفصل الثالث: شؤون القلب</div>
+                        <p>يقع يوسف في حب زنوبة، مغنية في الحانة التي يرتادها. على الرغم من معارضة والده والفضيحة التي تسببها، يتابع العلاقة. زواجه من زينب يتدهور أكثر وهو يهمل مسؤولياته العائلية.</p>
+                        <p>كمال يطور حبًا من طرف واحد لعايدة شداد، فتاة من عائلة ثرية. مشاعره تجاهها تصبح هوسًا يؤثر على دراسته وصحته العقلية. يعاني من تقدير الذات ويتساءل عن مكانه في العالم المتغير.</p>
+                        <p class="source-reference">المصدر: قصر الشوق لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "أزمة عائلية",
+                        description: "عائلة عبد الجواد تواجه أزمة كبيرة",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">الفصل الرابع: مرض رب العائلة</div>
+                        <p>يصاب السيد أحمد بجلطة دماغية تتركه مشلولًا جزئيًا. تُلقى العائلة في فوضى بينما يصبح رب الأسرة القوي ذات يوم معتمدًا على الآخرين. مرضه يجبره على مواجهة فناءه وعواقب تربيته الاستبدادية.</p>
+                        <p>تتولى أمينة إدارة المنزل، وتظهر قوة ومرونة غير متوقعة. يتجمع الأطفال حول والدهم، ويتجاهلون خلافاتهم في هذا الوقت من الأزمة. يتحمل يوسف مسؤولية إدارة أعمال العائلة، مما يفاجئ الجميع بمسؤوليته الجديدة.</p>
+                        <p class="source-reference">المصدر: قصر الشوق لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "بدايات جديدة",
+                        description: "تتكيف العائلة مع واقع جديد",
+                        image: "ok.jpg",
+                        text: `<div class="episode-title">الفصل الخامس: تغير الأوقات</div>
+                        <p>بينما يتعافى السيد أحمد ببطء، تتكيف العائلة مع أدوارها الجديدة. يتخرج كمال من كلية تدريب المعلمين ويبدأ حياته المهنية، وأخيرًا يجد هدفًا يتجاوز حبه من طرف واحد. ينخرط في الأوساط الفكرية، ويناقش الفلسفة والسياسة.</p>
+                        <p> تواجه عائشة مأساة عندما يمرض أطفالها خلال وباء. قوتها خلال هذا الوقت الصعب تتحول من الجمال الهش الذي كانت عليه ذات يوم. ينتهي الرواية بتجمع العائلة في لحظة نادرة من الوحدة، مواجهة مستقبلًا غير مؤكد ولكن مقواة بعلاقاتها.</p>
+                        <p class="source-reference">المصدر: قصر الشوق لنجيب محفوظ</p>`
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "السكرية",
+                author: "نجيب محفوظ",
+                category: "classic",
+                description: "الجزء الثالث من ثلاثية القاهرة، يتابع حياة أسرة عبد الجواد في حقبة جديدة من التغيرات الاجتماعية والسياسية",
+                pages: 5,
+                coverImage: "sokkarya.jpg",
+                content: [
+                    {
+                        title: "بداية جديدة",
+                        description: "عائلة عبد الجواد في حقبة ما بعد الحرب",
+                        image: "sokkarya.jpg",
+                        text: `<div class="episode-title">الفصل الأول: حقبة جديدة</div>
+                        <div class="book-description">
+                            <strong>وصف الكتاب:</strong> الجزء الثالث من ثلاثية القاهرة، يتابع حياة أسرة عبد الجواد في حقبة جديدة من التغيرات الاجتماعية والسياسية.
+                        </div>
+                        <p>تدخل عائلة عبد الجواد حقبة جديدة بعد الحرب العالمية الثانية. كمال، الابن الأصغر، أصبح الآن مدرسًا وفيلسوفًا يتساءل عن معنى الحياة. يوسف، الابن الأكبر، يحاول إدارة أعمال العائلة بعد مرض والده.</p>
+                        <p>تتغير ديناميكية العائلة مع تقدم الأطفال في السن واتخاذهم مسارات حياتية مختلفة. تواجه العائلة تحديات جديدة في مجتمع يتغير بسرعة، حيث تتصادم القيم التقليدية مع الأفكار الحديثة.</p>
+                        <p class="source-reference">المصدر: السكرية لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "صراعات داخلية",
+                        description: "الصراعات الداخلية داخل العائلة",
+                        image: "sokkarya.jpg",
+                        text: `<div class="episode-title">الفصل الثاني: توترات عائلية</div>
+                        <p>تتصاعد التوترات داخل عائلة عبد الجواد. كمال، الذي درس الفلسفة، يشك في المعتقدات التقليدية التي نشأ عليها، مما يسبب صراعًا مع عائلته والمجتمع المحيط. يبحث عن الحقيقة والمعنى في عالم يبدو له بلا معنى.</p>
+                        <p>يوسف، الذي تزوج مرة أخرى، يحاول التوفيق بين مسؤولياته العائلية وأعماله. علاقاته النسائية المستمرة تسبب مشاكل جديدة للعائلة. الأخوات، خديجة وعائشة، تواجهان تحديات خاصة بهما في زيجاتهما.</p>
+                        <p class="source-reference">المصدر: السكرية لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "تغير المجتمع",
+                        description: "التغيرات الاجتماعية وتأثيرها على العائلة",
+                        image: "sokkarya.jpg",
+                        text: `<div class="episode-title">الفصل الثالث: رياح التغيير</div>
+                        <p>تمر مصر بتحولات اجتماعية وسياسية كبيرة. تتصاعد الحركة الوطنية ضد الاحتلال البريطاني، وتتأثر عائلة عبد الجواد بهذه التغيرات. يصبح كمال منخرطًا في النشاط سياسي، بينما يحاول يوسف الحفاظ على أعمال العائلة في مناخ متقلب.</p>
+                        <p>تواجه العائلة أيضًا تغيرات في القيم الاجتماعية. تبدأ النساء في المطالبة بحقوق أكبر، وتتحدى الأجيال الشابة التقاليد القديمة. تعكس عائلة عبد الجواد هذه التغيرات، حيث يتصارع أفرادها بين التمسك بالتقاليد وتبني الأفكار الجديدة.</p>
+                        <p class="source-reference">المصدر: السكرية لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "مأساة شخصية",
+                        description: "مأساة تصيب العائلة",
+                        image: "sokkarya.jpg",
+                        text: `<div class="episode-title">الفصل الرابع: خسارة كبيرة</div>
+                        <p>تصاب العائلة بمأساة عندما تفقد عائشة أطفالها بسبب المرض. هذه الخسارة تدمر عائشة emotionally وتغير ديناميكية العائلة بأكملها. يحاول الجميع دعمها، لكنها تغرق في حزن عميق.</p>
+                        <p>في نفس الوقت، يواجه السيد أحمد، رب العائلة، تدهورًا في صحته. مرضه يجبره على الاعتماد على الآخرين، مما يغير من ديناميكية السلطة داخل العائلة. يصبح الأطفال الآن مسؤولين عن رعاية والدهم، وهي مهمة لم يكونوا مستعدين لها.</p>
+                        <p class="source-reference">المصدر: السكرية لنجيب محفوظ</p>`
+                    },
+                    {
+                        title: "نهاية الثلاثية",
+                        description: "ختام ثلاثية القاهرة",
+                        image: "sokkarya.jpg",
+                        text: `<div class="episode-title">الفصل الخامس: الختام</div>
+                        <p>تصل ثلاثية القاهرة إلى ختامها مع استمرار عائلة عبد الجواد в مواجهة تحديات الحياة. كمال، بعد رحلته الفلسفية، يبدأ في قبول فكرة أن الحياة قد لا يكون لها معنى كبير، لكنها تستحق العيش nonetheless.</p>
+                        <p>يوسف يتعلم أخيرًا تحمل المسؤولية ويصبح أكثر استقرارًا. الأخوات تجدن طرقًا للتعامل مع تحديات حياتهن. تنتهي الثلاثية مع استمرار العائلة، متكيفة مع العالم المتغير ولكنها متمسكة ببعض التقاليد التي تعرفها.</p>
+                        <p class="source-reference">المصدر: السكرية لنجيب محفوظ</p>`
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "عودة الروح",
+                author: "توفيق الحكيم",
+                category: "classic",
+                description: "رواية تروي قصة عائلة مصرية بسيطة خلال ثورة 1919، وتظهر كيف أن الشعب المصري كان يبحث عن البطل المنقذ",
+                pages: 5,
+                coverImage: "awdet-el-rooh.jpg",
+                content: [
+                    {
+                        title: "العائلة المصرية",
+                        description: "حياة عائلة مصرية بسيطة في الريف",
+                        image: "awdet-el-rooh.jpg",
+                        text: `<div class="episode-title">الفصل الأول: الحياة في الريف</div>
+                        <div class="book-description">
+                            <strong>وصف الكتاب:</strong> رواية تروي قصة عائلة مصرية بسيطة خلال ثورة 1919، وتظهر كيف أن الشعب المصري كان يبحث عن البطل المنقذ.
+                        </div>
+                        <p>تبدأ الرواية بوصف حياة عائلة مصرية بسيطة تعيش في الريف. محسن، الشاب الذي يعتبره الجميع معجزة العائلة، يذهب إلى القاهرة للدراسة. العائلة كلها تعول عليه ليكون المنقذ والمخلص الذي سيرفع من شأنهم.</p>
+                        <p>تصور الرواية الحياة اليومية للعائلة، بكل تفاصيلها البسيطة وتطلعاتها. العلاقات بين أفراد العائلة تظهر التضامن والتقاليد المصرية الأصيلة، وكذلك التحديات التي يواجهونها في حياتهم اليومية.</p>
+                        <p class="source-reference">المصدر: عودة الروح لتوفيق الحكيم</p>`
+                    },
+                    {
+                        title: "الثورة والمقاومة",
+                        description: "اندلاع ثورة 1919 وتأثيرها على العائلة",
+                        image: "awdet-el-rooh.jpg",
+                        text: `<div class="episode-title">الفصل الثاني: risings of the nation</div>
+                        <p>مع اندلاع ثورة 1919، تتحول حياة العائلة والعالم من حولهم. تصور الرواية كيف أن الشعب埃及ي بكافة فئاته انضم إلى الثورة، متحدًا ضد الاحتلال البريطاني. محسن وأفراد عائلته ينخرطون في الأحداث، ممثلين روح الأمة المصرية.</p>
+                        <p>تظهر الرواية كيف أن الثورة لم تكن مجرد حدث سياسي، بل risings شعبية تعبر عن روح الأمة وتطلعاتها للحرية والاستقلال. العائلة، مثل countless العائلات المصرية، تجد نفسها part of شيء أكبر من自身ها.</p>
+                        <p class="source-reference">المصدر: عودة الروح لتوفيق الحكيم</p>`
+                    },
+                    {
+                        title: "البحث عن المنقذ",
+                        description: "شعب يبحث عن البطل المنقذ",
+                        image: "awdet-el-rooh.jpg",
+                        text: `<div class="episode-title">الفصل الثالث: longing for a savior</div>
+                        <p>تصور الرواية كيف أن الشعب المصري كان يبحث عن البطل المنقذ، الذي سيقودهم إلى الحرية والكرامة. هذه الفكرة تجسدها شخصية محسن، الذي تراه العائلة والمعارف sebagai المعجزة والمنقذ.</p>
+                        <p>توفيق الحكيم ي explores فكرة how الشعوب تخلق أبطالها في أوقات الأزمات، وكيف أن هذه فكرة يمكن أن تكون قوة دافعة للت change والتضحية. لكنه أيضًا ي shows الجانب الآخر، حيث أن الاعتماد على منقذ واحد may يخفي قوة الشعب الحقيقية.</p>
+                        <p class="source-reference">المصدر: عودة الروح لتوفيق الحكيم</p>`
+                    },
+                    {
+                        title: "الوحدة الوطنية",
+                        description: "اتحاد الشعب المصري في وجه المحتل",
+                        image: "awdet-el-rooh.jpg",
+                        text: `<div class="episode-title">الفصل الرابع: اتحاد الأمة</div>
+                        <p>أحد الموضوعات المركزية في الرواية هو فكرة الوحدة الوطنية. تظهر الرواية كيف أن ثورة 1919 جمعت المصريين من جميع الطبقات والأديان تحت هدف مشترك هو التحرر من الاحتلال. هذه الوحدة تظهر قوة الشعب عندما يتحد.</p>
+                        <p>من خلال عائلة محسن والعلاقات بين الشخصيات، يصور توفيق الحكيم كيف أن المصريين، despite اختلافاتهم، يمكنهم الاتحاد عندما يتعلق الأمر بالقضايا المصيرية. هذه الفكرة تبقى relevant حتى اليوم.</p>
+                        <p class="source-reference">المصدر: عودة الروح لتوفيق الحكيم</p>`
+                    },
+                    {
+                        title: "عودة الروح",
+                        description: "استعادة الأمة لروحها وهويتها",
+                        image: "awdet-el-rooh.jpg",
+                        text: `<div class="episode-title">الفصل الخامس: صحوة الأمة</div>
+                        <p>الرواية تنتهي بفكرة "عودة الروح" للأمة المصرية. through الثورة والتضحية، يستعيد الشعب المصري روحه وهويتها. هذه الصحوة ليست فقط سياسية، ولكنها أيضًا ثقافية وروحية.</p>
+                        <p>توفيق الحكيم يقدم نظرة عميقة على النفس المصرية وتطلعاتها. الرواية، though كتبت في الثلاثينات، تبقى workًا مهمًا لفهم التطور السياسي والثقافي لمصر الحديثة. فكرة أن الأمة يمكنها استعادة روحها through النضال والتضحية تبقى messageًا قويًا.</p>
+                        <p class="source-reference">المصدر: عودة الروح لتوفيق الحكيم</p>`
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "الشحات",
+                author: "يوسف السباعي",
+                category: "classic",
+                description: "رواية اجتماعية تدور حول شخصية \"الشحات\" الذي يعيش على هامش المجتمع، وتكشف عن التناقضات الطبقية في المجتمع المصري",
+                pages: 5,
+                coverImage: "el-shahat.jpg",
+                content: [
+                    {
+                        title: "حياة الهامش",
+                        description: "عالم الشحاتين والمهمشين في المجتمع",
+                        image: "el-shahat.jpg",
+                        text: `<div class="episode-title">الفصل الأول: عالم منسي</div>
+                        <div class="book-description">
+                            <strong>وصف الكتاب:</strong> رواية اجتماعية تدور حول شخصية "الشحات" الذي يعيش على هامش المجتمع، وتكشف عن التناقضات الطبقية في المجتمع المصري.
+                        </div>
+                        <p>تدخل الرواية إلى عالم الشحاتين والمهمشين في المجتمع المصري. through شخصية "الشحات" الرئيسية، يصور يوسف السباعي حياة those الذين يعيشون على هامش المجتمع، بعيدًا عن الأنظار ولكنهم part من النسيج الاجتماعي.</p>
+                        <p>الرواية تبدأ بوصف حياة الشحات اليومية، strugglesه من أجل البقاء، والعلاقات بين الشحاتين themselves. هذا العالم الموازي يظهر جانبًا rarely يُرى من المجتمع، لكنه يعكس تناقضاته وتحدياته.</p>
+                        <p class="source-reference">المصدر: الشحات ليوسف السباعي</p>`
+                    },
+                    {
+                        title: "التناقضات الطبقية",
+                        description: "الفجوة بين الطبقات الاجتماعية",
+                        image: "el-shahat.jpg",
+                        text: `<div class="episode-title">الفصل الثاني: وجهان للمجتمع</div>
+                        <p>من خلال مقارنة حياة الشحات بحياة الأثرياء وأصحاب النفوذ، تكشف الرواية عن التناقضات الطبقية العميقة في المجتمع. يوسف السباعي يستخدم هذه المقارنة لـ critique الفجوة between الطبقات والظلم الاجتماعي.</p>
+                        <p>الرواية تظهر how أن نفس المجتمع الذي ينتج ثراءً فاحشًا لبعض أفراده، ينتج أيضًا فقرًا مدقعًا لآخرين. هذه التناقضات تخلق توترات اجتماعية وتطرح أسئلة حول العدالة والتوزيع العادل للثروة.</p>
+                        <p class="source-reference">المصدر: الشحات ليوسف السباعي</p>`
+                    },
+                    {
+                        title: "الإنسانية في الظروف القاسية",
+                        description: "القيم الإنسانية في عالم القسوة",
+                        image: "el-shahat.jpg",
+                        text: `<div class="episode-title">الفصل الثالث: إنسانية في الظل</div>
+                        <p>على الرغم من الظروف القاسية التي يعيش فيها الشحاتون، تظهر الرواية كيف أن القيم الإنسانية like التضامن والتعاطف يمكن أن تزدهر even في most الظروف صعوبة. العلاقات between الشحاتين تظهر formsًا من التكافل والدعم.</p>
+                        <p>في contrast، تظهر الرواية كيف أن بعض الأثرياء وأصحاب النفوذ قد يفقدون إنسانيتهم despite ثرائهم. هذه المفارقة تطرح أسئلة عميقة about طبيعة الإنسانية وما الذي يجعل الإنسان إنسانًا.</p>
+                        <p class="source-reference">المصدر: الشحات ليوسف السباعي</p>`
+                    },
+                    {
+                        title: "صراع البقاء",
+                        description: "الكفاح اليومي من أجل survival",
+                        image: "el-shahat.jpg",
+                        text: `<div class="episode-title">الفصل الرابع: معركة يومية</div>
+                        <p>تصور الرواية بتفصيل مؤثر الكفاح اليومي للشحاتين من أجل البقاء. every day هو معركة للحصول على food، مأوى، وقليل من الكرامة. this الكفاح يستهلك كل طاقاتهم ويحدد علاقاتهم بالعالم.</p>
+                        <p>من خلال هذا التصوير، يقدم يوسف السباعي نقدًا لاذعًا للهياكل الاجتماعية التي تسمح بوجود such المعاناة. الرواية تسأل: إلى أي extent المجتمع مسؤول عن these الظروف، وما هو واجبه towards الأكثر vulnerable؟</p>
+                        <p class="source-reference">المصدر: الشحات ليوسف السباعي</p>`
+                    },
+                    {
+                        title: "الكرامة الإنسانية",
+                        description: "البحث عن الكرامة في عالم ينتزعها",
+                        image: "el-shahat.jpg",
+                        text: `<div class="episode-title">الفصل الخامس: كرامة في الظل</div>
+                        <p>على الرغم من كل الظروف، تظهر الرواية كيف أن الشحاتين يحافظون على كرامتهم الإنسانية بطرقهم الخاصة. through التضامن، humor، والصمود، يخلقون مساحات من الكرامة في عالم يحاول نزعها منهم.</p>
+                        <p>الرواية تنتهي بطرح أسئلة حول طبيعة الكرامة الإنسانية: هل تأتي من المكانة الاجتماعية والثروة، أم من internal القوة والقيم؟ through قصة الشحات، يجيب يوسف السباعي أن الكرامة الحقيقية تكمن في الروح الإنسانية التي ترفض الاستسلام.</p>
+                        <p class="source-reference">المصدر: الشحات ليوسف السباعي</p>`
+                    }
+                ]
+            }
+        ];
+        
+        // DOM elements
+          const transferBtn = document.getElementById('transfer-btn');
+        const exitBtn = document.getElementById('exit-btn');
+        const languageBtn = document.getElementById('language-btn');
+        const logo = document.getElementById('logo');
+        const animeBooksScroll = document.getElementById('anime-books-scroll');
+        const classicBooksScroll = document.getElementById('classic-books-scroll');
+        const booksSection = document.getElementById('books-section');
+        const readingContainer = document.getElementById('reading-container');
+        const readingTitle = document.getElementById('reading-title');
+        const readingContent = document.getElementById('reading-content');
+        const backToBooksBtn = document.getElementById('back-to-books');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const pageIndicator = document.getElementById('page-indicator');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const settingsMenu = document.getElementById('settings-menu');
+        const languageMenu = document.getElementById('language-menu');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const animeSection = document.getElementById('anime-section');
+        const classicSection = document.getElementById('classic-section');
+        const backToCategoriesBtn = document.getElementById('back-to-categories');
+        const animeScrollLeft = document.getElementById('anime-scroll-left');
+        const animeScrollRight = document.getElementById('anime-scroll-right');
+        const classicScrollLeft = document.getElementById('classic-scroll-left');
+        const classicScrollRight = document.getElementById('classic-scroll-right');
+        
+        // App state
+        let currentBook = null;
+        let currentPage = 0;
+        let currentTheme = 'naruto';
+        let currentView = 'all'; // 'all', 'anime', 'classic', or 'search'
+        
+        // Initialize site
+        function initSite() {
+            // Display books by category
+            renderBooksByCategory();
+            
+            // Add event listeners
+            transferBtn.addEventListener('click', toggleSettingsMenu);
+            exitBtn.addEventListener('click', goToHomePage);
+            languageBtn.addEventListener('click', toggleLanguageMenu);
+            logo.addEventListener('dblclick', refreshPage);
+            
+            // Reading section events
+            backToBooksBtn.addEventListener('click', showBooksView);
+            prevPageBtn.addEventListener('click', goToPrevPage);
+            nextPageBtn.addEventListener('click', goToNextPage);
+            
+            // Search
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            // Scroll arrows
+            animeScrollLeft.addEventListener('click', () => scrollCategory('anime', 'left'));
+            animeScrollRight.addEventListener('click', () => scrollCategory('anime', 'right'));
+            classicScrollLeft.addEventListener('click', () => scrollCategory('classic', 'left'));
+            classicScrollRight.addEventListener('click', () => scrollCategory('classic', 'right'));
+            
+            // Close settings menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (settingsMenu && !settingsMenu.contains(e.target) && !transferBtn.contains(e.target)) {
+                    settingsMenu.classList.remove('active');
+                }
+                
+                if (languageMenu && !languageMenu.contains(e.target) && !languageBtn.contains(e.target)) {
+                    languageMenu.classList.remove('active');
+                }
+            });
+            
+            // Transfer to section
+            document.querySelectorAll('.social-link[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    filterBooks(section);
+                    settingsMenu.classList.remove('active');
+                });
+            });
+            
+            // Language selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    changeLanguage(lang);
+                    languageMenu.classList.remove('active');
+                });
+            });
+            
+            // Back to categories button
+            backToCategoriesBtn.addEventListener('click', function() {
+                currentView = 'all';
+                renderBooksByCategory();
+                backToCategoriesBtn.style.display = 'none';
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+            });
+        }
+        
+        // Display books by category
+        function renderBooksByCategory() {
+            const animeBooks = books.filter(book => book.category === 'anime');
+            const classicBooks = books.filter(book => book.category === 'classic');
+            
+            renderBooks(animeBooks, animeBooksScroll);
+            renderBooks(classicBooks, classicBooksScroll);
+        }
+        
+        // Display books
+        function renderBooks(booksArray, container) {
+            container.innerHTML = '';
+            
+            if (booksArray.length === 0) {
+                container.innerHTML = '<p class="no-results">No results found</p>';
+                return;
+            }
+            
+            booksArray.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.dataset.id = book.id;
+                bookCard.dataset.category = book.category;
+                bookCard.innerHTML = `
+                    <div class="book-cover ${book.id === 1 ? 'naruto' : book.id === 2 ? 'aot' : 'classic'}">
+                        <img src="${book.coverImage}" alt="${book.title}" class="cover-image">
+                    </div>
+                    <div class="book-title">${book.title}</div>
+                `;
+                
+                bookCard.addEventListener('click', () => {
+                    openBook(book);
+                });
+                
+                container.appendChild(bookCard);
+            });
+        }
+        
+        // Scroll category horizontally
+        function scrollCategory(category, direction) {
+            const scrollContainer = category === 'anime' ? animeBooksScroll : classicBooksScroll;
+            const scrollAmount = 300;
+            
+            if (direction === 'left') {
+                scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+        
+        // Open book
+        function openBook(book) {
+            // Show loading indicator
+            loadingSpinner.style.display = 'block';
+            
+            setTimeout(() => {
+                currentBook = book;
+                currentPage = 0;
+                
+                // Change theme based on book
+                if (book.id === 1) currentTheme = 'naruto';
+                else if (book.id === 2) currentTheme = 'aot';
+                else currentTheme = 'classic';
+                
+                document.body.className = '';
+                if (currentTheme !== 'naruto') {
+                    document.body.classList.add(`${currentTheme}-theme`);
+                }
+                
+                updateReadingView();
+                
+                // Show reading section and hide library section
+                booksSection.style.display = 'none';
+                readingContainer.style.display = 'block';
+                
+                // Hide loading indicator
+                loadingSpinner.style.display = 'none';
+            }, 500);
+        }
+        
+        // Update reading view
+        function updateReadingView() {
+            // Update title
+            readingTitle.textContent = currentBook.title;
+            
+            // Update current page content
+            renderPageContent();
+            
+            // Update page indicator
+            pageIndicator.textContent = `Page ${currentPage + 1} of ${currentBook.content.length}`;
+            
+            // Update navigation buttons state
+            prevPageBtn.disabled = currentPage <= 0;
+            nextPageBtn.disabled = currentPage >= currentBook.content.length - 1;
+        }
+        
+        // Display current page content
+        function renderPageContent() {
+            const content = currentBook.content[currentPage];
+            
+            readingContent.innerHTML = `
+                <div class="book-meta">
+                    <div class="book-author-reading">By: ${currentBook.author}</div>
+                </div>
+                <div class="page-image-container">
+                    <img src="${content.image}" alt="${content.title}" class="page-image">
+                </div>
+                <div class="page-text">
+                    ${content.text}
+                </div>
+            `;
+        }
+        
+        // Go to previous page
+        function goToPrevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updateReadingView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        // Go to next page
+        function goToNextPage() {
+            if (currentPage < currentBook.content.length - 1) {
+                currentPage++;
+                updateReadingView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        // Return to books view
+        function showBooksView() {
+            booksSection.style.display = 'block';
+            readingContainer.style.display = 'none';
+            
+            // Reset theme
+            document.body.className = '';
+            
+            // Reload books based on current view
+            if (currentView === 'all') {
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
+            } else if (currentView === 'anime') {
+                filterBooks('anime');
+            } else if (currentView === 'classic') {
+                filterBooks('classic');
+            } else if (currentView === 'search') {
+                performSearch();
+            }
+        }
+        
+        // Toggle settings menu
+        function toggleSettingsMenu(e) {
+            e.stopPropagation();
+            settingsMenu.classList.toggle('active');
+            // Close language menu if open
+            languageMenu.classList.remove('active');
+        }
+        
+        // Toggle language menu
+        function toggleLanguageMenu(e) {
+            e.stopPropagation();
+            languageMenu.classList.toggle('active');
+            // Close settings menu if open
+            settingsMenu.classList.remove('active');
+        }
+        
+        // Change language
+        function changeLanguage(lang) {
+            // This would be implemented to change the site language
+            console.log(`Changing language to: ${lang}`);
+            // In a real implementation, this would update all text content on the page
+        }
+        
+        // Go to home page
+        function goToHomePage() {
+            window.location.href = 'index.html';
+        }
+        
+        // Refresh page
+        function refreshPage() {
+            window.location.reload();
+        }
+        
+        // Filter books by category
+        function filterBooks(category) {
+            // Update current view state
+            currentView = category;
+            
+            // Show back to categories button
+            backToCategoriesBtn.style.display = 'block';
+            
+            // Hide all category sections initially
+            animeSection.style.display = 'none';
+            classicSection.style.display = 'none';
+            
+            if (category === 'all') {
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
+            } else {
+                const filteredBooks = books.filter(book => book.category === category);
+                
+                // Show the appropriate section
+                if (category === 'anime') {
+                    renderBooks(filteredBooks, animeBooksScroll);
+                    animeSection.style.display = 'block';
+                } else if (category === 'classic') {
+                    renderBooks(filteredBooks, classicBooksScroll);
+                    classicSection.style.display = 'block';
+                }
+            }
+        }
+        
+        // Perform search with better matching
+        function performSearch() {
+            currentView = 'search';
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm === '') {
+                currentView = 'all';
+                renderBooksByCategory();
+                animeSection.style.display = 'block';
+                classicSection.style.display = 'block';
+                backToCategoriesBtn.style.display = 'none';
+                return;
+            }
+            
+            // Show back to categories button
+            backToCategoriesBtn.style.display = 'block';
+            
+            // Hide category sections during search
+            animeSection.style.display = 'none';
+            classicSection.style.display = 'none';
+            
+            // Create search aliases for categories
+            const searchAliases = {
+                'anime': ['anime', 'أنمي', 'انمي', 'anim', 'manga', 'مانجا', 'مانغا'],
+                'classic': ['classic', 'كلاسيك', 'روايات', 'novel', 'رواية', 'literature', 'أدب']
+            };
+            
+            // Check if search term matches any category alias
+            let categoryMatch = null;
+            for (const category in searchAliases) {
+                if (searchAliases[category].includes(searchTerm)) {
+                    categoryMatch = category;
+                    break;
+                }
+            }
+            
+            let results = [];
+            
+            if (categoryMatch) {
+                // If search term matches a category, filter by that category
+                results = books.filter(book => book.category === categoryMatch);
+                
+                // Show the appropriate section
+                if (categoryMatch === 'anime') {
+                    animeSection.style.display = 'block';
+                } else if (categoryMatch === 'classic') {
+                    classicSection.style.display = 'block';
+                }
+            } else {
+                // Otherwise, perform regular search
+                results = books.filter(book => 
+                    book.title.toLowerCase().includes(searchTerm) || 
+                    book.author.toLowerCase().includes(searchTerm) ||
+                    book.description.toLowerCase().includes(searchTerm) ||
+                    book.category.toLowerCase().includes(searchTerm)
+                );
+                
+                // Show results in anime section grid
+                animeSection.style.display = 'block';
+            }
+            
+            renderBooks(results, animeBooksScroll);
+        }
+        
+        // Initialize site when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initSite);
+    </script>
+</body>
+</html>
