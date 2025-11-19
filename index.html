@@ -1539,18 +1539,18 @@
     <div class="loading-spinner" id="loading-spinner">
         <div class="spinner"></div>
     </div>
-    <!-- Update Notification Modal -->
+<!-- Update Notification Modal -->
 <div class="update-modal" id="update-modal">
     <div class="update-modal-content">
         <div class="update-icon">
             <i class="fas fa-sync-alt"></i>
         </div>
-        <h3>Site Update Required</h3>
-        <p>We kindly request you to restart our website to receive any new updates and improvements.</p>
-        <p>This will ensure you have the latest features and content available.</p>
-        <button class="update-btn" id="update-confirm">
-            <i class="fas fa-redo"></i> Restart Now
-        </button>
+      <h3>Site update</h3>
+‏        <p>We recommend restarting the site to get the latest updates and new content.</p>
+‏        <p>Please close this window and manually reload the page.</p>
+‏        <button class="update-btn" id="update-confirm">
+‏            <i class="fas fa-check"></i> It was completed
+‏        </button>
     </div>
 </div>
     <script>
@@ -5972,40 +5972,22 @@
 
         // Initialize the app when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
-// Update Notification Modal
 document.addEventListener('DOMContentLoaded', function() {
     const updateModal = document.getElementById('update-modal');
-    const updateConfirm = document.getElementById('update-confirm');
+    const updateConfirmBtn = document.getElementById('update-confirm');
     
-    // Show update modal after a short delay
-    setTimeout(() => {
-        updateModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }, 1000);
+    // إظهار الرسالة عند تحميل الصفحة
+    updateModal.style.display = 'flex';
     
-    // Handle update confirmation
-    updateConfirm.addEventListener('click', function() {
-        // Add closing animation
-        updateModal.style.opacity = '0';
-        updateModal.style.transition = 'opacity 0.3s ease';
-        
-        // Wait for animation to complete then hide
-        setTimeout(() => {
-            updateModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
+    // إخفاء الرسالة عند النقر على زر "تم"
+    updateConfirmBtn.addEventListener('click', function() {
+        updateModal.style.display = 'none';
     });
     
-    // Close modal when clicking outside
+    // إخفاء الرسالة عند النقر خارج المحتوى
     updateModal.addEventListener('click', function(e) {
         if (e.target === updateModal) {
-            updateModal.style.opacity = '0';
-            updateModal.style.transition = 'opacity 0.3s ease';
-            
-            setTimeout(() => {
-                updateModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
+            updateModal.style.display = 'none';
         }
     });
 });
