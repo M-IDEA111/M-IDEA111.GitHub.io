@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - M IDEA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            position: relative;
+            font-size: 0.95rem;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+        
+        /* Logo section */
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 30px 20px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-section img {
+            width: 600px;
+            height: 600px;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(182, 20, 18, 0.7));
+        }
+        
+        .logo-section h2 {
+            color: #b61412;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(182, 20, 18, 0.5);
+            letter-spacing: 1.5px;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            padding: 20px 15px 40px 15px;
+        }
+        
+        /* News page header */
+        .news-page-header {
+            text-align: center;
+            margin: 0 0 50px;
+        }
+        
+        .news-page-title {
+            color: #b61412;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(182, 20, 18, 0.5);
+        }
+        
+        .news-page-subtitle {
+            color: #ccc;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* News articles - New design similar to about section */
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-top: 40px;
+        }
+        
+        .news-article {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 30px;
+            background: rgba(25, 25, 25, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(182, 20, .2);
+        }
+        
+        .article-content {
+            flex: 1;
+            padding: 0 15px;
+            text-align: left;
+        }
+        
+        .article-date {
+            color: #b61412l;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .article-title {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .article-text {
+            color: #white;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .article-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Footer section */
+        .footer-section {
+            margin-top: auto;
+            padding-top: 40px;
+            width: 100%;
+        }
+        
+        /* Policy links */
+        .policy-links {
+            text-align: center;
+            margin: 0 0 15px;
+            padding: 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .policy-links a {
+            color: #b61412 !important;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .policy-links a:hover {
+            text-decoration: underline;
+            color: #d43c3a !important;
+        }
+        
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            padding: 15px 0;
+            color: #white;
+            font-size: 1rem;
+            background: transparent;
+            width: 100%;
+        }
+        
+        .copyright a {
+            color: #b61412 !important;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        
+        .copyright a:hover {
+            text-decoration: underline;
+            color: #d43c3a !important;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .news-article {
+                gap: 30px;
+            }
+            
+            .article-image {
+                min-width: 250px;
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo-section {
+                padding: 20px 15px 15px;
+            }
+            
+            .logo-section img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .logo-section h2 {
+                font-size: 2.2rem;
+            }
+            
+            .news-page-title {
+                font-size: 2rem;
+            }
+            
+            .news-page-subtitle {
+                font-size: 1rem;
+            }
+            
+            .news-article {
+                flex-direction: column-reverse;
+                padding: 20px;
+                gap: 25px;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .article-image {
+                min-width: auto;
+                max-width: 100%;
+            }
+            
+            .article-content {
+                padding: 0;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo-section img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .logo-section h2 {
+                font-size: 2rem;
+            }
+            
+            .news-page-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-title {
+                font-size: 1.3rem;
+            }
+            
+            .article-text {
+                font-size: 0.95rem;
+            }
+            
+            .news-article {
+                padding: 15px;
+            }
+            
+            .policy-links a {
+                margin: 0 10px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b61412;
+        }
+
+        /* For other browsers */
+        html {
+            scrollbar-color: #b61412 #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo section -->
+    <div class="logo-section">
+        <img src="Picsart_25-11-22_01-48-49-975.png" alt="App Logo">
+
+    </div>
+    
+    <div class="main-content">
+        <div class="news-page-header">
+            <h1 class="news-page-title">M IDEA News</h1>
+            <p class="news-page-subtitle">Stay updated with the latest news and updates from M IDEA</p>
+        </div>
+        
+        <div class="news-container">
+            <!-- Article 1 -->
+            <div class="news-article">
+                <div class="article-content">
+                    <span class="article-date">September 7, 2025</span>
+                    <h2 class="article-title">20 New Books Added to M IDEA Book Library</h2>
+                    <p class="article-text">
+                        Our digital library is continuously expanding! This month, we've added over 20 new titles across a variety of categories.
+                    </p>
+                    <p class="article-text">
+                        The M IDEA Book library has seen significant expansion with the addition of more than 20 new titles. This expansion includes works by renowned authors.
+                    </p>
+                    <p class="article-text">
+                        Some of the notable new additions:
+                        <br>• Exclusive releases from 10 best-selling authors
+                        <br>• Over 20 new fiction titles across various genres
+                        <br>• More than 8 educational and academic resources
+                        <br>• Special collections of classic literature
+                        <br>• Books in multiple languages
+                    </p>
+                </div>
+                <div class="article-image">
+                    <img src="good.png" alt="New Book Releases">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer section -->
+    <div class="footer-section">
+        <!-- Policy links -->
+        <div class="policy-links">
+            <a href="index.html"> Back to Homepage</a>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="copyright">
+            <p>Copyright © 2025-2026
+m-idea111.github.io or its affiliates. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // No navbar-related scripts needed anymore
+    </script>
+</body>
+</html>
