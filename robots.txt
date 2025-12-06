@@ -39,7 +39,4 @@ Crawl-delay: 1
 # ------ خريطة الموقع ------ 
 Sitemap: https://m-idea111.github.io/sitemap.xml
 
-# ------ المضيف المفضل ------ 
-Host: m-idea111.github.io
-
 # آخر تحديث: 2025-11-27 (مُحسّن للأمان والفهرسة)
