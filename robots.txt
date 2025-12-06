@@ -33,9 +33,6 @@ Allow: /js/
 Allow: /images/
 Allow: /fonts/
 
-# ------ إعدادات متقدمة لمحركات البحث ------
-Crawl-delay: 1
-
 # ------ خريطة الموقع ------ 
 Sitemap: https://m-idea111.github.io/sitemap.xml
 
