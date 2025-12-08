@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /
+
+# ------ استبعاد مسارات غير ضرورية للفهرسة ------
+Disallow: /search/
+Disallow: /private/
+Disallow: /temp/
+
+# ------ استبعاد أنواع ملفات معينة من الفهرسة ------
+Disallow: /*.pdf$
+Disallow: /*.docx$
+Disallow: /*.xlsx$
+Disallow: /*.pptx$
+Disallow: /*.zip$
+Disallow: /*.rar$
+
+# ------ استبعاد ملفات النظام والتطوير (إن وجدت) ------
+Disallow: /node_modules/
+Disallow: /vendor/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /test/
+Disallow: /demo/
+
+# ------ السماح بزحف الموارد الأساسية ------
+Allow: /css/*.css$
+Allow: /js/*.js$
+Allow: /images/*.jpg$
+Allow: /images/*.png$
+Allow: /images/*.webp$
+Allow: /fonts/*.woff$
+Allow: /fonts/*.woff2$
+
+# ------ خريطة الموقع ------
+Sitemap: https://m-idea111.github.io/sitemap.xml
+
+# ------ محركات بحث محددة ------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# آخر تحديث: 2025-12-09 - مخصص لموقع GitHub Pages
