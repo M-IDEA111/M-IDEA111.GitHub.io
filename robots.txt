@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://m-idea111.github.io/sitemap.xml
+
+# آخر تحديث: 2025-12-09 - مخصص لموقع GitHub Pages
