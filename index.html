@@ -43,6 +43,253 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
+    /* =========================================== */
+/* تحسينات حجم صور الكتب في صفحة القراءة */
+/* =========================================== */
+
+/* قاعدة أساسية لجميع الشاشات */
+.reading-content .page-image-container {
+    max-width: 80%;
+    margin: 0 auto 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(182, 20, 18, 0.3);
+}
+
+.reading-content .page-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== الشاشات الكبيرة جداً (أكبر من 1920px) ========== */
+@media (min-width: 1921px) {
+    .reading-content .page-image-container {
+        max-width: 60%; /* أصغر في الشاشات الضخمة */
+        padding: 15px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 500px; /* ارتفاع ثابت مناسب للشاشات الضخمة */
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات الكبيرة (1440px إلى 1920px) ========== */
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .reading-content .page-image-container {
+        max-width: 65%;
+        padding: 12px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 450px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات المتوسطة الكبيرة (1200px إلى 1439px) ========== */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .reading-content .page-image-container {
+        max-width: 70%;
+        padding: 10px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 400px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات المتوسطة (992px إلى 1199px) ========== */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .reading-content .page-image-container {
+        max-width: 75%;
+        padding: 8px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 380px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات المتوسطة الصغيرة (768px إلى 991px) ========== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .reading-content .page-image-container {
+        max-width: 85%;
+        padding: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 350px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات الصغيرة (576px إلى 767px) ========== */
+@media (min-width: 576px) and (max-width: 767px) {
+    .reading-content .page-image-container {
+        max-width: 90%;
+        padding: 6px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 300px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات الصغيرة جداً (480px إلى 575px) ========== */
+@media (min-width: 480px) and (max-width: 575px) {
+    .reading-content .page-image-container {
+        max-width: 95%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 250px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات المحمولة الصغيرة (360px إلى 479px) ========== */
+@media (min-width: 360px) and (max-width: 479px) {
+    .reading-content .page-image-container {
+        max-width: 98%;
+        padding: 4px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 220px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ========== الشاشات الصغيرة جداً جداً (أقل من 360px) ========== */
+@media (max-width: 359px) {
+    .reading-content .page-image-container {
+        max-width: 100%;
+        padding: 3px;
+        margin-bottom: 6px;
+        border-radius: 5px;
+    }
+    
+    .reading-content .page-image {
+        max-height: 200px;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* =========================================== */
+/* خيار إضافي: إذا أردت استخدام نسبة vh بدلاً من px */
+/* =========================================== */
+/*
+.reading-content .page-image {
+    max-height: 50vh !important;
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+@media (min-width: 1921px) {
+    .reading-content .page-image {
+        max-height: 45vh !important;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1920px) {
+    .reading-content .page-image {
+        max-height: 50vh !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .reading-content .page-image {
+        max-height: 55vh !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .reading-content .page-image {
+        max-height: 60vh !important;
+    }
+}
+*/
+
+/* =========================================== */
+/* تحسينات إضافية لتحسين الأداء والمظهر */
+/* =========================================== */
+
+/* منع تحميل الصور بحجم كبير */
+.reading-content .page-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* تحسين التحميل */
+.reading-content .page-image-container {
+    min-height: 150px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+}
+
+/* تأثير hover للشاشات الكبيرة فقط */
+@media (min-width: 992px) {
+    .reading-content .page-image {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .reading-content .page-image:hover {
+        transform: scale(1.01);
+        box-shadow: 0 8px 20px rgba(182, 20, 18, 0.3);
+    }
+}
+
+/* ضبط تلقائي للصور في حالة عدم توفرها */
+.reading-content .page-image-container:empty::before {
+    content: "🖼️";
+    display: block;
+    font-size: 50px;
+    color: #b61412;
+    text-align: center;
+    padding: 40px;
+    opacity: 0.5;
+}
+
+/* تحسينات للنصوص حول الصور */
+.reading-content .page-text {
+    margin-top: 15px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* ضبط المسافات حول الحاوية */
+.reading-content > .page-image-container:first-child {
+    margin-top: 10px;
+}
+
+.reading-content > .page-image-container:last-child {
+    margin-bottom: 25px;
+}
         * {
             margin: 0;
             padding: 0;
@@ -2216,14 +2463,6 @@ main {
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-<amp-ad
-     layout="fixed"
-     width="700"
-     height="50"
-     type="adsense"
-     data-ad-client="ca-pub-3352888654930814"
-     data-ad-slot="9512166119">
-</amp-ad>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
      crossorigin="anonymous"></script>
 <!-- AdSense Ads -->
@@ -2377,7 +2616,7 @@ main {
             <div class="footer-explore">
                 <h4>Explore M IDEA</h4>
                 <div class="footer-explore-links">
-                    <a href="index.html">M IDEA BooK</a>
+                    <a href="index.html">Home</a>
                 </div>
             </div>
         </div>
