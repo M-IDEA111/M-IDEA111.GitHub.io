@@ -2310,7 +2310,225 @@ main {
         max-height: 70vh;
         width: auto;
     }
+/* =========================================== */
+/* نظام تقييم الكتب */
+/* =========================================== */
 
+.book-rating-section {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(182, 20, 18, 0.3);
+    border-left: 4px solid var(--primary-color);
+}
+
+.rating-title {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(182, 20, 18, 0.2);
+}
+
+.rating-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+.average-rating {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.rating-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(182, 20, 18, 0.5);
+}
+
+.stars-display {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.stars-static {
+    font-size: 1.8rem;
+    color: #444;
+    position: relative;
+    display: inline-block;
+}
+
+.stars-static::before {
+    content: '★★★★★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    color: #ffc107;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.rating-count {
+    display: block;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+
+.user-rating {
+    flex: 1;
+    min-width: 250px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.rating-label {
+    color: #f5f5f5;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.stars-rating {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    direction: ltr; /* للحفاظ على اتجاه النجوم من اليسار لليمين */
+}
+
+.stars-rating .star {
+    cursor: pointer;
+    color: #444;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+    display: inline-block;
+}
+
+.stars-rating .star:hover {
+    transform: scale(1.2);
+    color: #ffc107;
+}
+
+.stars-rating .star.active {
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+.rating-note {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.8rem;
+    font-style: italic;
+}
+
+/* مؤشر نجمة التقييم عند التحويم */
+.star-rating-hint {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    border: 1px solid var(--primary-color);
+}
+
+/* توزيع التقييمات */
+.rating-distribution {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.distribution-title {
+    color: #f5f5f5;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.distribution-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.distribution-star {
+    width: 80px;
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+.distribution-progress {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.distribution-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #ffc107);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.distribution-count {
+    width: 40px;
+    text-align: right;
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    .rating-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .average-rating, .user-rating {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .stars-rating {
+        font-size: 1.8rem;
+    }
+    
+    .rating-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-rating-section {
+        padding: 1rem;
+    }
+    
+    .stars-rating {
+        font-size: 1.6rem;
+    }
+    
+    .stars-static {
+        font-size: 1.5rem;
+    }
+}
  </style>
 </head>
 <body>
@@ -2556,6 +2774,15 @@ main {
                 <!-- Books for the selected category will be populated here -->
              
              </div>
+            const bookRatings = getBookRatings(book.id);
+const { average, count } = calculateAverageRating(bookRatings);
+
+if (count > 0) {
+    const ratingHtml = `
+        <div class="book-rating-mini">
+            <span class="mini-stars">${'★'.repeat(Math.round(average))}</span>
+            <span class="mini-average">${average.toFixed(1)}</span>
+        </div>
             
         </div>
         <!-- Reading Section -->
@@ -2570,7 +2797,30 @@ main {
             <div class="reading-content" id="reading-content">
                 <!-- Current page content -->
             </div>
-            
+            <!-- نظام تقييم الكتب -->
+<div class="book-rating-section" id="book-rating-section">
+    <h4 class="rating-title">تقييم الكتاب</h4>
+    <div class="rating-stats">
+        <div class="average-rating">
+            <span class="rating-value" id="average-rating">0.0</span>
+            <div class="stars-display">
+                <div class="stars-static" id="static-stars"></div>
+            </div>
+            <span class="rating-count" id="total-ratings">(0 تقييم)</span>
+        </div>
+        <div class="user-rating">
+            <p class="rating-label">قيم هذا الكتاب:</p>
+            <div class="stars-rating" id="stars-rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <p class="rating-note">تقييمك سيتم حفظه تلقائياً</p>
+        </div>
+    </div>
+</div>
             <!-- Related Books Section -->
             <div class="related-books" id="related-books">
                 <h4 class="related-title">Related Books</h4>
@@ -7041,6 +7291,8 @@ document.getElementById('back-from-search').addEventListener('click', function()
             
             // Populate related books
             populateRelatedBooks(book);
+            
+            initializeRatingSystem(book.id);
         }
 
         // Load a specific page
@@ -7578,7 +7830,314 @@ function updateMetaDescription(text) {
     let meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute('content', text);
 }
+// ===========================================
+// نظام تقييم الكتب
+// ===========================================
 
+// تخزين التقييمات في localStorage
+const RATING_STORAGE_KEY = 'midea_book_ratings';
+
+// الحصول على جميع التقييمات
+function getAllRatings() {
+    const ratingsJson = localStorage.getItem(RATING_STORAGE_KEY);
+    return ratingsJson ? JSON.parse(ratingsJson) : {};
+}
+
+// حفظ التقييمات
+function saveAllRatings(ratings) {
+    localStorage.setItem(RATING_STORAGE_KEY, JSON.stringify(ratings));
+}
+
+// الحصول على تقييمات كتاب معين
+function getBookRatings(bookId) {
+    const allRatings = getAllRatings();
+    return allRatings[bookId] || { ratings: [], distribution: {1:0, 2:0, 3:0, 4:0, 5:0} };
+}
+
+// حفظ تقييم كتاب
+function saveBookRating(bookId, rating) {
+    // استخدام معرف فريد للمستخدم (مستند إلى المتصفح بدون تسجيل)
+    const userId = getUserId();
+    const allRatings = getAllRatings();
+    
+    if (!allRatings[bookId]) {
+        allRatings[bookId] = { ratings: [], distribution: {1:0, 2:0, 3:0, 4:0, 5:0} };
+    }
+    
+    // التحقق إذا كان المستخدم قد قيم هذا الكتاب من قبل
+    const existingIndex = allRatings[bookId].ratings.findIndex(r => r.userId === userId);
+    
+    if (existingIndex >= 0) {
+        // تحديث التقييم الحالي
+        const oldRating = allRatings[bookId].ratings[existingIndex].rating;
+        allRatings[bookId].distribution[oldRating]--;
+        
+        allRatings[bookId].ratings[existingIndex].rating = rating;
+        allRatings[bookId].ratings[existingIndex].date = new Date().toISOString();
+    } else {
+        // إضافة تقييم جديد
+        allRatings[bookId].ratings.push({
+            userId: userId,
+            rating: rating,
+            date: new Date().toISOString()
+        });
+    }
+    
+    // تحديث التوزيع
+    allRatings[bookId].distribution[rating]++;
+    
+    saveAllRatings(allRatings);
+    return true;
+}
+
+// إنشاء معرف فريد للمستخدم (يعتمد على المتصفح)
+function getUserId() {
+    let userId = localStorage.getItem('midea_user_id');
+    
+    if (!userId) {
+        // إنشاء معرف جديد
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('midea_user_id', userId);
+    }
+    
+    return userId;
+}
+
+// حساب متوسط التقييم
+function calculateAverageRating(bookRatings) {
+    if (!bookRatings.ratings || bookRatings.ratings.length === 0) {
+        return { average: 0, count: 0 };
+    }
+    
+    const total = bookRatings.ratings.reduce((sum, r) => sum + r.rating, 0);
+    const average = total / bookRatings.ratings.length;
+    
+    return { 
+        average: Math.round(average * 10) / 10, // تقريب إلى منزلة عشرية واحدة
+        count: bookRatings.ratings.length 
+    };
+}
+
+// عرض النجوم الثابتة (للمتوسط)
+function renderStaticStars(averageRating, elementId) {
+    const starsElement = document.getElementById(elementId);
+    if (!starsElement) return;
+    
+    // حساب عرض النجوم المملوءة كنسبة مئوية
+    const percentage = (averageRating / 5) * 100;
+    starsElement.style.width = `${percentage}%`;
+}
+
+// عرض توزيع التقييمات
+function renderRatingDistribution(distribution, totalRatings) {
+    const distributionContainer = document.getElementById('rating-distribution');
+    if (!distributionContainer) return;
+    
+    let distributionHTML = '';
+    
+    for (let i = 5; i >= 1; i--) {
+        const count = distribution[i] || 0;
+        const percentage = totalRatings > 0 ? (count / totalRatings) * 100 : 0;
+        
+        distributionHTML += `
+            <div class="distribution-bar">
+                <div class="distribution-star">${'★'.repeat(i)}</div>
+                <div class="distribution-progress">
+                    <div class="distribution-fill" data-percentage="${percentage}" style="width: ${percentage}%"></div>
+                </div>
+                <div class="distribution-count">${count}</div>
+            </div>
+        `;
+    }
+    
+    distributionContainer.innerHTML = distributionHTML;
+    
+    // إضافة تأثير تحريك للأشرطة
+    setTimeout(() => {
+        const fillElements = document.querySelectorAll('.distribution-fill');
+        fillElements.forEach(fill => {
+            const percentage = fill.getAttribute('data-percentage');
+            fill.style.width = `${percentage}%`;
+        });
+    }, 100);
+}
+
+// تهيئة نظام التقييم
+function initializeRatingSystem(bookId) {
+    const bookRatings = getBookRatings(bookId);
+    const { average, count } = calculateAverageRating(bookRatings);
+    const userId = getUserId();
+    
+    // تحديث عرض التقييم
+    document.getElementById('average-rating').textContent = average.toFixed(1);
+    document.getElementById('total-ratings').textContent = `(${count} ${count === 1 ? 'تقييم' : 'تقييمات'})`;
+    
+    // عرض النجوم الثابتة
+    renderStaticStars(average, 'static-stars');
+    
+    // عرض توزيع التقييمات إذا كان هناك تقييمات
+    if (count > 0) {
+        renderRatingDistribution(bookRatings.distribution, count);
+    }
+    
+    // البحث عن تقييم المستخدم الحالي لهذا الكتاب
+    const userRating = bookRatings.ratings.find(r => r.userId === userId);
+    
+    // تهيئة النجوم التفاعلية
+    const stars = document.querySelectorAll('.stars-rating .star');
+    stars.forEach(star => {
+        const value = parseInt(star.getAttribute('data-value'));
+        
+        // تعيين التقييم الحالي للمستخدم
+        if (userRating && value <= userRating.rating) {
+            star.classList.add('active');
+        }
+        
+        // إضافة أحداث التحويم والنقر
+        star.addEventListener('mouseenter', function() {
+            // تسليط الضوء على النجوم حتى هذه القيمة
+            stars.forEach(s => {
+                const sValue = parseInt(s.getAttribute('data-value'));
+                if (sValue <= value) {
+                    s.classList.add('hover');
+                } else {
+                    s.classList.remove('hover');
+                }
+            });
+        });
+        
+        star.addEventListener('mouseleave', function() {
+            // إزالة تأثير التحويم
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+        
+        star.addEventListener('click', function() {
+            // حفظ التقييم
+            saveBookRating(bookId, value);
+            
+            // تحديث عرض النجوم
+            stars.forEach(s => {
+                const sValue = parseInt(s.getAttribute('data-value'));
+                if (sValue <= value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+            
+            // إظهار رسالة تأكيد
+            showRatingConfirmation(value);
+            
+            // إعادة تحميل عرض التقييم
+            setTimeout(() => {
+                initializeRatingSystem(bookId);
+            }, 500);
+        });
+    });
+}
+
+// عرض رسالة تأكيد التقييم
+function showRatingConfirmation(rating) {
+    // إزالة أي رسالة سابقة
+    const existingMessage = document.querySelector('.rating-confirmation');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // إنشاء رسالة جديدة
+    const message = document.createElement('div');
+    message.className = 'rating-confirmation';
+    message.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <span>شكراً لتقييمك! <strong>${'★'.repeat(rating)}</strong></span>
+    `;
+    
+    // إضافة التنسيق للرسالة
+    message.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #4CAF50;
+        padding: 12px 20px;
+        border-radius: var(--border-radius);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 10000;
+        border: 1px solid #4CAF50;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(message);
+    
+    // إزالة الرسالة بعد 3 ثوانٍ
+    setTimeout(() => {
+        message.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            if (message.parentNode) {
+                message.remove();
+            }
+        }, 300);
+    }, 3000);
+}
+
+// إضافة أنيميشن للرسالة
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .stars-rating .star.hover {
+        color: #ffc107 !important;
+    }
+`;
+document.head.appendChild(style);
+
+// ===========================================
+// دمج نظام التقييم مع النظام الحالي
+// ===========================================
+
+// تعديل دالة openBook لتهيئة نظام التقييم
+// ابحث عن دالة openBook في الكود الحالي وأضف هذا السطر في نهايتها:
+// initializeRatingSystem(book.id);
+
+// أو إذا لم تتمكن من العثور عليها، أضف هذا الحدث:
+document.addEventListener('DOMContentLoaded', function() {
+    // عندما يتم فتح كتاب، قم بتهيئة نظام التقييم
+    // هذا الحدث سيكون مكملاً للنظام الحالي
+    
+    // يمكنك أيضًا إضافة قسم توزيع التقييمات إلى HTML
+    const ratingSection = document.getElementById('book-rating-section');
+    if (ratingSection) {
+        ratingSection.innerHTML += `
+            <div class="rating-distribution" id="rating-distribution-container" style="display: ${bookRatings.ratings.length > 0 ? 'block' : 'none'}">
+                <h5 class="distribution-title">توزيع التقييمات</h5>
+                <div id="rating-distribution"></div>
+            </div>
+        `;
+    }
+})
     </script>
 </body>
 </html>
