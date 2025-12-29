@@ -369,21 +369,19 @@
     --classic-bg: linear-gradient(135deg, #000, #000);
        /* NEW: Footer with Meta-like design - UPDATED for mobile and desktop */
 .footer {
-    background: 
+background: transparent;
     padding: 40px 20px 20px;
     border-top: 1px solid #333;
     margin-top: 40px;
 }
-
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr;
+    gap: 30px;
     align-items: start;
 }
-
 .footer-left {
     display: flex;
     flex-direction: column;
@@ -406,7 +404,6 @@
     font-weight: 700;
     font-size: 1.8rem;
 }
-
 .footer-explore {
     display: flex;
     flex-direction: column;
@@ -433,22 +430,21 @@
 }
 
 .footer-explore-links a:hover {
-    color: 
-    #b61412
+    color: #b61412;
     text-decoration: underline;
 }
-
 .footer-right {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 25px;
+    margin-top: 20px;
 }
 
 .footer-support {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 15px;
 }
 
@@ -456,13 +452,13 @@
     color: #b61412;
     margin-bottom: 5px;
     font-size: 1.2rem;
-    text-align: right;
+    text-align: left;
 }
 
 .footer-support-links {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 8px;
 }
 
@@ -474,14 +470,15 @@
 }
 
 .footer-support-links a:hover {
-    color:#b61412
+    color: #b61412;
     text-decoration: underline;
 }
 
-/* Updated social icons - smaller, no background, no animation */
+/* الأيقونات الاجتماعية */
 .social-icons-bottom {
     display: flex;
     gap: 15px;
+    margin-top: 10px;
 }
 
 .social-icon {
@@ -492,15 +489,14 @@
 }
 
 .social-icon:hover {
-    color: 
-    #b61412;
+    color: #b61412;
 }
 
-/* Copyright (حقوق النشر) */
+/* حقوق النشر */
 .copyright {
     text-align: center;
     padding: 15px 0;
-    color: ##b61412;
+    color: #b61412;
     font-size: 0.85rem;
     background: transparent !important;
     width: 100%;
@@ -523,30 +519,51 @@
 
 /* ---- Media Queries للـ Footer لضمان التجاوب على جميع الشاشات ---- */
 
-@media (max-width: 992px) {
+@media (min-width: 769px) {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
     }
     
-    .footer-left, .footer-right {
-        align-items: center;
-        text-align: center;
+    .footer-left {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
     
-    .footer-explore-links, .footer-support-links {
-        align-items: center;
+    .footer-logo {
+        order: 1;
+    }
+    
+    .footer-explore {
+        order: 2;
+    }
+    
+    .social-icons-bottom {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 15px;
+        margin-bottom: 0;
+    }
+    
+    .footer-right {
+        order: 4;
+        align-items: flex-start;
+        margin-top: 0;
     }
     
     .footer-support {
-        align-items: center;
-    }
-    
-    .footer-support h4 {
-        text-align: center;
+        order: 1;
+        align-items: flex-start;
+        text-align: left;
     }
 }
 
+/* =============================== */
+/* MEDIA QUERIES - شاشات صغيرة */
+/* =============================== */
 @media (max-width: 768px) {
     .footer-logo img {
         width: 70px;
@@ -557,7 +574,6 @@
         font-size: 1.5rem;
     }
     
-    /* UPDATED: Footer layout for mobile - proper order and alignment */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: left;
@@ -611,7 +627,6 @@
         width: 100%;
     }
 }
-
 @media (max-width: 600px) {
     .footer-logo img {
         width: 60px;
@@ -2614,14 +2629,16 @@ main {
                     Next Page <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
-            <amp-ad
-     layout="fixed"
-     width="200"
-     height="60"
-     type="adsense"
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
+     crossorigin="anonymous"></script>
+<!-- AdSense Ads -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:60px"
      data-ad-client="ca-pub-3352888654930814"
-     data-ad-slot="9512166119">
-</amp-ad>
+     data-ad-slot="9512166119"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
            </div>
         </div>
 <div class="footer">
@@ -2629,17 +2646,25 @@ main {
         <div class="footer-left">
             <div class="footer-logo">
                 <img src="m.idea.logo.png" alt="M IDEA Logo">
-                
             </div>
-            
-            <div class="footer-explore">
-                <h4>Explore M IDEA</h4>
-                <div class="footer-explore-links">
-                    <a href="index.html">Home</a>
-                </div>
-            </div>
+              </div>
         </div>
-        
+            <div class="footer-explore">
+    <h4>Explore M IDEA</h4>
+    <div class="footer-explore-links">
+        <a href="index.html">Home</a>
+        <a href="#" class="books-category" data-category="anime">Anime Books</a>
+        <a href="#" class="books-category" data-category="classic">Classic Novels</a>
+        <a href="#" class="books-category" data-category="arabic">Arabic Novels</a>
+        <a href="#" class="books-category" data-category="international">International Novels</a>
+        <a href="#" class="books-category" data-category="development">Personal Development</a>
+        <a href="#" class="books-category" data-category="history">History Books</a>
+            </div>
+    </div>
+            </div>
+  </div>
+        </div>
+                </div>
         <div class="footer-right">
             <div class="social-icons-bottom">
                 <a href="https://youtube.com/@maroidea?si=YWEfrmFdUSG2lPcf" target="_blank" class="social-icon">
