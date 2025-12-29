@@ -41,6 +41,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
+    .copy-warning {
+    position: fixed; /* ثابت في مكانه */
+    top: 20px; /* مسافة من الأعلى */
+    right: 20px; /* مسافة من اليمين */
+    background: rgba(0, 0, 0, 0.9) !important; /* خلفية سوداء شفافة */
+    color: #b61412 !important; /* لون النص الأحمر */
+    padding: 12px 20px; /* مسافة داخلية */
+    border-radius: var(--border-radius); /* زوايا دائرية */
+    font-size: 0.9rem; /* حجم الخط */
+    font-weight: 600; /* سمك الخط */
+    display: none; /* مخفي في البداية */
+    align-items: center; /* محاذاة العمودية */
+    gap: 10px; /* مسافة بين الأيقونة والنص */
+    z-index: 99999; /* فوق كل العناصر */
+    border: 1px solid #b61412; /* حدود حمراء */
+    box-shadow: none !important; /* بدون إضاءة */
+    text-shadow: none !important; /* بدون ظل للنص */
+    animation: slideInRight 0.3s ease-out; /* تأثير الظهور */
+    max-width: 250px; /* أقصى عرض */
+    text-align: right; /* محاذاة لليمين */
+    direction: rtl; /* اتجاه النص */
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%); /* تبدأ من خارج الشاشة */
+        opacity: 0; /* غير مرئية */
+    }
+    to {
+        transform: translateX(0); /* تتحرك إلى مكانها */
+        opacity: 1; /* مرئية */
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
 /* قاعدة أساسية لجميع الشاشات */
 .reading-content .page-image-container {
     max-width: 80%;
@@ -2466,14 +2509,6 @@ main {
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<amp-ad
-     layout="fixed"
-     width="200"
-     height="60"
-     type="adsense"
-     data-ad-client="ca-pub-3352888654930814"
-     data-ad-slot="9512166119">
-</amp-ad>
             </div>
             <!-- Arabic Novels Section -->
             <div class="category-section" id="arabic-section">
@@ -2579,6 +2614,14 @@ main {
                     Next Page <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
+            <amp-ad
+     layout="fixed"
+     width="200"
+     height="60"
+     type="adsense"
+     data-ad-client="ca-pub-3352888654930814"
+     data-ad-slot="9512166119">
+</amp-ad>
            </div>
         </div>
 <div class="footer">
@@ -2611,7 +2654,11 @@ main {
                 <a href="https://discord.gg/F6f48AgV" target="_blank" class="social-icon">
                     <i class="fab fa-discord"></i>
                 </a>
-            </div>
+    <a href="social.html" class="social-icon" title="More">
+        <i class="fas fa-plus-circle"></i> 
+        <span style="font-size: 0.9rem; margin-right: 5px;">More</span>
+    </a>
+</div>
             
             <div class="footer-support">
                 <h4>Support</h4>
@@ -2655,6 +2702,9 @@ main {
 <div class="splash-screen" id="splash-screen">
     <img src="introduction.png" alt="Welcome" class="splash-image">
     </div>
+    <div id="copy-warning" class="copy-warning">
+    <i class="fas fa-exclamation-triangle"></i> Copying is not allowed
+</div>
     <script>
       // Books data with real manga content
         const books = [
@@ -8319,11 +8369,6 @@ document.addEventListener('dragstart', function(e) {
         e.preventDefault();
     }
 });
-// منع النقر الأيمن في كل أنحاء الصفحة
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    showProtectionMessage("Copying is not allowed on this site");
-});
 function showBooksSection() {
     document.getElementById('books-section').style.display = 'block';
     document.getElementById('category-view').style.display = 'none';
@@ -8353,7 +8398,75 @@ function updateMetaDescription(text) {
     let meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute('content', text);
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. إنشاء الرسالة إذا لم تكن موجودة
+    if (!document.getElementById('copy-warning')) {
+        const copyWarning = document.createElement('div');
+        copyWarning.id = 'copy-warning';
+        copyWarning.className = 'copy-warning';
+        copyWarning.innerHTML = '<i class="fas fa-exclamation-triangle"></i> النسخ غير مسموح به';
+        document.body.appendChild(copyWarning);
+    }
+    
+    const copyWarning = document.getElementById('copy-warning');
+    let hideTimeout;
+    
+    // 2. منع النسخ
+    document.addEventListener('copy', function(e) {
+        e.preventDefault(); // يمنع النسخ
+        
+        // إظهار الرسالة
+        copyWarning.style.display = 'flex';
+        copyWarning.classList.remove('hide');
+        
+        // إخفاؤها بعد 3 ثواني
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            copyWarning.classList.add('hide');
+            setTimeout(() => {
+                copyWarning.style.display = 'none';
+            }, 300);
+        }, 3000);
+    });
+    
+    // 3. منع النقر الأيمن
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        
+        copyWarning.style.display = 'flex';
+        copyWarning.classList.remove('hide');
+        
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            copyWarning.classList.add('hide');
+            setTimeout(() => {
+                copyWarning.style.display = 'none';
+            }, 300);
+        }, 3000);
+    });
+    
+    // 4. منع سحب الصور
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            
+            // رسالة خاصة بالصور
+            copyWarning.style.display = 'flex';
+            copyWarning.classList.remove('hide');
+            const originalText = copyWarning.innerHTML;
+            copyWarning.innerHTML = '<i class="fas fa-image"></i> حفظ الصور غير مسموح';
+            
+            clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                copyWarning.classList.add('hide');
+                setTimeout(() => {
+                    copyWarning.style.display = 'none';
+                    copyWarning.innerHTML = originalText;
+                }, 300);
+            }, 3000);
+        }
+    });
+});
     </script>
 </body>
 </html>
