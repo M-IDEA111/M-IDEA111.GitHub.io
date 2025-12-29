@@ -210,6 +210,35 @@
                 font-size: 0.85rem;
             }
         }
+        
+        /* إضافة تنسيق زر العودة */
+        .policy-links {
+            text-align: center;
+            margin: 30px 0 15px;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+        
+        .policy-links a {
+            color: #b61412 !important;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .policy-links a:hover {
+            text-decoration: underline;
+            color: #d43c3a !important;
+        }
     </style>
 </head>
 <body>
@@ -257,6 +286,11 @@
                     <i class="fab fa-instagram"></i>
                     <div class="additional-name">Instagram 3</div>
                 </a>
+            </div>
+            
+            <!-- زر العودة إلى الصفحة الرئيسية -->
+            <div class="policy-links">
+                <a href="index.html">Back to Homepage</a>
             </div>
         </div>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
