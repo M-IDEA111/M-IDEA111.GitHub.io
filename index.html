@@ -2667,6 +2667,125 @@ main {
         max-height: 70vh;
         width: auto;
     }
+    /* تأثير اللمعة (Shimmer Effect) للصور أثناء التحميل */
+.shimmer-container {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-card);
+}
+
+.shimmer-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+    z-index: 1;
+}
+
+/* تأثير اللمعة للصور داخل البطاقات */
+.book-cover.shimmer-loading {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+    background-size: 200% 100%;
+}
+
+.book-cover.shimmer-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(182, 20, 18, 0.2),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+/* تأثير اللمعة للصور في قسم القراءة */
+.page-image-container.shimmer-loading {
+    min-height: 300px;
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-image-container.shimmer-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* تأثير اللمعة للصور في نتائج البحث */
+.search-results-grid .book-cover.shimmer-loading {
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+}
+
+/* تأثير اللمعة للشعار */
+.logo-img.shimmer-loading {
+    background: linear-gradient(90deg, #000 25%, #b61412 50%, #000 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    filter: none;
+}
+
+/* تأثير اللمعة للصور في الفوتر */
+.footer-logo img.shimmer-loading {
+    background: linear-gradient(90deg, #000 25%, #b61412 50%, #000 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .page-image-container.shimmer-loading {
+        min-height: 200px;
+    }
+    
+    .shimmer-container::before,
+    .book-cover.shimmer-loading::after {
+        animation-duration: 2s;
+    }
+}
+
+/* إيقاف التحريك للأشخاص الذين يفضلون تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+    .shimmer-container::before,
+    .book-cover.shimmer-loading::after,
+    .page-image-container.shimmer-loading::before,
+    .logo-img.shimmer-loading,
+    .footer-logo img.shimmer-loading {
+        animation: none;
+    }
+}
  </style>
 </head>
 <body>
@@ -2817,8 +2936,6 @@ main {
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-     crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
@@ -2859,8 +2976,6 @@ main {
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-     crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
@@ -2949,8 +3064,6 @@ main {
                     </div>
                      </div>
         </div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-     crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
@@ -10013,6 +10126,180 @@ observer.observe(document.body, {
     childList: true,
     subtree: true
 });
+// دالة لتطبيق تأثير اللمعة على الصور
+function applyShimmerEffect() {
+    // مراقبة جميع الصور في الموقع
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        // إضافة فئة التحميل للصور التي لم تحمل بعد
+        if (!img.complete) {
+            img.classList.add('shimmer-loading');
+            
+            // إضافة حاوية اللمعة للصور في أقسام محددة
+            if (img.closest('.book-cover') || img.closest('.page-image-container')) {
+                const container = img.closest('.book-cover') || img.closest('.page-image-container');
+                container.classList.add('shimmer-loading');
+            }
+        }
+        
+        // إزالة تأثير اللمعة عند تحميل الصورة
+        img.addEventListener('load', function() {
+            this.classList.remove('shimmer-loading');
+            const container = this.closest('.book-cover') || this.closest('.page-image-container');
+            if (container) {
+                container.classList.remove('shimmer-loading');
+            }
+        });
+        
+        // التعامل مع أخطاء التحميل
+        img.addEventListener('error', function() {
+            this.classList.remove('shimmer-loading');
+            const container = this.closest('.book-cover') || this.closest('.page-image-container');
+            if (container) {
+                container.classList.remove('shimmer-loading');
+            }
+            // يمكنك إضافة صورة بديلة هنا إذا أردت
+            // this.src = 'path/to/placeholder-image.jpg';
+        });
+    });
+    
+    // مراقبة الصور التي يتم إضافتها ديناميكياً
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeName === 'IMG') {
+                    if (!node.complete) {
+                        node.classList.add('shimmer-loading');
+                        
+                        // إضافة حاوية اللمعة
+                        if (node.closest('.book-cover') || node.closest('.page-image-container')) {
+                            const container = node.closest('.book-cover') || node.closest('.page-image-container');
+                            container.classList.add('shimmer-loading');
+                        }
+                    }
+                    
+                    node.addEventListener('load', function() {
+                        this.classList.remove('shimmer-loading');
+                        const container = this.closest('.book-cover') || this.closest('.page-image-container');
+                        if (container) {
+                            container.classList.remove('shimmer-loading');
+                        }
+                    });
+                    
+                    node.addEventListener('error', function() {
+                        this.classList.remove('shimmer-loading');
+                        const container = this.closest('.book-cover') || this.closest('.page-image-container');
+                        if (container) {
+                            container.classList.remove('shimmer-loading');
+                        }
+                    });
+                }
+            });
+        });
+    });
+    
+    // بدء المراقبة
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
+
+// تطبيق تأثير اللمعة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', applyShimmerEffect);
+
+// إعادة تطبيق التأثير عند تغيير المحتوى ديناميكياً
+document.addEventListener('contentChanged', applyShimmerEffect);
+
+// دالة مساعدة لإعادة تطبيق التأثير يدوياً
+function refreshShimmerEffects() {
+    // إزالة جميع تأثيرات اللمعة الحالية
+    document.querySelectorAll('.shimmer-loading').forEach(el => {
+        el.classList.remove('shimmer-loading');
+    });
+    
+    // إعادة تطبيق التأثير
+    applyShimmerEffect();
+}
+
+// دالة لتحميل صورة مع تأثير اللمعة
+function loadImageWithShimmer(imgElement, imageUrl) {
+    // إضافة تأثير اللمعة
+    imgElement.classList.add('shimmer-loading');
+    const container = imgElement.closest('.book-cover') || imgElement.closest('.page-image-container');
+    if (container) {
+        container.classList.add('shimmer-loading');
+    }
+    
+    // تحميل الصورة
+    const img = new Image();
+    img.onload = function() {
+        imgElement.src = imageUrl;
+        imgElement.classList.remove('shimmer-loading');
+        if (container) {
+            container.classList.remove('shimmer-loading');
+        }
+    };
+    
+    img.onerror = function() {
+        imgElement.classList.remove('shimmer-loading');
+        if (container) {
+            container.classList.remove('shimmer-loading');
+        }
+        console.error('فشل تحميل الصورة:', imageUrl);
+    };
+    
+    img.src = imageUrl;
+}
+// إدارة تأثيرات التحميل
+const LoadingManager = {
+    // إضافة تأثير التحميل لعنصر
+    showLoading: function(element) {
+        if (element.tagName === 'IMG') {
+            element.classList.add('shimmer-loading');
+        }
+        const container = element.closest('.book-cover') || element.closest('.page-image-container');
+        if (container) {
+            container.classList.add('shimmer-loading');
+        }
+    },
+    
+    // إخفاء تأثير التحميل
+    hideLoading: function(element) {
+        if (element.tagName === 'IMG') {
+            element.classList.remove('shimmer-loading');
+        }
+        const container = element.closest('.book-cover') || element.closest('.page-image-container');
+        if (container) {
+            container.classList.remove('shimmer-loading');
+        }
+    },
+    
+    // تحميل مجموعة من الصور مع تأثير التحميل
+    loadImages: function(images) {
+        images.forEach(imgData => {
+            const imgElement = document.querySelector(imgData.selector);
+            if (imgElement) {
+                this.showLoading(imgElement);
+                const img = new Image();
+                img.onload = () => {
+                    imgElement.src = imgData.url;
+                    this.hideLoading(imgElement);
+                };
+                img.onerror = () => {
+                    this.hideLoading(imgElement);
+                    console.error('فشل تحميل الصورة:', imgData.url);
+                };
+                img.src = imgData.url;
+            }
+        });
+    }
+};
+
+// تصدير المدير للاستخدام العالمي
+window.LoadingManager = LoadingManager;
+        
     </script>
 </body>
 </html>
