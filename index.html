@@ -41,6 +41,317 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
+  /* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .book-cover.loading {
+        background-size: 500px 100%;
+        animation: shimmer 1.5s infinite linear;
+    }
+    
+    .global-loading {
+        animation: gradientShift 2s ease infinite;
+    }
+}
+
+/* تحسينات للأداء */
+@media (prefers-reduced-motion: reduce) {
+    .loading,
+    .global-loading,
+    .spinner-glow {
+        animation: none !important;
+    }
+}
+
+/* تأثيرات لمسية للشاشات التي تدعم اللمس */
+@media (hover: none) and (pointer: coarse) {
+    .loading {
+        animation-duration: 1.5s !important;
+    }
+}
+
+/* تحسينات لضعاف البصر */
+@media (prefers-contrast: high) {
+    .loading {
+        opacity: 0.9 !important;
+        animation-duration: 1s !important;
+    }
+}
+/* تأثير التلميع الأساسي */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(182, 20, 18, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(182, 20, 18, 0.7);
+    }
+}
+
+@keyframes fade-in-glow {
+    from {
+        opacity: 0.3;
+        filter: brightness(0.8);
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* تلميع لأغلفة الكتب */
+.book-cover.loading {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.8) 25%,
+        rgba(182, 20, 18, 0.3) 50%,
+        rgba(0, 0, 0, 0.8) 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+/* تلميع للصور */
+.cover-image.loading {
+    opacity: 0.7;
+    animation: fade-in-glow 1.5s ease-in-out infinite alternate;
+}
+
+/* تلميع للعناوين */
+.category-title.loading,
+.section-title.loading {
+    background: linear-gradient(
+        90deg,
+        #b61412 25%,
+        #ff1856 50%,
+        #b61412 75%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* تلميع للأزرار */
+.icon-btn.loading,
+.transfer-btn.loading,
+.exit-btn.loading,
+.search-bar button.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-btn.loading::after,
+.transfer-btn.loading::after,
+.exit-btn.loading::after,
+.search-bar button.loading::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(182, 20, 18, 0.3) 50%,
+        transparent 70%
+    );
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* تلميع لشريط البحث */
+.search-bar.loading {
+    animation: glow-pulse 2s infinite ease-in-out;
+}
+
+.search-bar input.loading {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.8) 25%,
+        rgba(182, 20, 18, 0.2) 50%,
+        rgba(0, 0, 0, 0.8) 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+/* تلميع للشعار */
+.logo-img.loading {
+    animation: glow-pulse 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(182, 20, 18, 0.5));
+}
+
+/* تلميع لبطاقات الكتب */
+.book-card.loading {
+    animation: fade-in-glow 2s infinite alternate;
+}
+
+/* تلميع للفقرات والعناوين الفرعية */
+.book-title.loading,
+.book-author.loading {
+    background: linear-gradient(
+        90deg,
+        #aaa 25%,
+        #fff 50%,
+        #aaa 75%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 2s infinite linear;
+}
+
+/* تلميع للصور في قسم القراءة */
+.page-image.loading {
+    animation: fade-in-glow 2s infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-image.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* تلميع للفوتر */
+.footer.loading .footer-logo img {
+    animation: glow-pulse 2s infinite ease-in-out;
+}
+
+.footer.loading .social-icon {
+    animation: fade-in-glow 1.5s infinite alternate;
+}
+
+/* تلميع لإحصائيات الصفحات */
+.page-indicator.loading {
+    background: linear-gradient(
+        90deg,
+        #b61412 25%,
+        #ff1856 50%,
+        #b61412 75%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* تلميع للشريط الجانبي */
+.settings-menu.loading {
+    animation: fade-in-glow 1.5s infinite alternate;
+}
+
+/* تأثير تلميع للمحتوى النصي */
+.reading-content p.loading {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(182, 20, 18, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    height: 1em;
+    margin: 0.5em 0;
+    border-radius: 4px;
+}
+
+/* تلميع للأسهم */
+.scroll-arrow.loading {
+    animation: glow-pulse 1.5s infinite ease-in-out;
+}
+
+/* تأثير تلميع لشاشة البداية */
+.splash-screen.loading .splash-image {
+    animation: glow-pulse 1s infinite ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(182, 20, 18, 0.7));
+}
+
+/* ========== تأثيرات التحميل العامة ========== */
+
+/* تدرج التحميل العام */
+.global-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(182, 20, 18, 0.1) 50%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 3s ease infinite;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* مؤشر التحميل الدوار مع التلميع */
+.spinner-glow {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(182, 20, 18, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid rgba(182, 20, 18, 0.9);
+    animation: spin 1s linear infinite, glow-pulse 2s infinite;
+    box-shadow: 0 0 15px rgba(182, 20, 18, 0.5);
+}
+
+/* تأثير تلميع عند اكتمال التحميل */
+.loading-finished {
+    animation: finish-glow 0.5s ease-out;
+}
+
+@keyframes finish-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(182, 20, 18, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(182, 20, 18, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(182, 20, 18, 0);
+    }
+}
     .copy-warning {
     position: fixed; /* ثابت في مكانه */
     top: 20px; /* مسافة من الأعلى */
@@ -9632,6 +9943,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         }
     });
+});
+// دالة لمعالجة تحميل الصور مع تأثير التلميع
+function handleImageLoading() {
+    const images = document.querySelectorAll('img:not([data-loaded])');
+    
+    images.forEach(img => {
+        if (img.complete) {
+            // الصورة محملة بالفعل
+            img.setAttribute('data-loaded', 'true');
+            img.classList.remove('loading');
+        } else {
+            // إضافة تأثير التلميع أثناء التحميل
+            img.classList.add('loading');
+            
+            img.onload = function() {
+                this.setAttribute('data-loaded', 'true');
+                this.classList.remove('loading');
+                this.classList.add('loading-finished');
+                setTimeout(() => this.classList.remove('loading-finished'), 500);
+            };
+            
+            img.onerror = function() {
+                this.classList.remove('loading');
+            };
+        }
+    });
+}
+
+// استدعاء الدالة عند تحميل الصفحة وعند إضافة محتوى جديد
+document.addEventListener('DOMContentLoaded', handleImageLoading);
+window.addEventListener('load', handleImageLoading);
+
+// مراقبة DOM لإضافة تأثيرات للعناصر الجديدة
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.addedNodes.length) {
+            handleImageLoading();
+            refreshLoadingEffects(document.body);
+        }
+    });
+});
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
 });
     </script>
 </body>
