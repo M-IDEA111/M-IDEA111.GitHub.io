@@ -180,8 +180,13 @@ function performSearch() {
                 <div class="book-author">${book.author}</div>
             `;
             
-            // Go to book page
-            card.onclick = () => window.location.href = `index.html?bookId=${book.id}`;
+            // Go to book page - التعديل هنا
+            card.onclick = () => {
+                // حفظ معرف الكتاب في localStorage ثم الانتقال للصفحة الرئيسية
+                localStorage.setItem('mideaSelectedBookId', book.id);
+                window.location.href = 'index.html';
+            };
+            
             resultsGrid.appendChild(card);
         });
         

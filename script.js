@@ -10,33 +10,48 @@ let slideMenuOpen = false;
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing app...');
     // التحكم في شاشة البداية
-const urlParams = new URLSearchParams(window.location.search);
-const noSplash = urlParams.has('no-splash');
-const hasSeenSplash = sessionStorage.getItem('mideaSplashSeen');
+    const urlParams = new URLSearchParams(window.location.search);
+    const noSplash = urlParams.has('no-splash');
+    const hasSeenSplash = sessionStorage.getItem('mideaSplashSeen');
 
-const splashScreen = document.getElementById('splash-screen');
+    const splashScreen = document.getElementById('splash-screen');
 
-if (noSplash || hasSeenSplash) {
-    // إخفاء الشاشة مباشرة
-    if (splashScreen) {
-        splashScreen.style.display = 'none';
-    }
-    // إزالة الباراميتر من URL
-    if (noSplash) {
-        const newUrl = window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-    }
-} else {
-    // أول مرة في الجلسة - عرض الشاشة
-    sessionStorage.setItem('mideaSplashSeen', 'true');
-    setTimeout(() => {
+    if (noSplash || hasSeenSplash) {
+        // إخفاء الشاشة مباشرة
         if (splashScreen) {
             splashScreen.style.display = 'none';
         }
-    }, 3500);
-}
+        // إزالة الباراميتر من URL
+        if (noSplash) {
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+    } else {
+        // أول مرة في الجلسة - عرض الشاشة
+        sessionStorage.setItem('mideaSplashSeen', 'true');
+        setTimeout(() => {
+            if (splashScreen) {
+                splashScreen.style.display = 'none';
+            }
+        }, 3500);
+    }
+    
     // تحميل الكتب في الأقسام
     loadBooks();
+    
+    // التحقق إذا كان هناك كتاب محدد من صفحة البحث
+    const selectedBookId = localStorage.getItem('mideaSelectedBookId');
+    if (selectedBookId) {
+        // تأخير بسيط لضمان تحميل جميع الكتب
+        setTimeout(() => {
+            const book = books.find(b => b.id === selectedBookId);
+            if (book) {
+                showBookDetails(book.id);
+            }
+            // مسح القيمة بعد الاستخدام
+            localStorage.removeItem('mideaSelectedBookId');
+        }, 500);
+    }
     
     // إعداد الأحداث
     setupEventListeners();
