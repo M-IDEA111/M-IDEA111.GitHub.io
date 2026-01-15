@@ -1,5 +1,5 @@
 // books-data.js
-window.books = [
+var books = [
     // كل بيانات الكتب والنصوص
     { 
                 id: 1,
@@ -12264,4 +12264,4 @@ title: "الجزء الثامن: العودة إلى الوطن",
     }
 ];
 
-window.allBooks = books; 
+var allBooks = books; 

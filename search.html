@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Search CSS File -->
+    <link rel="stylesheet" href="search.css">
+    
 </head>
 <body>
 
@@ -38,9 +41,8 @@
         
         <!-- السهم على اليمين ويتجه لليسار -->
         <a href="index.html?no-splash" class="back-to-home">
-    <i class="fas fa-arrow-left"></i>
-</a>
-
+            <i class="fas fa-arrow-left"></i>
+        </a>
     </div>
 
     <!-- Search Results -->
@@ -61,19 +63,23 @@
                 <button class="modal-btn cancel" id="cancel-delete">Cancel</button>
                 <button class="modal-btn delete" id="confirm-delete">Delete</button>
             </div>
-                        </div>
-        </div>
         </div>
     </div>
-    <!-- Search CSS File -->
-    <link rel="stylesheet" href="search.css">
-    
+
     <!-- Fuse.js library for fuzzy search -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>  
     
     <!-- Data File -->
     <script src="data.js"></script>
+    
     <!-- Search JavaScript File -->
     <script src="search.js"></script>
+    
+    <!-- Debug Script -->
+    <script>
+        console.log('search.html fully loaded');
+        console.log('Books data available:', typeof books !== 'undefined' ? 'YES, length: ' + books.length : 'NO');
+        console.log('allBooks available:', typeof allBooks !== 'undefined' ? 'YES, length: ' + allBooks.length : 'NO');
+    </script>
 </body>
 </html>

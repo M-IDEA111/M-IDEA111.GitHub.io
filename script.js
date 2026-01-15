@@ -1,3 +1,5 @@
+// script.js - Version 3.0 (كامل)
+
 // المتغيرات العامة
 let currentBook = null;
 let currentPage = 0;
@@ -5,75 +7,53 @@ let searchResults = [];
 let currentCategory = null;
 let lastScrollTop = 0;
 let slideMenuOpen = false;
+let booksLoaded = false;
 
 // تهيئة التطبيق عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing app...');
+    console.log('DOM loaded, initializing M IDEA Book...');
+    
     // التحكم في شاشة البداية
     const urlParams = new URLSearchParams(window.location.search);
     const noSplash = urlParams.has('no-splash');
     const hasSeenSplash = sessionStorage.getItem('mideaSplashSeen');
-
     const splashScreen = document.getElementById('splash-screen');
 
     if (noSplash || hasSeenSplash) {
-        // إخفاء الشاشة مباشرة
-        if (splashScreen) {
-            splashScreen.style.display = 'none';
-        }
-        // إزالة الباراميتر من URL
-        if (noSplash) {
-            const newUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, newUrl);
-        }
+        if (splashScreen) splashScreen.style.display = 'none';
+        if (noSplash) window.history.replaceState({}, document.title, window.location.pathname);
     } else {
-        // أول مرة في الجلسة - عرض الشاشة
         sessionStorage.setItem('mideaSplashSeen', 'true');
         setTimeout(() => {
-            if (splashScreen) {
-                splashScreen.style.display = 'none';
-            }
+            if (splashScreen) splashScreen.style.display = 'none';
         }, 3500);
     }
     
     // تحميل الكتب في الأقسام
     loadBooks();
     
-    // التحقق إذا كان هناك كتاب محدد من صفحة البحث
-    const selectedBookId = localStorage.getItem('mideaSelectedBookId');
-    if (selectedBookId) {
-        // تأخير بسيط لضمان تحميل جميع الكتب
-        setTimeout(() => {
-            const book = books.find(b => b.id === selectedBookId);
-            if (book) {
-                showBookDetails(book.id);
-            }
-            // مسح القيمة بعد الاستخدام
-            localStorage.removeItem('mideaSelectedBookId');
-        }, 500);
-    }
-    
     // إعداد الأحداث
     setupEventListeners();
     
-    // إعداد التمرير الأفقي للكتب
+    // إعداد التمرير الأفقي
     setupHorizontalScroll();
-    
-    // إعداد التمرير الأفقي للاقتراحات
     setupRelatedScroll();
     
-    // إخفاء شاشة البداية بعد 3.5 ثانية
-    setTimeout(() => {
-        const splashScreen = document.getElementById('splash-screen');
-        if (splashScreen) {
-            splashScreen.style.display = 'none';
-        }
-    }, 3500);
+    // التحقق من وجود كتاب محدد من البحث
+    checkForBookFromSearch();
 });
 
 // تحميل الكتب في الأقسام
 function loadBooks() {
-    console.log('Loading books...');
+    console.log('Loading books, total available:', books ? books.length : 0);
+    
+    if (!books || books.length === 0) {
+        console.error('No books data available!');
+        setTimeout(loadBooks, 500); // المحاولة مرة أخرى
+        return;
+    }
+    
+    booksLoaded = true;
     const categories = ['anime', 'classic', 'arabic', 'international', 'development', 'history'];
     
     categories.forEach(category => {
@@ -89,6 +69,70 @@ function loadBooks() {
             });
         }
     });
+    
+    console.log('Books loaded successfully');
+}
+
+// التحقق من كتاب من البحث
+function checkForBookFromSearch() {
+    console.log('Checking for book from search...');
+    
+    // الطريقة 1: من localStorage
+    const selectedBookId = localStorage.getItem('mideaSelectedBookId');
+    const redirectData = localStorage.getItem('mideaBookRedirect');
+    
+    // الطريقة 2: من URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookIdFromUrl = urlParams.get('bookId');
+    const fromSearch = urlParams.has('fromSearch');
+    
+    let bookIdToShow = null;
+    
+    if (selectedBookId) {
+        console.log('Found book ID in localStorage:', selectedBookId);
+        bookIdToShow = selectedBookId;
+    } else if (bookIdFromUrl && fromSearch) {
+        console.log('Found book ID in URL:', bookIdFromUrl);
+        bookIdToShow = bookIdFromUrl;
+    }
+    
+    if (bookIdToShow) {
+        console.log('Attempting to show book:', bookIdToShow);
+        
+        // الانتظار حتى تحميل الكتب
+        const checkInterval = setInterval(() => {
+            if (booksLoaded && books && books.length > 0) {
+                clearInterval(checkInterval);
+                
+                const book = books.find(b => b.id === bookIdToShow);
+                if (book) {
+                    console.log('Book found, showing details:', book.title);
+                    
+                    // تأخير بسيط لضمان عرض الصفحة
+                    setTimeout(() => {
+                        showBookDetails(book.id);
+                        
+                        // تنظيف البيانات
+                        localStorage.removeItem('mideaSelectedBookId');
+                        localStorage.removeItem('mideaBookRedirect');
+                        
+                        // تحديث URL بدون الباراميترات
+                        if (fromSearch) {
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                        }
+                    }, 300);
+                } else {
+                    console.error('Book not found with ID:', bookIdToShow);
+                }
+            }
+        }, 100);
+        
+        // مهلة 5 ثوانٍ كحد أقصى
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            console.log('Timeout waiting for books to load');
+        }, 5000);
+    }
 }
 
 // إنشاء بطاقة كتاب
@@ -117,31 +161,51 @@ function createBookCard(book) {
 
 // عرض صفحة تفاصيل الكتاب
 function showBookDetails(bookId) {
-    console.log('Showing book details:', bookId);
+    console.log('showBookDetails called for:', bookId);
+    
     const book = books.find(b => b.id === bookId);
-    if (!book) return;
+    if (!book) {
+        console.error('Book not found:', bookId);
+        return;
+    }
     
     currentBook = book;
     
-    // إخفاء كل الأقسام وإظهار صفحة التفاصيل
+    // إخفاء كل الأقسام
     document.getElementById('books-section').style.display = 'none';
     document.getElementById('category-view').style.display = 'none';
     document.getElementById('search-results-section').style.display = 'none';
     document.getElementById('reading-container').style.display = 'none';
-    document.getElementById('book-details-container').style.display = 'block';
     
-    // تعبئة بيانات الكتاب
-    document.getElementById('details-cover-image').src = book.coverImage;
-    document.getElementById('details-cover-image').alt = book.title;
-    document.getElementById('book-details-title').textContent = book.title;
-    document.getElementById('book-details-description').textContent = book.description || 'No description available.';
-    document.getElementById('book-details-author').textContent = book.author;
+    // إظهار صفحة التفاصيل
+    const detailsContainer = document.getElementById('book-details-container');
+    if (detailsContainer) {
+        detailsContainer.style.display = 'block';
+    }
     
-    // تحميل الكتب ذات الصلة في صفحة التفاصيل
+    // تعبئة البيانات
+    const coverImg = document.getElementById('details-cover-image');
+    if (coverImg) {
+        coverImg.src = book.coverImage;
+        coverImg.alt = book.title;
+    }
+    
+    const titleEl = document.getElementById('book-details-title');
+    if (titleEl) titleEl.textContent = book.title;
+    
+    const descEl = document.getElementById('book-details-description');
+    if (descEl) descEl.textContent = book.description || 'No description available.';
+    
+    const authorEl = document.getElementById('book-details-author');
+    if (authorEl) authorEl.textContent = book.author;
+    
+    // تحميل الكتب ذات الصلة
     loadRelatedBooksInDetails(book);
     
     // التمرير للأعلى
     window.scrollTo(0, 0);
+    
+    console.log('Book details shown successfully:', book.title);
 }
 
 // بدء القراءة من صفحة التفاصيل
@@ -180,7 +244,7 @@ function displayPage() {
     const contentDiv = document.getElementById('reading-content');
     const page = currentBook.content[currentPage];
     
-    // عرض المحتوى بدون صورة الغلاف
+    // عرض المحتوى
     contentDiv.innerHTML = `
         <div class="page-text">${page.text}</div>
     `;
@@ -270,18 +334,6 @@ function setupRelatedScroll() {
     }
 }
 
-// البحث
-function searchBooks(query) {
-    const options = {
-        includeScore: true,
-        threshold: 0.4,
-        keys: ['title', 'author', 'description', 'category']
-    };
-    
-    const fuse = new Fuse(books, options);
-    return fuse.search(query).map(result => result.item);
-}
-
 // إعداد الأحداث
 function setupEventListeners() {
     console.log('Setting up event listeners...');
@@ -291,13 +343,10 @@ function setupEventListeners() {
         const header = document.getElementById('main-header');
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // إظهار الهيدر عند التمرير للأعلى فقط
         if (scrollTop > lastScrollTop && scrollTop > 50) {
-            // التمرير للأسفل - إخفاء الهيدر
             header.classList.remove('header-visible');
             header.classList.add('header-hidden');
         } else {
-            // التمرير للأعلى - إظهار الهيدر
             header.classList.remove('header-hidden');
             header.classList.add('header-visible');
         }
@@ -305,15 +354,17 @@ function setupEventListeners() {
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
     
-    // زر Transfer لفتح/إغلاق القائمة المنزلقة
-    document.getElementById('transfer-btn').addEventListener('click', function() {
-        toggleSlideMenu();
-    });
+    // زر Transfer
+    const transferBtn = document.getElementById('transfer-btn');
+    if (transferBtn) {
+        transferBtn.addEventListener('click', toggleSlideMenu);
+    }
     
-    // زر إغلاق القائمة المنزلقة
-    document.getElementById('close-menu').addEventListener('click', function() {
-        closeSlideMenu();
-    });
+    // زر إغلاق القائمة
+    const closeMenuBtn = document.getElementById('close-menu');
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', closeSlideMenu);
+    }
     
     // إغلاق القائمة عند النقر خارجها
     document.addEventListener('click', function(event) {
@@ -328,68 +379,88 @@ function setupEventListeners() {
     });
     
     // زر Support
-    document.getElementById('support-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = 'mailto:suppor2tmidea@gmail.com?subject=Support Request - M IDEA Book';
-    });
+    const supportBtn = document.getElementById('support-btn');
+    if (supportBtn) {
+        supportBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'mailto:suppor2tmidea@gmail.com?subject=Support Request - M IDEA Book';
+        });
+    }
     
-    // زر Start Reading - إصلاح مهم!
-    document.getElementById('start-reading-btn').addEventListener('click', function() {
-        startReadingFromDetails();
-    });
+    // زر Start Reading
+    const startReadingBtn = document.getElementById('start-reading-btn');
+    if (startReadingBtn) {
+        startReadingBtn.addEventListener('click', startReadingFromDetails);
+    }
     
     // التنقل بين الصفحات
-    document.getElementById('prev-page').addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            displayPage();
-            window.scrollTo(0, 0);
-        }
-    });
+    const prevPageBtn = document.getElementById('prev-page');
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                displayPage();
+                window.scrollTo(0, 0);
+            }
+        });
+    }
     
-    document.getElementById('next-page').addEventListener('click', () => {
-        if (currentBook && currentPage < currentBook.content.length - 1) {
-            currentPage++;
-            displayPage();
-            window.scrollTo(0, 0);
-        }
-    });
+    const nextPageBtn = document.getElementById('next-page');
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => {
+            if (currentBook && currentPage < currentBook.content.length - 1) {
+                currentPage++;
+                displayPage();
+                window.scrollTo(0, 0);
+            }
+        });
+    }
     
     // العودة للتفاصيل من القراءة
-    document.getElementById('back-to-details').addEventListener('click', () => {
-        document.getElementById('reading-container').style.display = 'none';
-        document.getElementById('book-details-container').style.display = 'block';
-        window.scrollTo(0, 0);
-    });
+    const backToDetailsBtn = document.getElementById('back-to-details');
+    if (backToDetailsBtn) {
+        backToDetailsBtn.addEventListener('click', () => {
+            document.getElementById('reading-container').style.display = 'none';
+            document.getElementById('book-details-container').style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+    }
     
     // العودة للقسم من التفاصيل
-    document.getElementById('back-to-category').addEventListener('click', () => {
-        document.getElementById('book-details-container').style.display = 'none';
-        
-        if (currentCategory) {
-            // إذا كنا جايين من عرض تصنيف
-            document.getElementById('category-view').style.display = 'block';
-        } else {
-            // إذا كنا جايين من الصفحة الرئيسية
-            document.getElementById('books-section').style.display = 'block';
-        }
-        
-        window.scrollTo(0, 0);
-    });
+    const backToCategoryBtn = document.getElementById('back-to-category');
+    if (backToCategoryBtn) {
+        backToCategoryBtn.addEventListener('click', () => {
+            document.getElementById('book-details-container').style.display = 'none';
+            
+            if (currentCategory) {
+                document.getElementById('category-view').style.display = 'block';
+            } else {
+                document.getElementById('books-section').style.display = 'block';
+            }
+            
+            window.scrollTo(0, 0);
+        });
+    }
     
     // العودة من البحث
-    document.getElementById('back-from-search').addEventListener('click', () => {
-        document.getElementById('search-results-section').style.display = 'none';
-        document.getElementById('books-section').style.display = 'block';
-        window.scrollTo(0, 0);
-    });
+    const backFromSearchBtn = document.getElementById('back-from-search');
+    if (backFromSearchBtn) {
+        backFromSearchBtn.addEventListener('click', () => {
+            document.getElementById('search-results-section').style.display = 'none';
+            document.getElementById('books-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+    }
     
     // العودة من التصنيف
-    document.getElementById('back-from-category').addEventListener('click', () => {
-        document.getElementById('category-view').style.display = 'none';
-        document.getElementById('books-section').style.display = 'block';
-        window.scrollTo(0, 0);
-    });
+    const backFromCategoryBtn = document.getElementById('back-from-category');
+    if (backFromCategoryBtn) {
+        backFromCategoryBtn.addEventListener('click', () => {
+            document.getElementById('category-view').style.display = 'none';
+            document.getElementById('books-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+    }
     
     // نقرات على عناوين التصنيفات
     document.querySelectorAll('.category-title').forEach(title => {
@@ -404,7 +475,6 @@ function setupEventListeners() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const category = this.getAttribute('data-category');
-            console.log('Category link clicked:', category);
             if (category) {
                 showCategoryView(category);
                 closeSlideMenu();
@@ -412,11 +482,8 @@ function setupEventListeners() {
         });
     });
     
-    // منع نسخ الصور
-    document.addEventListener('copy', function(e) {
-        e.preventDefault();
-        showCopyWarning();
-    });
+    // منع النسخ
+    document.addEventListener('copy', showCopyWarning);
     
     // منع النقر الأيمن على الصور
     document.addEventListener('contextmenu', function(e) {
@@ -433,6 +500,15 @@ function setupEventListeners() {
             showCopyWarning();
         }
     });
+    
+    // إضافة: زر البحث في الهيدر
+    const searchBtnHeader = document.getElementById('search-icon-btn');
+    if (searchBtnHeader) {
+        searchBtnHeader.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'search.html';
+        });
+    }
     
     console.log('Event listeners setup complete');
 }
@@ -458,10 +534,8 @@ function closeSlideMenu() {
     document.body.style.overflow = '';
 }
 
-// عرض التصنيف مع التمرير التلقائي للقسم
+// عرض التصنيف
 function showCategoryView(category) {
-    console.log('showCategoryView called for:', category);
-    
     const categoryBooks = books.filter(book => book.category === category);
     currentCategory = category;
     
@@ -493,7 +567,7 @@ function showCategoryView(category) {
         booksGrid.appendChild(bookCard);
     });
     
-    // التمرير للأعلى مباشرة
+    // التمرير للأعلى
     window.scrollTo(0, 0);
 }
 
@@ -507,4 +581,16 @@ function showCopyWarning() {
     setTimeout(() => {
         warning.style.display = 'none';
     }, 3000);
+}
+
+// دالة البحث (للبحث داخل الصفحة الرئيسية)
+function searchBooks(query) {
+    const options = {
+        includeScore: true,
+        threshold: 0.4,
+        keys: ['title', 'author', 'description', 'category']
+    };
+    
+    const fuse = new Fuse(books, options);
+    return fuse.search(query).map(result => result.item);
 }

@@ -1,6 +1,6 @@
-// search.js - English Version
+// search.js - Version 3.0
 
-// Search engine settings مع تحسينات للأداء
+// Search engine settings
 const fuseOptions = {
     keys: [
         { name: "title", weight: 0.7 },
@@ -8,20 +8,14 @@ const fuseOptions = {
         { name: "category", weight: 0.2 },
         { name: "description", weight: 0.1 }
     ],
-    threshold: 0.3, // تخفيض العتبة لجعل البحث أكثر تساهلاً
-    distance: 50,   // تقليل المسافة
+    threshold: 0.3,
+    distance: 50,
     includeScore: true,
-    minMatchCharLength: 1, // البحث بحرف واحد فقط
+    minMatchCharLength: 1,
     findAllMatches: true,
-    ignoreLocation: true,  // تجاهل موقع النص
+    ignoreLocation: true,
     useExtendedSearch: true
 };
-
-// Ensure data is loaded from external file
-let fuse;
-if (typeof allBooks !== 'undefined') {
-    fuse = new Fuse(allBooks, fuseOptions);
-}
 
 // Main elements
 const searchInput = document.getElementById('search-input');
@@ -44,8 +38,38 @@ let searchHistory = JSON.parse(localStorage.getItem('mideaSearchHistory')) || []
 
 // متغير لـ debounce
 let searchTimeout;
+let fuse = null;
 
-// Display search history
+// تهيئة محرك البحث
+function initializeSearch() {
+    console.log('initializeSearch called');
+    
+    // المحاولة مع books أولاً
+    if (typeof books !== 'undefined' && books.length > 0) {
+        console.log('Using books array, length:', books.length);
+        fuse = new Fuse(books, fuseOptions);
+        return true;
+    }
+    // ثم المحاولة مع allBooks
+    else if (typeof allBooks !== 'undefined' && allBooks.length > 0) {
+        console.log('Using allBooks array, length:', allBooks.length);
+        fuse = new Fuse(allBooks, fuseOptions);
+        return true;
+    }
+    // إذا لم تكن البيانات متاحة
+    else {
+        console.error('No books data found!');
+        resultsGrid.innerHTML = '<div class="no-results">Loading books data...</div>';
+        
+        // المحاولة مرة أخرى بعد ثانية
+        setTimeout(() => {
+            initializeSearch();
+        }, 1000);
+        return false;
+    }
+}
+
+// عرض سجل البحث
 function displaySearchHistory() {
     historyList.innerHTML = '';
     
@@ -54,7 +78,6 @@ function displaySearchHistory() {
         return;
     }
     
-    // Show only last 10 searches (newest to oldest)
     const recentHistory = searchHistory.slice(-10).reverse();
     
     recentHistory.forEach(query => {
@@ -66,14 +89,12 @@ function displaySearchHistory() {
             </button>
         `;
         
-        // When clicking on history item
         li.querySelector('.history-item-text').addEventListener('click', () => {
             searchInput.value = query;
             hideSearchHistory();
             performSearch();
         });
         
-        // Delete item button
         li.querySelector('.delete-history-item').addEventListener('click', (e) => {
             e.stopPropagation();
             deleteSearchHistoryItem(query);
@@ -82,37 +103,29 @@ function displaySearchHistory() {
         historyList.appendChild(li);
     });
     
-    // Show clear all button at bottom if there is history
     if (searchHistory.length > 0) {
         historyFooter.classList.add('show');
     }
 }
 
-// Add query to search history
+// إضافة إلى سجل البحث
 function addToSearchHistory(query) {
     if (!query.trim()) return;
     
-    // Remove if already exists (avoid duplicates)
     searchHistory = searchHistory.filter(item => item.toLowerCase() !== query.toLowerCase());
-    
-    // Add new query
     searchHistory.push(query);
-    
-    // Save to localStorage
     localStorage.setItem('mideaSearchHistory', JSON.stringify(searchHistory));
-    
-    // Update display
     displaySearchHistory();
 }
 
-// Delete item from search history
+// حذف عنصر من السجل
 function deleteSearchHistoryItem(query) {
     searchHistory = searchHistory.filter(item => item !== query);
     localStorage.setItem('mideaSearchHistory', JSON.stringify(searchHistory));
     displaySearchHistory();
 }
 
-// Show/hide search history
+// إظهار/إخفاء سجل البحث
 function showSearchHistory() {
     if (searchHistory.length > 0) {
         searchHistoryContainer.classList.add('show');
@@ -123,7 +136,7 @@ function hideSearchHistory() {
     searchHistoryContainer.classList.remove('show');
 }
 
-// Show/hide delete confirmation modal
+// مودال تأكيد الحذف
 function showDeleteModal() {
     deleteModal.classList.add('show');
 }
@@ -132,7 +145,7 @@ function hideDeleteModal() {
     deleteModal.classList.remove('show');
 }
 
-// Clear all search history
+// حذف كل السجل
 function clearAllHistory() {
     searchHistory = [];
     localStorage.removeItem('mideaSearchHistory');
@@ -141,7 +154,7 @@ function clearAllHistory() {
     hideDeleteModal();
 }
 
-// Perform search with debounce for better performance
+// دالة البحث الرئيسية - تم تحديثها
 function performSearch() {
     const query = searchInput.value.trim();
     resultsGrid.innerHTML = '';
@@ -152,11 +165,14 @@ function performSearch() {
     }
 
     if (!fuse) {
-        resultsGrid.innerHTML = '<div class="no-results">Error loading data</div>';
+        resultsGrid.innerHTML = '<div class="no-results">Initializing search engine...</div>';
+        setTimeout(() => {
+            initializeSearch();
+            performSearch();
+        }, 300);
         return;
     }
 
-    // Search with the query
     const results = fuse.search(query);
     
     if (results.length === 0) {
@@ -166,7 +182,6 @@ function performSearch() {
                 <p>No results for "${query}"</p>
             </div>`;
     } else {
-        // Limit results for better performance
         const limitedResults = results.slice(0, 50);
         
         limitedResults.forEach(result => {
@@ -175,22 +190,36 @@ function performSearch() {
             const card = document.createElement('div');
             card.className = 'book-card';
             card.innerHTML = `
-                <img src="${book.coverImage}" class="book-cover" onerror="this.src='logo.webp'" loading="lazy">
+                <img src="${book.coverImage}" class="book-cover" onerror="this.src='logo.png'" loading="lazy">
                 <div class="book-title">${book.title}</div>
                 <div class="book-author">${book.author}</div>
             `;
             
-            // Go to book page - التعديل هنا
-            card.onclick = () => {
-                // حفظ معرف الكتاب في localStorage ثم الانتقال للصفحة الرئيسية
+            // حدث النقر المهم - تم تحسينه
+            card.addEventListener('click', function() {
+                console.log('Book clicked:', book.id, '-', book.title);
+                
+                // اختبار حفظ البيانات
+                const testData = {
+                    id: book.id,
+                    title: book.title,
+                    timestamp: new Date().getTime()
+                };
+                
+                // حفظ في localStorage
                 localStorage.setItem('mideaSelectedBookId', book.id);
-                window.location.href = 'index.html';
-            };
+                localStorage.setItem('mideaBookRedirect', JSON.stringify(testData));
+                
+                console.log('Saved to localStorage:', book.id);
+                console.log('Test data:', testData);
+                
+                // الانتقال مع إضافة باراميتر لمنع الشاشة
+                window.location.href = 'index.html?fromSearch=true&bookId=' + book.id;
+            });
             
             resultsGrid.appendChild(card);
         });
         
-        // Show count if there are many results
         if (results.length > 50) {
             const countDiv = document.createElement('div');
             countDiv.className = 'no-results';
@@ -201,13 +230,12 @@ function performSearch() {
         }
     }
 
-    // Add to search history
-    if (query.length >= 2) { // Only add to history if query is at least 2 characters
+    if (query.length >= 2) {
         addToSearchHistory(query);
     }
 }
 
-// Optimized search with debounce
+// بحث محسن
 function debouncedSearch() {
     clearTimeout(searchTimeout);
     
@@ -219,30 +247,21 @@ function debouncedSearch() {
         return;
     }
     
-    if (query.length === 1) {
-        // Search immediately for single character
-        searchTimeout = setTimeout(() => {
-            hideSearchHistory();
-            performSearch();
-        }, 100); // Reduced delay for single character
-    } else {
-        // Slightly longer delay for longer queries
-        searchTimeout = setTimeout(() => {
-            hideSearchHistory();
-            performSearch();
-        }, 200);
-    }
+    searchTimeout = setTimeout(() => {
+        hideSearchHistory();
+        performSearch();
+    }, 300);
 }
 
-// Events
+// أحداث
 
-// 1. When clicking search button
+// 1. زر البحث
 searchBtn.addEventListener('click', () => {
     hideSearchHistory();
     performSearch();
 });
 
-// 2. When pressing Enter
+// 2. زر Enter
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         hideSearchHistory();
@@ -250,7 +269,7 @@ searchInput.addEventListener('keypress', (e) => {
     }
 });
 
-// 3. When clicking search input - show history
+// 3. النقر على حقل البحث
 searchInput.addEventListener('click', (e) => {
     e.stopPropagation();
     if (searchInput.value.trim() === '') {
@@ -258,60 +277,64 @@ searchInput.addEventListener('click', (e) => {
     }
 });
 
-// 4. When typing in search input - optimized with debounce
+// 4. الكتابة في حقل البحث
 searchInput.addEventListener('input', () => {
     debouncedSearch();
 });
 
-// 5. Close history when clicking outside
+// 5. إغلاق السجل عند النقر خارجها
 document.addEventListener('click', (e) => {
     if (!searchHistoryContainer.contains(e.target) && e.target !== searchInput) {
         hideSearchHistory();
     }
 });
 
-// 6. Prevent closing history when clicking inside
+// 6. منع إغلاق السجل عند النقر داخله
 searchHistoryContainer.addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
-// 7. Clear all history button at bottom
+// 7. زر حذف الكل
 clearHistoryBottomBtn.addEventListener('click', showDeleteModal);
 
-// 8. Modal buttons
+// 8. أزرار المودال
 confirmDeleteBtn.addEventListener('click', clearAllHistory);
 cancelDeleteBtn.addEventListener('click', hideDeleteModal);
 
-// 9. Close modal when clicking outside
+// 9. إغلاق المودال بالنقر خارجها
 deleteModal.addEventListener('click', (e) => {
     if (e.target === deleteModal) {
         hideDeleteModal();
     }
 });
 
-// Initialize page
-window.onload = () => {
-    // Display search history
-    displaySearchHistory();
+// تهيئة الصفحة
+window.addEventListener('load', () => {
+    console.log('Search page fully loaded');
     
-    // Search if there's a query in URL
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('q')) {
-        searchInput.value = params.get('q');
-        performSearch();
-    } else {
-        resultsGrid.innerHTML = '';
-    }
-    
-    // Focus on search input
-    searchInput.focus();
-    
-    // Add event for clearing input
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            searchInput.value = '';
-            resultsGrid.innerHTML = '';
-            showSearchHistory();
+    // تأخير بسيط لضمان تحميل data.js
+    setTimeout(() => {
+        console.log('Initializing search after delay...');
+        initializeSearch();
+        displaySearchHistory();
+        
+        // البحث إذا كان هناك استعلام في URL
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('q')) {
+            searchInput.value = params.get('q');
+            performSearch();
         }
-    });
-};
+        
+        // التركيز على حقل البحث
+        searchInput.focus();
+        
+        // حدث لمسح الحقل
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                resultsGrid.innerHTML = '';
+                showSearchHistory();
+            }
+        });
+    }, 500);
+});

@@ -420,5 +420,29 @@
 
 <!-- مكتبات خارجية -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+<script>
+    // سكريبت فحص
+    console.log('=== M IDEA Book Debug ===');
+    console.log('Page URL:', window.location.href);
+    console.log('Books loaded:', typeof books !== 'undefined' ? books.length : 'undefined');
+    console.log('localStorage book ID:', localStorage.getItem('mideaSelectedBookId'));
+    console.log('URL parameters:', window.location.search);
+    
+    // فحص البيانات المخزنة
+    const storedData = localStorage.getItem('mideaBookRedirect');
+    if (storedData) {
+        try {
+            console.log('Stored redirect data:', JSON.parse(storedData));
+        } catch(e) {
+            console.log('Stored data (raw):', storedData);
+        }
+    }
+    
+    // كشف الأخطاء
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.message, 'at', e.filename, 'line', e.lineno);
+    });
+</script>
 </body>
 </html>
