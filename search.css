@@ -1,0 +1,368 @@
+/* search.css - النسخة المحدثة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+:root {
+    --primary-color: #b61412; /* اللون الأحمر */
+    --dark-bg: #000;
+    --dark-card: #121212;
+    --dark-text: #f5f5f5;
+    --search-border: #333;
+    --search-bg: rgba(255, 255, 255, 0.1);
+    --modal-bg: rgba(0, 0, 0, 0.9);
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+    min-height: 100vh;
+    padding: 20px;
+    direction: ltr; /* اتجاه من اليسار لليمين */
+}
+
+/* شريط البحث والعودة */
+.search-header {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* كلمة Search على يسار شريط البحث */
+.search-label {
+    font-size: 1rem;
+    color: var(--dark-text);
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+/* شريط البحث */
+.search-container {
+    flex: 1;
+    position: relative;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    background: var(--search-bg);
+    border-radius: 25px;
+    overflow: hidden;
+    height: 44px;
+    border: 1px solid var(--search-border);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    background: transparent;
+    color: var(--dark-text);
+    outline: none;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* إيقونة البحث باللون الأحمر */
+.search-bar button {
+    background: transparent;
+    border: none;
+    padding: 0 15px;
+    color: var(--primary-color); /* اللون الأحمر */
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-bar button:hover {
+    color: #ff3333;
+}
+
+/* السهم على اليمين ويتجه لليسار */
+.back-to-home {
+    display: flex;
+    align-items: center;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-size: 1rem;
+    white-space: nowrap;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.back-to-home:hover {
+    color: var(--primary-color);
+}
+
+.back-to-home i {
+    margin-right: 5px;
+    font-size: 1.2rem;
+    /* السهم يتجه لليسار (افتراضي fa-arrow-left) */
+}
+
+/* بطاقات الكتب */
+.book-card {
+    background: var(--dark-card);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #222;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    border-color: var(--primary-color);
+}
+
+/* سجل البحث */
+.search-history {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--dark-card);
+    border-radius: 10px;
+    margin-top: 8px;
+    padding: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+    max-height: 350px;
+    overflow-y: auto;
+    border: 1px solid var(--search-border);
+}
+
+.search-history.show {
+    display: flex;
+    flex-direction: column;
+}
+
+/* إخفاء عنوان سجل البحث */
+.history-header {
+    display: none;
+}
+
+#history-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+#history-list li {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#history-list li:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#history-list li:last-child {
+    border-bottom: none;
+}
+
+.history-item-text {
+    flex: 1;
+    text-align: left;
+    font-size: 0.9rem;
+    word-break: break-word;
+}
+
+.delete-history-item {
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 5px;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-history-item:hover {
+    color: var(--primary-color);
+}
+
+/* زر حذف الكل في الأسفل */
+.history-footer {
+    padding: 12px 15px;
+    border-top: 1px solid var(--search-border);
+    text-align: center;
+    display: none;
+}
+
+.history-footer.show {
+    display: block;
+}
+
+#clear-history-bottom {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    width: 100%;
+    padding: 8px;
+}
+
+#clear-history-bottom:hover {
+    color: var(--primary-color);
+}
+
+/* نتائج البحث - أحجام أصغر */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
+    max-width: 1200px;
+    margin: 20px auto 0;
+}
+
+.book-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #222, #333);
+}
+
+.book-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    height: 2.2em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3;
+}
+
+.book-author {
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    font-size: 1rem;
+}
+
+.no-results i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* مودال تأكيد الحذف - تصميم TikTok */
+.delete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display: none;
+}
+
+.delete-modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #1c1c1e;
+    border-radius: 14px;
+    width: 85%;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 15px 20px;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.modal-actions {
+    display: flex;
+    border-top: 1px solid #333;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    background: transparent;
+    color: var(--dark-text);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-btn.cancel {
+    border-right: 1px solid #333;
+}
+
+.modal-btn.delete {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.modal-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* تحسينات للأداء والسرعة */
+.search-bar input:focus {
+    border-color: var(--primary-color);
+}
+
+/* تحسين عرض النتائج أثناء الكتابة */
+#search-results {
+    transition: opacity 0.2s ease;
+}

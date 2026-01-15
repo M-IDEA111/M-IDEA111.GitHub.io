@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M IDEA Book - Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <!-- Search Header -->
+    <div class="search-header">
+        <!-- كلمة Search على يسار شريط البحث -->
+        <span class="search-label">Search</span>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search books">
+                <button id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <!-- Search History -->
+            <div class="search-history" id="search-history">
+                <div class="history-header"></div>
+                <ul id="history-list">
+                    <!-- Will be populated by JavaScript -->
+                </ul>
+                <div class="history-footer" id="history-footer">
+                    <button id="clear-history-bottom">Clear All</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- السهم على اليمين ويتجه لليسار -->
+        <a href="index.html?no-splash" class="back-to-home">
+    <i class="fas fa-arrow-left"></i>
+</a>
+
+    </div>
+
+    <!-- Search Results -->
+    <div id="search-results" class="results-grid">
+        <!-- Will be populated by JavaScript -->
+    </div>
+
+    <!-- Delete Confirmation Modal (TikTok style) -->
+    <div class="delete-modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Delete Search History?</h3>
+            </div>
+            <div class="modal-body">
+                Your search history will be deleted and cannot be recovered.
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" id="cancel-delete">Cancel</button>
+                <button class="modal-btn delete" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+    <!-- Search CSS File -->
+    <link rel="stylesheet" href="search.css">
+    
+    <!-- Fuse.js library for fuzzy search -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>  
+    
+    <!-- Data File -->
+    <script src="data.js"></script>
+    <!-- Search JavaScript File -->
+    <script src="search.js"></script>
+</body>
+</html>

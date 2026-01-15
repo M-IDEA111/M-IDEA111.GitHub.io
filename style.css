@@ -1,0 +1,1411 @@
+/* إعادة ضبط كاملة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --primary-color: #b61412;
+    --primary-color-light: #ff4d4d;
+    --dark-bg: #000;
+    --dark-card: #000;
+    --dark-text: #f5f5f5;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+/* منع النسخ للصور */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+/* Body */
+body {
+    background: #000 !important;
+    color: var(--dark-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+/* Header - بدون خلفية */
+header {
+    padding: 0.8rem 1.2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    transition: transform 0.3s ease;
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+header.header-hidden {
+    transform: translateY(-100%);
+}
+
+header.header-visible {
+    transform: translateY(0);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.header-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+}
+
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* جميع الأزرار بدون خلفية وبألوان ثابتة */
+.search-icon-btn,
+.transfer-btn,
+.support-btn,
+.nav-btn,
+.nav-btn-simple,
+.back-to-categories,
+.back-to-books,
+.back-to-category,
+.back-to-details,
+.start-reading-btn,
+.category-link,
+.menu-link {
+    background: none;
+    border: none;
+    color: var(--primary-color) !important;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: none !important;
+}
+
+.logo-img {
+    height: 100px !important;
+    margin-top: 0;
+}
+
+/* القائمة المنزلقة الجديدة */
+.slide-menu {
+    position: fixed;
+    top: 0;
+    right: -50%;
+    width: 50%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1100;
+    overflow-y: auto;
+    border-left: 2px solid var(--primary-color);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.9);
+    transition: right 0.3s ease;
+}
+
+.slide-menu.active {
+    right: 0;
+}
+
+.slide-menu-header {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slide-menu-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.slide-menu-content {
+    padding: 1.5rem;
+}
+
+.menu-section {
+    margin-bottom: 2rem;
+}
+
+.menu-title {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.menu-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-link,
+.category-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: none !important;
+    border-radius: var(--border-radius);
+    color: var(--dark-text);
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+/* Main Content */
+main {
+    padding: 1.5rem;
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Sections */
+.category-section {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    padding-bottom: 0;
+    border-bottom: none !important;
+    display: inline-block;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Books Horizontal Layout - السهم القديم بين الكتب */
+.books-horizontal-container {
+    position: relative;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.books-scroll-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    margin: 0 50px;
+}
+
+.books-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* السهم الأصلي القديم - بين الكتب */
+.scroll-arrow {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s;
+}
+
+.scroll-arrow:hover {
+    background: rgba(182, 20, 18, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow.left {
+    left: 0;
+}
+
+.scroll-arrow.right {
+    right: 0;
+}
+
+.book-card {
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 180px; /* نفس العرض في جميع الشاشات */
+    padding: 10px;
+}
+
+.book-cover {
+    height: 220px; /* نفس الارتفاع في جميع الشاشات */
+    width: 160px; /* نفس العرض في جميع الشاشات */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(182, 20, 18, 0.3);
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.book-title {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-author {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 5px;
+    text-align: center;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Book Details Section */
+.book-details-container {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+.book-details-header {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+}
+
+.book-details-content {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.book-cover-section {
+    flex: 1;
+    min-width: 280px;
+    max-width: 320px;
+}
+
+.book-info-section {
+    flex: 2;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.details-book-cover {
+    height: 380px;
+    width: 100%;
+    max-width: 300px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--primary-color);
+    margin: 0 auto;
+}
+
+.details-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.book-meta-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.book-author-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.meta-label {
+    color: var(--primary-color);
+    font-weight: 600;
+    min-width: 70px;
+}
+
+.meta-value {
+    color: var(--dark-text);
+    font-weight: 500;
+}
+
+.book-details-title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+    text-shadow: 0 0 10px rgba(182, 20, 18, 0.3);
+    line-height: 1.2;
+}
+
+.book-description-section {
+    margin-bottom: 0;
+}
+
+.book-details-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--dark-text);
+    text-align: justify;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.start-reading-btn {
+    background: var(--primary-color) !important;
+    color: #000 !important;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: none !important;
+    margin: 0 auto;
+    min-width: 200px;
+}
+
+.start-reading-btn:active {
+    background: var(--primary-color) !important;
+    color: #000 !important;
+}
+
+/* Related Books in Details Page مع أسهم */
+.related-books-details {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(182, 20, 18, 0.3);
+    width: 100%;
+    position: relative;
+}
+
+.related-title-details {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.related-scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 50px;
+}
+
+.related-scroll-wrapper-details {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+}
+
+.related-scroll-wrapper-details::-webkit-scrollbar {
+    display: none;
+}
+
+/* سهم الاقتراحات */
+.related-scroll-arrow {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s;
+}
+
+.related-scroll-arrow:hover {
+    background: rgba(182, 20, 18, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.related-scroll-arrow.left {
+    left: -45px;
+}
+
+.related-scroll-arrow.right {
+    right: -45px;
+}
+
+/* Reading Section */
+.reading-container {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+.reading-header {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.reading-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    text-align: center;
+    flex-grow: 1;
+    order: 2;
+}
+
+.back-to-details {
+    order: 1;
+}
+
+.reading-content {
+    padding: 1.5rem;
+    line-height: 1.8;
+    font-size: 1rem;
+    min-height: 400px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.page-image-container {
+    max-width: 90%;
+    margin: 0 auto 20px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.page-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.page-text {
+    margin-top: 15px;
+    line-height: 1.7;
+    text-align: justify;
+    font-size: 1.1rem;
+    padding: 0 10px;
+}
+
+/* Page Navigation Simple - بدون خلفية */
+.page-navigation-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    margin-top: 2rem;
+}
+
+.nav-btn-simple {
+    background: none !important;
+    border: none !important;
+    color: var(--primary-color) !important;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.nav-btn-simple:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-btn-simple:active {
+    color: var(--primary-color) !important;
+    background: none !important;
+}
+
+.page-indicator {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0 20px;
+}
+
+/* Search Results */
+.search-results-section {
+    display: none;
+    margin-bottom: 2rem;
+}
+
+.search-results-title {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.search-result-count {
+    color: var(--primary-color-light);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* Category View */
+.category-view {
+    display: none;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+/* Back Buttons */
+.back-to-categories {
+    margin-bottom: 20px;
+}
+
+/* Footer */
+.footer {
+    background: transparent;
+    padding: 40px 20px 20px;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-logo img {
+    width: 180px;
+    height: 180px;
+}
+
+.footer-explore {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-explore h4 {
+    color: #b61412;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    border-bottom: none !important;
+}
+
+.footer-explore-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-explore-links a {
+    color: #b61412;
+    text-decoration: none;
+    font-size: 1rem;
+    background: none !important;
+    padding: 0;
+    border-radius: 0;
+}
+
+.footer-explore-links a:hover {
+    color: #b61412;
+    text-decoration: underline;
+    background: none !important;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.social-icons-bottom {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #b61412;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #b61412;
+}
+
+.footer-support {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-support h4 {
+    color: #b61412;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    text-align: left;
+    border-bottom: none !important;
+}
+
+.footer-support-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.footer-support-links a {
+    color: #b61412;
+    text-decoration: none;
+    font-size: 1rem;
+    background: none !important;
+    padding: 0;
+}
+
+.footer-support-links a:hover {
+    color: #b61412;
+    text-decoration: underline;
+}
+
+.copyright {
+    text-align: center;
+    padding: 15px 0;
+    color: #b61412;
+    font-size: 0.85rem;
+    background: transparent !important;
+    width: 100%;
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    grid-column: 1 / -1;
+}
+
+.copyright a {
+    color: #b61412 !important;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.copyright a:hover {
+    text-decoration: underline;
+}
+
+/* Copy Warning - لون أحمر */
+.copy-warning {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: #ff0000 !important;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    z-index: 99999;
+    border: 1px solid #ff0000;
+    text-align: right;
+    direction: rtl;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(182, 20, 18, 0.3);
+    border-radius: 50%;
+    border-top: 5px solid var(--primary-color);
+}
+
+/* Splash Screen */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.splash-image {
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    background: transparent !important;
+    display: block;
+    margin: auto;
+    padding: 0;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .book-details-content {
+        gap: 2.5rem;
+    }
+    
+    .details-book-cover {
+        height: 350px;
+        max-width: 280px;
+    }
+    
+    .book-details-title {
+        font-size: 2rem;
+    }
+    
+    .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .related-scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .related-scroll-arrow.left {
+        left: -40px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .book-details-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .book-cover-section {
+        flex: 1;
+        min-width: 250px;
+        max-width: 280px;
+    }
+    
+    .book-info-section {
+        flex: 2;
+        min-width: 250px;
+    }
+    
+    .details-book-cover {
+        height: 320px;
+        max-width: 250px;
+    }
+    
+    .book-details-title {
+        font-size: 1.8rem;
+    }
+    
+    .books-scroll-wrapper {
+        margin: 0 40px;
+    }
+    
+    .scroll-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .related-scroll-container {
+        margin: 0 40px;
+    }
+    
+    .related-scroll-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .related-scroll-arrow.left {
+        left: -38px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -38px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-menu {
+        width: 70%;
+        right: -70%;
+    }
+    
+    header {
+        height: 70px;
+        padding: 8px 10px;
+    }
+    
+    .logo-img {
+        height: 80px;
+    }
+    
+    .search-icon-btn,
+    .transfer-btn,
+    .support-btn {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+    
+    /* في الشاشات الصغيرة، نجعله نفس الشاشات الكبيرة */
+    .book-card {
+        width: 160px;
+    }
+    
+    .book-cover {
+        height: 200px;
+        width: 140px;
+    }
+    
+    .book-title {
+        font-size: 0.95rem;
+        max-width: 140px;
+    }
+    
+    .books-grid,
+    .search-results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.2rem;
+    }
+    
+    .book-details-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .book-cover-section {
+        width: 100%;
+        max-width: 320px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .book-info-section {
+        width: 100%;
+    }
+    
+    .details-book-cover {
+        height: 300px;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .book-details-title {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+    
+     .book-author-top {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .book-details-description {
+        text-align: center;
+        font-size: 1rem;
+    }
+    
+    .start-reading-btn {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    
+    /* إظهار الأسهم في الشاشات الصغيرة */
+    .books-scroll-wrapper {
+        margin: 0 45px;
+    }
+    
+    .scroll-arrow {
+        display: flex !important;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .related-scroll-container {
+        margin: 0 45px;
+    }
+    
+    .related-scroll-arrow {
+        display: flex !important;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .related-scroll-arrow.left {
+        left: -36px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -36px;
+    }
+}
+
+@media (max-width: 576px) {
+    .slide-menu {
+        width: 85%;
+        right: -85%;
+    }
+    
+    header {
+        height: 65px;
+    }
+    
+    .logo-img {
+        height: 70px;
+    }
+    
+    .transfer-btn span,
+    .support-btn span {
+        display: none;
+    }
+    
+    .book-card {
+        width: 140px;
+    }
+    
+    .book-cover {
+        height: 180px;
+        width: 120px;
+    }
+    
+    .book-title {
+        font-size: 0.9rem;
+        max-width: 120px;
+    }
+    
+    .books-grid,
+    .search-results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+    
+    .details-book-cover {
+        height: 280px;
+        max-width: 240px;
+    }
+    
+    .book-details-title {
+        font-size: 1.5rem;
+    }
+    
+    .book-details-description {
+        font-size: 0.95rem;
+    }
+    
+    .start-reading-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 220px;
+    }
+    
+    .page-navigation-simple {
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .nav-btn-simple {
+        padding: 10px 15px;
+    }
+    
+    .page-indicator {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    /* إظهار الأسهم في الشاشات الصغيرة جداً */
+    .books-scroll-wrapper {
+        margin: 0 40px;
+    }
+    
+    .scroll-arrow {
+        display: flex !important;
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .related-scroll-container {
+        margin: 0 40px;
+    }
+    
+    .related-scroll-arrow {
+        display: flex !important;
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .related-scroll-arrow.left {
+        left: -34px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide-menu {
+        width: 90%;
+        right: -90%;
+    }
+    
+    .book-card {
+        width: 130px;
+    }
+    
+    .book-cover {
+        height: 170px;
+        width: 110px;
+    }
+    
+    .book-title {
+        font-size: 0.85rem;
+        max-width: 110px;
+    }
+    
+    .books-grid,
+    .search-results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+    
+    .details-book-cover {
+        height: 260px;
+        max-width: 220px;
+    }
+    
+    .book-details-title {
+        font-size: 1.4rem;
+    }
+    
+    .book-author-top {
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+    
+    .meta-label {
+        min-width: auto;
+    }
+    
+    .books-scroll-wrapper {
+        margin: 0 38px;
+    }
+    
+    .scroll-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .related-scroll-container {
+        margin: 0 38px;
+    }
+    
+    .related-scroll-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .related-scroll-arrow.left {
+        left: -32px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -32px;
+    }
+}
+
+@media (max-width: 360px) {
+    .book-card {
+        width: 120px;
+    }
+    
+    .book-cover {
+        height: 160px;
+        width: 100px;
+    }
+    
+    .book-title {
+        font-size: 0.8rem;
+        max-width: 100px;
+    }
+    
+    .books-grid,
+    .search-results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .details-book-cover {
+        height: 240px;
+        max-width: 200px;
+    }
+    
+    .book-details-title {
+        font-size: 1.3rem;
+    }
+    
+    .book-details-description {
+        font-size: 0.9rem;
+    }
+    
+    .start-reading-btn {
+        font-size: 0.95rem;
+        padding: 8px 16px;
+    }
+    
+    /* السهم في الشاشات الصغيرة جداً */
+    .books-scroll-wrapper {
+        margin: 0 36px;
+    }
+    
+    .scroll-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+    
+    .related-scroll-container {
+        margin: 0 36px;
+    }
+    
+    .related-scroll-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+    
+    .related-scroll-arrow.left {
+        left: -30px;
+    }
+    
+    .related-scroll-arrow.right {
+        right: -30px;
+    }
+}
+/* أنماط الإعلان في منتصف صفحة القراءة */
+.reading-ad {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 30px auto;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 728px;
+  width: 100%;
+}
+
+.reading-ad ins {
+  margin: 0 auto;
+}
+
+/* تنسيق أقسام المحتوى */
+#reading-content-part1, 
+#reading-content-part2 {
+  padding: 10px;
+  line-height: 1.6;
+  color: #333;
+}
+
+#reading-content-part1 p, 
+#reading-content-part2 p {
+  margin-bottom: 1em;
+  text-align: justify;
+}
