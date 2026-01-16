@@ -4,53 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M IDEA Book - Search</title>
+    
+    <!-- مكتبات CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Search CSS File -->
+    <!-- ملفات CSS الخاصة -->
     <link rel="stylesheet" href="search.css">
-    
 </head>
 <body>
+    <!-- Main Content فقط بدون هيدر أو فوتر -->
+    <main>
+        <!-- Search Header -->
+        <div class="search-header">
+            <span class="search-label">Search</span>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search books">
+                    <button id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Search History -->
+                <div class="search-history" id="search-history">
+                    <div class="history-header"></div>
+                    <ul id="history-list">
+                        <!-- Will be populated by JavaScript -->
+                    </ul>
+                    <div class="history-footer" id="history-footer">
+                        <button id="clear-history-bottom">Clear All</button>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="index.html?no-splash" class="back-to-home">
+                <i class="fas fa-arrow-left"></i> Home
+            </a>
+        </div>
 
-    <!-- Search Header -->
-    <div class="search-header">
-        <!-- كلمة Search على يسار شريط البحث -->
-        <span class="search-label">Search</span>
-        
-        <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search books">
-                <button id="search-btn">
-                    <i class="fas fa-search"></i>
+        <!-- Search Results -->
+        <div id="search-results" class="results-grid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <!-- Book Details Section -->
+        <div class="book-details-container" id="book-details-container" style="display: none;">
+            <div class="book-details-header">
+                <button class="back-to-search" id="back-to-search">
+                    <i class="fas fa-arrow-left"></i> Back to Search
                 </button>
             </div>
             
-            <!-- Search History -->
-            <div class="search-history" id="search-history">
-                <div class="history-header"></div>
-                <ul id="history-list">
-                    <!-- Will be populated by JavaScript -->
-                </ul>
-                <div class="history-footer" id="history-footer">
-                    <button id="clear-history-bottom">Clear All</button>
+            <div class="book-details-content">
+                <div class="book-cover-section">
+                    <div class="details-book-cover">
+                        <img id="details-cover-image" src="" alt="Book Cover" class="details-cover-img">
+                    </div>
+                </div>
+                
+                <div class="book-info-section">
+                    <div class="book-meta-top">
+                        <div class="book-author-top">
+                            <span class="meta-label">Author:</span>
+                            <span id="book-details-author" class="meta-value"></span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="book-details-title" id="book-details-title"></h1>
+                    
+                    <div class="book-description-section">
+                        <p class="book-details-description" id="book-details-description"></p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="start-reading-btn" id="start-reading-btn">
+                            <i class="fas fa-book-open"></i> Start Reading
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Books in Details Page -->
+            <div class="related-books-details" id="related-books-details">
+                <h3 class="related-title-details">Related Books</h3>
+                <div class="related-scroll-container">
+                    <button class="related-scroll-arrow left" id="related-scroll-left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="related-scroll-wrapper-details" id="related-books-details-scroll">
+                        <!-- Related books will be populated here -->
+                    </div>
+                    <button class="related-scroll-arrow right" id="related-scroll-right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        
-        <!-- السهم على اليمين ويتجه لليسار -->
-        <a href="index.html?no-splash" class="back-to-home">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-    </div>
 
-    <!-- Search Results -->
-    <div id="search-results" class="results-grid">
-        <!-- Will be populated by JavaScript -->
-    </div>
+        <!-- Reading Section -->
+        <div class="reading-container" id="reading-container" style="display: none;">
+            <div class="reading-header">
+                <button class="back-to-details" id="back-to-details">
+                    <i class="fas fa-arrow-left"></i> Back to Details
+                </button>
+                <h3 class="reading-title" id="reading-title"></h3>
+            </div>
+            
+            <div class="reading-content" id="reading-content">
+                <!-- Reading content will be here -->
+            </div>
+            
+            <div class="page-navigation-simple">
+                <button class="nav-btn-simple" id="prev-page" disabled>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="page-indicator" id="page-indicator">Page 1 of 1</div>
+                <button class="nav-btn-simple" id="next-page">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
 
-    <!-- Delete Confirmation Modal (TikTok style) -->
+    <!-- Delete Confirmation Modal فقط -->
     <div class="delete-modal" id="delete-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -66,20 +144,9 @@
         </div>
     </div>
 
-    <!-- Fuse.js library for fuzzy search -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>  
-    
-    <!-- Data File -->
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script src="data.js"></script>
-    
-    <!-- Search JavaScript File -->
     <script src="search.js"></script>
-    
-    <!-- Debug Script -->
-    <script>
-        console.log('search.html fully loaded');
-        console.log('Books data available:', typeof books !== 'undefined' ? 'YES, length: ' + books.length : 'NO');
-        console.log('allBooks available:', typeof allBooks !== 'undefined' ? 'YES, length: ' + allBooks.length : 'NO');
-    </script>
 </body>
 </html>

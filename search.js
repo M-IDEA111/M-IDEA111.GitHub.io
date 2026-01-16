@@ -1,80 +1,167 @@
-// search.js - Version 3.0
+// search.js - ملف البحث المعدل بدون هيدر أو فوتر
 
-// Search engine settings
-const fuseOptions = {
-    keys: [
-        { name: "title", weight: 0.7 },
-        { name: "author", weight: 0.3 },
-        { name: "category", weight: 0.2 },
-        { name: "description", weight: 0.1 }
-    ],
-    threshold: 0.3,
-    distance: 50,
-    includeScore: true,
-    minMatchCharLength: 1,
-    findAllMatches: true,
-    ignoreLocation: true,
-    useExtendedSearch: true
-};
-
-// Main elements
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
-const resultsGrid = document.getElementById('search-results');
-
-// Search history elements
-const searchHistoryContainer = document.getElementById('search-history');
-const historyList = document.getElementById('history-list');
-const clearHistoryBottomBtn = document.getElementById('clear-history-bottom');
-const historyFooter = document.getElementById('history-footer');
-
-// Modal elements
-const deleteModal = document.getElementById('delete-modal');
-const confirmDeleteBtn = document.getElementById('confirm-delete');
-const cancelDeleteBtn = document.getElementById('cancel-delete');
-
-// Initialize search history from localStorage
-let searchHistory = JSON.parse(localStorage.getItem('mideaSearchHistory')) || [];
-
-// متغير لـ debounce
-let searchTimeout;
-let fuse = null;
-
-// تهيئة محرك البحث
-function initializeSearch() {
-    console.log('initializeSearch called');
+// ==================== تهيئة الصفحة ====================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Search page loading...');
     
-    // المحاولة مع books أولاً
-    if (typeof books !== 'undefined' && books.length > 0) {
-        console.log('Using books array, length:', books.length);
-        fuse = new Fuse(books, fuseOptions);
-        return true;
+    // تحميل البيانات وتهيئة البحث
+    initializeSearchPage();
+});
+
+// ==================== المتغيرات العامة ====================
+let fuse = null;
+let currentBook = null;
+let currentPage = 0;
+let searchHistory = JSON.parse(localStorage.getItem('mideaSearchHistory')) || [];
+let searchTimeout = null;
+
+// ==================== تهيئة صفحة البحث ====================
+function initializeSearchPage() {
+    console.log('Initializing search page...');
+    
+    // تحقق من تحميل بيانات الكتب
+    if (typeof books === 'undefined' || books.length === 0) {
+        console.log('Waiting for books data...');
+        setTimeout(initializeSearchPage, 500);
+        return;
     }
-    // ثم المحاولة مع allBooks
-    else if (typeof allBooks !== 'undefined' && allBooks.length > 0) {
-        console.log('Using allBooks array, length:', allBooks.length);
-        fuse = new Fuse(allBooks, fuseOptions);
-        return true;
-    }
-    // إذا لم تكن البيانات متاحة
-    else {
-        console.error('No books data found!');
-        resultsGrid.innerHTML = '<div class="no-results">Loading books data...</div>';
+    
+    console.log('Books data loaded:', books.length);
+    
+    // تهيئة محرك البحث
+    initializeSearchEngine();
+    
+    // إعداد الأحداث
+    setupEventListeners();
+    
+    // عرض سجل البحث
+    displaySearchHistory();
+    
+    // التحقق من البحث في URL
+    checkURLForSearch();
+    
+    // التركيز على حقل البحث
+    setTimeout(() => {
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.focus();
+            console.log('Search input focused');
+        }
+    }, 800);
+    
+    console.log('Search page initialized successfully');
+}
+
+// ==================== تهيئة محرك البحث ====================
+function initializeSearchEngine() {
+    try {
+        const options = {
+            keys: [
+                { name: 'title', weight: 0.6 },
+                { name: 'author', weight: 0.3 },
+                { name: 'category', weight: 0.1 },
+                { name: 'description', weight: 0.1 }
+            ],
+            threshold: 0.4,
+            includeScore: true,
+            minMatchCharLength: 2
+        };
         
-        // المحاولة مرة أخرى بعد ثانية
-        setTimeout(() => {
-            initializeSearch();
-        }, 1000);
-        return false;
+        fuse = new Fuse(books, options);
+        console.log('Search engine initialized with', books.length, 'books');
+    } catch (error) {
+        console.error('Failed to initialize search engine:', error);
     }
 }
 
-// عرض سجل البحث
+// ==================== وظائف البحث ====================
+function performSearch() {
+    const searchInput = document.getElementById('search-input');
+    const resultsGrid = document.getElementById('search-results');
+    
+    if (!searchInput || !resultsGrid) {
+        console.error('Search elements not found');
+        return;
+    }
+    
+    const query = searchInput.value.trim();
+    resultsGrid.innerHTML = '';
+    
+    if (!query) {
+        return;
+    }
+    
+    if (!fuse) {
+        resultsGrid.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading search engine...</p>
+            </div>`;
+        setTimeout(initializeSearchEngine, 500);
+        return;
+    }
+    
+    console.log('Searching for:', query);
+    
+    try {
+        const results = fuse.search(query);
+        
+        if (results.length === 0) {
+            resultsGrid.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search-minus"></i>
+                    <p>No results found for "${query}"</p>
+                </div>`;
+        } else {
+            results.forEach(result => {
+                const book = result.item;
+                
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <img src="${book.coverImage || 'logo.png'}" 
+                         class="book-cover" 
+                         alt="${book.title}"
+                         onerror="this.src='logo.png'">
+                    <div class="book-title">${book.title}</div>
+                    <div class="book-author">${book.author}</div>
+                `;
+                
+                card.addEventListener('click', () => showBookDetails(book.id));
+                resultsGrid.appendChild(card);
+            });
+            
+            // إضافة إلى سجل البحث
+            if (query.length >= 2) {
+                addToSearchHistory(query);
+            }
+        }
+    } catch (error) {
+        console.error('Search error:', error);
+        resultsGrid.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Search error occurred</p>
+            </div>`;
+    }
+}
+
+function debouncedSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(performSearch, 300);
+}
+
+// ==================== سجل البحث ====================
 function displaySearchHistory() {
+    const historyList = document.getElementById('history-list');
+    const historyFooter = document.getElementById('history-footer');
+    
+    if (!historyList) return;
+    
     historyList.innerHTML = '';
     
     if (searchHistory.length === 0) {
-        historyFooter.classList.remove('show');
+        if (historyFooter) historyFooter.style.display = 'none';
         return;
     }
     
@@ -84,13 +171,13 @@ function displaySearchHistory() {
         const li = document.createElement('li');
         li.innerHTML = `
             <span class="history-item-text">${query}</span>
-            <button class="delete-history-item" data-query="${query}" title="Delete item">
+            <button class="delete-history-item" data-query="${query}">
                 <i class="fas fa-times"></i>
             </button>
         `;
         
         li.querySelector('.history-item-text').addEventListener('click', () => {
-            searchInput.value = query;
+            document.getElementById('search-input').value = query;
             hideSearchHistory();
             performSearch();
         });
@@ -103,49 +190,47 @@ function displaySearchHistory() {
         historyList.appendChild(li);
     });
     
-    if (searchHistory.length > 0) {
-        historyFooter.classList.add('show');
-    }
+    if (historyFooter) historyFooter.style.display = 'block';
 }
 
-// إضافة إلى سجل البحث
 function addToSearchHistory(query) {
     if (!query.trim()) return;
     
-    searchHistory = searchHistory.filter(item => item.toLowerCase() !== query.toLowerCase());
+    // إزالة التكرارات
+    searchHistory = searchHistory.filter(item => 
+        item.toLowerCase() !== query.toLowerCase()
+    );
+    
+    // إضافة الاستعلام الجديد
     searchHistory.push(query);
+    
+    // حفظ في localStorage
     localStorage.setItem('mideaSearchHistory', JSON.stringify(searchHistory));
+    
+    // تحديث العرض
     displaySearchHistory();
 }
 
-// حذف عنصر من السجل
 function deleteSearchHistoryItem(query) {
     searchHistory = searchHistory.filter(item => item !== query);
     localStorage.setItem('mideaSearchHistory', JSON.stringify(searchHistory));
     displaySearchHistory();
 }
 
-// إظهار/إخفاء سجل البحث
 function showSearchHistory() {
-    if (searchHistory.length > 0) {
+    const searchHistoryContainer = document.getElementById('search-history');
+    if (searchHistoryContainer && searchHistory.length > 0) {
         searchHistoryContainer.classList.add('show');
     }
 }
 
 function hideSearchHistory() {
-    searchHistoryContainer.classList.remove('show');
+    const searchHistoryContainer = document.getElementById('search-history');
+    if (searchHistoryContainer) {
+        searchHistoryContainer.classList.remove('show');
+    }
 }
 
-// مودال تأكيد الحذف
-function showDeleteModal() {
-    deleteModal.classList.add('show');
-}
-
-function hideDeleteModal() {
-    deleteModal.classList.remove('show');
-}
-
-// حذف كل السجل
 function clearAllHistory() {
     searchHistory = [];
     localStorage.removeItem('mideaSearchHistory');
@@ -154,187 +239,290 @@ function clearAllHistory() {
     hideDeleteModal();
 }
 
-// دالة البحث الرئيسية - تم تحديثها
-function performSearch() {
-    const query = searchInput.value.trim();
-    resultsGrid.innerHTML = '';
+function showDeleteModal() {
+    const deleteModal = document.getElementById('delete-modal');
+    if (deleteModal) deleteModal.style.display = 'flex';
+}
 
-    if (query === "") {
-        resultsGrid.innerHTML = '';
-        return;
-    }
+function hideDeleteModal() {
+    const deleteModal = document.getElementById('delete-modal');
+    if (deleteModal) deleteModal.style.display = 'none';
+}
 
-    if (!fuse) {
-        resultsGrid.innerHTML = '<div class="no-results">Initializing search engine...</div>';
-        setTimeout(() => {
-            initializeSearch();
-            performSearch();
-        }, 300);
-        return;
-    }
-
-    const results = fuse.search(query);
+// ==================== عرض تفاصيل الكتاب ====================
+function showBookDetails(bookId) {
+    console.log('Showing book details for ID:', bookId);
     
-    if (results.length === 0) {
-        resultsGrid.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search-minus"></i>
-                <p>No results for "${query}"</p>
-            </div>`;
-    } else {
-        const limitedResults = results.slice(0, 50);
-        
-        limitedResults.forEach(result => {
-            const book = result.item;
-            
-            const card = document.createElement('div');
-            card.className = 'book-card';
-            card.innerHTML = `
-                <img src="${book.coverImage}" class="book-cover" onerror="this.src='logo.png'" loading="lazy">
-                <div class="book-title">${book.title}</div>
-                <div class="book-author">${book.author}</div>
-            `;
-            
-            // حدث النقر المهم - تم تحسينه
-            card.addEventListener('click', function() {
-                console.log('Book clicked:', book.id, '-', book.title);
-                
-                // اختبار حفظ البيانات
-                const testData = {
-                    id: book.id,
-                    title: book.title,
-                    timestamp: new Date().getTime()
-                };
-                
-                // حفظ في localStorage
-                localStorage.setItem('mideaSelectedBookId', book.id);
-                localStorage.setItem('mideaBookRedirect', JSON.stringify(testData));
-                
-                console.log('Saved to localStorage:', book.id);
-                console.log('Test data:', testData);
-                
-                // الانتقال مع إضافة باراميتر لمنع الشاشة
-                window.location.href = 'index.html?fromSearch=true&bookId=' + book.id;
-            });
-            
-            resultsGrid.appendChild(card);
+    if (typeof books === 'undefined' || !Array.isArray(books)) {
+        console.error('Books data not available');
+        return;
+    }
+    
+    const book = books.find(b => b.id === bookId);
+    if (!book) {
+        console.error('Book not found:', bookId);
+        return;
+    }
+    
+    currentBook = book;
+    
+    // إخفاء نتائج البحث وإظهار التفاصيل
+    const resultsGrid = document.getElementById('search-results');
+    const searchHeader = document.querySelector('.search-header');
+    const bookDetailsContainer = document.getElementById('book-details-container');
+    
+    if (resultsGrid) resultsGrid.style.display = 'none';
+    if (searchHeader) searchHeader.style.display = 'none';
+    if (bookDetailsContainer) bookDetailsContainer.style.display = 'block';
+    
+    // تعبئة بيانات الكتاب
+    document.getElementById('details-cover-image').src = book.coverImage || 'logo.png';
+    document.getElementById('details-cover-image').alt = book.title;
+    document.getElementById('book-details-title').textContent = book.title;
+    document.getElementById('book-details-author').textContent = book.author;
+    document.getElementById('book-details-description').textContent = 
+        book.description || 'No description available.';
+    
+    // تحميل الكتب ذات الصلة
+    loadRelatedBooks(book);
+    
+    // التمرير للأعلى
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('Book details displayed:', book.title);
+}
+
+function backToSearch() {
+    const resultsGrid = document.getElementById('search-results');
+    const searchHeader = document.querySelector('.search-header');
+    const bookDetailsContainer = document.getElementById('book-details-container');
+    const readingContainer = document.getElementById('reading-container');
+    
+    if (bookDetailsContainer) bookDetailsContainer.style.display = 'none';
+    if (readingContainer) readingContainer.style.display = 'none';
+    if (resultsGrid) resultsGrid.style.display = 'grid';
+    if (searchHeader) searchHeader.style.display = 'flex';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function loadRelatedBooks(book) {
+    const container = document.getElementById('related-books-details-scroll');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (typeof books === 'undefined' || !Array.isArray(books)) {
+        container.innerHTML = '<p class="no-related">Loading related books...</p>';
+        return;
+    }
+    
+    const relatedBooks = books
+        .filter(b => b.category === book.category && b.id !== book.id)
+        .slice(0, 5);
+    
+    if (relatedBooks.length === 0) {
+        container.innerHTML = '<p class="no-related">No related books found</p>';
+        return;
+    }
+    
+    relatedBooks.forEach(book => {
+        const card = document.createElement('div');
+        card.className = 'book-card';
+        card.innerHTML = `
+            <img src="${book.coverImage || 'logo.png'}" class="book-cover" alt="${book.title}">
+            <div class="book-title">${book.title}</div>
+            <div class="book-author">${book.author}</div>
+        `;
+        card.addEventListener('click', () => showBookDetails(book.id));
+        container.appendChild(card);
+    });
+}
+
+// ==================== القراءة ====================
+function startReading() {
+    if (!currentBook) {
+        console.error('No book selected for reading');
+        return;
+    }
+    
+    currentPage = 0;
+    
+    const bookDetailsContainer = document.getElementById('book-details-container');
+    const readingContainer = document.getElementById('reading-container');
+    
+    if (bookDetailsContainer) bookDetailsContainer.style.display = 'none';
+    if (readingContainer) readingContainer.style.display = 'block';
+    
+    document.getElementById('reading-title').textContent = currentBook.title;
+    displayPage();
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('Started reading:', currentBook.title);
+}
+
+function displayPage() {
+    if (!currentBook || !currentBook.content || !Array.isArray(currentBook.content)) {
+        console.error('No book content available');
+        return;
+    }
+    
+    const contentDiv = document.getElementById('reading-content');
+    if (!contentDiv) return;
+    
+    const page = currentBook.content[currentPage];
+    contentDiv.innerHTML = `<div class="page-text">${page.text || 'No content'}</div>`;
+    
+    document.getElementById('page-indicator').textContent = 
+        `Page ${currentPage + 1} of ${currentBook.content.length}`;
+    
+    document.getElementById('prev-page').disabled = currentPage === 0;
+    document.getElementById('next-page').disabled = 
+        currentPage === currentBook.content.length - 1;
+}
+
+function backToDetails() {
+    const readingContainer = document.getElementById('reading-container');
+    const bookDetailsContainer = document.getElementById('book-details-container');
+    
+    if (readingContainer) readingContainer.style.display = 'none';
+    if (bookDetailsContainer) bookDetailsContainer.style.display = 'block';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==================== إعداد الأحداث ====================
+function setupEventListeners() {
+    console.log('Setting up event listeners...');
+    
+    // زر البحث
+    const searchBtn = document.getElementById('search-btn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            hideSearchHistory();
+            performSearch();
+        });
+    }
+    
+    // حقل البحث
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                hideSearchHistory();
+                performSearch();
+            }
         });
         
-        if (results.length > 50) {
-            const countDiv = document.createElement('div');
-            countDiv.className = 'no-results';
-            countDiv.style.fontSize = '0.9rem';
-            countDiv.style.color = '#aaa';
-            countDiv.innerHTML = `Showing 50 of ${results.length} results`;
-            resultsGrid.appendChild(countDiv);
-        }
-    }
-
-    if (query.length >= 2) {
-        addToSearchHistory(query);
-    }
-}
-
-// بحث محسن
-function debouncedSearch() {
-    clearTimeout(searchTimeout);
-    
-    const query = searchInput.value.trim();
-    
-    if (query.length === 0) {
-        resultsGrid.innerHTML = '';
-        showSearchHistory();
-        return;
-    }
-    
-    searchTimeout = setTimeout(() => {
-        hideSearchHistory();
-        performSearch();
-    }, 300);
-}
-
-// أحداث
-
-// 1. زر البحث
-searchBtn.addEventListener('click', () => {
-    hideSearchHistory();
-    performSearch();
-});
-
-// 2. زر Enter
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        hideSearchHistory();
-        performSearch();
-    }
-});
-
-// 3. النقر على حقل البحث
-searchInput.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (searchInput.value.trim() === '') {
-        showSearchHistory();
-    }
-});
-
-// 4. الكتابة في حقل البحث
-searchInput.addEventListener('input', () => {
-    debouncedSearch();
-});
-
-// 5. إغلاق السجل عند النقر خارجها
-document.addEventListener('click', (e) => {
-    if (!searchHistoryContainer.contains(e.target) && e.target !== searchInput) {
-        hideSearchHistory();
-    }
-});
-
-// 6. منع إغلاق السجل عند النقر داخله
-searchHistoryContainer.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
-
-// 7. زر حذف الكل
-clearHistoryBottomBtn.addEventListener('click', showDeleteModal);
-
-// 8. أزرار المودال
-confirmDeleteBtn.addEventListener('click', clearAllHistory);
-cancelDeleteBtn.addEventListener('click', hideDeleteModal);
-
-// 9. إغلاق المودال بالنقر خارجها
-deleteModal.addEventListener('click', (e) => {
-    if (e.target === deleteModal) {
-        hideDeleteModal();
-    }
-});
-
-// تهيئة الصفحة
-window.addEventListener('load', () => {
-    console.log('Search page fully loaded');
-    
-    // تأخير بسيط لضمان تحميل data.js
-    setTimeout(() => {
-        console.log('Initializing search after delay...');
-        initializeSearch();
-        displaySearchHistory();
+        searchInput.addEventListener('input', debouncedSearch);
         
-        // البحث إذا كان هناك استعلام في URL
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('q')) {
-            searchInput.value = params.get('q');
-            performSearch();
-        }
-        
-        // التركيز على حقل البحث
-        searchInput.focus();
-        
-        // حدث لمسح الحقل
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                searchInput.value = '';
-                resultsGrid.innerHTML = '';
+        searchInput.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (searchInput.value === '') {
                 showSearchHistory();
             }
         });
-    }, 500);
-});
+        
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                const resultsGrid = document.getElementById('search-results');
+                if (resultsGrid) resultsGrid.innerHTML = '';
+                showSearchHistory();
+            }
+        });
+    }
+    
+    // سجل البحث
+    document.addEventListener('click', (e) => {
+        const searchHistoryContainer = document.getElementById('search-history');
+        const searchInput = document.getElementById('search-input');
+        
+        if (searchHistoryContainer && 
+            !searchHistoryContainer.contains(e.target) && 
+            e.target !== searchInput) {
+            hideSearchHistory();
+        }
+    });
+    
+    // مودال الحذف
+    const clearHistoryBottomBtn = document.getElementById('clear-history-bottom');
+    if (clearHistoryBottomBtn) {
+        clearHistoryBottomBtn.addEventListener('click', showDeleteModal);
+    }
+    
+    const confirmDeleteBtn = document.getElementById('confirm-delete');
+    if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', clearAllHistory);
+    }
+    
+    const cancelDeleteBtn = document.getElementById('cancel-delete');
+    if (cancelDeleteBtn) {
+        cancelDeleteBtn.addEventListener('click', hideDeleteModal);
+    }
+    
+    // أحداث الكتاب
+    const startReadingBtn = document.getElementById('start-reading-btn');
+    if (startReadingBtn) {
+        startReadingBtn.addEventListener('click', startReading);
+    }
+    
+    const backToSearchBtn = document.getElementById('back-to-search');
+    if (backToSearchBtn) {
+        backToSearchBtn.addEventListener('click', backToSearch);
+    }
+    
+    const backToDetailsBtn = document.getElementById('back-to-details');
+    if (backToDetailsBtn) {
+        backToDetailsBtn.addEventListener('click', backToDetails);
+    }
+    
+    // التنقل بين الصفحات
+    const prevPageBtn = document.getElementById('prev-page');
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                displayPage();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+    
+    const nextPageBtn = document.getElementById('next-page');
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => {
+            if (currentBook && currentPage < currentBook.content.length - 1) {
+                currentPage++;
+                displayPage();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+    
+    // التمرير الأفقي للكتب ذات الصلة
+    const relatedLeftBtn = document.getElementById('related-scroll-left');
+    const relatedRightBtn = document.getElementById('related-scroll-right');
+    const relatedContainer = document.getElementById('related-books-details-scroll');
+    
+    if (relatedLeftBtn && relatedRightBtn && relatedContainer) {
+        relatedLeftBtn.addEventListener('click', () => {
+            relatedContainer.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+        
+        relatedRightBtn.addEventListener('click', () => {
+            relatedContainer.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+    }
+}
+
+// ==================== فحص URL للبحث ====================
+function checkURLForSearch() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('q')) {
+        const query = urlParams.get('q');
+        document.getElementById('search-input').value = query;
+        setTimeout(() => performSearch(), 100);
+    }
+}
