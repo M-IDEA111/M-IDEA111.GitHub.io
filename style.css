@@ -1409,3 +1409,44 @@ main {
   margin-bottom: 1em;
   text-align: justify;
 }
+/* تعديلات ألوان Footer والقائمة المنزلقة */
+.footer-explore-links a {
+    color: #ffffff !important;
+}
+
+.footer-explore-links a:hover {
+    color: #b61412 !important;
+}
+
+.social-icon {
+    color: #ffffff !important;
+}
+
+.social-icon:hover {
+    color: #b61412 !important;
+}
+
+.footer-support-links a {
+    color: #ffffff !important;
+}
+
+.footer-support-links a:hover {
+    color: #b61412 !important;
+}
+
+.menu-link,
+.category-link {
+    color: #ffffff !important;
+}
+
+.menu-link:hover,
+.category-link:hover {
+    color: #b61412 !important;
+}
+
+/* التأكد من أن العناوين تبقى حمراء */
+.footer-explore h4,
+.footer-support h4,
+.menu-title {
+    color: #b61412 !important;
+}
