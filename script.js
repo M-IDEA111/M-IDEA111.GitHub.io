@@ -1,4 +1,4 @@
-// script.js - Version 3.0 (كامل)
+// script.js - Version 5.1 (مع دعم الإعلانات بين الكتب)
 
 // المتغيرات العامة
 let currentBook = null;
@@ -29,6 +29,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3500);
     }
     
+    // الانتظار حتى تحميل جميع الكتب
+    waitForBooks();
+});
+
+// انتظار تحميل الكتب
+function waitForBooks() {
+    if (typeof books !== 'undefined' && books.length > 0) {
+        console.log('Books loaded, total:', books.length);
+        initializeApp();
+    } else {
+        console.log('Waiting for books to load...');
+        setTimeout(waitForBooks, 500);
+    }
+}
+
+// تهيئة التطبيق
+function initializeApp() {
+    // دمج بيانات جميع الكتب في مصفوفة واحدة
+    mergeAllBooks();
+    
     // تحميل الكتب في الأقسام
     loadBooks();
     
@@ -41,15 +61,59 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // التحقق من وجود كتاب محدد من البحث
     checkForBookFromSearch();
-});
+    
+    console.log('App initialized successfully with', books.length, 'books');
+}
 
-// تحميل الكتب في الأقسام
+// دمج جميع بيانات الكتب في مصفوفة واحدة
+function mergeAllBooks() {
+    // جمع جميع المصفوفات في مصفوفة واحدة
+    const allBooks = [];
+    
+    // دمج الكتب من جميع الملفات
+    if (typeof personalDevelopmentBooks !== 'undefined') {
+        allBooks.push(...personalDevelopmentBooks);
+    }
+    
+    if (typeof animeBooks !== 'undefined') {
+        allBooks.push(...animeBooks);
+    }
+    
+    if (typeof classicNovels !== 'undefined') {
+        allBooks.push(...classicNovels);
+    }
+    
+    if (typeof arabicNovels !== 'undefined') {
+        allBooks.push(...arabicNovels);
+    }
+    
+    if (typeof internationalNovels !== 'undefined') {
+        allBooks.push(...internationalNovels);
+    }
+    
+    if (typeof historyBooks !== 'undefined') {
+        allBooks.push(...historyBooks);
+    }
+    
+    // تعيين المصفوفة الرئيسية
+    window.books = allBooks;
+    console.log('Total books merged:', allBooks.length);
+    
+    // تسجيل عدد الكتب لكل فئة
+    const categories = ['personal-development', 'anime', 'classic', 'arabic', 'international', 'history'];
+    categories.forEach(category => {
+        const count = allBooks.filter(book => book.category === category).length;
+        console.log(`${category} books:`, count);
+    });
+}
+
+// تحميل الكتب في الأقسام مع الإعلان بين أول كتابين
 function loadBooks() {
     console.log('Loading books, total available:', books ? books.length : 0);
     
     if (!books || books.length === 0) {
         console.error('No books data available!');
-        setTimeout(loadBooks, 500); // المحاولة مرة أخرى
+        setTimeout(loadBooks, 500);
         return;
     }
     
@@ -63,25 +127,116 @@ function loadBooks() {
         
         if (container) {
             container.innerHTML = '';
-            categoryBooks.forEach(book => {
-                const bookCard = createBookCard(book);
-                container.appendChild(bookCard);
-            });
+            
+            if (categoryBooks.length === 0) {
+                container.innerHTML = `
+                    <div class="no-books-message">
+                        <i class="fas fa-book-open"></i>
+                        <p>No ${category} books available yet</p>
+                    </div>
+                `;
+            } else {
+                // إضافة الكتب مع الإعلان بين أول كتابين
+                categoryBooks.forEach((book, index) => {
+                    const bookCard = createBookCard(book);
+                    container.appendChild(bookCard);
+                    
+                    // إضافة الإعلان بين أول كتابين (بعد الكتاب الأول)
+                    if (index === 0 && categoryBooks.length > 1) {
+                        const adCard = createAdCard();
+                        container.appendChild(adCard);
+                    }
+                });
+            }
         }
     });
     
-    console.log('Books loaded successfully');
+    console.log('Books loaded successfully with ads');
+}
+
+// إنشاء بطاقة كتاب
+function createBookCard(book) {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.dataset.id = book.id;
+    
+    // استخدام صورة افتراضية إذا لم تكن متوفرة
+    const coverImage = book.coverImage || 'logo.png';
+    
+    card.innerHTML = `
+        <div class="book-cover">
+            <img src="${coverImage}" alt="${book.title}" class="cover-image" 
+                 onerror="this.src='logo.png'">
+        </div>
+        <h4 class="book-title">${book.title}</h4>
+        <div class="book-author">${book.author}</div>
+    `;
+    
+    card.addEventListener('click', () => showBookDetails(book.id));
+    
+    // منع سحب الصورة
+    const img = card.querySelector('img');
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    return card;
+}
+
+// إنشاء بطاقة إعلان
+function createAdCard() {
+    const adCard = document.createElement('div');
+    adCard.className = 'book-ad-card';
+    
+    adCard.innerHTML = `
+        <div class="book-ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
+                crossorigin="anonymous"></script>
+            <!-- إعلان بين الكتب -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3352888654930814"
+                data-ad-slot="4256859999"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    `;
+    
+    return adCard;
+}
+
+// إنشاء بطاقة إعلان للعرض الشبكي
+function createGridAdCard() {
+    const adCard = document.createElement('div');
+    adCard.className = 'grid-ad-card';
+    
+    adCard.innerHTML = `
+        <div class="grid-ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
+                crossorigin="anonymous"></script>
+            <!-- إعلان في العرض الشبكي -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3352888654930814"
+                data-ad-slot="4256859999"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    `;
+    
+    return adCard;
 }
 
 // التحقق من كتاب من البحث
 function checkForBookFromSearch() {
     console.log('Checking for book from search...');
     
-    // الطريقة 1: من localStorage
     const selectedBookId = localStorage.getItem('mideaSelectedBookId');
-    const redirectData = localStorage.getItem('mideaBookRedirect');
-    
-    // الطريقة 2: من URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const bookIdFromUrl = urlParams.get('bookId');
     const fromSearch = urlParams.has('fromSearch');
@@ -99,73 +254,35 @@ function checkForBookFromSearch() {
     if (bookIdToShow) {
         console.log('Attempting to show book:', bookIdToShow);
         
-        // الانتظار حتى تحميل الكتب
-        const checkInterval = setInterval(() => {
-            if (booksLoaded && books && books.length > 0) {
-                clearInterval(checkInterval);
+        const book = books.find(b => b.id == bookIdToShow);
+        if (book) {
+            console.log('Book found, showing details:', book.title);
+            
+            setTimeout(() => {
+                showBookDetails(book.id);
                 
-                const book = books.find(b => b.id === bookIdToShow);
-                if (book) {
-                    console.log('Book found, showing details:', book.title);
-                    
-                    // تأخير بسيط لضمان عرض الصفحة
-                    setTimeout(() => {
-                        showBookDetails(book.id);
-                        
-                        // تنظيف البيانات
-                        localStorage.removeItem('mideaSelectedBookId');
-                        localStorage.removeItem('mideaBookRedirect');
-                        
-                        // تحديث URL بدون الباراميترات
-                        if (fromSearch) {
-                            window.history.replaceState({}, document.title, window.location.pathname);
-                        }
-                    }, 300);
-                } else {
-                    console.error('Book not found with ID:', bookIdToShow);
+                // تنظيف البيانات
+                localStorage.removeItem('mideaSelectedBookId');
+                
+                // تحديث URL بدون الباراميترات
+                if (fromSearch) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
                 }
-            }
-        }, 100);
-        
-        // مهلة 5 ثوانٍ كحد أقصى
-        setTimeout(() => {
-            clearInterval(checkInterval);
-            console.log('Timeout waiting for books to load');
-        }, 5000);
+            }, 300);
+        } else {
+            console.error('Book not found with ID:', bookIdToShow);
+        }
     }
-}
-
-// إنشاء بطاقة كتاب
-function createBookCard(book) {
-    const card = document.createElement('div');
-    card.className = 'book-card';
-    card.dataset.id = book.id;
-    
-    card.innerHTML = `
-        <div class="book-cover">
-            <img src="${book.coverImage}" alt="${book.title}" class="cover-image">
-        </div>
-        <h4 class="book-title">${book.title}</h4>
-        <div class="book-author">${book.author}</div>
-    `;
-    
-    card.addEventListener('click', () => showBookDetails(book.id));
-    
-    // منع سحب الصورة
-    const img = card.querySelector('img');
-    img.addEventListener('dragstart', (e) => e.preventDefault());
-    img.addEventListener('contextmenu', (e) => e.preventDefault());
-    
-    return card;
 }
 
 // عرض صفحة تفاصيل الكتاب
 function showBookDetails(bookId) {
     console.log('showBookDetails called for:', bookId);
     
-    const book = books.find(b => b.id === bookId);
+    const book = books.find(b => b.id == bookId);
     if (!book) {
         console.error('Book not found:', bookId);
+        alert('Book not found!');
         return;
     }
     
@@ -184,26 +301,19 @@ function showBookDetails(bookId) {
     }
     
     // تعبئة البيانات
-    const coverImg = document.getElementById('details-cover-image');
-    if (coverImg) {
-        coverImg.src = book.coverImage;
-        coverImg.alt = book.title;
-    }
-    
-    const titleEl = document.getElementById('book-details-title');
-    if (titleEl) titleEl.textContent = book.title;
-    
-    const descEl = document.getElementById('book-details-description');
-    if (descEl) descEl.textContent = book.description || 'No description available.';
-    
-    const authorEl = document.getElementById('book-details-author');
-    if (authorEl) authorEl.textContent = book.author;
+    const coverImage = book.coverImage || 'logo.png';
+    document.getElementById('details-cover-image').src = coverImage;
+    document.getElementById('details-cover-image').alt = book.title;
+    document.getElementById('book-details-title').textContent = book.title;
+    document.getElementById('book-details-author').textContent = book.author;
+    document.getElementById('book-details-description').textContent = 
+        book.description || 'No description available.';
     
     // تحميل الكتب ذات الصلة
     loadRelatedBooksInDetails(book);
     
     // التمرير للأعلى
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     
     console.log('Book details shown successfully:', book.title);
 }
@@ -229,15 +339,30 @@ function startReadingFromDetails() {
     displayPage();
     
     // التمرير للأعلى
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     
     console.log('Reading started for book:', currentBook.title);
 }
 
 // عرض الصفحة في قسم القراءة
 function displayPage() {
-    if (!currentBook || !currentBook.content) {
-        console.error('No book content available');
+    if (!currentBook) {
+        console.error('No book selected');
+        return;
+    }
+    
+    if (!currentBook.content || !Array.isArray(currentBook.content) || currentBook.content.length === 0) {
+        console.error('No content available for this book');
+        const contentDiv = document.getElementById('reading-content');
+        if (contentDiv) {
+            contentDiv.innerHTML = `
+                <div class="no-content">
+                    <i class="fas fa-book"></i>
+                    <h3>No Content Available</h3>
+                    <p>This book doesn't have any readable content yet.</p>
+                </div>
+            `;
+        }
         return;
     }
     
@@ -245,9 +370,7 @@ function displayPage() {
     const page = currentBook.content[currentPage];
     
     // عرض المحتوى
-    contentDiv.innerHTML = `
-        <div class="page-text">${page.text}</div>
-    `;
+    contentDiv.innerHTML = `<div class="page-text">${page.text || 'No content for this page'}</div>`;
     
     // تحديث مؤشر الصفحة
     document.getElementById('page-indicator').textContent = 
@@ -260,38 +383,27 @@ function displayPage() {
 
 // تحميل الكتب ذات الصلة في صفحة التفاصيل
 function loadRelatedBooksInDetails(book) {
-    const relatedBooks = books
-        .filter(b => b.category === book.category && b.id !== book.id)
-        .slice(0, 5);
-    
     const container = document.getElementById('related-books-details-scroll');
+    if (!container) return;
+    
     container.innerHTML = '';
     
+    if (!books || books.length === 0) {
+        container.innerHTML = '<p class="no-related">Loading related books...</p>';
+        return;
+    }
+    
+    const relatedBooks = books
+        .filter(b => b.category === book.category && b.id != book.id)
+        .slice(0, 5);
+    
     if (relatedBooks.length === 0) {
-        container.innerHTML = '<p class="no-related">No related books found.</p>';
+        container.innerHTML = '<p class="no-related">No related books found</p>';
         return;
     }
     
     relatedBooks.forEach(book => {
-        const relatedCard = document.createElement('div');
-        relatedCard.className = 'book-card';
-        relatedCard.dataset.id = book.id;
-        
-        relatedCard.innerHTML = `
-            <div class="book-cover">
-                <img src="${book.coverImage}" alt="${book.title}" class="cover-image">
-            </div>
-            <h4 class="book-title">${book.title}</h4>
-            <div class="book-author">${book.author}</div>
-        `;
-        
-        relatedCard.addEventListener('click', () => showBookDetails(book.id));
-        
-        // منع سحب الصورة
-        const img = relatedCard.querySelector('img');
-        img.addEventListener('dragstart', (e) => e.preventDefault());
-        img.addEventListener('contextmenu', (e) => e.preventDefault());
-        
+        const relatedCard = createBookCard(book);
         container.appendChild(relatedCard);
     });
 }
@@ -371,7 +483,7 @@ function setupEventListeners() {
         const slideMenu = document.getElementById('slide-menu');
         const transferBtn = document.getElementById('transfer-btn');
         
-        if (slideMenuOpen && 
+        if (slideMenuOpen && slideMenu && transferBtn &&
             !slideMenu.contains(event.target) && 
             !transferBtn.contains(event.target)) {
             closeSlideMenu();
@@ -400,7 +512,7 @@ function setupEventListeners() {
             if (currentPage > 0) {
                 currentPage--;
                 displayPage();
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
@@ -411,7 +523,7 @@ function setupEventListeners() {
             if (currentBook && currentPage < currentBook.content.length - 1) {
                 currentPage++;
                 displayPage();
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
@@ -422,7 +534,7 @@ function setupEventListeners() {
         backToDetailsBtn.addEventListener('click', () => {
             document.getElementById('reading-container').style.display = 'none';
             document.getElementById('book-details-container').style.display = 'block';
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
     
@@ -438,7 +550,7 @@ function setupEventListeners() {
                 document.getElementById('books-section').style.display = 'block';
             }
             
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
     
@@ -448,7 +560,7 @@ function setupEventListeners() {
         backFromSearchBtn.addEventListener('click', () => {
             document.getElementById('search-results-section').style.display = 'none';
             document.getElementById('books-section').style.display = 'block';
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
     
@@ -458,7 +570,7 @@ function setupEventListeners() {
         backFromCategoryBtn.addEventListener('click', () => {
             document.getElementById('category-view').style.display = 'none';
             document.getElementById('books-section').style.display = 'block';
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
     
@@ -501,7 +613,7 @@ function setupEventListeners() {
         }
     });
     
-    // إضافة: زر البحث في الهيدر
+    // زر البحث في الهيدر
     const searchBtnHeader = document.getElementById('search-icon-btn');
     if (searchBtnHeader) {
         searchBtnHeader.addEventListener('click', function(e) {
@@ -529,12 +641,14 @@ function toggleSlideMenu() {
 
 function closeSlideMenu() {
     const slideMenu = document.getElementById('slide-menu');
-    slideMenu.classList.remove('active');
+    if (slideMenu) {
+        slideMenu.classList.remove('active');
+    }
     slideMenuOpen = false;
     document.body.style.overflow = '';
 }
 
-// عرض التصنيف
+// عرض التصنيف مع الإعلان بين أول كتابين
 function showCategoryView(category) {
     const categoryBooks = books.filter(book => book.category === category);
     currentCategory = category;
@@ -558,17 +672,32 @@ function showCategoryView(category) {
     
     document.getElementById('category-view-title').textContent = categoryNames[category] || category;
     
-    // عرض الكتب
+    // عرض الكتب مع الإعلان بين أول كتابين
     const booksGrid = document.getElementById('category-books-grid');
     booksGrid.innerHTML = '';
     
-    categoryBooks.forEach(book => {
-        const bookCard = createBookCard(book);
-        booksGrid.appendChild(bookCard);
-    });
+    if (categoryBooks.length === 0) {
+        booksGrid.innerHTML = `
+            <div class="no-books-message">
+                <i class="fas fa-book-open"></i>
+                <p>No books in this category yet</p>
+            </div>
+        `;
+    } else {
+        categoryBooks.forEach((book, index) => {
+            const bookCard = createBookCard(book);
+            booksGrid.appendChild(bookCard);
+            
+            // إضافة الإعلان بين أول كتابين (بعد الكتاب الأول)
+            if (index === 0 && categoryBooks.length > 1) {
+                const adCard = createGridAdCard();
+                booksGrid.appendChild(adCard);
+            }
+        });
+    }
     
     // التمرير للأعلى
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // عرض تحذير النسخ
@@ -585,12 +714,22 @@ function showCopyWarning() {
 
 // دالة البحث (للبحث داخل الصفحة الرئيسية)
 function searchBooks(query) {
+    if (!books || books.length === 0) return [];
+    
     const options = {
         includeScore: true,
         threshold: 0.4,
         keys: ['title', 'author', 'description', 'category']
     };
     
-    const fuse = new Fuse(books, options);
-    return fuse.search(query).map(result => result.item);
+    try {
+        const fuse = new Fuse(books, options);
+        return fuse.search(query).map(result => result.item);
+    } catch (error) {
+        console.error('Search error:', error);
+        return books.filter(book => 
+            book.title.toLowerCase().includes(query.toLowerCase()) ||
+            book.author.toLowerCase().includes(query.toLowerCase())
+        );
+    }
 }

@@ -292,49 +292,32 @@
       </div>
     </div>
   </div>
+  
   <!-- Reading Section -->
-<div class="reading-container" id="reading-container" style="display: none;">
-  <div class="reading-header">
-    <button class="back-to-details" id="back-to-details">
-      <i class="fas fa-arrow-left"></i> Back to Details
-    </button>
-    <h3 class="reading-title" id="reading-title"></h3>
-  </div>
-  
-  <div class="reading-content" id="reading-content">
+  <div class="reading-container" id="reading-container" style="display: none;">
+    <div class="reading-header">
+      <button class="back-to-details" id="back-to-details">
+        <i class="fas fa-arrow-left"></i> Back to Details
+      </button>
+      <h3 class="reading-title" id="reading-title"></h3>
+    </div>
     
-    <!-- نص الجزء الأول من الصفحة -->
-    <div id="reading-content-part1"></div>
+    <div class="reading-content" id="reading-content">
+      <!-- Reading content will be here -->
+    </div>
     
-    <!-- نص الجزء الثاني من الصفحة -->
-    <div id="reading-content-part2"></div>
+    <div class="page-navigation-simple">
+      <button class="nav-btn-simple" id="prev-page" disabled>
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="page-indicator" id="page-indicator">Page 1 of 1</div>
+      <button class="nav-btn-simple" id="next-page">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
   </div>
-  
-  <div class="page-navigation-simple">
-    <button class="nav-btn-simple" id="prev-page" disabled>
-      <i class="fas fa-arrow-left"></i>
-    </button>
-    <div class="page-indicator" id="page-indicator">Page 1 of 5</div>
-    <button class="nav-btn-simple" id="next-page">
-      <i class="fas fa-arrow-right"></i>
-    </button>
-  </div>
-  </div>
-</div>
-<!-- ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3352888654930814"
-     data-ad-slot="4256859999"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-</div>
-</div>
 </main>
+
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">
@@ -409,15 +392,18 @@
   <i class="fas fa-exclamation-triangle"></i> Copying is not allowed
 </div>
 
+<!-- مكتبات خارجية -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
-<!-- بيانات الكتب -->
-<script src="data.js"></script>
+<script src="anime-data.js"></script>
+<script src="classic-novels-data.js"></script>
+<script src="arabic-novels-data.js"></script>
+<script src="international-novels-data.js"></script>
+<script src="personal-development.js"></script>
+<script src="history-books.js"></script>
 
 <!-- الكود الرئيسي -->
 <script src="script.js"></script>
-
-<!-- مكتبات خارجية -->
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
 <script>
     // سكريبت فحص

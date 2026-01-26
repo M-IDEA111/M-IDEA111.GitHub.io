@@ -1,4 +1,4 @@
-// search.js - ملف البحث المعدل بدون هيدر أو فوتر
+// search.js - ملف البحث المعدل مع دعم الإعلانات بين الكتب
 
 // ==================== تهيئة الصفحة ====================
 document.addEventListener('DOMContentLoaded', function() {
@@ -14,19 +14,22 @@ let currentBook = null;
 let currentPage = 0;
 let searchHistory = JSON.parse(localStorage.getItem('mideaSearchHistory')) || [];
 let searchTimeout = null;
+let allBooks = [];
 
 // ==================== تهيئة صفحة البحث ====================
 function initializeSearchPage() {
     console.log('Initializing search page...');
     
-    // تحقق من تحميل بيانات الكتب
-    if (typeof books === 'undefined' || books.length === 0) {
+    // دمج جميع البيانات أولاً
+    mergeAllBooksForSearch();
+    
+    console.log('Total books for search:', allBooks.length);
+    
+    if (allBooks.length === 0) {
         console.log('Waiting for books data...');
         setTimeout(initializeSearchPage, 500);
         return;
     }
-    
-    console.log('Books data loaded:', books.length);
     
     // تهيئة محرك البحث
     initializeSearchEngine();
@@ -52,6 +55,43 @@ function initializeSearchPage() {
     console.log('Search page initialized successfully');
 }
 
+function mergeAllBooksForSearch() {
+    allBooks = [];
+    
+    // دمج الكتب من جميع الملفات
+    if (typeof personalDevelopmentBooks !== 'undefined') {
+        allBooks.push(...personalDevelopmentBooks);
+        console.log('Added personal development books:', personalDevelopmentBooks.length);
+    }
+    
+    if (typeof animeBooks !== 'undefined') {
+        allBooks.push(...animeBooks);
+        console.log('Added anime books:', animeBooks.length);
+    }
+    
+    if (typeof classicNovels !== 'undefined') {
+        allBooks.push(...classicNovels);
+        console.log('Added classic novels:', classicNovels.length);
+    }
+    
+    if (typeof arabicNovels !== 'undefined') {
+        allBooks.push(...arabicNovels);
+        console.log('Added arabic novels:', arabicNovels.length);
+    }
+    
+    if (typeof internationalNovels !== 'undefined') {
+        allBooks.push(...internationalNovels);
+        console.log('Added international novels:', internationalNovels.length);
+    }
+    
+    if (typeof historyBooks !== 'undefined') {
+        allBooks.push(...historyBooks);
+        console.log('Added history books:', historyBooks.length);
+    }
+    
+    console.log('Total books merged for search:', allBooks.length);
+}
+
 // ==================== تهيئة محرك البحث ====================
 function initializeSearchEngine() {
     try {
@@ -67,8 +107,8 @@ function initializeSearchEngine() {
             minMatchCharLength: 2
         };
         
-        fuse = new Fuse(books, options);
-        console.log('Search engine initialized with', books.length, 'books');
+        fuse = new Fuse(allBooks, options);
+        console.log('Search engine initialized with', allBooks.length, 'books');
     } catch (error) {
         console.error('Failed to initialize search engine:', error);
     }
@@ -113,7 +153,7 @@ function performSearch() {
                     <p>No results found for "${query}"</p>
                 </div>`;
         } else {
-            results.forEach(result => {
+            results.forEach((result, index) => {
                 const book = result.item;
                 
                 const card = document.createElement('div');
@@ -129,6 +169,12 @@ function performSearch() {
                 
                 card.addEventListener('click', () => showBookDetails(book.id));
                 resultsGrid.appendChild(card);
+                
+                // إضافة الإعلان بين أول كتابين في نتائج البحث
+                if (index === 0 && results.length > 1) {
+                    const adCard = createSearchAdCard();
+                    resultsGrid.appendChild(adCard);
+                }
             });
             
             // إضافة إلى سجل البحث
@@ -144,6 +190,33 @@ function performSearch() {
                 <p>Search error occurred</p>
             </div>`;
     }
+}
+
+// إنشاء بطاقة إعلان لصفحة البحث
+function createSearchAdCard() {
+    const adCard = document.createElement('div');
+    adCard.className = 'book-card';
+    
+    adCard.innerHTML = `
+        <div class="book-cover" style="display: flex; align-items: center; justify-content: center;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
+                crossorigin="anonymous"></script>
+            <!-- إعلان في نتائج البحث -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3352888654930814"
+                data-ad-slot="4256859999"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div class="book-title">Sponsored</div>
+        <div class="book-author">Advertisement</div>
+    `;
+    
+    return adCard;
 }
 
 function debouncedSearch() {
@@ -253,12 +326,12 @@ function hideDeleteModal() {
 function showBookDetails(bookId) {
     console.log('Showing book details for ID:', bookId);
     
-    if (typeof books === 'undefined' || !Array.isArray(books)) {
+    if (allBooks.length === 0) {
         console.error('Books data not available');
         return;
     }
     
-    const book = books.find(b => b.id === bookId);
+    const book = allBooks.find(b => b.id == bookId);
     if (!book) {
         console.error('Book not found:', bookId);
         return;
@@ -283,6 +356,9 @@ function showBookDetails(bookId) {
     document.getElementById('book-details-description').textContent = 
         book.description || 'No description available.';
     
+    // حفظ في localStorage للعودة للصفحة الرئيسية
+    localStorage.setItem('mideaSelectedBookId', book.id);
+    
     // تحميل الكتب ذات الصلة
     loadRelatedBooks(book);
     
@@ -303,6 +379,9 @@ function backToSearch() {
     if (resultsGrid) resultsGrid.style.display = 'grid';
     if (searchHeader) searchHeader.style.display = 'flex';
     
+    // إزالة من localStorage
+    localStorage.removeItem('mideaSelectedBookId');
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -312,13 +391,13 @@ function loadRelatedBooks(book) {
     
     container.innerHTML = '';
     
-    if (typeof books === 'undefined' || !Array.isArray(books)) {
+    if (allBooks.length === 0) {
         container.innerHTML = '<p class="no-related">Loading related books...</p>';
         return;
     }
     
-    const relatedBooks = books
-        .filter(b => b.category === book.category && b.id !== book.id)
+    const relatedBooks = allBooks
+        .filter(b => b.category === book.category && b.id != book.id)
         .slice(0, 5);
     
     if (relatedBooks.length === 0) {
@@ -330,7 +409,8 @@ function loadRelatedBooks(book) {
         const card = document.createElement('div');
         card.className = 'book-card';
         card.innerHTML = `
-            <img src="${book.coverImage || 'logo.png'}" class="book-cover" alt="${book.title}">
+            <img src="${book.coverImage || 'logo.png'}" class="book-cover" alt="${book.title}"
+                 onerror="this.src='logo.png'">
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
         `;
@@ -513,6 +593,20 @@ function setupEventListeners() {
         
         relatedRightBtn.addEventListener('click', () => {
             relatedContainer.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+    }
+    
+    // زر الرجوع للصفحة الرئيسية
+    const backToHomeBtn = document.getElementById('back-to-home');
+    if (backToHomeBtn) {
+        backToHomeBtn.addEventListener('click', () => {
+            // حفظ معرف الكتاب للعودة إليه في الصفحة الرئيسية
+            if (currentBook) {
+                localStorage.setItem('mideaSelectedBookId', currentBook.id);
+            }
+            
+            // الذهاب إلى الصفحة الرئيسية
+            window.location.href = 'index.html?fromSearch=true';
         });
     }
 }
