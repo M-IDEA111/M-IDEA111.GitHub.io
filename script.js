@@ -1,4 +1,4 @@
-// script.js - Version 5.1 (مع دعم الإعلانات بين الكتب)
+// script.js - Version 5.2 (مع إعلانات موحدة الحجم)
 
 // المتغيرات العامة
 let currentBook = null;
@@ -98,16 +98,9 @@ function mergeAllBooks() {
     // تعيين المصفوفة الرئيسية
     window.books = allBooks;
     console.log('Total books merged:', allBooks.length);
-    
-    // تسجيل عدد الكتب لكل فئة
-    const categories = ['personal-development', 'anime', 'classic', 'arabic', 'international', 'history'];
-    categories.forEach(category => {
-        const count = allBooks.filter(book => book.category === category).length;
-        console.log(`${category} books:`, count);
-    });
 }
 
-// تحميل الكتب في الأقسام مع الإعلان بين أول كتابين
+// تحميل الكتب في الأقسام
 function loadBooks() {
     console.log('Loading books, total available:', books ? books.length : 0);
     
@@ -136,100 +129,15 @@ function loadBooks() {
                     </div>
                 `;
             } else {
-                // إضافة الكتب مع الإعلان بين أول كتابين
-                categoryBooks.forEach((book, index) => {
+                categoryBooks.forEach(book => {
                     const bookCard = createBookCard(book);
                     container.appendChild(bookCard);
-                    
-                    // إضافة الإعلان بين أول كتابين (بعد الكتاب الأول)
-                    if (index === 0 && categoryBooks.length > 1) {
-                        const adCard = createAdCard();
-                        container.appendChild(adCard);
-                    }
                 });
             }
         }
     });
     
-    console.log('Books loaded successfully with ads');
-}
-
-// إنشاء بطاقة كتاب
-function createBookCard(book) {
-    const card = document.createElement('div');
-    card.className = 'book-card';
-    card.dataset.id = book.id;
-    
-    // استخدام صورة افتراضية إذا لم تكن متوفرة
-    const coverImage = book.coverImage || 'logo.png';
-    
-    card.innerHTML = `
-        <div class="book-cover">
-            <img src="${coverImage}" alt="${book.title}" class="cover-image" 
-                 onerror="this.src='logo.png'">
-        </div>
-        <h4 class="book-title">${book.title}</h4>
-        <div class="book-author">${book.author}</div>
-    `;
-    
-    card.addEventListener('click', () => showBookDetails(book.id));
-    
-    // منع سحب الصورة
-    const img = card.querySelector('img');
-    img.addEventListener('dragstart', (e) => e.preventDefault());
-    img.addEventListener('contextmenu', (e) => e.preventDefault());
-    
-    return card;
-}
-
-// إنشاء بطاقة إعلان
-function createAdCard() {
-    const adCard = document.createElement('div');
-    adCard.className = 'book-ad-card';
-    
-    adCard.innerHTML = `
-        <div class="book-ad-container">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-                crossorigin="anonymous"></script>
-            <!-- إعلان بين الكتب -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-3352888654930814"
-                data-ad-slot="4256859999"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    `;
-    
-    return adCard;
-}
-
-// إنشاء بطاقة إعلان للعرض الشبكي
-function createGridAdCard() {
-    const adCard = document.createElement('div');
-    adCard.className = 'grid-ad-card';
-    
-    adCard.innerHTML = `
-        <div class="grid-ad-container">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-                crossorigin="anonymous"></script>
-            <!-- إعلان في العرض الشبكي -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-3352888654930814"
-                data-ad-slot="4256859999"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    `;
-    
-    return adCard;
+    console.log('Books loaded successfully');
 }
 
 // التحقق من كتاب من البحث
@@ -273,6 +181,32 @@ function checkForBookFromSearch() {
             console.error('Book not found with ID:', bookIdToShow);
         }
     }
+}
+
+// إنشاء بطاقة كتاب
+function createBookCard(book) {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.dataset.id = book.id;
+    
+    const coverImage = book.coverImage || 'logo.png';
+    
+    card.innerHTML = `
+        <div class="book-cover">
+            <img src="${coverImage}" alt="${book.title}" class="cover-image" 
+                 onerror="this.src='logo.png'">
+        </div>
+        <h4 class="book-title">${book.title}</h4>
+        <div class="book-author">${book.author}</div>
+    `;
+    
+    card.addEventListener('click', () => showBookDetails(book.id));
+    
+    const img = card.querySelector('img');
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    return card;
 }
 
 // عرض صفحة تفاصيل الكتاب
@@ -344,7 +278,7 @@ function startReadingFromDetails() {
     console.log('Reading started for book:', currentBook.title);
 }
 
-// عرض الصفحة في قسم القراءة
+// عرض الصفحة في قسم القراءة مع الإعلانات
 function displayPage() {
     if (!currentBook) {
         console.error('No book selected');
@@ -369,8 +303,62 @@ function displayPage() {
     const contentDiv = document.getElementById('reading-content');
     const page = currentBook.content[currentPage];
     
+    // تحضير محتوى الصفحة مع الإعلانات في 3 مراحل
+    let pageContent = '';
+    
+    // المرحلة 1: الإعلان قبل بداية أول سطر
+    pageContent += `
+        <div class="ad-section ad-top">
+            <!-- إعلان - بداية الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
+    // نص الصفحة مع المرحلة 2: الإعلان في منتصف النص
+    const textContent = page.text || 'No content for this page';
+    const textParts = textContent.split('\n');
+    const midPoint = Math.floor(textParts.length / 2);
+    
+    // النصف الأول من النص
+    for (let i = 0; i < midPoint; i++) {
+        pageContent += `<p>${textParts[i]}</p>`;
+    }
+    
+    // المرحلة 2: الإعلان في منتصف الصفحة
+    pageContent += `
+        <div class="ad-section ad-middle">
+            <!-- إعلان - منتصف الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
+    // النصف الثاني من النص
+    for (let i = midPoint; i < textParts.length; i++) {
+        pageContent += `<p>${textParts[i]}</p>`;
+    }
+    
+    // المرحلة 3: الإعلان في نهاية الصفحة
+    pageContent += `
+        <div class="ad-section ad-bottom">
+            <!-- إعلان - نهاية الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
     // عرض المحتوى
-    contentDiv.innerHTML = `<div class="page-text">${page.text || 'No content for this page'}</div>`;
+    contentDiv.innerHTML = `<div class="page-text">${pageContent}</div>`;
     
     // تحديث مؤشر الصفحة
     document.getElementById('page-indicator').textContent = 
@@ -379,6 +367,18 @@ function displayPage() {
     // تحديث أزرار التنقل
     document.getElementById('prev-page').disabled = currentPage === 0;
     document.getElementById('next-page').disabled = currentPage === currentBook.content.length - 1;
+    
+    // تحديث الإعلانات
+    setTimeout(() => {
+        if (window.adsbygoogle) {
+            try {
+                window.adsbygoogle.push({});
+                console.log('Ads refreshed successfully');
+            } catch (error) {
+                console.error('Error refreshing ads:', error);
+            }
+        }
+    }, 500);
 }
 
 // تحميل الكتب ذات الصلة في صفحة التفاصيل
@@ -648,7 +648,7 @@ function closeSlideMenu() {
     document.body.style.overflow = '';
 }
 
-// عرض التصنيف مع الإعلان بين أول كتابين
+// عرض التصنيف
 function showCategoryView(category) {
     const categoryBooks = books.filter(book => book.category === category);
     currentCategory = category;
@@ -672,7 +672,7 @@ function showCategoryView(category) {
     
     document.getElementById('category-view-title').textContent = categoryNames[category] || category;
     
-    // عرض الكتب مع الإعلان بين أول كتابين
+    // عرض الكتب
     const booksGrid = document.getElementById('category-books-grid');
     booksGrid.innerHTML = '';
     
@@ -684,15 +684,9 @@ function showCategoryView(category) {
             </div>
         `;
     } else {
-        categoryBooks.forEach((book, index) => {
+        categoryBooks.forEach(book => {
             const bookCard = createBookCard(book);
             booksGrid.appendChild(bookCard);
-            
-            // إضافة الإعلان بين أول كتابين (بعد الكتاب الأول)
-            if (index === 0 && categoryBooks.length > 1) {
-                const adCard = createGridAdCard();
-                booksGrid.appendChild(adCard);
-            }
         });
     }
     

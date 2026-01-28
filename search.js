@@ -1,4 +1,4 @@
-// search.js - ملف البحث المعدل مع دعم الإعلانات بين الكتب
+// search.js - ملف البحث المعدل مع إعلانات موحدة الحجم
 
 // ==================== تهيئة الصفحة ====================
 document.addEventListener('DOMContentLoaded', function() {
@@ -153,7 +153,7 @@ function performSearch() {
                     <p>No results found for "${query}"</p>
                 </div>`;
         } else {
-            results.forEach((result, index) => {
+            results.forEach(result => {
                 const book = result.item;
                 
                 const card = document.createElement('div');
@@ -169,12 +169,6 @@ function performSearch() {
                 
                 card.addEventListener('click', () => showBookDetails(book.id));
                 resultsGrid.appendChild(card);
-                
-                // إضافة الإعلان بين أول كتابين في نتائج البحث
-                if (index === 0 && results.length > 1) {
-                    const adCard = createSearchAdCard();
-                    resultsGrid.appendChild(adCard);
-                }
             });
             
             // إضافة إلى سجل البحث
@@ -190,33 +184,6 @@ function performSearch() {
                 <p>Search error occurred</p>
             </div>`;
     }
-}
-
-// إنشاء بطاقة إعلان لصفحة البحث
-function createSearchAdCard() {
-    const adCard = document.createElement('div');
-    adCard.className = 'book-card';
-    
-    adCard.innerHTML = `
-        <div class="book-cover" style="display: flex; align-items: center; justify-content: center;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-                crossorigin="anonymous"></script>
-            <!-- إعلان في نتائج البحث -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-3352888654930814"
-                data-ad-slot="4256859999"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div class="book-title">Sponsored</div>
-        <div class="book-author">Advertisement</div>
-    `;
-    
-    return adCard;
 }
 
 function debouncedSearch() {
@@ -419,7 +386,7 @@ function loadRelatedBooks(book) {
     });
 }
 
-// ==================== القراءة ====================
+// ==================== القراءة مع الإعلانات ====================
 function startReading() {
     if (!currentBook) {
         console.error('No book selected for reading');
@@ -452,7 +419,63 @@ function displayPage() {
     if (!contentDiv) return;
     
     const page = currentBook.content[currentPage];
-    contentDiv.innerHTML = `<div class="page-text">${page.text || 'No content'}</div>`;
+    
+    // تحضير محتوى الصفحة مع الإعلانات في 3 مراحل
+    let pageContent = '';
+    
+    // المرحلة 1: الإعلان قبل بداية أول سطر
+    pageContent += `
+        <div class="ad-section ad-top">
+            <!-- إعلان - بداية الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
+    // نص الصفحة مع المرحلة 2: الإعلان في منتصف النص
+    const textContent = page.text || 'No content for this page';
+    const textParts = textContent.split('\n');
+    const midPoint = Math.floor(textParts.length / 2);
+    
+    // النصف الأول من النص
+    for (let i = 0; i < midPoint; i++) {
+        pageContent += `<p>${textParts[i]}</p>`;
+    }
+    
+    // المرحلة 2: الإعلان في منتصف الصفحة
+    pageContent += `
+        <div class="ad-section ad-middle">
+            <!-- إعلان - منتصف الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
+    // النصف الثاني من النص
+    for (let i = midPoint; i < textParts.length; i++) {
+        pageContent += `<p>${textParts[i]}</p>`;
+    }
+    
+    // المرحلة 3: الإعلان في نهاية الصفحة
+    pageContent += `
+        <div class="ad-section ad-bottom">
+            <!-- إعلان - نهاية الصفحة -->
+            <ins class="adsbygoogle"
+                 data-ad-client="ca-pub-3352888654930814"
+                 data-ad-slot="4256859999"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+    
+    // عرض المحتوى
+    contentDiv.innerHTML = `<div class="page-text">${pageContent}</div>`;
     
     document.getElementById('page-indicator').textContent = 
         `Page ${currentPage + 1} of ${currentBook.content.length}`;
@@ -460,6 +483,18 @@ function displayPage() {
     document.getElementById('prev-page').disabled = currentPage === 0;
     document.getElementById('next-page').disabled = 
         currentPage === currentBook.content.length - 1;
+    
+    // تحديث الإعلانات
+    setTimeout(() => {
+        if (window.adsbygoogle) {
+            try {
+                window.adsbygoogle.push({});
+                console.log('Ads refreshed successfully');
+            } catch (error) {
+                console.error('Error refreshing ads:', error);
+            }
+        }
+    }, 500);
 }
 
 function backToDetails() {
