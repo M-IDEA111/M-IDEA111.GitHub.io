@@ -1,4 +1,4 @@
-// search.js - ملف البحث المعدل مع إعلانات موحدة الحجم
+// search.js - ملف البحث المعدل مع إعلانات بنفس الحجم 400x60
 
 // ==================== تهيئة الصفحة ====================
 document.addEventListener('DOMContentLoaded', function() {
@@ -420,7 +420,7 @@ function displayPage() {
     
     const page = currentBook.content[currentPage];
     
-    // تحضير محتوى الصفحة مع الإعلانات في 3 مراحل
+    // تحضير محتوى الصفحة مع الإعلانات في 3 مراحل - جميعها بنفس الحجم 400x60
     let pageContent = '';
     
     // المرحلة 1: الإعلان قبل بداية أول سطر
@@ -428,10 +428,9 @@ function displayPage() {
         <div class="ad-section ad-top">
             <!-- إعلان - بداية الصفحة -->
             <ins class="adsbygoogle"
+                 style="display:inline-block;width:400px;height:60px"
                  data-ad-client="ca-pub-3352888654930814"
-                 data-ad-slot="4256859999"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+                 data-ad-slot="4256859999"></ins>
         </div>
     `;
     
@@ -450,10 +449,9 @@ function displayPage() {
         <div class="ad-section ad-middle">
             <!-- إعلان - منتصف الصفحة -->
             <ins class="adsbygoogle"
+                 style="display:inline-block;width:400px;height:60px"
                  data-ad-client="ca-pub-3352888654930814"
-                 data-ad-slot="4256859999"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+                 data-ad-slot="4256859999"></ins>
         </div>
     `;
     
@@ -467,10 +465,9 @@ function displayPage() {
         <div class="ad-section ad-bottom">
             <!-- إعلان - نهاية الصفحة -->
             <ins class="adsbygoogle"
+                 style="display:inline-block;width:400px;height:60px"
                  data-ad-client="ca-pub-3352888654930814"
-                 data-ad-slot="4256859999"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+                 data-ad-slot="4256859999"></ins>
         </div>
     `;
     

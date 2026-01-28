@@ -614,7 +614,7 @@ main {
     padding: 0 10px;
 }
 
-/* الإعلانات في صفحات القراءة - بدون حدود حمراء وخلفية شفافة */
+/* الإعلانات في صفحات القراءة - جميعها بنفس الحجم 400x60 */
 .ad-section {
     text-align: center;
     margin: 20px 0;
@@ -637,7 +637,9 @@ main {
 }
 
 .adsbygoogle {
-    display: block !important;
+    display: inline-block !important;
+    width: 400px !important;
+    height: 60px !important;
     margin: 0 auto !important;
     border: none !important;
     border-radius: 8px;
@@ -979,6 +981,12 @@ main {
     .related-scroll-arrow.right {
         right: -40px;
     }
+    
+    /* تحجيم الإعلانات للشاشات الكبيرة المتوسطة */
+    .adsbygoogle {
+        width: 380px !important;
+        height: 57px !important;
+    }
 }
 
 @media (max-width: 992px) {
@@ -1035,6 +1043,12 @@ main {
     
     .related-scroll-arrow.right {
         right: -38px;
+    }
+    
+    /* تحجيم الإعلانات للشاشات المتوسطة */
+    .adsbygoogle {
+        width: 350px !important;
+        height: 53px !important;
     }
 }
 
@@ -1158,6 +1172,12 @@ main {
     .related-scroll-arrow.right {
         right: -36px;
     }
+    
+    /* تحجيم الإعلانات للشاشات الصغيرة */
+    .adsbygoogle {
+        width: 320px !important;
+        height: 48px !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1268,6 +1288,12 @@ main {
     .related-scroll-arrow.right {
         right: -34px;
     }
+    
+    /* تحجيم الإعلانات للشاشات الصغيرة جداً */
+    .adsbygoogle {
+        width: 280px !important;
+        height: 42px !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1342,6 +1368,12 @@ main {
     .related-scroll-arrow.right {
         right: -32px;
     }
+    
+    /* تحجيم الإعلانات للشاشات الصغيرة جداً */
+    .adsbygoogle {
+        width: 250px !important;
+        height: 38px !important;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1409,6 +1441,12 @@ main {
     
     .related-scroll-arrow.right {
         right: -30px;
+    }
+    
+    /* تحجيم الإعلانات للشاشات الصغيرة جداً */
+    .adsbygoogle {
+        width: 220px !important;
+        height: 33px !important;
     }
 }
 
