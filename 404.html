@@ -333,7 +333,9 @@
               shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
           }
 
-          shape.style.left = `${Math.random() * 100}vw`;
+          // منع تراكم الأشكال عمودياً في الجانب الأيسر (توزيع متوازن عشوائي عبر كامل عرض الشاشة)
+          const randomLeft = Math.random() * 100;
+          shape.style.left = `${randomLeft}vw`;
           shape.style.animationDelay = `${Math.random() * 15}s`;
           shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
 
