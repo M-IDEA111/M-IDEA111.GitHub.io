@@ -14,7 +14,6 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   
   <!-- SEO site name optimization tags -->
   <link rel="canonical" href="https://m-idea111.github.io/">
@@ -69,7 +68,7 @@
         height: 38vh;
     }
 
-    /* Background Elements */
+    /* الخلفية الهندسية العائمة الجديدة - مستقلة تماماً وخفيفة */
     .geometric-background {
         position: fixed;
         top: 0;
@@ -81,7 +80,28 @@
         overflow: hidden;
     }
 
-    /* هيدر الموقع بدون خطوط فاصلة */
+    /* الأشكال الهندسية العائمة التفاعلية الجديدة */
+    .floating-shape {
+        position: absolute;
+        opacity: 0.12;
+        animation: floatShape 25s infinite linear;
+        transform-origin: center;
+    }
+
+    @keyframes floatShape {
+        0% {
+            transform: translateY(110vh) rotate(0deg) scale(0.8);
+        }
+        50% {
+            opacity: 0.25;
+        }
+        100% {
+            transform: translateY(-15vh) rotate(360deg) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    /* هيدر الموقع بدون خطوط فاصلة وبدون استدعاء خارجي */
     header {
         padding: 0.8rem 2rem;
         position: fixed;
@@ -105,6 +125,12 @@
         align-items: center;
     }
 
+    .logo-img {
+        height: 100px !important;
+        margin-top: 0;
+        pointer-events: none;
+    }
+
     .header-center {
         display: none;
     }
@@ -116,11 +142,11 @@
         align-items: center;
     }
 
-    /* زر البدء Start بخلفية شفافة تماماً وإطار أحمر - مع حذف الأنيميشن والحركة تماماً */
+    /* زر البدء Start بخلفية شفافة تماماً وإطار أحمر - بدون تحريك */
     .start-nav-btn {
         background: transparent !important;
-        border: 2px solid var(--primary-color) !important;
-        color: var(--primary-color) !important;
+        border: 2px solid #b61412 !important;
+        color: #b61412 !important;
         font-size: 0.95rem;
         padding: 8px 20px;
         border-radius: 30px;
@@ -130,12 +156,12 @@
         align-items: center;
         gap: 8px;
         text-decoration: none;
-        transition: none !important; /* إلغاء الأنيميشن */
+        transition: none !important;
     }
 
     .start-nav-btn:hover {
         background: rgba(182, 20, 18, 0.1) !important;
-        transform: none !important; /* إلغاء التكبير والتأثيرات الحركية عند تمرير الماوس */
+        transform: none !important;
     }
 
     /* الحاوية الرئيسية للمحتوى */
@@ -171,7 +197,7 @@
     .logo-404-text {
         font-size: clamp(5rem, 10vw, 9rem);
         font-weight: 800;
-        color: var(--primary-color) !important;
+        color: #b61412 !important;
         line-height: 1;
         font-family: 'Arial Black', Gadget, sans-serif;
         letter-spacing: -2px;
@@ -189,11 +215,11 @@
         text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
     }
 
-    /* زر الدعم الفني بدون حدود خارجية وبدون أي تأثيرات حركة أو أنيميشن */
+    /* زر الدعم الفني بدون حدود وبدون تأثيرات حركة */
     .support-mid-btn {
         background: rgba(182, 20, 18, 0.08) !important;
         border: none !important;
-        color: var(--primary-color) !important;
+        color: #b61412 !important;
         font-size: 0.95rem;
         padding: 10px 24px;
         border-radius: 30px;
@@ -203,13 +229,13 @@
         align-items: center;
         gap: 8px;
         text-decoration: none;
-        transition: none !important; /* إلغاء الأنيميشن */
+        transition: none !important;
         margin-bottom: 3.5rem;
     }
 
     .support-mid-btn:hover {
         background: rgba(182, 20, 18, 0.18) !important;
-        transform: none !important; /* إلغاء التكبير والحركة */
+        transform: none !important;
     }
 
     /* مجمع وحاوية الكوبي رايت داخل الجزء الأبيض التموجي السفلي ومؤمن في كافة الشاشات مع زيادة حجم الخط */
@@ -234,6 +260,7 @@
         letter-spacing: 0.5px;
         text-align: center;
         line-height: 1.4;
+        font-family: 'Cairo', sans-serif;
     }
 
     .footer-copyright-bottom .copyright a {
@@ -333,7 +360,7 @@
               shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
           }
 
-          // منع تراكم الأشكال عمودياً في الجانب الأيسر (توزيع متوازن عشوائي عبر كامل عرض الشاشة)
+          // توزيع عشوائي متوازن تماماً على كامل عرض الشاشة لمنع التكتل العمودي
           const randomLeft = Math.random() * 100;
           shape.style.left = `${randomLeft}vw`;
           shape.style.animationDelay = `${Math.random() * 15}s`;
