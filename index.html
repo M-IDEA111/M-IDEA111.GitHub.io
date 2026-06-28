@@ -1,400 +1,363 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-3352888654930814">
-  <title>404</title>
+  <title>Home</title>
   <link class="fav" rel="icon" href="logo.png" type="image/png">
   <meta property="og:image" content="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="M IDEA Book - Under Maintenance">
-  <meta property="og:description" content="Explore a wide selection of books, novels, and manga at M IDEA Book Library.">
+  <meta property="og:url" content="https://m-idea111.github.io/">
+  <meta property="og:title" content="M IDEA Book - Premium Audio Library">
+  <meta property="og:description" content="Discover global novels and anime audiobooks in a modern cinematic platform.">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=400;600;700&family=Montserrat:wght=700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- SEO site name optimization tags -->
-  <link rel="canonical" href="https://m-idea111.github.io/">
-  <meta property="og:site_name" content="M IDEA Book">
-  
-  <!-- JSON-LD Structured Data Schema for Google Search -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "M IDEA Book",
-    "alternateName": ["M IDEA", "M.IDEA Book"],
-    "url": "https://m-idea111.github.io/"
-  }
-  </script>
-
-  <style>
-    /* تهيئة وتصفير الهوامش لضمان مطابقة التموج */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        padding-top: 70px !important; /* تقليل الهامش العلوي قليلاً */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* تجميع العناصر في المنتصف بدلاً من توزيعها على الأطراف */
-        align-items: center;
-        min-height: 100vh;
-        background: #000000 !important;
-        overflow-x: hidden;
-        position: relative;
-        gap: 15px; /* مسافة أمان عامة بين الأقسام الرئيسية */
-    }
-
-    /* حاوية التموج الانسيابي المطابق للصورة تماماً باستخدام SVG */
-    .wave-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        line-height: 0;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    .wave-container svg {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 25vh; /* تقليل طول التموج لتوفير مساحة رأسية ممتازة تمنع الـ Scroll */
-    }
-
-    /* الخلفية الهندسية العائمة الجديدة - مستقلة تماماً وخفيفة */
-    .geometric-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 2;
-        overflow: hidden;
-    }
-
-    /* الأشكال الهندسية العائمة التفاعلية الجديدة */
-    .floating-shape {
-        position: absolute;
-        opacity: 0.12;
-        animation: floatShape 25s infinite linear;
-        transform-origin: center;
-    }
-
-    @keyframes floatShape {
-        0% {
-            transform: translateY(110vh) rotate(0deg) scale(0.8);
-        }
-        50% {
-            opacity: 0.25;
-        }
-        100% {
-            transform: translateY(-15vh) rotate(360deg) scale(1.2);
-            opacity: 0;
-        }
-    }
-
-    /* هيدر الموقع بدون خطوط فاصلة وبدون استدعاء خارجي */
-    header {
-        padding: 0.5rem 2rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 70px; /* تقليل الارتفاع العام للهيدر */
-        background: transparent !important;
-        border-bottom: none !important;
-        backdrop-filter: blur(10px);
-    }
-
-    .header-left {
-        flex: 1;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .logo-img {
-        height: 80px !important; /* تقليل حجم لوجو الهيدر ليتناسب مع التقارب العام */
-        margin-top: 0;
-        pointer-events: none;
-    }
-
-    .header-center {
-        display: none;
-    }
-
-    .header-right {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    /* زر البدء Start بخلفية شفافة تماماً وإطار أحمر - بدون تحريك */
-    .start-nav-btn {
-        background: transparent !important;
-        border: 2px solid #b61412 !important;
-        color: #b61412 !important;
-        font-size: 0.9rem;
-        padding: 6px 18px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        transition: none !important;
-    }
-
-    .start-nav-btn:hover {
-        background: rgba(182, 20, 18, 0.1) !important;
-        transform: none !important;
-    }
-
-    /* الحاوية الرئيسية للمحتوى */
-    .creative-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: none; /* إيقاف التمدد التلقائي لتقريب العناصر */
-        width: 100%;
-        max-width: 90%;
-        padding: 1rem 1rem 0 1rem; /* تقليص الحشو الداخلي */
-        z-index: 10;
-        text-align: center;
-        margin: 0 auto;
-    }
-
-    /* دمج الشعار و404 */
-    .brand-creative-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px; /* تقريب الشعار من النص */
-        margin-bottom: 1rem; /* تقليص الهامش السفلي */
-        flex-wrap: wrap;
-    }
-
-    .logo-b-img {
-        height: clamp(80px, 12vw, 120px); /* تقليل الحجم ليتناسب مع المساحات الجديدة */
-        width: auto;
-    }
-
-    .logo-404-text {
-        font-size: clamp(4rem, 8vw, 7rem); /* تقليص الحجم لتقليل الهدر الرأسي */
-        font-weight: 800;
-        color: #b61412 !important;
-        line-height: 1;
-        font-family: 'Arial Black', Gadget, sans-serif;
-        letter-spacing: -2px;
-    }
-
-    /* تطبيق خط راقٍ وجذاب وعصري للغاية لجملة الصيانة */
-    .maintenance-title {
-        font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.3rem, 3.5vw, 2rem); /* تقليص الحجم لتوفير مساحة */
-        font-weight: 900;
-        color: #ffffff;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 1.2rem; /* تقريبها من الزرار */
-        text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-    }
-
-    /* زر الدعم الفني بدون حدود وبدون تأثيرات حركة */
-    .support-mid-btn {
-        background: rgba(182, 20, 18, 0.08) !important;
-        border: none !important;
-        color: #b61412 !important;
-        font-size: 0.9rem;
-        padding: 8px 20px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        transition: none !important;
-        margin-bottom: 1.5rem; /* تقليص الهامش تحت الزرار لتقريب الإعلان */
-    }
-
-    .support-mid-btn:hover {
-        background: rgba(182, 20, 18, 0.18) !important;
-        transform: none !important;
-    }
-
-    /* حاوية الإعلان المنسقة والمقربة جداً */
-    .adsense-wrapper {
-        width: 100%;
-        max-width: 728px;
-        margin: 0 auto 1rem auto; /* تقليص الهامش السفلي لتقريبه من التموج */
-        z-index: 15;
-        position: relative;
-    }
-
-    /* مجمع وحاوية الكوبي رايت داخل الجزء الأبيض التموجي السفلي ومؤمن في كافة الشاشات مع زيادة حجم الخط */
-    .footer-copyright-bottom {
-        position: absolute;
-        bottom: clamp(1.5vh, 2.5vh, 3.5vh); /* رفع الكوبي رايت ليتناسب مع التموج الأصغر */
-        left: 0;
-        width: 100%;
-        padding: 0 15px;
-        z-index: 20;
-        display: flex;
-        justify-content: center;
-        pointer-events: auto;
-    }
-
-    .footer-copyright-bottom .copyright {
-        border-top: none !important;
-        background: transparent !important;
-        color: #b61412 !important;
-        font-weight: 700;
-        font-size: clamp(0.7rem, 1.8vw, 0.85rem) !important; /* تقليل الحجم ليتناسب مع ضغط التصميم */
-        letter-spacing: 0.5px;
-        text-align: center;
-        line-height: 1.3;
-        font-family: 'Cairo', sans-serif;
-    }
-
-    .footer-copyright-bottom .copyright a {
-        color: #b61412 !important;
-        text-decoration: none;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body dir="rtl">
 
-<!-- تموج انسيابي متطابق بنسبة 100% مع شكل التموج بالصورة المرفقة بعد تقليص حجمه رآسياً -->
-<div class="wave-container">
-  <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-    <path fill="#ffffff" d="M0,192 C240,245.3 480,266.7 720,160 C960,53.3 1200,85.3 1440,128 L1440,320 L0,320 Z"></path>
-  </svg>
-</div>
+<!-- التحقق من الدخول لمنع فقدان البيانات قبل تشغيل الواجهة -->
+<script>
+  if (!localStorage.getItem('midea_user_logged_in')) {
+      window.location.href = 'login.html';
+  }
+</script>
 
-<!-- Background Elements -->
-<div class="geometric-background" id="geometric-background"></div>
-
-<!-- هيدر الموقع بدون خط فاصل سفلي والشعار باتجاه اليسار و زر البدء لليمين -->
-<header id="main-header">
-  <div class="header-left">
-    <a href="index.html" class="logo-link">
-      <img src="m.idea.book2.png" alt="M IDEA" class="logo-img">
-    </a>
+<!-- Top Clean Header -->
+<header class="app-header">
+  <button class="icon-action-btn" id="floating-menu-trigger" title="القائمة">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <div class="header-logo-container">
+    <img src="logo.png" alt="M IDEA BOOK" class="app-header-brand-img" style="height: 60px; object-fit: contain;">
   </div>
-  <div class="header-center"></div>
-  <div class="header-right">
-    <a href="index.html" class="start-nav-btn">
-      <span>Start</span> <i class="fas fa-play"></i>
-    </a>
-  </div>
+  
+  <div style="width: 42px;"></div> <!-- مساحة توازن فارغة محاذية بصرية -->
 </header>
 
-<!-- المحتوى الرئيسي بالمنتصف متقارب ومحكم بدون هدر راسي للمساحة -->
-<main style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; flex: none; padding: 0; z-index: 10;">
-  <div class="creative-container">
-    <div class="brand-creative-row">
-      <!-- الشعار B -->
-      <img src="logo_b.png" alt="M IDEA Book" class="logo-b-img" onerror="this.src='logo.png'">
-      <!-- رقم 404 المجاور والمدمج -->
-      <div class="logo-404-text">404</div>
-    </div>
+<!-- PREMIUM SETTINGS FULL SCREEN OVERLAY -->
+<div class="premium-settings-screen" id="slide-menu">
+  <div class="settings-max-viewport-wrapper">
     
-    <!-- النص الجذاب تحت الصيانة بخطه العصري الرائع -->
-    <h1 class="maintenance-title">Under Maintenance</h1>
+    <!-- Settings Header -->
+    <div class="prem-settings-header">
+      <button class="settings-back-arrow" id="close-menu" title="رجوع">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <h2 class="settings-title">الإعدادات</h2>
+      <div style="width:36px;"></div> <!-- مساحة موازنة بصرية -->
+    </div>
 
-    <!-- زر الدعم الفني متمركز بدقة تحت الجملة مباشرة وبدون حدود حمراء وبدون حركات -->
-    <a href="mailto:suppor2tmidea@gmail.com?subject=Support Request - M IDEA Book" class="support-mid-btn">
-      <i class="fas fa-headset"></i> <span>Support</span>
+    <!-- Active User Profile Card Info -->
+    <a href="edit-profile.html" class="prem-settings-user-card">
+      <div class="settings-profile-left">
+        <img src="logo.png" alt="Profile" class="settings-profile-avatar" id="settings-user-avatar">
+        <div class="settings-profile-meta">
+          <span class="settings-profile-name" id="settings-user-name">عبدالرحمن دانيال</span>
+          <span class="settings-profile-sub" id="settings-user-role">قارئ بلاتيني</span>
+        </div>
+      </div>
+      <i class="fas fa-chevron-left settings-chevron"></i>
     </a>
 
-    <!-- إعلان أدسنس المضاف تحت زر الدعم مباشرة بمسافة منسقة ومتقاربة جداً -->
-    <div class="adsense-wrapper">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-           crossorigin="anonymous"></script>
-      <!-- ad -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3352888654930814"
-           data-ad-slot="4256859999"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+    <!-- Group 1: General Settings -->
+    <h3 class="settings-group-label">إعدادات عامة</h3>
+    <div class="prem-settings-group-box">
+      <a href="edit-profile.html" class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="far fa-user"></i>
+          <span>تفاصيل الحساب الشخصي</span>
+        </div>
+        <i class="fas fa-chevron-left settings-chevron"></i>
+      </a>
+      
+      <a href="edit-profile.html?action=password" class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="fas fa-lock"></i>
+          <span>إعدادات كلمة المرور</span>
+        </div>
+        <i class="fas fa-chevron-left settings-chevron"></i>
+      </a>
+
+      <!-- زر تغيير اللغة المدمج بالنمط الجديد وبدون أخطاء -->
+      <button class="prem-settings-row" id="lang-switch-btn" style="width: 100%;">
+        <div class="settings-item-info">
+          <i class="fas fa-globe"></i>
+          <span data-i18n="language_setting">لغة التطبيق</span>
+        </div>
+        <span style="font-size: 0.85rem; color: #C90000; font-weight: 800;" id="current-lang-name">English</span>
+      </button>
+
+      <div class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="far fa-bell"></i>
+          <span>الإشعارات الفورية</span>
+        </div>
+        <label class="settings-toggle-switch">
+          <input type="checkbox" id="settings-notif-toggle" checked>
+          <span class="settings-slider"></span>
+        </label>
+      </div>
+
+      <div class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="far fa-moon"></i>
+          <span>الوضع الداكن النشط</span>
+        </div>
+        <label class="settings-toggle-switch">
+          <input type="checkbox" id="settings-darkmode-toggle" checked disabled>
+          <span class="settings-slider"></span>
+        </label>
+      </div>
     </div>
+
+    <!-- Group 2: Support & Account Action -->
+    <h3 class="settings-group-label">الدعم والتطبيق</h3>
+    <div class="prem-settings-group-box">
+      <a href="news.html" class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="fas fa-info-circle"></i>
+          <span>حول تطبيق M IDEA</span>
+        </div>
+        <i class="fas fa-chevron-left settings-chevron"></i>
+      </a>
+
+      <a href="mailto:suppor2tmidea@gmail.com?subject=Help Request" class="prem-settings-row">
+        <div class="settings-item-info">
+          <i class="far fa-question-circle"></i>
+          <span>الدعم والأسئلة الشائعة</span>
+        </div>
+        <i class="fas fa-chevron-left settings-chevron"></i>
+      </a>
+
+      <button class="prem-settings-row" onclick="triggerManualLogOut()">
+        <div class="settings-item-info" style="color: #EF4444;">
+          <i class="fas fa-trash-alt" style="color: #EF4444;"></i>
+          <span style="color: #EF4444;">تسجيل الخروج من الحساب</span>
+        </div>
+        <i class="fas fa-chevron-left settings-chevron" style="color: #EF4444;"></i>
+      </button>
+    </div>
+    
+    <div class="settings-menu-footer">
+      <p>حقوق الطبع والنشر © 2025-2026</p>
+      <a href="#">m-idea111.github.io</a>
+    </div>
+
+  </div>
+</div>
+
+<main class="app-main-content">
+  <!-- Dynamic Showcase Shelves -->
+  <div class="showcase-view-wrapper" id="books-section">
+    
+    <!-- Section 1: Continue Reading (Featured/Horizontal View) -->
+    <section class="bookworm-section">
+      <div class="section-header-row">
+        <h2 class="section-main-heading" data-i18n="continue_reading">متابعة القراءة</h2>
+        <div class="scroll-navigation-hints">
+          <button class="scroll-arrow-mini left" onclick="scrollShelf('continue-reading-scroll', -200)"><i class="fas fa-chevron-right"></i></button>
+          <button class="scroll-arrow-mini right" onclick="scrollShelf('continue-reading-scroll', 200)"><i class="fas fa-chevron-left"></i></button>
+        </div>
+      </div>
+      <div class="horizontal-shelf-scroll" id="continue-reading-scroll">
+        <!-- Dynamically injected large horizontal cards -->
+      </div>
+    </section>
+
+    <!-- Category Filter Tabs Container -->
+    <div class="bookworm-tabs-container">
+      <div class="tabs-scroll-wrapper" id="category-tabs-row">
+        <button class="tab-pill-btn active" data-category="all" data-i18n="all_collections">الكل</button>
+        <button class="tab-pill-btn" data-category="anime" data-i18n="anime_stories">روايات الأنمي</button>
+        <button class="tab-pill-btn" data-category="classic" data-i18n="classic_novels">الروايات الكلاسيكية</button>
+        <button class="tab-pill-btn" data-category="arabic" data-i18n="arabic_novels">الروايات العربية</button>
+        <button class="tab-pill-btn" data-category="international" data-i18n="international_novels">الروايات العالمية</button>
+        <button class="tab-pill-btn" data-category="development" data-i18n="personal_growth">تطوير الذات</button>
+        <button class="tab-pill-btn" data-category="history" data-i18n="history_chronicles">كتب التاريخ</button>
+      </div>
+    </div>
+
+    <!-- Section 2: For You List (Split grid with vertical item styling) -->
+    <section class="bookworm-section">
+      <div class="section-header-row">
+        <h2 class="section-main-heading" id="vertical-list-heading" data-i18n="featured_voices">أصوات مميزة لك</h2>
+      </div>
+      <div class="vertical-cards-list-grid" id="main-vertical-list">
+        <!-- Dynamically injected lists -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Book Details View (BookWorm Screen 3) -->
+  <div class="book-details-screen" id="book-details-container" style="display: none;">
+    <div class="details-nav-row">
+      <button class="details-back-circle-btn" id="back-to-category">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <span class="details-top-header-title" data-i18n="book_details">تفاصيل الكتاب</span>
+    </div>
+
+    <div class="details-core-display">
+      <div class="details-cover-artwork-wrapper">
+        <img id="details-backdrop-img" src="" alt="Book Cover" class="details-cover-img-flat" onerror="this.src='logo.png'">
+      </div>
+      
+      <div class="details-text-meta-block">
+        <h1 class="details-main-title" id="book-details-title">اسم الكتاب</h1>
+        <p class="details-author-badge" id="book-details-meta-author-dubber">اسم الكاتب والراوي</p>
+        
+        <div class="action-buttons-group">
+          <button class="bookworm-primary-orange-btn" id="start-reading-btn">
+            <i class="fas fa-play"></i> <span data-i18n="start_narration">ابدأ القراءة الصوتية</span>
+          </button>
+        </div>
+
+        <div class="auxiliary-interactions-row">
+          <button class="aux-interact-btn" id="fav-toggle-btn"><i class="far fa-heart"></i> <span data-i18n="my_list">قائمتي</span></button>
+          <button class="aux-interact-btn" id="share-book-btn"><i class="fas fa-share-nodes"></i> <span data-i18n="share">مشاركة</span></button>
+        </div>
+
+        <div class="details-synopsis-box">
+          <p class="details-synopsis-text" id="book-details-description"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- فصول الرواية -->
+    <div class="details-tabbed-playlist-section">
+      <div class="playlist-heading-row">
+        <h3 class="playlist-heading" data-i18n="chapters">الفصول الصوتية</h3>
+      </div>
+      <div class="chapters-vertical-list" id="barry-chapters-list">
+        <!-- Chapters dynamic Injection -->
+      </div>
+    </div>
+
+    <!-- نظام التقييم والتعليقات الحقيقي والمحلي بالكامل داخل جهاز المستخدم -->
+    <div class="details-tabbed-playlist-section">
+      <h3 class="playlist-heading">التقييم والتعليقات المحفوظة</h3>
+      
+      <div class="user-rating-scaffold" style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-size:0.85rem; font-weight:800;">اضغط لتقييم الرواية:</span>
+        <div class="star-interactive-row" id="star-rating-holder" style="display:flex; gap:6px; color:#8E8E93; cursor:pointer; font-size:1.2rem;">
+          <i class="far fa-star" data-star="1"></i>
+          <i class="far fa-star" data-star="2"></i>
+          <i class="far fa-star" data-star="3"></i>
+          <i class="far fa-star" data-star="4"></i>
+          <i class="far fa-star" data-star="5"></i>
+        </div>
+      </div>
+
+      <div class="comment-input-area" style="display:flex; flex-direction:column; gap:10px;">
+        <textarea id="comment-text-input" placeholder="اكتب رأيك أو تعليقك بكل حرية وحفظه داخل ملفك الأمان..." style="width:100%; height:80px; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,0.06); font-family:'Cairo'; font-size:0.9rem; outline:none; background:#FAF6F0; resize:none;"></textarea>
+        <button class="bookworm-primary-orange-btn" id="post-comment-btn" style="align-self:flex-start; width:auto; padding:10px 24px; font-size:0.85rem;"><i class="fas fa-comment"></i> إضافة التعليق</button>
+      </div>
+
+      <div class="comments-output-scaffold" id="book-comments-container" style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+        <!-- Comments list goes here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- BookWorm Flat Audio Player Screen (Integrated Seamlessly) -->
+  <div class="audio-player-screen" id="reading-container" style="display: none;">
+    <div class="player-header-nav">
+      <button class="player-back-btn" id="back-to-details">
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="player-context-meta">
+        <span class="player-eyebrow" data-i18n="now_playing">قيد التشغيل الآن</span>
+        <h4 class="player-context-book-title" id="reading-title">اسم الكتاب</h4>
+      </div>
+      <div style="width: 44px;"></div>
+    </div>
+
+    <div class="player-flat-body-content">
+      <div class="player-artwork-scaffold">
+        <img id="page-image" src="" alt="Audio Artwork" class="player-large-artwork" onerror="this.src='logo.png'">
+      </div>
+
+      <div class="player-labels-row">
+        <h2 class="player-track-title" id="spotify-page-title">الفصل الأول</h2>
+        <span class="player-track-narrator" id="spotify-book-subtitle">اسم الصوت المميز</span>
+      </div>
+
+      <div class="player-progress-bar-scaffold">
+        <div class="progress-track-wrapper" id="reading-audio-progress-bar">
+          <div class="progress-fill-element" id="reading-audio-progress-fill"></div>
+        </div>
+        <div class="progress-time-indicators">
+          <span id="reading-current-time">0:00</span>
+          <span id="reading-duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="player-main-controls-scaffold">
+        <button class="control-secondary-btn" id="spotify-shuffle-btn" title="عشوائي">
+          <i class="fas fa-random"></i>
+        </button>
+        <button class="control-secondary-btn" id="prev-page" title="الفصل السابق">
+          <i class="fas fa-backward"></i>
+        </button>
+        <button class="control-primary-play-btn" id="reading-play-pause">
+          <i class="fas fa-play"></i>
+        </button>
+        <button class="control-secondary-btn" id="next-page" title="الفصل التالي">
+          <i class="fas fa-forward"></i>
+        </button>
+        <button class="control-secondary-btn" id="spotify-repeat-btn" title="تكرار">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+
+      <div class="player-auxiliary-actions-scaffold">
+        <button class="player-aux-icon" id="share-page-btn"><i class="fas fa-share-nodes"></i></button>
+        <div class="player-chapter-badge-capsule" id="page-indicator">الفصل 1 من 1</div>
+        <button class="player-speed-multiplier-btn" id="reading-speed-btn">1.0x</button>
+      </div>
+    </div>
+    <audio id="reading-audio" preload="metadata"></audio>
   </div>
 </main>
 
-<!-- الكوبي رايت مؤمن تماماً ومتوافق هندسياً داخل التموج السفلي لكافة الشاشات بدون أي خلل -->
-<div class="footer-copyright-bottom">
-  <footer class="footer" style="width: 100%; padding: 0; margin-top: 0; border-top: none; background: transparent !important;">
-    <div class="copyright">
-      Copyright © 2025-2026 - <a href="#">m-idea111.github.io</a> or its affiliates. All rights reserved
-    </div>
-  </footer>
+<!-- Bottom Navigation Pill -->
+<div class="bottom-floating-navigation">
+  <div class="nav-pills-row">
+    <button class="nav-pill-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <i class="fas fa-book-open"></i>
+      <span data-i18n="listen">قراءة</span>
+    </button>
+    <button class="nav-pill-item" onclick="window.location.href='search.html'">
+      <i class="fas fa-search"></i>
+      <span data-i18n="search">بحث</span>
+    </button>
+    <button class="nav-pill-item profile-nav-pill" onclick="window.location.href='profile.html'">
+      <div class="nav-profile-avatar-frame">
+        <img src="logo.png" alt="Profile" id="nav-profile-img" onerror="this.src='logo.png'">
+      </div>
+      <span data-i18n="profile">حسابي</span>
+    </button>
+  </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      setupGeometricBackground();
-  });
+<!-- Warning Toast -->
+<div id="copy-warning" class="copy-warning-toast" style="display: none;">
+  <i class="fas fa-lock"></i> <span data-i18n="copy_warning_text">المحتوى الصوتي محمي فكرياً للمنصة.</span>
+</div>
 
-  function setupGeometricBackground() {
-      const bgContainer = document.getElementById('geometric-background');
-      if (!bgContainer) return;
-
-      const shapes = ['square', 'triangle', 'circle'];
-      const totalShapesCount = 18;
-
-      for (let i = 0; i < totalShapesCount; i++) {
-          const shape = document.createElement('div');
-          const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
-          shape.className = `floating-shape ${shapeType}`;
-          
-          const size = Math.floor(Math.random() * 25) + 12;
-          shape.style.width = `${size}px`;
-          shape.style.height = `${size}px`;
-          
-          if (shapeType === 'triangle') {
-              shape.style.borderLeft = `${size / 2}px solid transparent`;
-              shape.style.borderRight = `${size / 2}px solid transparent`;
-              shape.style.borderBottom = `${size}px solid rgba(255, 255, 255, 0.04)`;
-              shape.style.width = '0';
-              shape.style.height = '0';
-          } else if (shapeType === 'circle') {
-              shape.style.borderRadius = '50%';
-              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
-          } else {
-              shape.style.borderRadius = '6px';
-              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
-          }
-
-          // توزيع عشوائي متوازن تماماً على كامل عرض الشاشة لمنع التكتل العمودي
-          const randomLeft = Math.random() * 100;
-          shape.style.left = `${randomLeft}vw`;
-          shape.style.animationDelay = `${Math.random() * 15}s`;
-          shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
-
-          bgContainer.appendChild(shape);
-      }
-  }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+<script src="dubbers-data.js"></script>
+<script src="anime-data.js"></script>
+<script src="classic-novels-data.js"></script>
+<script src="arabic-novels-data.js"></script>
+<script src="international-novels-data.js"></script>
+<script src="personal-development.js"></script>
+<script src="history-books.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
