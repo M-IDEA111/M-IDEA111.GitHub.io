@@ -13,7 +13,7 @@
   <meta property="og:description" content="Explore a wide selection of books, novels, and manga at M IDEA Book Library.">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=400;600;700&family=Montserrat:wght=700;800;900&display=swap" rel="stylesheet">
   
   <!-- SEO site name optimization tags -->
   <link rel="canonical" href="https://m-idea111.github.io/">
@@ -39,15 +39,16 @@
     }
 
     body {
-        padding-top: 80px !important;
+        padding-top: 70px !important; /* تقليل الهامش العلوي قليلاً */
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center; /* تجميع العناصر في المنتصف بدلاً من توزيعها على الأطراف */
         align-items: center;
         min-height: 100vh;
         background: #000000 !important;
         overflow-x: hidden;
         position: relative;
+        gap: 15px; /* مسافة أمان عامة بين الأقسام الرئيسية */
     }
 
     /* حاوية التموج الانسيابي المطابق للصورة تماماً باستخدام SVG */
@@ -65,7 +66,7 @@
         position: relative;
         display: block;
         width: 100%;
-        height: 38vh;
+        height: 25vh; /* تقليل طول التموج لتوفير مساحة رأسية ممتازة تمنع الـ Scroll */
     }
 
     /* الخلفية الهندسية العائمة الجديدة - مستقلة تماماً وخفيفة */
@@ -103,7 +104,7 @@
 
     /* هيدر الموقع بدون خطوط فاصلة وبدون استدعاء خارجي */
     header {
-        padding: 0.8rem 2rem;
+        padding: 0.5rem 2rem;
         position: fixed;
         top: 0;
         left: 0;
@@ -112,7 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 80px;
+        height: 70px; /* تقليل الارتفاع العام للهيدر */
         background: transparent !important;
         border-bottom: none !important;
         backdrop-filter: blur(10px);
@@ -126,7 +127,7 @@
     }
 
     .logo-img {
-        height: 100px !important;
+        height: 80px !important; /* تقليل حجم لوجو الهيدر ليتناسب مع التقارب العام */
         margin-top: 0;
         pointer-events: none;
     }
@@ -147,8 +148,8 @@
         background: transparent !important;
         border: 2px solid #b61412 !important;
         color: #b61412 !important;
-        font-size: 0.95rem;
-        padding: 8px 20px;
+        font-size: 0.9rem;
+        padding: 6px 18px;
         border-radius: 30px;
         cursor: pointer;
         font-weight: 700;
@@ -170,13 +171,13 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex: 1;
+        flex: none; /* إيقاف التمدد التلقائي لتقريب العناصر */
         width: 100%;
         max-width: 90%;
-        padding: 2rem 1rem;
+        padding: 1rem 1rem 0 1rem; /* تقليص الحشو الداخلي */
         z-index: 10;
         text-align: center;
-        margin: auto;
+        margin: 0 auto;
     }
 
     /* دمج الشعار و404 */
@@ -184,18 +185,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 20px;
-        margin-bottom: 2rem;
+        gap: 15px; /* تقريب الشعار من النص */
+        margin-bottom: 1rem; /* تقليص الهامش السفلي */
         flex-wrap: wrap;
     }
 
     .logo-b-img {
-        height: clamp(100px, 15vw, 160px);
+        height: clamp(80px, 12vw, 120px); /* تقليل الحجم ليتناسب مع المساحات الجديدة */
         width: auto;
     }
 
     .logo-404-text {
-        font-size: clamp(5rem, 10vw, 9rem);
+        font-size: clamp(4rem, 8vw, 7rem); /* تقليص الحجم لتقليل الهدر الرأسي */
         font-weight: 800;
         color: #b61412 !important;
         line-height: 1;
@@ -206,12 +207,12 @@
     /* تطبيق خط راقٍ وجذاب وعصري للغاية لجملة الصيانة */
     .maintenance-title {
         font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+        font-size: clamp(1.3rem, 3.5vw, 2rem); /* تقليص الحجم لتوفير مساحة */
         font-weight: 900;
         color: #ffffff;
-        letter-spacing: 4px;
+        letter-spacing: 3px;
         text-transform: uppercase;
-        margin-bottom: 2rem;
+        margin-bottom: 1.2rem; /* تقريبها من الزرار */
         text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
     }
 
@@ -220,8 +221,8 @@
         background: rgba(182, 20, 18, 0.08) !important;
         border: none !important;
         color: #b61412 !important;
-        font-size: 0.95rem;
-        padding: 10px 24px;
+        font-size: 0.9rem;
+        padding: 8px 20px;
         border-radius: 30px;
         cursor: pointer;
         font-weight: 700;
@@ -230,7 +231,7 @@
         gap: 8px;
         text-decoration: none;
         transition: none !important;
-        margin-bottom: 2rem; /* تم تقليل المسافة قليلاً لتناسب وجود الإعلان تحتها */
+        margin-bottom: 1.5rem; /* تقليص الهامش تحت الزرار لتقريب الإعلان */
     }
 
     .support-mid-btn:hover {
@@ -238,11 +239,11 @@
         transform: none !important;
     }
 
-    /* حاوية الإعلان لضمان عدم تداخل الإعلان مع الخلفية أو التأثير على التموج */
+    /* حاوية الإعلان المنسقة والمقربة جداً */
     .adsense-wrapper {
         width: 100%;
         max-width: 728px;
-        margin: 0 auto 3.5rem auto;
+        margin: 0 auto 1rem auto; /* تقليص الهامش السفلي لتقريبه من التموج */
         z-index: 15;
         position: relative;
     }
@@ -250,7 +251,7 @@
     /* مجمع وحاوية الكوبي رايت داخل الجزء الأبيض التموجي السفلي ومؤمن في كافة الشاشات مع زيادة حجم الخط */
     .footer-copyright-bottom {
         position: absolute;
-        bottom: clamp(2vh, 4.5vh, 6vh);
+        bottom: clamp(1.5vh, 2.5vh, 3.5vh); /* رفع الكوبي رايت ليتناسب مع التموج الأصغر */
         left: 0;
         width: 100%;
         padding: 0 15px;
@@ -265,10 +266,10 @@
         background: transparent !important;
         color: #b61412 !important;
         font-weight: 700;
-        font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        font-size: clamp(0.7rem, 1.8vw, 0.85rem) !important; /* تقليل الحجم ليتناسب مع ضغط التصميم */
         letter-spacing: 0.5px;
         text-align: center;
-        line-height: 1.4;
+        line-height: 1.3;
         font-family: 'Cairo', sans-serif;
     }
 
@@ -280,7 +281,7 @@
 </head>
 <body>
 
-<!-- تموج انسيابي متطابق بنسبة 100% مع شكل التموج بالصورة المرفقة -->
+<!-- تموج انسيابي متطابق بنسبة 100% مع شكل التموج بالصورة المرفقة بعد تقليص حجمه رآسياً -->
 <div class="wave-container">
   <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
     <path fill="#ffffff" d="M0,192 C240,245.3 480,266.7 720,160 C960,53.3 1200,85.3 1440,128 L1440,320 L0,320 Z"></path>
@@ -305,8 +306,8 @@
   </div>
 </header>
 
-<!-- المحتوى الرئيسي بالمنتصف -->
-<main style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; flex: 1; padding: 0; z-index: 10;">
+<!-- المحتوى الرئيسي بالمنتصف متقارب ومحكم بدون هدر راسي للمساحة -->
+<main style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; flex: none; padding: 0; z-index: 10;">
   <div class="creative-container">
     <div class="brand-creative-row">
       <!-- الشعار B -->
@@ -323,7 +324,7 @@
       <i class="fas fa-headset"></i> <span>Support</span>
     </a>
 
-    <!-- إعلان أدسنس المضاف تحت زر الدعم مباشرة -->
+    <!-- إعلان أدسنس المضاف تحت زر الدعم مباشرة بمسافة منسقة ومتقاربة جداً -->
     <div class="adsense-wrapper">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
            crossorigin="anonymous"></script>
