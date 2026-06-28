@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-3352888654930814">
+  <title>404</title>
+  <link class="fav" rel="icon" href="logo.png" type="image/png">
+  <meta property="og:image" content="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="M IDEA Book - Under Maintenance">
+  <meta property="og:description" content="Explore a wide selection of books, novels, and manga at M IDEA Book Library.">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- SEO site name optimization tags -->
+  <link rel="canonical" href="https://m-idea111.github.io/">
+  <meta property="og:site_name" content="M IDEA Book">
+  
+  <!-- JSON-LD Structured Data Schema for Google Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "M IDEA Book",
+    "alternateName": ["M IDEA", "M.IDEA Book"],
+    "url": "https://m-idea111.github.io/"
+  }
+  </script>
+
+  <style>
+    /* تهيئة وتصفير الهوامش لضمان مطابقة التموج */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        padding-top: 80px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 100vh;
+        background: #000000 !important;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* حاوية التموج الانسيابي المطابق للصورة تماماً باستخدام SVG */
+    .wave-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .wave-container svg {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 38vh;
+    }
+
+    /* الخلفية الهندسية العائمة الجديدة - مستقلة تماماً وخفيفة */
+    .geometric-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+        overflow: hidden;
+    }
+
+    /* الأشكال الهندسية العائمة التفاعلية الجديدة */
+    .floating-shape {
+        position: absolute;
+        opacity: 0.12;
+        animation: floatShape 25s infinite linear;
+        transform-origin: center;
+    }
+
+    @keyframes floatShape {
+        0% {
+            transform: translateY(110vh) rotate(0deg) scale(0.8);
+        }
+        50% {
+            opacity: 0.25;
+        }
+        100% {
+            transform: translateY(-15vh) rotate(360deg) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    /* هيدر الموقع بدون خطوط فاصلة وبدون استدعاء خارجي */
+    header {
+        padding: 0.8rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+        background: transparent !important;
+        border-bottom: none !important;
+        backdrop-filter: blur(10px);
+    }
+
+    .header-left {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .logo-img {
+        height: 100px !important;
+        margin-top: 0;
+        pointer-events: none;
+    }
+
+    .header-center {
+        display: none;
+    }
+
+    .header-right {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    /* زر البدء Start بخلفية شفافة تماماً وإطار أحمر - بدون تحريك */
+    .start-nav-btn {
+        background: transparent !important;
+        border: 2px solid #b61412 !important;
+        color: #b61412 !important;
+        font-size: 0.95rem;
+        padding: 8px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        transition: none !important;
+    }
+
+    .start-nav-btn:hover {
+        background: rgba(182, 20, 18, 0.1) !important;
+        transform: none !important;
+    }
+
+    /* الحاوية الرئيسية للمحتوى */
+    .creative-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        width: 100%;
+        max-width: 90%;
+        padding: 2rem 1rem;
+        z-index: 10;
+        text-align: center;
+        margin: auto;
+    }
+
+    /* دمج الشعار و404 */
+    .brand-creative-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .logo-b-img {
+        height: clamp(100px, 15vw, 160px);
+        width: auto;
+    }
+
+    .logo-404-text {
+        font-size: clamp(5rem, 10vw, 9rem);
+        font-weight: 800;
+        color: #b61412 !important;
+        line-height: 1;
+        font-family: 'Arial Black', Gadget, sans-serif;
+        letter-spacing: -2px;
+    }
+
+    /* تطبيق خط راقٍ وجذاب وعصري للغاية لجملة الصيانة */
+    .maintenance-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    /* زر الدعم الفني بدون حدود وبدون تأثيرات حركة */
+    .support-mid-btn {
+        background: rgba(182, 20, 18, 0.08) !important;
+        border: none !important;
+        color: #b61412 !important;
+        font-size: 0.95rem;
+        padding: 10px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        transition: none !important;
+        margin-bottom: 3.5rem;
+    }
+
+    .support-mid-btn:hover {
+        background: rgba(182, 20, 18, 0.18) !important;
+        transform: none !important;
+    }
+
+    /* مجمع وحاوية الكوبي رايت داخل الجزء الأبيض التموجي السفلي ومؤمن في كافة الشاشات مع زيادة حجم الخط */
+    .footer-copyright-bottom {
+        position: absolute;
+        bottom: clamp(2vh, 4.5vh, 6vh);
+        left: 0;
+        width: 100%;
+        padding: 0 15px;
+        z-index: 20;
+        display: flex;
+        justify-content: center;
+        pointer-events: auto;
+    }
+
+    .footer-copyright-bottom .copyright {
+        border-top: none !important;
+        background: transparent !important;
+        color: #b61412 !important;
+        font-weight: 700;
+        font-size: clamp(0.75rem, 2vw, 0.95rem) !important;
+        letter-spacing: 0.5px;
+        text-align: center;
+        line-height: 1.4;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .footer-copyright-bottom .copyright a {
+        color: #b61412 !important;
+        text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- تموج انسيابي متطابق بنسبة 100% مع شكل التموج بالصورة المرفقة -->
+<div class="wave-container">
+  <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <path fill="#ffffff" d="M0,192 C240,245.3 480,266.7 720,160 C960,53.3 1200,85.3 1440,128 L1440,320 L0,320 Z"></path>
+  </svg>
+</div>
+
+<!-- Background Elements -->
+<div class="geometric-background" id="geometric-background"></div>
+
+<!-- هيدر الموقع بدون خط فاصل سفلي والشعار باتجاه اليسار و زر البدء لليمين -->
+<header id="main-header">
+  <div class="header-left">
+    <a href="index.html" class="logo-link">
+      <img src="m.idea.book2.png" alt="M IDEA" class="logo-img">
+    </a>
+  </div>
+  <div class="header-center"></div>
+  <div class="header-right">
+    <a href="index.html" class="start-nav-btn">
+      <span>Start</span> <i class="fas fa-play"></i>
+    </a>
+  </div>
+</header>
+
+<!-- المحتوى الرئيسي بالمنتصف -->
+<main style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; flex: 1; padding: 0; z-index: 10;">
+  <div class="creative-container">
+    <div class="brand-creative-row">
+      <!-- الشعار B -->
+      <img src="logo_b.png" alt="M IDEA Book" class="logo-b-img" onerror="this.src='logo.png'">
+      <!-- رقم 404 المجاور والمدمج -->
+      <div class="logo-404-text">404</div>
+    </div>
+    
+    <!-- النص الجذاب تحت الصيانة بخطه العصري الرائع -->
+    <h1 class="maintenance-title">Under Maintenance</h1>
+
+    <!-- زر الدعم الفني متمركز بدقة تحت الجملة مباشرة وبدون حدود حمراء وبدون حركات -->
+    <a href="mailto:suppor2tmidea@gmail.com?subject=Support Request - M IDEA Book" class="support-mid-btn">
+      <i class="fas fa-headset"></i> <span>Support</span>
+    </a>
+  </div>
+</main>
+
+<!-- الكوبي رايت مؤمن تماماً ومتوافق هندسياً داخل التموج السفلي لكافة الشاشات بدون أي خلل -->
+<div class="footer-copyright-bottom">
+  <footer class="footer" style="width: 100%; padding: 0; margin-top: 0; border-top: none; background: transparent !important;">
+    <div class="copyright">
+      Copyright © 2025-2026 - <a href="#">m-idea111.github.io</a> or its affiliates. All rights reserved
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      setupGeometricBackground();
+  });
+
+  function setupGeometricBackground() {
+      const bgContainer = document.getElementById('geometric-background');
+      if (!bgContainer) return;
+
+      const shapes = ['square', 'triangle', 'circle'];
+      const totalShapesCount = 18;
+
+      for (let i = 0; i < totalShapesCount; i++) {
+          const shape = document.createElement('div');
+          const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+          shape.className = `floating-shape ${shapeType}`;
+          
+          const size = Math.floor(Math.random() * 25) + 12;
+          shape.style.width = `${size}px`;
+          shape.style.height = `${size}px`;
+          
+          if (shapeType === 'triangle') {
+              shape.style.borderLeft = `${size / 2}px solid transparent`;
+              shape.style.borderRight = `${size / 2}px solid transparent`;
+              shape.style.borderBottom = `${size}px solid rgba(255, 255, 255, 0.04)`;
+              shape.style.width = '0';
+              shape.style.height = '0';
+          } else if (shapeType === 'circle') {
+              shape.style.borderRadius = '50%';
+              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
+          } else {
+              shape.style.borderRadius = '6px';
+              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
+          }
+
+          // توزيع عشوائي متوازن تماماً على كامل عرض الشاشة لمنع التكتل العمودي
+          const randomLeft = Math.random() * 100;
+          shape.style.left = `${randomLeft}vw`;
+          shape.style.animationDelay = `${Math.random() * 15}s`;
+          shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
+
+          bgContainer.appendChild(shape);
+      }
+  }
+</script>
+</body>
+</html>
