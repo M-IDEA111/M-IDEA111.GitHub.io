@@ -1,408 +1,484 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" id="app-html-root">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  
-  <link rel="alternate" hreflang="ar" href="https://m-idea111.github.io/?lang=ar">
-  <link rel="alternate" hreflang="en" href="https://m-idea111.github.io/?lang=en">
-  <link rel="alternate" hreflang="x-default" href="https://m-idea111.github.io/">
-
-  <title id="meta-title">M-IDEA.Book | Under Maintenance</title>
-  <meta name="description" id="meta-desc" content="M-IDEA.Book is currently undergoing scheduled maintenance. We will be back online shortly. | منصة M-IDEA.Book تحت الصيانة المبرمجة حالياً.">
-  <meta name="keywords" content="M-IDEA, M-IDEA.Book, Under Maintenance, audiobooks, روايات صوتية">
-  <meta name="robots" content="noindex, follow"> <link rel="canonical" href="https://m-idea111.github.io/">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://m-idea111.github.io/">
-  <meta property="og:title" id="og-title" content="M-IDEA.Book | Under Maintenance">
-  <meta property="og:description" id="og-desc" content="We are currently upgrading M-IDEA.Book to serve you better.">
-  <meta property="og:image" content="https://m-idea111.github.io/logo.png">
-  <meta property="og:site_name" content="M-IDEA.Book">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" id="twitter-title" content="M-IDEA.Book | Under Maintenance">
-  <meta name="twitter:description" id="twitter-desc" content="We are currently upgrading M-IDEA.Book.">
-  <meta name="twitter:image" content="https://m-idea111.github.io/logo.png">
-
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814" crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-3352888654930814">
-  
-  <link class="fav" rel="icon" href="logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="logo.png">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "M-IDEA.Book",
-    "alternateName": [
-      "M-IDEA.BooK",
-      "M IDEA Book"
-    ],
-    "url": "https://m-idea111.github.io/"
-  }
-  </script>
-  <style>
-    /* تهيئة وتصفير الهوامش لضمان مطابقة التموج */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        padding-top: 70px !important;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: #000000 !important;
-        overflow-x: hidden;
-        position: relative;
-        gap: 15px;
-    }
-
-    /* حاوية التموج الانسيابي المطابق للصورة تماماً باستخدام SVG */
-    .wave-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        line-height: 0;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    .wave-container svg {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 25vh;
-    }
-
-    /* الخلفية الهندسية العائمة الجديدة - مستقلة تماماً وخفيفة */
-    .geometric-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 2;
-        overflow: hidden;
-    }
-
-    /* الأشكال الهندسية العائمة التفاعلية الجديدة */
-    .floating-shape {
-        position: absolute;
-        opacity: 0.12;
-        animation: floatShape 25s infinite linear;
-        transform-origin: center;
-    }
-
-    @keyframes floatShape {
-        0% {
-            transform: translateY(110vh) rotate(0deg) scale(0.8);
-        }
-        50% {
-            opacity: 0.25;
-        }
-        100% {
-            transform: translateY(-15vh) rotate(360deg) scale(1.2);
-            opacity: 0;
-        }
-    }
-
-    /* هيدر الموقع بدون خطوط فاصلة وبدون استدعاء خارجي */
-    header {
-        padding: 0.5rem 2rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 70px;
-        background: transparent !important;
-        border-bottom: none !important;
-        backdrop-filter: blur(10px);
-    }
-
-    .header-left {
-        flex: 1;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .logo-img {
-        height: 80px !important;
-        margin-top: 0;
-        pointer-events: none;
-    }
-
-    .header-center {
-        display: none;
-    }
-
-    .header-right {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    /* زر البدء Start بخلفية شفافة تماماً وإطار أحمر - بدون تحريك */
-    .start-nav-btn {
-        background: transparent !important;
-        border: 2px solid #b61412 !important;
-        color: #b61412 !important;
-        font-size: 0.9rem;
-        padding: 6px 18px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        transition: none !important;
-    }
-
-    .start-nav-btn:hover {
-        background: rgba(182, 20, 18, 0.1) !important;
-        transform: none !important;
-    }
-
-    /* الحاوية الرئيسية للمحتوى */
-    .creative-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: none;
-        width: 100%;
-        max-width: 90%;
-        padding: 1rem 1rem 0 1rem;
-        z-index: 10;
-        text-align: center;
-        margin: 0 auto;
-    }
-
-    /* دمج الشعار و404 */
-    .brand-creative-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .logo-b-img {
-        height: clamp(80px, 12vw, 120px);
-        width: auto;
-    }
-
-    .logo-404-text {
-        font-size: clamp(4rem, 8vw, 7rem);
-        font-weight: 800;
-        color: #b61412 !important;
-        line-height: 1;
-        font-family: 'Arial Black', Gadget, sans-serif;
-        letter-spacing: -2px;
-    }
-
-    /* تطبيق خط راقٍ وجذاب وعصري للغاية لجملة الصيانة */
-    .maintenance-title {
-        font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.3rem, 3.5vw, 2rem);
-        font-weight: 900;
-        color: #ffffff;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 1.2rem;
-        text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-    }
-
-    /* زر الدعم الفني بدون حدود وبدون تأثيرات حركة */
-    .support-mid-btn {
-        background: rgba(182, 20, 18, 0.08) !important;
-        border: none !important;
-        color: #b61412 !important;
-        font-size: 0.9rem;
-        padding: 8px 20px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        transition: none !important;
-        margin-bottom: 1.5rem;
-    }
-
-    .support-mid-btn:hover {
-        background: rgba(182, 20, 18, 0.18) !important;
-        transform: none !important;
-    }
-
-    /* حاوية الإعلان المنسقة والمقربة جداً */
-    .adsense-wrapper {
-        width: 100%;
-        max-width: 728px;
-        margin: 0 auto 1rem auto;
-        z-index: 15;
-        position: relative;
-    }
-
-    /* مجمع وحاوية الكوبي رايت داخل الجزء الأبيض التموجي السفلي ومؤمن في كافة الشاشات مع زيادة حجم الخط */
-    .footer-copyright-bottom {
-        position: absolute;
-        bottom: clamp(1.5vh, 2.5vh, 3.5vh);
-        left: 0;
-        width: 100%;
-        padding: 0 15px;
-        z-index: 20;
-        display: flex;
-        justify-content: center;
-        pointer-events: auto;
-    }
-
-    .footer-copyright-bottom .copyright {
-        border-top: none !important;
-        background: transparent !important;
-        color: #b61412 !important;
-        font-weight: 700;
-        font-size: clamp(0.7rem, 1.8vw, 0.85rem) !important;
-        letter-spacing: 0.5px;
-        text-align: center;
-        line-height: 1.3;
-        font-family: 'Cairo', sans-serif;
-    }
-
-    .footer-copyright-bottom .copyright a {
-        color: #b61412 !important;
-        text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative House Store</title>
+    <!-- ملف التنسيق الثابت المطور للتجاوب -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- إضافة مكتبة Supabase الرسمية للربط بقاعدة البيانات السحابية -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="bg-main text-white">
 
-<div class="wave-container">
-  <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-    <path fill="#ffffff" d="M0,192 C240,245.3 480,266.7 720,160 C960,53.3 1200,85.3 1440,128 L1440,320 L0,320 Z"></path>
-  </svg>
-</div>
+    <!-- حاوية الإشعارات المنبثقة الذكية (Toasts) -->
+    <div id="toast-container" class="toast-container"></div>
 
-<div class="geometric-background" id="geometric-background"></div>
+    <!-- شريط التنقل العلوي الموحد ذو الارتفاع والتناسق الثابت عبر جميع الصفحات -->
+    <header id="app-header" class="app-header border-main-b">
+        <div class="header-container-stacked">
+            
+            <!-- الصف الرئيسي: محاذاة في خط أفقي واحد ومثالي -->
+            <div class="header-top-row">
+                <!-- اليمين: زر القائمة الجانبية -->
+                <button onclick="toggleMenu()" class="menu-trigger-btn" title="القائمة">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
 
-<header id="main-header">
-  <div class="header-left">
-    <a href="index.html" class="logo-link">
-      <img src="m.idea.book2.png" alt="M-IDEA.Book Logo" class="logo-img">
-    </a>
-  </div>
-  <div class="header-center"></div>
-  <div class="header-right">
-    <a href="index.html" class="start-nav-btn">
-      <span>Start</span> <i class="fas fa-play"></i>
-    </a>
-  </div>
-</header>
+                <!-- المنتصف: شعار المتجر بارتفاع متناسق ومثالي لمنع التداخل والتعرج -->
+                <div class="logo-area-centered">
+                    <img src="logo.png" alt="Creative House Store" class="logo-img-large" onclick="navigateTo('home')">
+                </div>
 
-<main style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; flex: none; padding: 0; z-index: 10;">
-  <div class="creative-container">
-    <div class="brand-creative-row">
-      <img src="logo_b.png" alt="M-IDEA.Book" class="logo-b-img" onerror="this.src='logo.png'">
-      <div class="logo-404-text">404</div>
+                <!-- اليسار: أزرار التحكم والتنقل السريع محاذية رأسياً بدقة -->
+                <div class="header-actions-group">
+                    <!-- أيقونة الصفحة الرئيسية -->
+                    <button onclick="navigateTo('home')" class="header-action-btn" id="nav-btn-home" title="الصفحة الرئيسية">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </button>
+                    <!-- أيقونة الملف الشخصي -->
+                    <button onclick="navigateTo('profile')" class="header-action-btn" id="nav-btn-profile" title="الملف الشخصي والمفضلة">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                    <!-- أيقونة سلة المشتريات التفاعلية مع شارة العدد -->
+                    <button onclick="toggleCart()" class="header-action-btn relative" title="سلة المشتريات">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span id="cart-count" class="cart-badge hidden">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الصف الثاني: شريط البحث (يظهر ويختفي ديناميكياً مع الحفاظ على هيكل الهيدر) -->
+            <div class="header-search-row" id="global-search-row">
+                <div class="amazon-search-container">
+                    <input type="text" id="header-search-input" oninput="handleHeaderSearch(this.value)" placeholder="ابحث عن تصميم، لون، قطعة بريميوم..." class="header-search-input-premium">
+                    <button onclick="toggleFilterPopover()" class="search-filter-toggle-btn" id="filter-trigger" title="خيارات تصفية السعر">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- منبثقة أدوات الفلترة والتحكم بالأسعار -->
+                <div id="search-filter-popover" class="search-filter-popover hidden">
+                    <div class="popover-arrow"></div>
+                    <div class="popover-content">
+                        <label class="filter-label">السعر الأقصى المحدد:</label>
+                        <input type="range" id="price-range" min="50" max="5000" value="5000" oninput="updatePriceFilter(this.value)" class="price-slider">
+                        <div class="price-indicators">
+                            <span>50 ج.م</span>
+                            <span id="price-val" class="active-price">5000 ج.م</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- القائمة الجانبية الفاخرة -->
+    <div id="menu-drawer" class="menu-drawer hidden">
+        <div onclick="toggleMenu()" class="menu-overlay"></div>
+        <div class="menu-sidebar spotify-glass border-main-l animate-slide-menu">
+            <div class="menu-header">
+                <h3 class="menu-sidebar-title text-accent">تصفح أقسام المنصة</h3>
+                <button onclick="toggleMenu()" class="menu-close-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="menu-scroll-area">
+                <!-- القسم الأول: التنقل السريع -->
+                <div class="drawer-section">
+                    <h4 class="drawer-section-heading">التنقل السريع</h4>
+                    <button onclick="navigateTo('home'); toggleMenu();" class="menu-nav-link">
+                        <svg class="nav-svg-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>الصفحة الرئيسية</span>
+                    </button>
+                    <button onclick="navigateTo('profile'); toggleMenu();" class="menu-nav-link">
+                        <svg class="nav-svg-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>الملف الشخصي والمفضلة</span>
+                    </button>
+                </div>
+
+                <!-- القسم الثاني: سياسات المنصة -->
+                <div class="drawer-section">
+                    <h4 class="drawer-section-heading">السياسات العامة</h4>
+                    <button onclick="navigateTo('policies'); toggleMenu();" class="menu-nav-link">
+                        <svg class="nav-svg-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>مركز دعم السياسات</span>
+                    </button>
+                </div>
+
+                <!-- القسم الثالث: أخبار ومستجدات المتجر -->
+                <div class="drawer-section">
+                    <h4 class="drawer-section-heading">آخر الأخبار والمجموعات</h4>
+                    <button onclick="navigateTo('news'); toggleMenu();" class="menu-nav-link">
+                        <svg class="nav-svg-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                        <span>مدونة التوجهات الحصرية</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الفوتر المطور شاملاً طلب العميل بالتحديث التاريخي 2026-2027 -->
+            <div class="menu-footer text-center">
+                <p class="menu-footer-brand">CREATIVE HOUSE STORE</p>
+                <p class="menu-copyright-text">© 2026-2027 جميع الحقوق محفوظة</p>
+            </div>
+        </div>
     </div>
-    
-    <h1 class="maintenance-title">Under Maintenance</h1>
 
-    <a href="mailto:suppor2tmidea@gmail.com?subject=Support Request - M-IDEA.Book" class="support-mid-btn">
-      <i class="fas fa-headset"></i> <span>Support</span>
-    </a>
+    <!-- محتوى الصفحات الرئيسي المحمي تماماً من تداخل الشاشات -->
+    <main class="main-content">
+        
+        <!-- 1. صفحة الرئيسية والمنتجات -->
+        <div id="view-home" class="page-view animate-fade">
+            <!-- حاوية نتائج البحث الفوري السريع -->
+            <div id="dynamic-search-results-section" class="section-container hidden">
+                <h3 class="section-title text-accent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>نتائج البحث الفوري</span>
+                    <button onclick="clearSearchFilters()" class="clear-filters-btn">✕ إلغاء التصفية</button>
+                </h3>
+                <div class="products-grid" id="dynamic-search-grid">
+                    <!-- تعبئة تلقائية وديناميكية بالـ JS -->
+                </div>
+            </div>
 
-    <div class="adsense-wrapper">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3352888654930814"
-           crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3352888654930814"
-           data-ad-slot="4256859999"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+            <div id="home-hero-banner" class="hero-banner">
+                <div class="hero-text-container">
+                    <span class="premium-badge">PREMIUM SELECTION</span>
+                    <h2 class="hero-title">قطع نادرة بأسعار حصرية</h2>
+                    <p class="hero-desc">تشكيلة بريميوم جريئة مصممة لتميزك اليومي.</p>
+                </div>
+            </div>
+
+            <div id="premium-section" class="section-container">
+                <h3 class="section-title">
+                    <span class="neon-dot"></span> بريميوم ستور
+                </h3>
+                <div class="products-grid" id="premium-grid">
+                    <!-- تعبئة تلقائية -->
+                </div>
+            </div>
+
+            <div id="normal-section" class="section-container">
+                <h3 class="section-title">
+                    <span class="white-dot"></span> تشكيلة مضافة حديثاً
+                </h3>
+                <div class="products-grid" id="normal-grid">
+                    <!-- تعبئة تلقائية -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. صفحة الملف الشخصي للمستخدم والمفضلة (تستخدم الهيدر الموحد لضمان التناسق) -->
+        <div id="view-profile" class="page-view hidden animate-fade">
+            <div id="profile-logged-in" class="profile-layout mt-2">
+                <div class="user-info-card">
+                    <div class="avatar-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-black">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="user-phone-title" id="user-profile-phone">عميل إستثنائي</h3>
+                        <p class="verification-status">
+                            <span class="active-pulse-dot"></span> حساب محمي وموثق سحابياً
+                        </p>
+                    </div>
+                </div>
+
+                <div class="profile-settings-card">
+                    <h4 class="card-subtitle">إعدادات المظهر والوضع</h4>
+                    <div class="theme-setting-row">
+                        <div class="theme-text-info">
+                            <span class="theme-setting-title">مظهر التطبيق</span>
+                            <span class="theme-setting-desc" id="current-theme-name">الوضع الداكن</span>
+                        </div>
+                        <button onclick="toggleTheme()" class="theme-toggle-switch-btn" id="theme-btn-switch">
+                            <span>تبديل المظهر</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline ml-1">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-settings-card">
+                    <h4 class="card-subtitle">المنتجات المحفوظة والمفضلة</h4>
+                    <div class="products-grid" id="wishlist-results-grid">
+                        <!-- تعبئة المفضلة ديناميكياً -->
+                    </div>
+                </div>
+
+                <div class="address-card">
+                    <h4 class="card-subtitle">عنوان الشحن الفعلي</h4>
+                    <div class="address-detail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <div class="address-text">
+                            <input type="text" id="shipping-address-input" onchange="updateShippingAddress(this.value)" placeholder="أدخل تفاصيل الشحن الخاصة بك..." class="interactive-address-input">
+                            <p class="address-status-notice">سيتم حفظ العنوان وتطبيقه تلقائياً عند طلب المنتجات.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="handleLogout()" class="logout-btn">
+                    تسجيل الخروج من الحساب
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. صفحة عرض تفاصيل المنتج المستقلة والكاملة مع التقييم الحقيقي المطور -->
+        <div id="view-product-details" class="page-view hidden animate-fade">
+            <div class="details-page-header">
+                <button onclick="goBackToPreviousView()" class="details-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <h3 class="details-header-title">تفاصيل القطعة المختارة</h3>
+            </div>
+            
+            <div id="product-details-content" class="details-content-wrapper">
+                <!-- تعبئة ديناميكية -->
+            </div>
+        </div>
+
+        <!-- 4. صفحة السياسات العامة المصممة باحترافية على غرار أمازون -->
+        <div id="view-policies" class="page-view hidden animate-fade">
+            <div class="details-page-header">
+                <button onclick="navigateTo('home')" class="details-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <h3 class="details-header-title">مركز دعم السياسات</h3>
+            </div>
+            
+            <div class="amazon-policies-grid">
+                <!-- سياسة الشحن -->
+                <div class="amazon-policy-accordion">
+                    <div class="policy-accordion-header" onclick="toggleAccordion(this)">
+                        <span class="policy-header-title">سياسة الاستبدال والارتجاع المرنة</span>
+                        <span class="accordion-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                    <div class="policy-accordion-content hidden">
+                        <p class="policy-content-text">
+                            نوفر لك إمكانية استبدال أو استرجاع المنتجات خلال 14 يوماً من تاريخ استلام الطلب الفعلي، شريطة أن تكون القطعة في حالتها الأصلية وبكامل تغليفها الأصلي وملحقاتها دون نزع الشارة (Tags).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- سياسة حماية الخصوصية والبيانات -->
+                <div class="amazon-policy-accordion">
+                    <div class="policy-accordion-header" onclick="toggleAccordion(this)">
+                        <span class="policy-header-title">حماية وخصوصية البيانات الحقيقية</span>
+                        <span class="accordion-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                    <div class="policy-accordion-content hidden">
+                        <p class="policy-content-text">
+                            نلتزم في Creative House ببروتوكولات الأمان الرائدة لحماية وتأمين سرية بيانات الشحن، أرقام الهواتف، والعمليات الشرائية لعملائنا وتخزينها تحت تشفير كامل وصارم غير قابل للمشاركة مع أي أطراف خارجية.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- شروط الشحن والدفع -->
+                <div class="amazon-policy-accordion">
+                    <div class="policy-accordion-header" onclick="toggleAccordion(this)">
+                        <span class="policy-header-title">خيارات الشحن والتحويل المالي المعتمدة</span>
+                        <span class="accordion-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
+                    <div class="policy-accordion-content hidden">
+                        <p class="policy-content-text">
+                            يتم شحن الطلبات بعد التحقق المباشر من الحساب عبر الهاتف وتأكيد تفاصيل الطلب على واتساب لتسجيل تفاصيل تتبع الشحنة. نقبل التحويلات البنكية المباشرة ومحافظ الدفع الإلكتروني المعتمدة رسمياً في مصر والخليج.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. صفحة الأخبار والمستجدات المصممة بنمط مجلات الموضة الاحترافية -->
+        <div id="view-news" class="page-view hidden animate-fade">
+            <div class="details-page-header">
+                <button onclick="navigateTo('home')" class="details-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <h3 class="details-header-title">أخبار ومجموعات Creative House</h3>
+            </div>
+            
+            <div class="premium-editorial-news-grid">
+                <!-- الخبر الأول -->
+                <article class="editorial-news-card">
+                    <div class="editorial-news-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80" alt="المجموعة الخريفية" class="editorial-news-image">
+                        <span class="editorial-category-badge">مجموعات حصرية</span>
+                    </div>
+                    <div class="editorial-news-content">
+                        <div class="editorial-meta-row">
+                            <span class="meta-date">فبراير 2026</span>
+                            <span class="meta-read-time">قراءة في دقيقتين</span>
+                        </div>
+                        <h4 class="editorial-news-title">إطلاق التشكيلة الانتقالية الجديدة بألوان ترابية جريئة</h4>
+                        <p class="editorial-news-snippet">بدأت عمليات تصوير وتجهيز مجموعة التصاميم الشتوية المستوحاة من طابع الفخامة العصرية. ترقبوا الإطلاق المباشر والتوفر الحصري بنظام الحجز المبكر عبر المنصة.</p>
+                    </div>
+                </article>
+
+                <!-- الخبر الثاني -->
+                <article class="editorial-news-card">
+                    <div class="editorial-news-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop&q=80" alt="توسيع الشحن" class="editorial-news-image">
+                        <span class="editorial-category-badge">تحديثات المنصة</span>
+                    </div>
+                    <div class="editorial-news-content">
+                        <div class="editorial-meta-row">
+                            <span class="meta-date">يناير 2026</span>
+                            <span class="meta-read-time">قراءة في دقيقة واحدة</span>
+                        </div>
+                        <h4 class="editorial-news-title">توسيع نطاق الشحن السريع والآمن لدول مجلس التعاون الخليجي</h4>
+                        <p class="editorial-news-snippet">أصبح بإمكان عملائنا في المملكة العربية السعودية، الإمارات، والكويت طلب وتجربة تصاميمنا الفاخرة مباشرة مع ميزات تتبع حي ومباشر ومؤمن بالكامل من الشحن الجوي السريع.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- 6. صفحة تسجيل الدخول بنمط سبوتيفاي المميز -->
+        <div id="view-auth" class="page-view hidden">
+            <div class="auth-wrapper">
+                <div class="auth-card spotify-glass">
+                    <div class="auth-card-content">
+                        
+                        <div id="auth-step-phone">
+                            <div class="auth-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2DE29A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="auth-shield-icon">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                                <h2 class="auth-main-title">CREATIVE HOUSE</h2>
+                                <p class="auth-tagline">Never Lost. Discover Creative Fashion.</p>
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label">رقم الهاتف الدولي</label>
+                                <input type="tel" id="input-phone" placeholder="+20" class="auth-input" dir="ltr">
+                            </div>
+
+                            <button onclick="requestSMS()" class="action-pill-btn">
+                                إرسال كود التحقق SMS
+                            </button>
+                        </div>
+
+                        <div id="auth-step-otp" class="hidden">
+                            <div class="auth-header">
+                                <h2 class="auth-main-title">تحقق من الرسائل</h2>
+                                <p class="auth-tagline" id="otp-message-sent">وصلك كود مكون من 4 أرقام لهاتفك</p>
+                            </div>
+
+                            <div class="input-group text-center">
+                                <label class="input-label">أدخل الرمز المستلم</label>
+                                <input type="text" maxlength="4" id="input-otp" placeholder="0000" class="otp-input" dir="ltr">
+                            </div>
+
+                            <button onclick="verifySMS()" class="action-pill-btn">
+                                تأكيد وتسجيل الدخول
+                            </button>
+
+                            <button onclick="resetAuthView()" class="change-phone-btn">تعديل رقم الهاتف</button>
+                        </div>
+
+                    </div>
+
+                    <div class="auth-footer-text">
+                        © 2026-2027 CREATIVE HOUSE. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- سلة المشتريات الجانبية -->
+    <div id="cart-drawer" class="cart-drawer hidden">
+        <div onclick="toggleCart()" class="cart-overlay"></div>
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h2 class="cart-sidebar-title">سلة المشتريات</h2>
+                <button onclick="toggleCart()" class="cart-close-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="cart-body">
+                <ul class="cart-items-list" id="cart-items-list">
+                    <!-- عناصر السلة التفاعلية -->
+                </ul>
+            </div>
+
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>الإجمالي</span>
+                    <span id="cart-total" class="text-accent">0.00 ج.م</span>
+                </div>
+                <button onclick="sendOrderViaWhatsApp()" class="whatsapp-checkout-btn">
+                    إرسال الطلب عبر واتساب
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-</main>
 
-<div class="footer-copyright-bottom">
-  <footer class="footer" style="width: 100%; padding: 0; margin-top: 0; border-top: none; background: transparent !important;">
-    <div class="copyright">
-      Copyright © 2025-2026 - <a href="#">m-idea111.github.io</a> or its affiliates. All rights reserved
-    </div>
-  </footer>
-</div>
-
-<script>
-  // [تعديل الحماية والأرشفة]: توجيه فوري للزوار ومحركات البحث للرابط الجديد على Vercel لضمان نقل الترتيب والإعلانات
-  window.location.replace("https://m-idea-book.vercel.app" + window.location.pathname + window.location.search);
-
-  document.addEventListener('DOMContentLoaded', function() {
-      setupGeometricBackground();
-  });
-
-  function setupGeometricBackground() {
-      const bgContainer = document.getElementById('geometric-background');
-      if (!bgContainer) return;
-
-      const shapes = ['square', 'triangle', 'circle'];
-      const totalShapesCount = 18;
-
-      for (let i = 0; i < totalShapesCount; i++) {
-          const shape = document.createElement('div');
-          const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
-          shape.className = `floating-shape ${shapeType}`;
-          
-          const size = Math.floor(Math.random() * 25) + 12;
-          shape.style.width = `${size}px`;
-          shape.style.height = `${size}px`;
-          
-          if (shapeType === 'triangle') {
-              shape.style.borderLeft = `${size / 2}px solid transparent`;
-              shape.style.borderRight = `${size / 2}px solid transparent`;
-              shape.style.borderBottom = `${sizepx solid rgba(255, 255, 255, 0.04)`;
-              shape.style.width = '0';
-              shape.style.height = '0';
-          } else if (shapeType === 'circle') {
-              shape.style.borderRadius = '50%';
-              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
-          } else {
-              shape.style.borderRadius = '6px';
-              shape.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
-          }
-
-          const randomLeft = Math.random() * 100;
-          shape.style.left = `${randomLeft}vw`;
-          shape.style.animationDelay = `${Math.random() * 15}s`;
-          shape.style.animationDuration = `${Math.random() * 15 + 15}s`;
-
-          bgContainer.appendChild(shape);
-      }
-  }
-</script>
+    <script src="app.js"></script>
 </body>
 </html>
