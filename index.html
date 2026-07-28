@@ -1,33 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="app-html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  
+
   <!-- وسوم تهيئة اللغات الدولية لـ SEO لمنع تضارب الأرشفة -->
   <link rel="alternate" hreflang="ar" href="https://m-idea111.github.io/?lang=ar">
   <link rel="alternate" hreflang="en" href="https://m-idea111.github.io/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://m-idea111.github.io/">
 
-  <!-- توجيه اسم الموقع الرسمي لجوجل (Google Site Name) -->
-  <title id="meta-title">M-IDEA.Book | Premium Audio Library & Novels</title>
-  <meta name="description" id="meta-desc" content="استمع إلى أفضل الروايات العالمية، العربية، وقصص الأنمي الصوتية عبر منصة M-IDEA.Book. تجربة استماع سينمائية فريدة. | Discover global novels and anime audiobooks in a modern cinematic platform.">
-  <meta name="keywords" content="روايات صوتية, كتب مسموعة, روايات أنمي, M-IDEA, audiobooks, anime novels, audio library, arabic novels">
-  <meta name="robots" content="index, follow"> <!-- تم استرجاع الفهرسة الكاملة وإلغاء وسم الصيانة -->
+  <!-- تأكيد هوية واجهة الإطلاق الجديدة وضمان الفهرسة الكاملة -->
+  <title id="meta-title">M-IDEA.Book | Scheduled Upgrades & Enhancements</title>
+  <meta name="description" id="meta-desc" content="منصة M-IDEA.Book تحت التطوير والترقية الفنية الآن لتقديم تجربة استماع وقراءة استثنائية وجديدة كلياً. ترقبوا عودتنا قريباً بالتحديثات الجديدة. | Discover the new upcoming audio experience.">
+  <meta name="keywords" content="M-IDEA, M-IDEA.Book, audiobooks, روايات صوتية, كتب مسموعة, منصة كتب, ترقية فنية">
+  <meta name="robots" content="index, follow"> <!-- أرشفة كاملة ومستقرة -->
   <link rel="canonical" href="https://m-idea111.github.io/">
 
-  <!-- وسوم Open Graph لتأكيد اسم الموقع لهواتف المستخدمين ومنصات التواصل -->
+  <!-- وسوم Open Graph للشبكات الاجتماعية -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://m-idea111.github.io/">
-  <meta property="og:title" id="og-title" content="M-IDEA.Book | Premium Audio Library & Novels">
-  <meta property="og:description" id="og-desc" content="Discover global novels and anime audiobooks in a modern cinematic platform on M-IDEA.Book.">
+  <meta property="og:title" id="og-title" content="M-IDEA.Book | Upgrades & Enhancements">
+  <meta property="og:description" id="og-desc" content="منصة M-IDEA.Book تحت الترقية والتحسينات المجدولة حالياً لتوفير تجربة قراءة واستماع غير مسبوقة.">
   <meta property="og:image" content="https://m-idea111.github.io/logo.png">
   <meta property="og:site_name" content="M-IDEA.Book">
 
   <!-- وسوم Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" id="twitter-title" content="M-IDEA.Book | Premium Audio Library">
-  <meta name="twitter:description" id="twitter-desc" content="Discover global novels and anime audiobooks in a modern cinematic platform.">
+  <meta name="twitter:title" id="twitter-title" content="M-IDEA.Book | Scheduled Upgrades">
+  <meta name="twitter:description" id="twitter-desc" content="Scheduled platform upgrades are currently underway to deliver a premium audio-literary experience.">
   <meta name="twitter:image" content="https://m-idea111.github.io/logo.png">
 
   <!-- التحقق من حسابات الإعلانات وجوجل -->
@@ -40,9 +41,8 @@
   <!-- الخطوط والأيقونات الخارجية -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
 
-  <!-- البيانات المنظمة لفرض اسم الموقع المستهدف (M-IDEA.Book) على خوارزميات البحث -->
+  <!-- البيانات المنظمة لفرض اسم الموقع المستهدف (M-IDEA.Book) على جوجل -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,418 +53,332 @@
       "M IDEA Book",
       "M-IDEA"
     ],
-    "url": "https://m-idea111.github.io/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://m-idea111.github.io/search.html?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://m-idea111.github.io/"
   }
   </script>
+
+  <style>
+    :root {
+        --brand-red: #C90000;
+        --brand-red-hover: #A30000;
+        --bg-dark: #09090B;
+        --text-pure: #FFFFFF;
+        --text-muted: #A1A1AA;
+        --border-subtle: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-pure);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px 24px;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* التموج الانسيابي المطابق للمنصة بالأسفل */
+    .wave-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .wave-container svg {
+        display: block;
+        width: 100%;
+        height: 18vh;
+    }
+
+    /* الحاوية المركزية الصافية */
+    .landing-wrapper {
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* إزالة إطار وخلفية الشعار وجعله عائماً بنقاء */
+    .logo-frame {
+        width: 110px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 4px;
+    }
+
+    .logo-frame img {
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        object-fit: cover;
+    }
+
+    .brand-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        background: linear-gradient(to right, #FFFFFF, #D4D4D8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* تبسيط وتجميل شارة الحالة */
+    .status-badge {
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-pure);
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .status-badge i {
+        color: var(--brand-red);
+        animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 0.4; }
+        50% { opacity: 1; }
+        100% { opacity: 0.4; }
+    }
+
+    /* إزالة الصناديق والحدود تماماً وتوزيع النصوص الصافية */
+    .pitch-card-ar {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 8px !important;
+        width: 100%;
+        text-align: right;
+    }
+
+    .pitch-card-ar h2 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--brand-red);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .pitch-card-ar p {
+        font-size: 0.88rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+    }
+
+    .pitch-card-en {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 8px !important;
+        width: 100%;
+        text-align: left;
+        direction: ltr;
+    }
+
+    .pitch-card-en h2 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .pitch-card-en p {
+        font-size: 0.82rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+    }
+
+    /* إزالة إطار وخلفية حاوية الإعلان وجعلها شفافة بالكامل */
+    .adsense-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 8px 0;
+        z-index: 15;
+        position: relative;
+        overflow: hidden;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    /* أزرار التواصل والشبكات المدمجة والشفافة */
+    .social-dock {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .social-btn {
+        background-color: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text-pure);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .social-btn:hover {
+        background-color: var(--brand-red);
+        border-color: transparent;
+        transform: translateY(-2px);
+    }
+
+    .social-btn-text {
+        background-color: var(--brand-red);
+        color: #FFFFFF;
+        font-size: 0.85rem;
+        font-weight: 800;
+        padding: 12px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(201, 0, 0, 0.25);
+        transition: transform 0.2s;
+    }
+
+    .social-btn-text:hover {
+        transform: translateY(-2px);
+    }
+
+    /* الكوبي رايت والأرشفة التحتية */
+    .footer-stamp {
+        z-index: 10;
+        text-align: center;
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.3px;
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    .footer-stamp a {
+        color: var(--brand-red);
+        text-decoration: none;
+        font-weight: 700;
+    }
+  </style>
 </head>
 <body>
-<!-- سكريبت التهيئة اللغوية السريعة + التحقق من الدخول لمنع تذبذب الواجهة (Flickering) -->
-<script>
-  (function() {
-    // 1. التحقق من الدخول لغير روبوتات الأرشفة والأنظمة الافتراضية بطريقة آمنة تماماً تمنع الانهيار
-    let isBot = false;
-    try {
-        isBot = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|chrome-lighthouse/i.test(navigator.userAgent) 
-                || !!navigator.webdriver;
-    } catch (e) {
-        isBot = true; 
-    }
 
-    let isLoggedIn = false;
-    try {
-        isLoggedIn = !!localStorage.getItem('midea_user_logged_in');
-    } catch (e) {
-        isLoggedIn = true; 
-    }
-
-    if (!isBot && !isLoggedIn) {
-        window.location.href = 'login.html';
-        return;
-    }
-
-    // 2. كشف وتعيين اللغة ديناميكياً قبل تحميل الـ DOM لضمان سرعة استجابة الـ SEO والأجانب
-    let currentLang = null;
-    try {
-      const params = new URLSearchParams(window.location.search);
-      currentLang = params.get('lang') || localStorage.getItem('midea_selected_lang');
-    } catch (e) {
-      currentLang = 'ar';
-    }
+  <div class="landing-wrapper">
     
-    if (!currentLang) {
-      try {
-        const browserLang = navigator.language || navigator.userLanguage;
-        currentLang = browserLang.startsWith('ar') ? 'ar' : 'en';
-      } catch (e) {
-        currentLang = 'ar';
-      }
-    }
-    
-    try {
-      localStorage.setItem('midea_selected_lang', currentLang);
-    } catch (e) {}
-
-    const root = document.getElementById('app-html-root');
-
-    if (currentLang === 'en') {
-      root.setAttribute('lang', 'en');
-      root.setAttribute('dir', 'ltr');
-      document.body.dir = 'ltr';
-      
-      // تحديث وسوم الميتا ديناميكياً ليرى روبوت البحث الأجنبي الصفحة بالإنجليزية بالكامل
-      document.title = "M-IDEA.Book | Premium Audio Library & Novels";
-      document.getElementById('meta-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M-IDEA.Book. Experience a cinematic narration.');
-      document.getElementById('og-title').setAttribute('content', 'M-IDEA.Book | Premium Audio Library & Novels');
-      document.getElementById('og-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M-IDEA.Book.');
-    } else {
-      root.setAttribute('lang', 'ar');
-      root.setAttribute('dir', 'rtl');
-      document.body.dir = 'rtl';
-      
-      document.title = "M-IDEA.Book | مكتبة الروايات الصوتية والأنمي المميزة";
-      document.getElementById('meta-desc').setAttribute('content', 'استمع إلى أفضل الروايات العالمية، العربية، وقصص الأنمي الصوتية عبر منصة M-IDEA.Book. تجربة استماع سينمائية فريدة.');
-    }
-  })();
-</script>
-
-<!-- Top Clean Header -->
-<header class="app-header">
-  <button class="icon-action-btn" id="floating-menu-trigger" title="القائمة">
-    <i class="fas fa-bars"></i>
-  </button>
-  
-  <div class="header-logo-container">
-    <img src="logo.png" alt="M-IDEA BOOK" class="app-header-brand-img" style="height: 60px; object-fit: contain;">
-  </div>
-  
-  <div style="width: 42px;"></div> <!-- مساحة توازن فارغة محاذية بصرية -->
-</header>
-
-<!-- PREMIUM SETTINGS FULL SCREEN OVERLAY -->
-<div class="premium-settings-screen" id="slide-menu">
-  <div class="settings-max-viewport-wrapper">
-    
-    <!-- Settings Header -->
-    <div class="prem-settings-header">
-      <button class="settings-back-arrow" id="close-menu" title="رجوع">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      <h2 class="settings-title" data-i18n="settings">الإعدادات</h2>
-      <div style="width:36px;"></div> <!-- مساحة موازنة بصرية -->
+    <!-- Pure Logo Frame (No border, No Background) -->
+    <div class="logo-frame">
+      <img src="logo.png" alt="M-IDEA.Book Logo" onerror="this.src='m.idea.book2.png'">
     </div>
 
-    <!-- Active User Profile Card Info -->
-    <a href="edit-profile.html" class="prem-settings-user-card">
-      <div class="settings-profile-left">
-        <img src="logo.png" alt="Profile" class="settings-profile-avatar" id="settings-user-avatar">
-        <div class="settings-profile-meta">
-          <span class="settings-profile-name" id="settings-user-name">عبدالرحمن دانيال</span>
-          <span class="settings-profile-sub" id="settings-user-role" data-i18n="platinum_reader">قارئ بلاتيني</span>
-        </div>
-      </div>
-      <i class="fas fa-chevron-left settings-chevron"></i>
+    <!-- Minimalist Status Badge -->
+    <div class="status-badge">
+      <i class="fas fa-circle-notch fa-spin"></i>
+      <span>تحديثات البنية التحتية • Platform Upgrades</span>
+    </div>
+
+    <h1 class="brand-title">M-IDEA.Book</h1>
+
+    <!-- Pure Arabic Content (No Box) -->
+    <div class="pitch-card-ar">
+      <h2><i class="fas fa-magic"></i> ترقية وتحسينات مجدولة</h2>
+      <p>
+        تخضع منصة **M-IDEA.Book** الآن لعملية ترقية وتحديث شاملة ومجدولة لبنيتها التحتية. نحن نعمل خلف الكواليس لإطلاق نسخة جديدة كلياً تأخذ تجربة القراءة والاستماع إلى أبعاد استثنائية وغير مسبوقة. انتظرونا قريباً بالتحديث الأضخم للمنصة.
+      </p>
+    </div>
+
+    <!-- Pure English Content (No Box) -->
+    <div class="pitch-card-en">
+      <h2><i class="fas fa-sliders"></i> Scheduled Enhancements</h2>
+      <p>
+        We are currently upgrading the backend and architecture of **M-IDEA.Book**. Our team is working diligently to deploy an entirely revamped platform that will redefine your digital reading and listening experience. Exciting times are ahead.
+      </p>
+    </div>
+
+    <!-- إعلان أدسنس العائم بنقاء تام -->
+    <div class="adsense-wrapper">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3352888654930814"
+           data-ad-slot="4256859999"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Action & Discord Button -->
+    <a href="https://discord.gg/F6f48AgV" class="social-btn-text" target="_blank">
+      <i class="fab fa-discord"></i>
+      <span>انضم لمجتمع ديسكورد الرسمي</span>
     </a>
 
-    <!-- Group 1: General Settings -->
-    <h3 class="settings-group-label" data-i18n="general_settings">إعدادات عامة</h3>
-    <div class="prem-settings-group-box">
-      <a href="edit-profile.html" class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="far fa-user"></i>
-          <span data-i18n="account_details">تفاصيل الحساب الشخصي</span>
-        </div>
-        <i class="fas fa-chevron-left settings-chevron"></i>
+    <!-- Secondary Social Media Channels dock -->
+    <div class="social-dock">
+      <a href="https://www.tiktok.com/@m.idea7" class="social-btn" target="_blank" title="TikTok">
+        <i class="fab fa-tiktok"></i>
       </a>
-      
-      <a href="edit-profile.html?action=password" class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="fas fa-lock"></i>
-          <span data-i18n="password_settings">إعدادات كلمة المرور</span>
-        </div>
-        <i class="fas fa-chevron-left settings-chevron"></i>
+      <a href="https://www.instagram.com/__maroidea" class="social-btn" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
       </a>
-
-      <!-- زر تغيير اللغة المدمج بالنمط الجديد وبدون أخطاء -->
-      <button class="prem-settings-row" id="lang-switch-btn" style="width: 100%;">
-        <div class="settings-item-info">
-          <i class="fas fa-globe"></i>
-          <span data-i18n="language_setting">لغة التطبيق</span>
-        </div>
-        <span style="font-size: 0.85rem; color: #C90000; font-weight: 800;" id="current-lang-name">English</span>
-      </button>
-
-      <div class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="far fa-bell"></i>
-          <span data-i18n="push_notifications">الإشعارات الفورية</span>
-        </div>
-        <label class="settings-toggle-switch">
-          <input type="checkbox" id="settings-notif-toggle" checked>
-          <span class="settings-slider"></span>
-        </label>
-      </div>
-
-      <div class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="far fa-moon"></i>
-          <span data-i18n="dark_mode">الوضع الداكن النشط</span>
-        </div>
-        <label class="settings-toggle-switch">
-          <input type="checkbox" id="settings-darkmode-toggle" checked disabled>
-          <span class="settings-slider"></span>
-        </label>
-      </div>
-    </div>
-
-    <!-- Group 2: Support & Account Action -->
-    <h3 class="settings-group-label" data-i18n="support_app">الدعم والتطبيق</h3>
-    <div class="prem-settings-group-box">
-      <a href="news.html" class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="fas fa-info-circle"></i>
-          <span data-i18n="about_app">حول تطبيق M IDEA</span>
-        </div>
-        <i class="fas fa-chevron-left settings-chevron"></i>
+      <a href="mailto:suppor2tmidea@gmail.com?subject=Inquiry" class="social-btn" title="Email Support">
+        <i class="far fa-envelope"></i>
       </a>
-
-      <a href="mailto:suppor2tmidea@gmail.com?subject=Help Request" class="prem-settings-row">
-        <div class="settings-item-info">
-          <i class="far fa-question-circle"></i>
-          <span data-i18n="support_faq">الدعم والأسئلة الشائعة</span>
-        </div>
-        <i class="fas fa-chevron-left settings-chevron"></i>
-      </a>
-
-      <button class="prem-settings-row" onclick="triggerManualLogOut()">
-        <div class="settings-item-info" style="color: #EF4444;">
-          <i class="fas fa-trash-alt" style="color: #EF4444;"></i>
-          <span style="color: #EF4444;" data-i18n="logout">تسجيل الخروج من الحساب</span>
-        </div>
-        <i class="fas fa-chevron-left settings-chevron" style="color: #EF4444;"></i>
-      </button>
-    </div>
-    
-    <div class="settings-menu-footer">
-      <p data-i18n="copyright">حقوق الطبع والنشر © 2025-2026</p>
-      <a href="#">m-idea111.github.io</a>
     </div>
 
   </div>
-</div>
 
-<main class="app-main-content">
-  <!-- Dynamic Showcase Shelves -->
-  <div class="showcase-view-wrapper" id="books-section">
-    
-    <!-- Section 1: Continue Reading (Featured/Horizontal View) -->
-    <section class="bookworm-section">
-      <div class="section-header-row">
-        <h2 class="section-main-heading" data-i18n="continue_reading">متابعة القراءة</h2>
-        <div class="scroll-navigation-hints">
-          <button class="scroll-arrow-mini left" onclick="scrollShelf('continue-reading-scroll', -200)"><i class="fas fa-chevron-right"></i></button>
-          <button class="scroll-arrow-mini right" onclick="scrollShelf('continue-reading-scroll', 200)"><i class="fas fa-chevron-left"></i></button>
-        </div>
-      </div>
-      <div class="horizontal-shelf-scroll" id="continue-reading-scroll">
-        <!-- Dynamically injected large horizontal cards -->
-      </div>
-    </section>
-
-    <!-- Category Filter Tabs Container -->
-    <div class="bookworm-tabs-container">
-      <div class="tabs-scroll-wrapper" id="category-tabs-row">
-        <button class="tab-pill-btn active" data-category="all" data-i18n="all_collections">الكل</button>
-        <button class="tab-pill-btn" data-category="anime" data-i18n="anime_stories">روايات الأنمي</button>
-        <button class="tab-pill-btn" data-category="classic" data-i18n="classic_novels">الروايات الكلاسيكية</button>
-        <button class="tab-pill-btn" data-category="arabic" data-i18n="arabic_novels">الروايات العربية</button>
-        <button class="tab-pill-btn" data-category="international" data-i18n="international_novels">الروايات العالمية</button>
-        <button class="tab-pill-btn" data-category="development" data-i18n="personal_growth">تطوير الذات</button>
-        <button class="tab-pill-btn" data-category="history" data-i18n="history_chronicles">كتب التاريخ</button>
-      </div>
-    </div>
-
-    <!-- Section 2: For You List (Split grid with vertical item styling) -->
-    <section class="bookworm-section">
-      <div class="section-header-row">
-        <h2 class="section-main-heading" id="vertical-list-heading" data-i18n="featured_voices">أصوات مميزة لك</h2>
-      </div>
-      <div class="vertical-cards-list-grid" id="main-vertical-list">
-        <!-- Dynamically injected lists -->
-      </div>
-    </section>
+  <!-- Bottom Organic SVG Red Wave Matching the brand -->
+  <div class="wave-container">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#C90000" d="M0,224 C320,300 720,120 1080,250 C1280,300 1380,210 1440,192 L1440,320 L0,320 Z"></path>
+    </svg>
   </div>
 
-  <!-- Book Details View (BookWorm Screen 3) -->
-  <div class="book-details-screen" id="book-details-container" style="display: none;">
-    <div class="details-nav-row">
-      <button class="details-back-circle-btn" id="back-to-category">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      <span class="details-top-header-title" data-i18n="book_details">تفاصيل الكتاب</span>
-    </div>
-
-    <div class="details-core-display">
-      <div class="details-cover-artwork-wrapper">
-        <img id="details-backdrop-img" src="" alt="Book Cover" class="details-cover-img-flat" onerror="this.src='logo.png'">
-      </div>
-      
-      <div class="details-text-meta-block">
-        <h1 class="details-main-title" id="book-details-title">اسم الكتاب</h1>
-        <p class="details-author-badge" id="book-details-meta-author-dubber">اسم الكاتب والراوي</p>
-        
-        <div class="action-buttons-group">
-          <button class="bookworm-primary-orange-btn" id="start-reading-btn">
-            <i class="fas fa-play"></i> <span data-i18n="start_narration">ابدأ القراءة الصوتية</span>
-          </button>
-        </div>
-
-        <div class="auxiliary-interactions-row">
-          <button class="aux-interact-btn" id="fav-toggle-btn"><i class="far fa-heart"></i> <span data-i18n="my_list">قائمتي</span></button>
-          <button class="aux-interact-btn" id="share-book-btn"><i class="fas fa-share-nodes"></i> <span data-i18n="share">مشاركة</span></button>
-        </div>
-
-        <div class="details-synopsis-box">
-          <p class="details-synopsis-text" id="book-details-description"></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- فصول الرواية -->
-    <div class="details-tabbed-playlist-section">
-      <div class="playlist-heading-row">
-        <h3 class="playlist-heading" data-i18n="chapters">الفصول الصوتية</h3>
-      </div>
-      <div class="chapters-vertical-list" id="barry-chapters-list">
-        <!-- Chapters dynamic Injection -->
-      </div>
-    </div>
-
-    <!-- نظام التقييم والتعليقات الحقيقي والمحلي بالكامل داخل جهاز المستخدم -->
-    <div class="details-tabbed-playlist-section">
-      <h3 class="playlist-heading" data-i18n="reviews_comments">التقييم والتعليقات المحفوظة</h3>
-      
-      <div class="user-rating-scaffold" style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <span style="font-size:0.85rem; font-weight:800;" data-i18n="rate_novel">اضغط لتقييم الرواية:</span>
-        <div class="star-interactive-row" id="star-rating-holder" style="display:flex; gap:6px; color:#8E8E93; cursor:pointer; font-size:1.2rem;">
-          <i class="far fa-star" data-star="1"></i>
-          <i class="far fa-star" data-star="2"></i>
-          <i class="far fa-star" data-star="3"></i>
-          <i class="far fa-star" data-star="4"></i>
-          <i class="far fa-star" data-star="5"></i>
-        </div>
-      </div>
-
-      <div class="comment-input-area" style="display:flex; flex-direction:column; gap:10px;">
-        <textarea id="comment-text-input" placeholder="اكتب رأيك أو تعليقك بكل حرية وحفظه داخل ملفك الأمان..." data-i18n-placeholder="comment_placeholder" style="width:100%; height:80px; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,0.06); font-family:'Cairo'; font-size:0.9rem; outline:none; background:#FAF6F0; resize:none;"></textarea>
-        <button class="bookworm-primary-orange-btn" id="post-comment-btn" style="align-self:flex-start; width:auto; padding:10px 24px; font-size:0.85rem;"><i class="fas fa-comment"></i> <span data-i18n="add_comment">إضافة التعليق</span></button>
-      </div>
-
-      <div class="comments-output-scaffold" id="book-comments-container" style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
-        <!-- Comments list goes here -->
-      </div>
-    </div>
+  <!-- Copyright Stamp -->
+  <div class="footer-stamp">
+    <p>حقوق الطبع والنشر © 2025-2026 • <a href="#">m-idea111.github.io</a>. جميع الحقوق محفوظة.</p>
   </div>
 
-  <!-- BookWorm Flat Audio Player Screen (Integrated Seamlessly) -->
-  <div class="audio-player-screen" id="reading-container" style="display: none;">
-    <div class="player-header-nav">
-      <button class="player-back-btn" id="back-to-details">
-        <i class="fas fa-chevron-down"></i>
-      </button>
-      <div class="player-context-meta">
-        <span class="player-eyebrow" data-i18n="now_playing">قيد التشغيل الآن</span>
-        <h4 class="player-context-book-title" id="reading-title">اسم الكتاب</h4>
-      </div>
-      <div style="width: 44px;"></div>
-    </div>
-
-    <div class="player-flat-body-content">
-      <div class="player-artwork-scaffold">
-        <img id="page-image" src="" alt="Audio Artwork" class="player-large-artwork" onerror="this.src='logo.png'">
-      </div>
-
-      <div class="player-labels-row">
-        <h2 class="player-track-title" id="spotify-page-title">الفصل الأول</h2>
-        <span class="player-track-narrator" id="spotify-book-subtitle">اسم الصوت المميز</span>
-      </div>
-
-      <div class="player-progress-bar-scaffold">
-        <div class="progress-track-wrapper" id="reading-audio-progress-bar">
-          <div class="progress-fill-element" id="reading-audio-progress-fill"></div>
-        </div>
-        <div class="progress-time-indicators">
-          <span id="reading-current-time">0:00</span>
-          <span id="reading-duration">0:00</span>
-        </div>
-      </div>
-
-      <div class="player-main-controls-scaffold">
-        <button class="control-secondary-btn" id="spotify-shuffle-btn" title="عشوائي">
-          <i class="fas fa-random"></i>
-        </button>
-        <button class="control-secondary-btn" id="prev-page" title="الفصل السابق">
-          <i class="fas fa-backward"></i>
-        </button>
-        <button class="control-primary-play-btn" id="reading-play-pause">
-          <i class="fas fa-play"></i>
-        </button>
-        <button class="control-secondary-btn" id="next-page" title="الفصل التالي">
-          <i class="fas fa-forward"></i>
-        </button>
-        <button class="control-secondary-btn" id="spotify-repeat-btn" title="تكرار">
-          <i class="fas fa-redo"></i>
-        </button>
-      </div>
-
-      <div class="player-auxiliary-actions-scaffold">
-        <button class="player-aux-icon" id="share-page-btn"><i class="fas fa-share-nodes"></i></button>
-        <div class="player-chapter-badge-capsule" id="page-indicator">الفصل 1 من 1</div>
-        <button class="player-speed-multiplier-btn" id="reading-speed-btn">1.0x</button>
-      </div>
-    </div>
-    <audio id="reading-audio" preload="metadata"></audio>
-  </div>
-</main>
-
-<!-- Bottom Navigation Pill -->
-<div class="bottom-floating-navigation">
-  <div class="nav-pills-row">
-    <button class="nav-pill-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-      <i class="fas fa-book-open"></i>
-      <span data-i18n="listen">قراءة</span>
-    </button>
-    <button class="nav-pill-item" onclick="window.location.href='search.html'">
-      <i class="fas fa-search"></i>
-      <span data-i18n="search">بحث</span>
-    </button>
-    <button class="nav-pill-item profile-nav-pill" onclick="window.location.href='profile.html'">
-      <div class="nav-profile-avatar-frame">
-        <img src="logo.png" alt="Profile" id="nav-profile-img" onerror="this.src='logo.png'">
-      </div>
-      <span data-i18n="profile">حسابي</span>
-    </button>
-  </div>
-</div>
-
-<!-- Warning Toast -->
-<div id="copy-warning" class="copy-warning-toast" style="display: none;">
-  <i class="fas fa-lock"></i> <span data-i18n="copy_warning_text">المحتوى الصوتي محمي فكرياً للمنصة.</span>
-</div>
-
-<!-- استدعاء ملفات جافا سكريبت باستعمال خاصية defer لضمان عدم حظر عناكب البحث وسرعة الرندر الاستثنائية -->
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2" defer></script>
-<script src="dubbers-data.js" defer></script>
-<script src="anime-data.js" defer></script>
-<script src="classic-novels-data.js" defer></script>
-<script src="arabic-novels-data.js" defer></script>
-<script src="international-novels-data.js" defer></script>
-<script src="personal-development.js" defer></script>
-<script src="history-books.js" defer></script>
-<script src="script.js" defer></script>
 </body>
 </html>
