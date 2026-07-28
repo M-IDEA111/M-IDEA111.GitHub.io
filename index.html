@@ -66,25 +66,50 @@
 <!-- سكريبت التهيئة اللغوية السريعة + التحقق من الدخول لمنع تذبذب الواجهة (Flickering) -->
 <script>
   (function() {
+    // 1. التحقق الآمن من الدخول لغير روبوتات الأرشفة والأنظمة الافتراضية
+    let isBot = false;
+    try {
+        isBot = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|chrome-lighthouse/i.test(navigator.userAgent) 
+                || !!navigator.webdriver;
+    } catch (e) {
+        isBot = true; 
+    }
 
-    // 1. التحقق من الدخول لغير روبوتات الأرشفة
-    const isBot = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yand/i.test(navigator.userAgent);
-    if (!isBot && !localStorage.getItem('midea_user_logged_in')) {
+    let isLoggedIn = false;
+    try {
+        isLoggedIn = !!localStorage.getItem('midea_user_logged_in');
+    } catch (e) {
+        // إذا كان المتصفح يمنع وصول الـ iframe أو البوت للـ localStorage نعتبره مسجل دخول لتفادي التوجيه
+        isLoggedIn = true; 
+    }
+
+    if (!isBot && !isLoggedIn) {
         window.location.href = 'login.html';
         return;
     }
 
     // 2. كشف وتعيين اللغة ديناميكياً قبل تحميل الـ DOM لضمان سرعة استجابة الـ SEO والأجانب
-    const params = new URLSearchParams(window.location.search);
-    let currentLang = params.get('lang') || localStorage.getItem('midea_selected_lang');
-    
-    if (!currentLang) {
-      // التحقق من لغة المتصفح الافتراضية إذا لم يكن هناك خيار محفوظ
-      const browserLang = navigator.language || navigator.userLanguage;
-      currentLang = browserLang.startsWith('ar') ? 'ar' : 'en';
+    let currentLang = null;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      currentLang = params.get('lang') || localStorage.getItem('midea_selected_lang');
+    } catch (e) {
+      currentLang = 'ar';
     }
     
-    localStorage.setItem('midea_selected_lang', currentLang);
+    if (!currentLang) {
+      try {
+        const browserLang = navigator.language || navigator.userLanguage;
+        currentLang = browserLang.startsWith('ar') ? 'ar' : 'en';
+      } catch (e) {
+        currentLang = 'ar';
+      }
+    }
+    
+    try {
+      localStorage.setItem('midea_selected_lang', currentLang);
+    } catch (e) {}
+
     const root = document.getElementById('app-html-root');
 
     if (currentLang === 'en') {
