@@ -13,7 +13,7 @@
   <title id="meta-title">M-IDEA.Book | Premium Audio Library & Novels</title>
   <meta name="description" id="meta-desc" content="استمع إلى أفضل الروايات العالمية، العربية، وقصص الأنمي الصوتية عبر منصة M-IDEA.Book. تجربة استماع سينمائية فريدة. | Discover global novels and anime audiobooks in a modern cinematic platform.">
   <meta name="keywords" content="روايات صوتية, كتب مسموعة, روايات أنمي, M-IDEA, audiobooks, anime novels, audio library, arabic novels">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow"> <!-- تم استرجاع الفهرسة الكاملة وإلغاء وسم الصيانة -->
   <link rel="canonical" href="https://m-idea111.github.io/">
 
   <!-- وسوم Open Graph لتأكيد اسم الموقع لهواتف المستخدمين ومنصات التواصل -->
@@ -66,7 +66,7 @@
 <!-- سكريبت التهيئة اللغوية السريعة + التحقق من الدخول لمنع تذبذب الواجهة (Flickering) -->
 <script>
   (function() {
-    // 1. التحقق الآمن من الدخول لغير روبوتات الأرشفة والأنظمة الافتراضية
+    // 1. التحقق من الدخول لغير روبوتات الأرشفة والأنظمة الافتراضية بطريقة آمنة تماماً تمنع الانهيار
     let isBot = false;
     try {
         isBot = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|chrome-lighthouse/i.test(navigator.userAgent) 
@@ -79,7 +79,6 @@
     try {
         isLoggedIn = !!localStorage.getItem('midea_user_logged_in');
     } catch (e) {
-        // إذا كان المتصفح يمنع وصول الـ iframe أو البوت للـ localStorage نعتبره مسجل دخول لتفادي التوجيه
         isLoggedIn = true; 
     }
 
@@ -118,17 +117,17 @@
       document.body.dir = 'ltr';
       
       // تحديث وسوم الميتا ديناميكياً ليرى روبوت البحث الأجنبي الصفحة بالإنجليزية بالكامل
-      document.title = "M IDEA Book | Premium Audio Library & Novels";
-      document.getElementById('meta-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M IDEA Book. Experience a cinematic narration.');
-      document.getElementById('og-title').setAttribute('content', 'M IDEA Book | Premium Audio Library & Novels');
-      document.getElementById('og-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M IDEA Book.');
+      document.title = "M-IDEA.Book | Premium Audio Library & Novels";
+      document.getElementById('meta-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M-IDEA.Book. Experience a cinematic narration.');
+      document.getElementById('og-title').setAttribute('content', 'M-IDEA.Book | Premium Audio Library & Novels');
+      document.getElementById('og-desc').setAttribute('content', 'Listen to premium global novels, Arabic stories, and professional anime audiobooks on M-IDEA.Book.');
     } else {
       root.setAttribute('lang', 'ar');
       root.setAttribute('dir', 'rtl');
       document.body.dir = 'rtl';
       
-      document.title = "M IDEA Book | مكتبة الروايات الصوتية والأنمي المميزة";
-      document.getElementById('meta-desc').setAttribute('content', 'استمع إلى أفضل الروايات العالمية، العربية، وقصص الأنمي الصوتية عبر منصة M IDEA Book. تجربة استماع سينمائية فريدة.');
+      document.title = "M-IDEA.Book | مكتبة الروايات الصوتية والأنمي المميزة";
+      document.getElementById('meta-desc').setAttribute('content', 'استمع إلى أفضل الروايات العالمية، العربية، وقصص الأنمي الصوتية عبر منصة M-IDEA.Book. تجربة استماع سينمائية فريدة.');
     }
   })();
 </script>
@@ -140,7 +139,7 @@
   </button>
   
   <div class="header-logo-container">
-    <img src="logo.png" alt="M IDEA BOOK" class="app-header-brand-img" style="height: 60px; object-fit: contain;">
+    <img src="logo.png" alt="M-IDEA BOOK" class="app-header-brand-img" style="height: 60px; object-fit: contain;">
   </div>
   
   <div style="width: 42px;"></div> <!-- مساحة توازن فارغة محاذية بصرية -->
@@ -457,14 +456,15 @@
   <i class="fas fa-lock"></i> <span data-i18n="copy_warning_text">المحتوى الصوتي محمي فكرياً للمنصة.</span>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-<script src="dubbers-data.js"></script>
-<script src="anime-data.js"></script>
-<script src="classic-novels-data.js"></script>
-<script src="arabic-novels-data.js"></script>
-<script src="international-novels-data.js"></script>
-<script src="personal-development.js"></script>
-<script src="history-books.js"></script>
-<script src="script.js"></script>
+<!-- استدعاء ملفات جافا سكريبت باستعمال خاصية defer لضمان عدم حظر عناكب البحث وسرعة الرندر الاستثنائية -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2" defer></script>
+<script src="dubbers-data.js" defer></script>
+<script src="anime-data.js" defer></script>
+<script src="classic-novels-data.js" defer></script>
+<script src="arabic-novels-data.js" defer></script>
+<script src="international-novels-data.js" defer></script>
+<script src="personal-development.js" defer></script>
+<script src="history-books.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
