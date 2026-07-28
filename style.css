@@ -1,0 +1,334 @@
+/* ====================================================================
+   💎 ملف الأنماط الخاص بواجهات حساب العميل (profile.css)
+   المصمم بأسلوب Charlotte King النظيف والمتجاوب بالكامل مع الشاشات
+   ==================================================================== */
+
+:root {
+    --ck-bg: #0b0c10;
+    --ck-card: #15161b;
+    --ck-input-bg: #1e1f26;
+    --ck-text: #f3f4f6;
+    --ck-text-muted: #9ca3af;
+    --ck-border: rgba(255, 255, 255, 0.08);
+    --ck-red: #E11D48;
+    --ck-green: #10B981;
+    --ck-shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* معالجة تباين النصوص والألوان في الوضع المضيء */
+[data-theme="light"] {
+    --ck-bg: #f4f5f6;
+    --ck-card: #ffffff;
+    --ck-input-bg: #f1f2f4;
+    --ck-text: #111111;
+    --ck-text-muted: #6b7280;
+    --ck-border: rgba(0, 0, 0, 0.08);
+    --ck-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* === حاوية البروفايل الذكية لمنع محاكاة الموبايل على الهواتف الحقيقية مع مرونة التمرير === */
+.ck-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh;
+    height: auto !important; /* السماح بالتمدد الديناميكي مع القوائم والمفضلة */
+    background: var(--ck-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+    overflow-y: visible !important; /* تأمين التمرير لأسفل */
+}
+
+/* يتم تطبيق المظهر المحاكي الأنيق فقط في الشاشات المكتبية والتابلت */
+@media (min-width: 768px) {
+    .ck-container {
+        max-width: 480px !important;
+        margin: 40px auto;
+        min-height: calc(100vh - 80px);
+        border-radius: 32px;
+        border: 1px solid var(--ck-border);
+        box-shadow: 0 20px 60px var(--ck-shadow);
+    }
+}
+
+/* === الشاشات التفاعلية الممتدة كصفحات كاملة غير مغلقة الارتفاع === */
+.ck-screen {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    height: auto !important; /* إلغاء القفل العمودي للموبايل */
+    padding: 24px;
+    box-sizing: border-box;
+    background: var(--ck-bg);
+    animation: ckFadeIn 0.3s ease-in-out;
+    overflow-y: visible !important; /* تأمين التمرير لرؤية زر تسجيل الخروج والمفضلة */
+}
+
+@media (min-width: 768px) {
+    .ck-screen {
+        min-height: calc(100vh - 82px);
+        border-radius: 30px;
+    }
+}
+
+.ck-screen.active {
+    display: flex;
+}
+
+@keyframes ckFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === عناصر الهيدر المطور تباين ممتاز في المظهرين === */
+.ck-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ck-border);
+}
+
+.ck-header-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ck-input-bg);
+    color: var(--ck-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ck-header-btn:hover {
+    opacity: 0.9;
+}
+
+.ck-header-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--ck-text) !important; /* فرض التباين المباشر */
+}
+
+/* === كارت المستخدم الرئيسي النظيف === */
+.ck-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    background: var(--ck-card);
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid var(--ck-border);
+}
+
+.ck-avatar-wrap {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+}
+
+.ck-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--ck-input-bg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--ck-border);
+}
+
+.ck-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ck-camera-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    background: var(--ck-card);
+    border-radius: 50%;
+    border: 1px solid var(--ck-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    color: var(--ck-text);
+}
+
+.ck-user-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.ck-username-main {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ck-text) !important; /* تباين حاد */
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ck-user-handle {
+    font-size: 13px;
+    color: var(--ck-text-muted) !important;
+    margin-top: 4px;
+    word-break: break-all;
+}
+
+.ck-edit-btn {
+    background-color: var(--ck-red);
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    display: inline-block;
+    transition: opacity 0.2s;
+    text-align: center;
+}
+
+.ck-edit-btn:hover {
+    opacity: 0.9;
+}
+
+/* === قائمة الخيارات الكلاسيكية المفلترة === */
+.ck-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ck-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 12px;
+    cursor: pointer;
+    border-radius: 16px;
+    background: var(--ck-card);
+    border: 1px solid var(--ck-border);
+    margin-bottom: 8px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.ck-menu-item:hover {
+    border-color: var(--ck-red);
+}
+
+.ck-menu-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ck-menu-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--ck-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ck-menu-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ck-text) !important; /* حماية تباين النصوص في المظهر المضيء */
+}
+
+.ck-menu-arrow {
+    color: var(--ck-text-muted);
+    display: flex;
+    align-items: center;
+}
+
+/* === حقول الإدخال الرمادية لشاشة التعديل === */
+.ck-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.ck-input-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ck-text) !important;
+    margin-right: 4px;
+}
+
+.ck-input-field {
+    width: 100%;
+    background-color: var(--ck-input-bg);
+    border: 1.5px solid var(--ck-border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--ck-text);
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.25s ease-in-out;
+}
+
+.ck-input-field:focus {
+    border-color: var(--ck-red);
+    background-color: var(--ck-bg);
+}
+
+/* === لوحة المشرف والتحكم بالمنتجات والاعلانات === */
+.admin-section-header {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--ck-text-muted) !important;
+    letter-spacing: 0.08em;
+    margin: 24px 8px 12px 8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ck-border);
+    padding-bottom: 8px;
+}
+
+.admin-sub-card {
+    background-color: var(--ck-card);
+    border: 1px solid var(--ck-border);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.admin-grid-wishlist-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 4px 0px;
+}
+
+/* === الحل الحاسم لكسر Specificity النافذة المنبثقة للقص وإخفائها الافتراضي === */
+#avatar-crop-modal {
+    display: none !important;
+}
+
+#avatar-crop-modal:not(.hidden) {
+    display: flex !important;
+}
