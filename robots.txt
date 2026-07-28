@@ -1,6 +1,15 @@
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /privacy.html
+Allow: /news.html
+Allow: /our-technologies.html
+Allow: /social.html
+
+# منع أرشفة الصفحات الديناميكية الخاصة ببيانات المستخدمين لعدم إعطاء أخطاء زحف في الكونسول
+Disallow: /profile.html
+Disallow: /edit-profile.html
+Disallow: /edit-profile.js
+Disallow: /profile.js
 
 Sitemap: https://m-idea111.github.io/sitemap.xml
-
-# آخر تحديث: 2025-12-09 - مخصص لموقع GitHub Pages
